@@ -1,0 +1,137 @@
+llvm_versions:
+  - &llvm_tot 12
+  - &llvm_latest 11
+urls:
+  - &mainline-url https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+  - &next-url     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+  - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+  - &android-url  https://android.googlesource.com/kernel/common.git
+trees:
+  - &mainline         {repo: *mainline-url, ref: master,              name: mainline}
+  - &next             {repo: *next-url,     ref: master,              name: next}
+  - &stable-5_10      {repo: *stable-url,   ref: linux-5.10.y,        name: "5.10"}
+  - &stable-5_4       {repo: *stable-url,   ref: linux-5.4.y,         name: "5.4"}
+  - &stable-4_19      {repo: *stable-url,   ref: linux-4.19.y,        name: "4.19"}
+  - &stable-4_14      {repo: *stable-url,   ref: linux-4.14.y,        name: "4.14"}
+  - &stable-4_9       {repo: *stable-url,   ref: linux-4.9.y,         name: "4.9"}
+  - &stable-4_4       {repo: *stable-url,   ref: linux-4.4.y,         name: "4.4"}
+  - &android-mainline {repo: *android-url,  ref: android-mainline,    name: android-mainline}
+  - &android-5_10     {repo: *android-url,  ref: android12-5.10,      name: android-5.10}
+  - &android-5_4      {repo: *android-url,  ref: android12-5.4,       name: android-5.4}
+  - &android-4_19     {repo: *android-url,  ref: android-4.19-stable, name: android-4.19}
+  - &android-4_14     {repo: *android-url,  ref: android-4.14-stable, name: android-4.14}
+  - &android-4_9      {repo: *android-url,  ref: android-4.9-q,       name: android-4.9}
+architectures:
+ - &arm-arch     arm
+ - &arm64-arch   arm64
+ - &mips-arch    mips
+ - &powerpc-arch powerpc
+ - &riscv-arch   riscv
+ - &s390-arch    s390
+triples:
+  - &arm-triple         {CROSS_COMPILE: arm-linux-gnueabi-,    ARCH: *arm-arch}
+  - &arm64-triple       {CROSS_COMPILE: aarch64-linux-gnu-,    ARCH: *arm64-arch}
+  - &mips-triple        {CROSS_COMPILE: mips-linux-gnu-,       ARCH: *mips-arch}
+  - &mipsel-triple      {CROSS_COMPILE: mipsel-linux-gnu-,     ARCH: *mips-arch}
+  - &powerpc-triple     {CROSS_COMPILE: powerpc-linux-gnu-,    ARCH: *powerpc-arch}
+  - &powerpc64-triple   {CROSS_COMPILE: powerpc64-linux-gnu,   ARCH: *powerpc-arch}
+  - &powerpc64le-triple {CROSS_COMPILE: powerpc64le-linux-gnu, ARCH: *powerpc-arch}
+  - &riscv-triple       {CROSS_COMPILE: riscv64-linux-gnu,     ARCH: *riscv-arch}
+  - &s390-triple        {CROSS_COMPILE: s390x-linux-gnu,       ARCH: *s390-arch}
+defconfigs:
+  #            config:                            [triples:] (Optional: x86)
+  - &arm32_v5 {config: multi_v5_defconfig,        << : *arm-triple}
+  - &arm32_v6 {config: aspeed_g5_defconfig,       << : *arm-triple}
+  - &arm32_v7 {config: multi_v7_defconfig,        << : *arm-triple}
+  - &arm64    {config: defconfig,                 << : *arm64-triple}
+  - &mips     {config: malta_kvm_guest_defconfig, << : *mips-triple}
+  - &mipsel   {config: malta_kvm_guest_defconfig, << : *mipsel-triple}
+  - &ppc32    {config: ppc44x_defconfig,          << : *powerpc-triple}
+  - &ppc64    {config: pseries_defconfig,         << : *powerpc64-triple}
+  - &ppc64le  {config: powernv_defconfig,         << : *powerpc64le-triple}
+  - &riscv    {config: defconfig,                 << : *riscv-triple}
+  - &s390     {config: defconfig,                 << : *s390-triple}
+  - &x86      {config: i386_defconfig}
+  - &x86_64   {config: defconfig}
+builds:
+  # Mainline
+  #  defconfigs:     trees:                  LLVM=1       LLVM_IAS=1       BOOT=1       llvm_versions:
+  - {<< : *arm32_v5, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *riscv,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
+  #- {<< : *s390,     << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
+  #- {<< : *x86,      << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  # Next
+  - {<< : *arm32_v5, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *mips,     << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *mipsel,   << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *ppc32,    << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *ppc64,    << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *ppc64le,  << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  #- {<< : *riscv,    << : *next,             llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
+  #- {<< : *s390,     << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
+  #- {<< : *x86,      << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  # Stable
+  - {<< : *arm32_v5, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mips,     << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mipsel,   << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,    << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64,    << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,  << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *riscv,    << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
+  - {<< : *s390,     << : *stable-5_10,      llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86,      << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mips,     << : *stable-5_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mipsel,   << : *stable-5_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,    << : *stable-5_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-4_19,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-4_19,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,  << : *stable-4_19,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-4_19,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,  << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  # Android
+  - {<< : *arm64,    << : *android-mainline, llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *android-5_10,     llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *android-5_4,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *android-4_19,     llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *android-4_14,     llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *android-4_9,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  # Latest LLVM release
+  #- {<< : *arm32_v5, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
+  #- {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}

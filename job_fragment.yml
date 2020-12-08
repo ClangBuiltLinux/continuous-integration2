@@ -1,0 +1,26 @@
+name: Clang Linux CI v2
+on:
+  # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events
+  #schedule:
+    #- cron:  '* 0 * * *'
+
+  # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch
+  workflow_dispatch:
+jobs:
+  kick_tuxbuild:
+    name: TuxBuild
+    # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    container: tuxbuild/tuxbuild
+    env:
+      TUXBUILD_TOKEN: ${{ secrets.TUXBUILD_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: tuxbuild
+        run: |
+          tuxbuild build-set --git-repo "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" --git-ref master --set-name foo-bar --json-out builds.json --tux-config tuxbuild.yml || true
+      - name: save output
+        uses: actions/upload-artifact@v2
+        with:
+          path: builds.json
+          name: output_artifact
