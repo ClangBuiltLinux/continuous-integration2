@@ -10,7 +10,6 @@ def install_deps():
         return
     arch = os.environ["ARCH"]
 
-    # TODO: could be smaller if we used cbl_arch_to_arch
     arch_dependencies = {
       "arm64": ["qemu-system-aarch64"],
       "arm": ["qemu-system-arm"],

@@ -125,13 +125,13 @@ builds:
   - {<< : *arm64,    << : *android-4_14,     llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *android-4_9,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   # Latest LLVM release
-  #- {<< : *arm32_v5, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v5, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
   #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
