@@ -73,6 +73,9 @@ def print_builds(config, tree_name):
     # Bug in yaml.load()???
     fragment["on"] = fragment[True]
     del fragment[True]
+    fragment["jobs"]["kick_tuxbuild"]["steps"][1]["run"] = \
+            "tuxbuild build-set --git-repo \"{}\" --git-ref {} --set-name foo-bar --json-out builds.json --tux-config {}.tux.config || true".format(\
+            repo, ref, tree_name)
 
     for build in config["builds"]:
         if build["repo"] == repo and build["ref"] == ref:

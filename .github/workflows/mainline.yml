@@ -12,9 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxbuild
-      run: 'tuxbuild build-set --git-repo "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" --git-ref master --set-name foo-bar --json-out builds.json --tux-config tuxbuild.yml || true
-
-        '
+      run: tuxbuild build-set --git-repo "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" --git-ref master --set-name foo-bar --json-out builds.json --tux-config mainline.tux.config || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
