@@ -40,10 +40,11 @@ sets:
     for build in config["builds"]:
         if build["repo"] == repo and build["ref"] == ref:
             arch = build["ARCH"] if "ARCH" in build else "x86_64"
-            toolchain = "llvm-" if build["llvm"] else "clang-"
+            toolchain = "clang-"
             toolchain += "nightly" if build["llvm_version"] == max_version else str(build["llvm_version"])
             kconfig = build["config"]
-            print("      - {{target_arch: {0}, toolchain: {1}, kconfig: {2}}}".format(arch, toolchain, kconfig))
+            print("      - {{target_arch: {0}, toolchain: {1}, kconfig: {2}, make_variables: {{LLVM: {3}}}}}".format(\
+                    arch, toolchain, kconfig, int(build["llvm"])))
 
 if __name__ == "__main__":
     # The list of valid trees come from the input, so we parse the input, then
