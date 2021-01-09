@@ -1,5 +1,5 @@
-[![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/Clang%20Linux%20CI%20v2%20next/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3A"Clang+Linux+CI+v2+next")
-[![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/Clang%20Linux%20CI%20v2%20mainline/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3A"Clang+Linux+CI+v2+mainline")
+[![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/next/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3A"next")
+[![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/mainline/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3A"mainline")
 
 Testing using [TuxBuild](https://gitlab.com/Linaro/tuxbuild) to build the Linux
 kernel with LLVM under CI.

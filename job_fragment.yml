@@ -1,4 +1,4 @@
-name: Clang Linux CI v2
+name: "replace me"
 on:
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events
   #schedule:

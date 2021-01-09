@@ -69,7 +69,7 @@ def get_steps(build):
 def print_builds(config, tree_name):
     repo, ref = get_repo_ref(config, tree_name)
     fragment = get_fragment()
-    fragment["name"] += " " + tree_name
+    fragment["name"] = tree_name
     # Bug in yaml.load()???
     fragment["on"] = fragment[True]
     del fragment[True]
