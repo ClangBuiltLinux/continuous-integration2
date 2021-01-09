@@ -43,7 +43,7 @@ sets:
             toolchain = "clang-"
             toolchain += "nightly" if build["llvm_version"] == max_version else str(build["llvm_version"])
             kconfig = build["config"]
-            print("      - {{target_arch: {0}, toolchain: {1}, kconfig: {2}, make_variables: {{LLVM: {3}}}}}".format(\
+            print("      - {{target_arch: {0}, toolchain: {1}, kconfig: {2}, make_variables: {{LLVM: \"{3}\"}}}}".format(\
                     arch, toolchain, kconfig, int(build["llvm"])))
 
 if __name__ == "__main__":
