@@ -74,7 +74,7 @@ def print_builds(config, tree_name):
     fragment["on"] = fragment[True]
     del fragment[True]
     fragment["jobs"]["kick_tuxbuild"]["steps"][1]["run"] = \
-            "tuxbuild build-set --git-repo \"{}\" --git-ref {} --set-name foo-bar --json-out builds.json --tux-config generated/{}.tux.yml || true".format(\
+            "tuxbuild build-set --git-repo \"{}\" --git-ref {} --set-name foo-bar --json-out builds.json --tux-config tuxbuild/{}.tux.yml || true".format(\
             repo, ref, tree_name)
 
     for build in config["builds"]:
