@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import hashlib
 import yaml
 import sys
 
@@ -33,10 +34,15 @@ def get_job_name(build):
     + " " + build["config"]
 
 
+def sanitize_job_name(name):
+    h = hashlib.new("md5", name.encode("utf-8"), usedForSecurity=False)
+    return "_" + h.hexdigest()
+
+
 def get_steps(build):
     name = get_job_name(build)
     return {
-        hash(name): {
+        sanitize_job_name(name): {
             "runs-on": "ubuntu-20.04",
             "needs": "kick_tuxbuild",
             "name": name,

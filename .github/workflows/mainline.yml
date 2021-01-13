@@ -18,7 +18,7 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  4537385126242870597:
+  _2f31caea64189172224e4f00071d26f1:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v5_defconfig
@@ -38,7 +38,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  7166002817969073485:
+  _b1980b1b58c71e25890efad28684383b:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 aspeed_g5_defconfig
@@ -58,7 +58,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  2551850696637750843:
+  _db3abfab189898b60d2902e701651da3:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v7_defconfig
@@ -78,7 +78,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  -765878788211304428:
+  _047eb1aa64b9595252197636de0f1327:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
@@ -98,7 +98,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  -1927321282524276875:
+  _af6f80cfd25ab4381dfe6f974cb87ddc:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
@@ -118,7 +118,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  -6955133369707966678:
+  _db51faed08b817528428f89a529fd79e:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 multi_v5_defconfig
@@ -138,7 +138,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  116347308515865955:
+  _6b331471c6508782a26a864608af0044:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 aspeed_g5_defconfig
@@ -158,7 +158,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  3607126909282523730:
+  _1784502e3f8b4b3d189d1dc291026ee6:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 multi_v7_defconfig
@@ -178,7 +178,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  7831103767623698310:
+  _9148373ae5ea26c971bb54ffe784d924:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
@@ -198,7 +198,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  -5110477357835244759:
+  _ee7595d5ca720f6818bcb5e079ef8d63:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig

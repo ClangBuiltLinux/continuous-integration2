@@ -18,7 +18,7 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  -2445226549631522483:
+  _2f31caea64189172224e4f00071d26f1:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v5_defconfig
@@ -38,7 +38,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  -1611733779756360454:
+  _b1980b1b58c71e25890efad28684383b:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 aspeed_g5_defconfig
@@ -58,7 +58,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  4780324131017435127:
+  _db3abfab189898b60d2902e701651da3:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v7_defconfig
@@ -78,7 +78,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  4518105199117456010:
+  _047eb1aa64b9595252197636de0f1327:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
@@ -98,7 +98,7 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  5042566988340568611:
+  _af6f80cfd25ab4381dfe6f974cb87ddc:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
