@@ -18,10 +18,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  ARCH_arm_LLVM_1_LLVM_IAS_1_BOOT_1_multi_v5_defconfig:
+  -2445226549631522483:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM: true
@@ -38,10 +38,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  ARCH_arm_LLVM_1_LLVM_IAS_1_BOOT_1_aspeed_g5_defconfig:
+  -1611733779756360454:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM: true
@@ -58,10 +58,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  ARCH_arm_LLVM_1_LLVM_IAS_1_BOOT_1_multi_v7_defconfig:
+  4780324131017435127:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM: true
@@ -78,10 +78,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  ARCH_arm64_LLVM_1_LLVM_IAS_1_BOOT_1_defconfig:
+  4518105199117456010:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: arm64
       LLVM: true
@@ -98,10 +98,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  ARCH_x86_64_LLVM_1_LLVM_IAS_1_BOOT_1_defconfig:
+  5042566988340568611:
     runs-on: ubuntu-20.04
     needs: kick_tuxbuild
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: x86_64
       LLVM: true
