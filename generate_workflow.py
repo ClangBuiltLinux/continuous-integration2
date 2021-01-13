@@ -29,17 +29,14 @@ def get_repo_ref(config, tree_name):
 def get_job_name(build):
     return "ARCH=" + (build["ARCH"] if "ARCH" in build else "x86_64") \
     + " LLVM=" + str(int(build["llvm"])) + " LLVM_IAS=" + str(int(build["llvm_ias"])) \
-    + " BOOT=" + str(int(build["boot"]))
-
-
-def sanitize_job_name(name):
-    return name.replace(" ", "_").replace("=", "_")
+    + " BOOT=" + str(int(build["boot"])) + " LLVM " + str(int(build["llvm_version"])) \
+    + " " + build["config"]
 
 
 def get_steps(build):
     name = get_job_name(build)
     return {
-        sanitize_job_name(name + "_" + build["config"]): {
+        hash(name): {
             "runs-on": "ubuntu-20.04",
             "needs": "kick_tuxbuild",
             "name": name,
