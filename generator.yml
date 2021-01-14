@@ -7,20 +7,20 @@ urls:
   - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
   - &android-url  https://android.googlesource.com/kernel/common.git
 trees:
-  - &mainline         {repo: *mainline-url, ref: master,              name: mainline}
-  - &next             {repo: *next-url,     ref: master,              name: next}
-  - &stable-5_10      {repo: *stable-url,   ref: linux-5.10.y,        name: "5.10"}
-  - &stable-5_4       {repo: *stable-url,   ref: linux-5.4.y,         name: "5.4"}
-  - &stable-4_19      {repo: *stable-url,   ref: linux-4.19.y,        name: "4.19"}
-  - &stable-4_14      {repo: *stable-url,   ref: linux-4.14.y,        name: "4.14"}
-  - &stable-4_9       {repo: *stable-url,   ref: linux-4.9.y,         name: "4.9"}
-  - &stable-4_4       {repo: *stable-url,   ref: linux-4.4.y,         name: "4.4"}
-  - &android-mainline {repo: *android-url,  ref: android-mainline,    name: android-mainline}
-  - &android-5_10     {repo: *android-url,  ref: android12-5.10,      name: android-5.10}
-  - &android-5_4      {repo: *android-url,  ref: android12-5.4,       name: android-5.4}
-  - &android-4_19     {repo: *android-url,  ref: android-4.19-stable, name: android-4.19}
-  - &android-4_14     {repo: *android-url,  ref: android-4.14-stable, name: android-4.14}
-  - &android-4_9      {repo: *android-url,  ref: android-4.9-q,       name: android-4.9}
+  - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
+  - &next             {git_repo: *next-url,     git_ref: master,              name: next}
+  - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
+  - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
+  - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19"}
+  - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14"}
+  - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9"}
+  - &stable-4_4       {git_repo: *stable-url,   git_ref: linux-4.4.y,         name: "4.4"}
+  - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
+  - &android-5_10     {git_repo: *android-url,  git_ref: android12-5.10,      name: android-5.10}
+  - &android-5_4      {git_repo: *android-url,  git_ref: android12-5.4,       name: android-5.4}
+  - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19}
+  - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14}
+  - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
