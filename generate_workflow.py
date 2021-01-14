@@ -23,7 +23,7 @@ def get_fragment():
 def get_repo_ref(config, tree_name):
     for tree in config["trees"]:
         if tree["name"] == tree_name:
-            return tree["repo"], tree["ref"]
+            return tree["git_repo"], tree["git_ref"]
 
 
 def get_job_name(build):
@@ -74,11 +74,11 @@ def print_builds(config, tree_name):
     fragment["on"] = fragment[True]
     del fragment[True]
     fragment["jobs"]["kick_tuxbuild"]["steps"][1]["run"] = \
-            "tuxbuild build-set --git-repo \"{}\" --git-ref {} --set-name foo-bar --json-out builds.json --tux-config tuxbuild/{}.tux.yml || true".format(\
-            repo, ref, tree_name)
+            "tuxbuild build-set --set-name foo-bar --json-out builds.json --tux-config tuxbuild/{}.tux.yml || true".format(\
+            tree_name)
 
     for build in config["builds"]:
-        if build["repo"] == repo and build["ref"] == ref:
+        if build["git_repo"] == repo and build["git_ref"] == ref:
             steps = get_steps(build)
             fragment["jobs"].update(steps)
     print("# DO NOT MODIFY MANUALLY!")

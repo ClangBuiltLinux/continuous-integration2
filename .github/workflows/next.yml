@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxbuild
-      run: tuxbuild build-set --git-repo "https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git" --git-ref master --set-name foo-bar --json-out builds.json --tux-config tuxbuild/next.tux.yml || true
+      run: tuxbuild build-set --set-name foo-bar --json-out builds.json --tux-config tuxbuild/next.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
