@@ -25,6 +25,7 @@ jobs:
     env:
       ARCH: arm
       LLVM: true
+      LLVM_VERSION: 12
       LLVM_IAS: true
       INSTALL_DEPS: 1
       BOOT: true
@@ -45,6 +46,7 @@ jobs:
     env:
       ARCH: arm
       LLVM: true
+      LLVM_VERSION: 12
       LLVM_IAS: true
       INSTALL_DEPS: 1
       BOOT: true
@@ -65,6 +67,7 @@ jobs:
     env:
       ARCH: arm
       LLVM: true
+      LLVM_VERSION: 12
       LLVM_IAS: true
       INSTALL_DEPS: 1
       BOOT: true
@@ -85,6 +88,7 @@ jobs:
     env:
       ARCH: arm64
       LLVM: true
+      LLVM_VERSION: 12
       LLVM_IAS: true
       INSTALL_DEPS: 1
       BOOT: true
@@ -105,6 +109,7 @@ jobs:
     env:
       ARCH: powerpc
       LLVM: false
+      LLVM_VERSION: 12
       LLVM_IAS: false
       INSTALL_DEPS: 1
       BOOT: false
@@ -125,6 +130,7 @@ jobs:
     env:
       ARCH: powerpc
       LLVM: false
+      LLVM_VERSION: 12
       LLVM_IAS: false
       INSTALL_DEPS: 1
       BOOT: false
@@ -145,6 +151,7 @@ jobs:
     env:
       ARCH: powerpc
       LLVM: false
+      LLVM_VERSION: 12
       LLVM_IAS: false
       INSTALL_DEPS: 1
       BOOT: false
@@ -165,6 +172,7 @@ jobs:
     env:
       ARCH: x86_64
       LLVM: true
+      LLVM_VERSION: 12
       LLVM_IAS: true
       INSTALL_DEPS: 1
       BOOT: true

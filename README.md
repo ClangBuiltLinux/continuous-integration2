@@ -19,14 +19,16 @@ $ ./generate_workflow.py $BRANCH < generator.yml > .github/workflows/$BRANCH.yml
 
 The CI the child workflows run can be rerun locally via:
 ```sh
-$ ARCH=arm CONFIG=defconfig [BOOT=0] [INSTALL_DEPS=1] ./check_logs.py
+$ ARCH=arm CONFIG=defconfig LLVM_VERSION=[12|11] [BOOT=0] [INSTALL_DEPS=1] \
+  ./check_logs.py
 ```
 
 Where `ARCH` and `CONFIG` are canonical names from the Linux kernel sources,
-but should be listed in `generator.yml`. `BOOT=0` can be specified to skip the
-boot test (for instance, when boot failure is expected). `INSTALL_DEPS=1` can
-be specified to install the child workflow dependcies (mostly QEMU) which the
-github actions workers need to do.
+but should be listed in `generator.yml`.  `LLVM_VERSION` is which version of
+LLVM to test.  `BOOT=0` can be specified to skip the boot test (for instance,
+when boot failure is expected). `INSTALL_DEPS=1` can be specified to install
+the child workflow dependcies (mostly QEMU) which the github actions workers
+need to do.
 
 Requires that a
 [TuxSuite secret token](https://gitlab.com/Linaro/tuxsuite#setup-config) is
