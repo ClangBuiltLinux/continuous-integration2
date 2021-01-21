@@ -62,9 +62,9 @@ builds:
   - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
   #- {<< : *riscv,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
   #- {<< : *s390,     << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
   #- {<< : *x86,      << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
@@ -76,9 +76,9 @@ builds:
   - {<< : *arm64,    << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mips,     << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mipsel,   << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *ppc32,    << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *ppc64,    << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *ppc64le,  << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,    << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64,    << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64le,  << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
   #- {<< : *riscv,    << : *next,             llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
   #- {<< : *s390,     << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
   #- {<< : *x86,      << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
@@ -133,5 +133,5 @@ builds:
   #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
+  - {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_latest}
   - {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
