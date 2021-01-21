@@ -119,5 +119,7 @@ jobs:
     - name: Boot Test
       run: ./check_logs.py
 'on':
+  schedule:
+  - cron: 0 0 * * *
   workflow_dispatch: null
 
