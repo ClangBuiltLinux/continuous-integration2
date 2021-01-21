@@ -44,7 +44,7 @@ def get_steps(build):
     return {
         sanitize_job_name(name): {
             "runs-on": "ubuntu-20.04",
-            "needs": "kick_tuxbuild",
+            "needs": "kick_tuxsuite",
             "name": name,
             "env": {
                 "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
@@ -76,8 +76,8 @@ def print_builds(config, tree_name):
     # Bug in yaml.load()???
     fragment["on"] = fragment[True]
     del fragment[True]
-    fragment["jobs"]["kick_tuxbuild"]["steps"][1]["run"] = \
-            "tuxbuild build-set --set-name foo-bar --json-out builds.json --tux-config tuxbuild/{}.tux.yml || true".format(\
+    fragment["jobs"]["kick_tuxsuite"]["steps"][1]["run"] = \
+            "tuxsuite build-set --set-name foo-bar --json-out builds.json --tux-config tuxsuite/{}.tux.yml || true".format(\
             tree_name)
 
     for build in config["builds"]:

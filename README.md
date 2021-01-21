@@ -1,7 +1,7 @@
 [![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/next/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3A"next")
 [![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/mainline/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3A"mainline")
 
-Testing using [TuxBuild](https://gitlab.com/Linaro/tuxbuild) to build the Linux
+Testing using [TuxSuite](https://gitlab.com/Linaro/tuxsuite) to build the Linux
 kernel with LLVM under CI.
 
 All test parameters are encoded in `generator.yml`; new trees, architectures,
@@ -9,11 +9,11 @@ configs, etc. should be added there.
 
 ### Usage
 
-The tuxbuild and github actions workflow configs should be updated when
+The tuxsuite and github actions workflow configs should be updated when
 `generator.yml` changes. Ex.
 ```sh
 $ BRANCH=next
-$ ./generate_tuxbuild.py $BRANCH < generator.yml > $BRANCH.tux.yml
+$ ./generate_tuxsuite.py $BRANCH < generator.yml > $BRANCH.tux.yml
 $ ./generate_workflow.py $BRANCH < generator.yml > .github/workflows/$BRANCH.yml
 ```
 
@@ -29,5 +29,5 @@ be specified to install the child workflow dependcies (mostly QEMU) which the
 github actions workers need to do.
 
 Requires that a
-[TuxBuild secret token](https://gitlab.com/Linaro/tuxbuild#setup-config) is
+[TuxSuite secret token](https://gitlab.com/Linaro/tuxsuite#setup-config) is
 configured.

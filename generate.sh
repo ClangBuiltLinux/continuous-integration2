@@ -7,7 +7,7 @@ set -eu
 cd "${CI}"
 
 while ((${#})); do
-    ./generate_tuxbuild.py <generator.yml "${1}" >tuxbuild/"${1}".tux.yml
+    ./generate_tuxsuite.py <generator.yml "${1}" >tuxsuite/"${1}".tux.yml
     ./generate_workflow.py <generator.yml "${1}" >.github/workflows/"${1}".yml
     shift
 done
