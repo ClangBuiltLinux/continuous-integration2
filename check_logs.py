@@ -94,12 +94,10 @@ def boot_test(build):
 
 
 if __name__ == "__main__":
-    if not "ARCH" in os.environ:
-        print_red("$ARCH must be specified")
-        sys.exit(1)
-    if not "CONFIG" in os.environ:
-        print_red("$CONFIG must be specified")
-        sys.exit(1)
+    for var in ["ARCH", "CONFIG", "LLVM_VERSION"]:
+        if not var in os.environ:
+            print_red("$%s must be specified" % var)
+            sys.exit(1)
     build = get_build()
     print(json.dumps(build, indent=4))
     check_log(build)

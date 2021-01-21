@@ -3,6 +3,11 @@ import os
 import sys
 
 
+# TODO: brittle, we should parse generator.yml for this, but requires adding
+# pyyaml dependency to workers...
+TOT_LLVM = 12
+
+
 def get_image_name():
     arch = os.environ["ARCH"]
     # "ppc32": "uImage",
@@ -69,11 +74,18 @@ def _read_builds():
     return builds
 
 
+def get_requested_llvm_version():
+    ver = int(os.environ["LLVM_VERSION"])
+    return "clang-" + ("nightly" if ver == TOT_LLVM else str(ver))
+
+
 def get_build():
     arch = os.environ["ARCH"]
     config = os.environ["CONFIG"]
+    llvm_version = get_requested_llvm_version()
     for build in _read_builds():
-        if build["target_arch"] == arch and build["kconfig"][0] == config:
+        if build["target_arch"] == arch and build["kconfig"][0] == config \
+                and build["toolchain"] == llvm_version:
             return build
     print_red("Unable to find build")
     sys.exit(1)

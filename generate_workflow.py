@@ -49,6 +49,7 @@ def get_steps(build):
             "env": {
                 "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
                 "LLVM": build["llvm"],
+                "LLVM_VERSION": build["llvm_version"],
                 "LLVM_IAS": build["llvm_ias"],
                 "INSTALL_DEPS": 1,
                 "BOOT": build["boot"],
