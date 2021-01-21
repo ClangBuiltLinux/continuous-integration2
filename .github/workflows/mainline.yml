@@ -3,16 +3,16 @@
 # $ ./generate_workflow.py < generator.yml mainline > .github/workflows/mainline.yml
 name: mainline
 jobs:
-  kick_tuxbuild:
-    name: TuxBuild
+  kick_tuxsuite:
+    name: TuxSuite
     runs-on: ubuntu-20.04
-    container: tuxbuild/tuxbuild
+    container: tuxsuite/tuxsuite
     env:
       TUXBUILD_TOKEN: ${{ secrets.TUXBUILD_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: tuxbuild
-      run: tuxbuild build-set --set-name foo-bar --json-out builds.json --tux-config tuxbuild/mainline.tux.yml || true
+    - name: tuxsuite
+      run: tuxsuite build-set --set-name foo-bar --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
@@ -20,7 +20,7 @@ jobs:
         name: output_artifact
   _2f31caea64189172224e4f00071d26f1:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v5_defconfig
     env:
       ARCH: arm
@@ -40,7 +40,7 @@ jobs:
       run: ./check_logs.py
   _b1980b1b58c71e25890efad28684383b:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 aspeed_g5_defconfig
     env:
       ARCH: arm
@@ -60,7 +60,7 @@ jobs:
       run: ./check_logs.py
   _db3abfab189898b60d2902e701651da3:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v7_defconfig
     env:
       ARCH: arm
@@ -80,7 +80,7 @@ jobs:
       run: ./check_logs.py
   _047eb1aa64b9595252197636de0f1327:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: arm64
@@ -100,7 +100,7 @@ jobs:
       run: ./check_logs.py
   _af6f80cfd25ab4381dfe6f974cb87ddc:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: x86_64
@@ -120,7 +120,7 @@ jobs:
       run: ./check_logs.py
   _db51faed08b817528428f89a529fd79e:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 multi_v5_defconfig
     env:
       ARCH: arm
@@ -140,7 +140,7 @@ jobs:
       run: ./check_logs.py
   _6b331471c6508782a26a864608af0044:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 aspeed_g5_defconfig
     env:
       ARCH: arm
@@ -160,7 +160,7 @@ jobs:
       run: ./check_logs.py
   _1784502e3f8b4b3d189d1dc291026ee6:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 multi_v7_defconfig
     env:
       ARCH: arm
@@ -180,7 +180,7 @@ jobs:
       run: ./check_logs.py
   _9148373ae5ea26c971bb54ffe784d924:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
     env:
       ARCH: arm64
@@ -200,7 +200,7 @@ jobs:
       run: ./check_logs.py
   _ee7595d5ca720f6818bcb5e079ef8d63:
     runs-on: ubuntu-20.04
-    needs: kick_tuxbuild
+    needs: kick_tuxsuite
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
     env:
       ARCH: x86_64

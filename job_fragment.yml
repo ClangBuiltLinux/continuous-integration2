@@ -8,16 +8,16 @@ on:
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch
   workflow_dispatch:
 jobs:
-  kick_tuxbuild:
-    name: TuxBuild
+  kick_tuxsuite:
+    name: TuxSuite
     # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-20.04
-    container: tuxbuild/tuxbuild
+    container: tuxsuite/tuxsuite
     env:
       TUXBUILD_TOKEN: ${{ secrets.TUXBUILD_TOKEN }}
     steps:
       - uses: actions/checkout@v2
-      - name: tuxbuild
+      - name: tuxsuite
         run: "not echo 'replace me'"
       - name: save output
         uses: actions/upload-artifact@v2
