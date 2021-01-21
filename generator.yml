@@ -134,4 +134,5 @@ builds:
   #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_latest}
+  - {<< : *s390,     << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_latest}
   - {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
