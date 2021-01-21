@@ -1,8 +1,9 @@
 name: "replace me"
 on:
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events
-  #schedule:
-    #- cron:  '* 0 * * *'
+  schedule:
+    # Daily at midnight.
+    - cron:  '0 0 * * *'
 
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch
   workflow_dispatch:
