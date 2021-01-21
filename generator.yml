@@ -24,6 +24,7 @@ trees:
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
+ - &i386-arch    i386
  - &mips-arch    mips
  - &powerpc-arch powerpc
  - &riscv-arch   riscv
@@ -31,6 +32,7 @@ architectures:
 triples:
   - &arm-triple         {CROSS_COMPILE: arm-linux-gnueabi-,    ARCH: *arm-arch}
   - &arm64-triple       {CROSS_COMPILE: aarch64-linux-gnu-,    ARCH: *arm64-arch}
+  - &i386-triple        {CROSS_COMPILE: "",                    ARCH: *i386-arch}
   - &mips-triple        {CROSS_COMPILE: mips-linux-gnu-,       ARCH: *mips-arch}
   - &mipsel-triple      {CROSS_COMPILE: mipsel-linux-gnu-,     ARCH: *mips-arch}
   - &powerpc-triple     {CROSS_COMPILE: powerpc-linux-gnu-,    ARCH: *powerpc-arch}
@@ -44,6 +46,7 @@ defconfigs:
   - &arm32_v6 {config: aspeed_g5_defconfig,       << : *arm-triple}
   - &arm32_v7 {config: multi_v7_defconfig,        << : *arm-triple}
   - &arm64    {config: defconfig,                 << : *arm64-triple}
+  - &i386     {config: defconfig,                 << : *i386-triple}
   - &mips     {config: malta_kvm_guest_defconfig, << : *mips-triple}
   - &mipsel   {config: malta_kvm_guest_defconfig, << : *mipsel-triple}
   - &ppc32    {config: ppc44x_defconfig,          << : *powerpc-triple}
@@ -51,7 +54,6 @@ defconfigs:
   - &ppc64le  {config: powernv_defconfig,         << : *powerpc64le-triple}
   - &riscv    {config: defconfig,                 << : *riscv-triple}
   - &s390     {config: defconfig,                 << : *s390-triple}
-  - &x86      {config: i386_defconfig}
   - &x86_64   {config: defconfig}
 builds:
   # Mainline
@@ -60,6 +62,7 @@ builds:
   - {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *i386,     << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
@@ -67,13 +70,13 @@ builds:
   - {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
   #- {<< : *riscv,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
   #- {<< : *s390,     << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  #- {<< : *x86,      << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   # Next
   - {<< : *arm32_v5, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v6, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *i386,     << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mips,     << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mipsel,   << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,    << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
@@ -81,13 +84,13 @@ builds:
   - {<< : *ppc64le,  << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
   #- {<< : *riscv,    << : *next,             llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
   #- {<< : *s390,     << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  #- {<< : *x86,      << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   # Stable
   - {<< : *arm32_v5, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v6, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *i386,     << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,     << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,   << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,    << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
@@ -95,7 +98,6 @@ builds:
   - {<< : *ppc64le,  << : *stable-5_10,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *riscv,    << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
   - {<< : *s390,     << : *stable-5_10,      llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  - {<< : *x86,      << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
