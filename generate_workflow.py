@@ -52,7 +52,7 @@ def get_steps(build):
                 "LLVM_VERSION": build["llvm_version"],
                 "LLVM_IAS": build["llvm_ias"],
                 "INSTALL_DEPS": 1,
-                "BOOT": build["boot"],
+                "BOOT": int(build["boot"]),
                 "CONFIG": build["config"],
             },
             "steps": [{
