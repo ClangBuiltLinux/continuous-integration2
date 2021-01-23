@@ -18,15 +18,15 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _2f31caea64189172224e4f00071d26f1:
+  _95a379afd39c4b025b41036895742537:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: true
+      LLVM_IAS: false
       INSTALL_DEPS: 1
       BOOT: true
       CONFIG: multi_v5_defconfig
@@ -39,15 +39,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _b1980b1b58c71e25890efad28684383b:
+  _f4c4538a44eaf67226cfa0263ce0146b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: true
+      LLVM_IAS: false
       INSTALL_DEPS: 1
       BOOT: true
       CONFIG: aspeed_g5_defconfig
@@ -60,15 +60,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _db3abfab189898b60d2902e701651da3:
+  _151279e1b24d1b80de19121e970b8271:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: true
+      LLVM_IAS: false
       INSTALL_DEPS: 1
       BOOT: true
       CONFIG: multi_v7_defconfig
@@ -102,13 +102,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _d23056385a8224ef80ba8d1f7b3c98a0:
+  _32c3369e9e6e96278dced880a0fde3e9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 ppc44x_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 ppc44x_defconfig
     env:
       ARCH: powerpc
-      LLVM: false
+      LLVM: true
       LLVM_VERSION: 12
       LLVM_IAS: false
       INSTALL_DEPS: 1
@@ -123,13 +123,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _b77960c015f581a56e62796a4f6be980:
+  _f87d1f728a0f4508f368bd49cc2f1794:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 pseries_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 pseries_defconfig
     env:
       ARCH: powerpc
-      LLVM: false
+      LLVM: true
       LLVM_VERSION: 12
       LLVM_IAS: false
       INSTALL_DEPS: 1
@@ -144,13 +144,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _34b73f02e4d61a8ed5309f0225c3f605:
+  _0bd6d21eb758bae77cf890895efc123b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 powernv_defconfig
     env:
       ARCH: powerpc
-      LLVM: false
+      LLVM: true
       LLVM_VERSION: 12
       LLVM_IAS: false
       INSTALL_DEPS: 1
