@@ -102,27 +102,6 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _c25e7cc6457b86e88a5b3379f84bab64:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
-    env:
-      ARCH: i386
-      LLVM: true
-      LLVM_VERSION: 12
-      LLVM_IAS: true
-      INSTALL_DEPS: 1
-      BOOT: true
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
   _d23056385a8224ef80ba8d1f7b3c98a0:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
