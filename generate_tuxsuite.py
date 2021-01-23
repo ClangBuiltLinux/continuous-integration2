@@ -42,8 +42,9 @@ sets:
             toolchain = "clang-"
             toolchain += "nightly" if build["llvm_version"] == max_version else str(build["llvm_version"])
             kconfig = build["config"]
-            print("      - {{git_repo: \"{0}\", git_ref: \"{1}\", target_arch: {2}, toolchain: {3}, kconfig: {4}, make_variables: {{LLVM: \"{5}\"}}}}".format(\
-                    build["git_repo"], build["git_ref"], arch, toolchain, kconfig, int(build["llvm"])))
+            make_variables = ", make_variables: " + str(build["make_variables"]) if "make_variables" in build else ""
+            print("      - {{git_repo: \"{0}\", git_ref: \"{1}\", target_arch: {2}, toolchain: {3}, kconfig: {4}{5}}}".format(\
+                    build["git_repo"], build["git_ref"], arch, toolchain, kconfig, make_variables))
 
 if __name__ == "__main__":
     # The list of valid trees come from the input, so we parse the input, then

@@ -69,36 +69,50 @@ tiers:
   - &riscv_llvm_full    {llvm: true,  llvm_ias: true,  make_variables: {LD: riscv64-linux-gnu-ld, LLVM: 1, LLVM_IAS: 1}}
 builds:
   # Mainline
-  #  defconfigs:     trees:                  LLVM=1       LLVM_IAS=1       BOOT=1       llvm_versions:
-  - {<< : *arm32_v5, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  # https://github.com/ClangBuiltLinux/linux/issues/1210
-  #- {<< : *i386,     << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  - {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  - {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  #- {<< : *riscv,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
-  #- {<< : *s390,     << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  - {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  #  defconfigs:     trees:                  make_variables:        BOOT=1       llvm_versions:
+  - {<< : *arm32_v5, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # i386: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1210)
+  # - {<< : *i386,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # mips and mipsel: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/1)
+  # mips and mipsel: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *mips,     << : *mainline,         << : *mips_llvm,       boot: false, llvm_version: *llvm_tot}
+  # - {<< : *mipsel,   << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  # ppc32, ppc64, and ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  - {<< : *ppc32,    << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64,    << : *mainline,         << : *ppc64_llvm,      boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64le,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  # riscv: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/18)
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *riscv,    << : *mainline,         << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
+  # s390: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/34)
+  # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
+  # - {<< : *s390,     << : *mainline,         << : *clang,           boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   # Next
-  - {<< : *arm32_v5, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v6, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,    << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  # https://github.com/ClangBuiltLinux/linux/issues/1210
-  #- {<< : *i386,     << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *mips,     << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  #- {<< : *mipsel,   << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,    << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  - {<< : *ppc64,    << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  - {<< : *ppc64le,  << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  #- {<< : *riscv,    << : *next,             llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
-  #- {<< : *s390,     << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
-  - {<< : *x86_64,   << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v5, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # i386: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1210)
+  # - {<< : *i386,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # mips and mipsel: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/1)
+  # mips and mipsel: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *mips,     << : *next,             << : *mips_llvm,       boot: false, llvm_version: *llvm_tot}
+  # - {<< : *mipsel,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  # ppc32, ppc64, and ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  - {<< : *ppc32,    << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64,    << : *next,             << : *ppc64_llvm,      boot: false, llvm_version: *llvm_tot}
+  - {<< : *ppc64le,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  # riscv: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/18)
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *riscv,    << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
+  # s390: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/34)
+  # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
+  # - {<< : *s390,     << : *next,             << : *clang,           boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   # Stable
   - {<< : *arm32_v5, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v6, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
@@ -141,15 +155,20 @@ builds:
   - {<< : *arm64,    << : *android-4_14,     llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *android-4_9,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   # Latest LLVM release
-  - {<< : *arm32_v5, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  - {<< : *i386,     << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
-  #- {<< : *ppc64,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc64le,  << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_latest}
-  - {<< : *s390,     << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_latest}
-  - {<< : *x86_64,   << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v5, << : *mainline,         << : *llvm,                   boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v6, << : *mainline,         << : *llvm,                   boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v7, << : *mainline,         << : *llvm,                   boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64,    << : *mainline,         << : *llvm_full,              boot: true,  llvm_version: *llvm_latest}
+  - {<< : *i386,     << : *mainline,         << : *llvm_full,              boot: true,  llvm_version: *llvm_latest}
+  # mips and mipsel: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/1)
+  # mips and mipsel: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *mips,     << : *mainline,         << : *mips_llvm,              boot: false, llvm_version: *llvm_latest}
+  # - {<< : *mipsel,   << : *mainline,         << : *llvm,                   boot: false, llvm_version: *llvm_latest}
+  # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
+  # ppc32, ppc64, and ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *ppc32,    << : *mainline,         << : *llvm,                   boot: false, llvm_version: *llvm_latest}
+  # - {<< : *ppc64,    << : *mainline,         << : *ppc64_llvm,             boot: false, llvm_version: *llvm_latest}
+  - {<< : *ppc64le,  << : *mainline,         << : *llvm,                   boot: false, llvm_version: *llvm_latest}
+  # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
+  - {<< : *s390,     << : *mainline,         << : *clang,                  boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64,   << : *mainline,         << : *llvm_full,              boot: true,  llvm_version: *llvm_latest}
