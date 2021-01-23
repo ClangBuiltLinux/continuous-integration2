@@ -24,11 +24,9 @@ jobs:
     name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 multi_v5_defconfig
     env:
       ARCH: arm
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: multi_v5_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -45,11 +43,9 @@ jobs:
     name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 aspeed_g5_defconfig
     env:
       ARCH: arm
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: aspeed_g5_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -66,11 +62,9 @@ jobs:
     name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 multi_v7_defconfig
     env:
       ARCH: arm
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: multi_v7_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -87,11 +81,9 @@ jobs:
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: arm64
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: true
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
@@ -108,11 +100,9 @@ jobs:
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 ppc44x_defconfig
     env:
       ARCH: powerpc
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: false
+      BOOT: 0
       CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -129,11 +119,9 @@ jobs:
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 pseries_defconfig
     env:
       ARCH: powerpc
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: false
+      BOOT: 0
       CONFIG: pseries_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -150,11 +138,9 @@ jobs:
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 powernv_defconfig
     env:
       ARCH: powerpc
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: false
+      BOOT: 0
       CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -171,11 +157,9 @@ jobs:
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: x86_64
-      LLVM: true
       LLVM_VERSION: 12
-      LLVM_IAS: true
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
@@ -192,11 +176,9 @@ jobs:
     name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 11 multi_v5_defconfig
     env:
       ARCH: arm
-      LLVM: true
       LLVM_VERSION: 11
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: multi_v5_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -213,11 +195,9 @@ jobs:
     name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 11 aspeed_g5_defconfig
     env:
       ARCH: arm
-      LLVM: true
       LLVM_VERSION: 11
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: aspeed_g5_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -234,11 +214,9 @@ jobs:
     name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 11 multi_v7_defconfig
     env:
       ARCH: arm
-      LLVM: true
       LLVM_VERSION: 11
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: multi_v7_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -255,11 +233,9 @@ jobs:
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
     env:
       ARCH: arm64
-      LLVM: true
       LLVM_VERSION: 11
-      LLVM_IAS: true
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
@@ -276,11 +252,9 @@ jobs:
     name: ARCH=i386 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
     env:
       ARCH: i386
-      LLVM: true
       LLVM_VERSION: 11
-      LLVM_IAS: true
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
@@ -297,11 +271,9 @@ jobs:
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 11 powernv_defconfig
     env:
       ARCH: powerpc
-      LLVM: true
       LLVM_VERSION: 11
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: false
+      BOOT: 0
       CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -318,11 +290,9 @@ jobs:
     name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 11 defconfig
     env:
       ARCH: s390
-      LLVM: false
       LLVM_VERSION: 11
-      LLVM_IAS: false
       INSTALL_DEPS: 1
-      BOOT: false
+      BOOT: 0
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
@@ -339,11 +309,9 @@ jobs:
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
     env:
       ARCH: x86_64
-      LLVM: true
       LLVM_VERSION: 11
-      LLVM_IAS: true
       INSTALL_DEPS: 1
-      BOOT: true
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
