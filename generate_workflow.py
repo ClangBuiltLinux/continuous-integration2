@@ -78,7 +78,7 @@ def print_builds(config, tree_name):
     fragment["on"] = fragment[True]
     del fragment[True]
     fragment["jobs"]["kick_tuxsuite"]["steps"][1]["run"] = \
-            "tuxsuite build-set --set-name foo-bar --json-out builds.json --tux-config tuxsuite/{}.tux.yml || true".format(\
+            "tuxsuite build-set --set-name cbl --json-out builds.json --tux-config tuxsuite/{}.tux.yml || true".format(\
             tree_name)
 
     for build in config["builds"]:

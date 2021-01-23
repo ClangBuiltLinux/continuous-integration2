@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name foo-bar --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
+      run: tuxsuite build-set --set-name cbl --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
