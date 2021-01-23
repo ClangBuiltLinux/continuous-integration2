@@ -26,20 +26,6 @@ def get_image_name():
     }[arch]
 
 
-def get_image_path():
-    arch = os.environ["ARCH"]
-    return {
-        "arm": "arch/arm/boot/",
-        "arm64": "arch/arm64/boot/",
-        "i386": "arch/x86/boot/",
-        "mips": "arch/mips/boot/",
-        "powerpc": "arch/powerpc/boot/",
-        "riscv": "arch/riscv/boot/",
-        "s390": "arch/s390/boot/",
-        "x86_64": "arch/x86_64/boot/",
-    }[arch]
-
-
 def get_cbl_name():
     arch = os.environ["ARCH"]
     config = os.environ["CONFIG"]

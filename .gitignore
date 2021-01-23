@@ -1,3 +1,5 @@
-arch/
+dtbs/
 __pycache__/
 builds.json
+*Image*
+vmlinux
