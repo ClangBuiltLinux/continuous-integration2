@@ -55,6 +55,18 @@ defconfigs:
   - &riscv    {config: defconfig,                 << : *riscv-triple}
   - &s390     {config: defconfig,                 << : *s390-triple}
   - &x86_64   {config: defconfig}
+tiers:
+  # Generic tiers       LLVM=1       LLVM_IAS=1       Make variables to pass to TuxSuite
+  - &llvm_full          {llvm: true,  llvm_ias: true,  make_variables: {LLVM: 1, LLVM_IAS: 1}}
+  - &llvm               {llvm: true,  llvm_ias: false, make_variables: {LLVM: 1}}
+  - &clang              {llvm: false, llvm_ias: false}
+  # Architecture specific tiers
+  # MIPS big endian                                                     https://github.com/ClangBuiltLinux/linux/issues/1025
+  - &mips_llvm          {llvm: true,  llvm_ias: false, make_variables: {LD: mips-linux-gnu-ld, LLVM: 1}}
+  # PowerPC 64-bit big endian                                           https://github.com/ClangBuiltLinux/linux/issues/602
+  - &ppc64_llvm         {llvm: true,  llvm_ias: false, make_variables: {LD: powerpc64le-linux-gnu-ld, LLVM: 1}}
+  # RISC-V                                                              https://github.com/ClangBuiltLinux/linux/issues/1020
+  - &riscv_llvm_full    {llvm: true,  llvm_ias: true,  make_variables: {LD: riscv64-linux-gnu-ld, LLVM: 1, LLVM_IAS: 1}}
 builds:
   # Mainline
   #  defconfigs:     trees:                  LLVM=1       LLVM_IAS=1       BOOT=1       llvm_versions:
