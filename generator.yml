@@ -68,7 +68,9 @@ tiers:
   # RISC-V                                                              https://github.com/ClangBuiltLinux/linux/issues/1020
   - &riscv_llvm_full    {llvm: true,  llvm_ias: true,  make_variables: {LD: riscv64-linux-gnu-ld, LLVM: 1, LLVM_IAS: 1}}
 builds:
-  # Mainline
+  ##############
+  #  Mainline  #
+  ##############
   #  defconfigs:     trees:                  make_variables:        BOOT=1       llvm_versions:
   - {<< : *arm32_v5, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v6, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -91,7 +93,9 @@ builds:
   # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
   # - {<< : *s390,     << : *mainline,         << : *clang,           boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # Next
+  ##########
+  #  Next  #
+  ##########
   - {<< : *arm32_v5, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v6, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -113,7 +117,9 @@ builds:
   # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
   # - {<< : *s390,     << : *next,             << : *clang,           boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # Stable
+  ############
+  #  5.10.y  #
+  ############
   - {<< : *arm32_v5, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v6, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
@@ -127,34 +133,53 @@ builds:
   - {<< : *riscv,    << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: false, llvm_version: *llvm_tot}
   - {<< : *s390,     << : *stable-5_10,      llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *stable-5_10,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  ###########
+  #  5.4.y  #
+  ###########
   - {<< : *arm32_v7, << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,     << : *stable-5_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,   << : *stable-5_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,    << : *stable-5_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *stable-5_4,       llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  ############
+  #  4.19.y  #
+  ############
   - {<< : *arm32_v7, << : *stable-4_19,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *stable-4_19,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,  << : *stable-4_19,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *stable-4_19,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  ############
+  #  4.14.y  #
+  ############
   - {<< : *arm32_v7, << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,  << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  ###########
+  #  4.9.y  #
+  ###########
   - {<< : *arm32_v7, << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  ###########
+  #  4.4.y  #
+  ###########
   - {<< : *arm32_v7, << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,   << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  # Android
+  #############
+  #  Android  #
+  #############
   - {<< : *arm64,    << : *android-mainline, llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *android-5_10,     llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *android-5_4,      llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *android-4_19,     llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *android-4_14,     llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *android-4_9,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  # Latest LLVM release
+  #########################
+  #  Latest LLVM release  #
+  #########################
   - {<< : *arm32_v5, << : *mainline,         << : *llvm,                   boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v6, << : *mainline,         << : *llvm,                   boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7, << : *mainline,         << : *llvm,                   boot: true,  llvm_version: *llvm_latest}
