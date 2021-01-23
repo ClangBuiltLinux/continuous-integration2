@@ -62,7 +62,8 @@ builds:
   - {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *i386,     << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  # https://github.com/ClangBuiltLinux/linux/issues/1210
+  #- {<< : *i386,     << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
@@ -76,7 +77,8 @@ builds:
   - {<< : *arm32_v6, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7, << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,    << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
-  - {<< : *i386,     << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
+  # https://github.com/ClangBuiltLinux/linux/issues/1210
+  #- {<< : *i386,     << : *next,             llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mips,     << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   #- {<< : *mipsel,   << : *next,             llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,    << : *next,             llvm: false, llvm_ias: false, boot: false, llvm_version: *llvm_tot}
@@ -131,6 +133,7 @@ builds:
   - {<< : *arm32_v6, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7, << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64,    << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
+  - {<< : *i386,     << : *mainline,         llvm: true,  llvm_ias: true,  boot: true,  llvm_version: *llvm_latest}
   #- {<< : *mips,     << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *mipsel,   << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
   #- {<< : *ppc32,    << : *mainline,         llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_latest}
