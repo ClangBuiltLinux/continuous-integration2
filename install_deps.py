@@ -13,15 +13,15 @@ def install_deps():
     arch_dependencies = {
       "arm64": ["qemu-system-aarch64"],
       "arm": ["qemu-system-arm"],
+      "i386": ["qemu-system-x86"],
       "mips": ["qemu-system-mips"],
       "powerpc": ["qemu-system-ppc"],
-      "x86": ["qemu-system-x86"],
       "x86_64": ["qemu-system-x86"],
       "s390": [],
       "riscv": ["qemu-system-riscv64"],
     }
     if not arch in arch_dependencies:
-        print("Unknown arch \"%s\", can't install dependencies" % cbl_arch,
+        print("Unknown arch \"%s\", can't install dependencies" % arch,
               file=sys.stderr)
         sys.exit(1)
     # Not specific to any arch.

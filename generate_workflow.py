@@ -48,11 +48,9 @@ def get_steps(build):
             "name": name,
             "env": {
                 "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
-                "LLVM": build["llvm"],
                 "LLVM_VERSION": build["llvm_version"],
-                "LLVM_IAS": build["llvm_ias"],
                 "INSTALL_DEPS": 1,
-                "BOOT": build["boot"],
+                "BOOT": int(build["boot"]),
                 "CONFIG": build["config"],
             },
             "steps": [{
@@ -78,7 +76,7 @@ def print_builds(config, tree_name):
     fragment["on"] = fragment[True]
     del fragment[True]
     fragment["jobs"]["kick_tuxsuite"]["steps"][1]["run"] = \
-            "tuxsuite build-set --set-name foo-bar --json-out builds.json --tux-config tuxsuite/{}.tux.yml || true".format(\
+            "tuxsuite build-set --set-name cbl --json-out builds.json --tux-config tuxsuite/{}.tux.yml || true".format(\
             tree_name)
 
     for build in config["builds"]:

@@ -18,6 +18,7 @@ def get_image_name():
     return {
         "arm": "zImage",
         "arm64": "Image.gz",
+        "i386": "bzImage",
         "mips": "vmlinux",
         "riscv": "Image.gz",
         "s390": "bzImage",
@@ -26,19 +27,15 @@ def get_image_name():
 
 
 def get_image_path():
-    config = os.environ["CONFIG"]
-    if config == "i386_defconfig":
-        return "arch/x86/boot/"
-
     arch = os.environ["ARCH"]
     return {
         "arm": "arch/arm/boot/",
         "arm64": "arch/arm64/boot/",
+        "i386": "arch/x86/boot/",
         "mips": "arch/mips/boot/",
         "powerpc": "arch/powerpc/boot/",
         "riscv": "arch/riscv/boot/",
         "s390": "arch/s390/boot/",
-        # "x86": "arch/x86/boot/",
         "x86_64": "arch/x86_64/boot/",
     }[arch]
 
@@ -55,12 +52,11 @@ def get_cbl_name():
         "ppc44x_defconfig": "ppc32",
         "pseries_defconfig": "ppc64",
         "powernv_defconfig": "ppc64le",
-        "i386_defconfig": "x86",
     }
     if config in unique_defconfigs:
         return unique_defconfigs[config]
     if config == "defconfig":
-        return arch
+        return "x86" if arch == "i386" else arch
     raise Exception("unknown CBL name")
 
 
