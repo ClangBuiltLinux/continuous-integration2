@@ -184,9 +184,8 @@ builds:
   ###########
   #  4.4.y  #
   ###########
-  - {<< : *arm32_v7, << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,    << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,   << : *stable-4_4,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-4_4,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
   #############
   #  Android  #
   #############
