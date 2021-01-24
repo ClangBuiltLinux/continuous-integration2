@@ -62,6 +62,7 @@ tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
   - &llvm_full          {llvm: true,  llvm_ias: true,  make_variables: {LLVM: 1, LLVM_IAS: 1}}
   - &llvm               {llvm: true,  llvm_ias: false, make_variables: {LLVM: 1}}
+  - &lld                {llvm: false, llvm_ias: false, make_variables: {LD: ld.lld}}
   - &clang              {llvm: false, llvm_ias: false}
   # Architecture specific tiers
   # MIPS big endian                                                     https://github.com/ClangBuiltLinux/linux/issues/1025
@@ -169,10 +170,11 @@ builds:
   ############
   #  4.14.y  #
   ############
-  - {<< : *arm32_v7, << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,    << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64le,  << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,   << : *stable-4_14,      llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  # ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  - {<< : *ppc64le,  << : *stable-4_14,      << : *clang,           boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
   ###########
   #  4.9.y  #
   ###########
