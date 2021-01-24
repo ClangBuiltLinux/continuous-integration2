@@ -81,6 +81,7 @@ def print_builds(config, tree_name):
 
     for build in config["builds"]:
         if build["git_repo"] == repo and build["git_ref"] == ref:
+            fragment["on"]["schedule"][0]["cron"] = build["schedule"]
             steps = get_steps(build)
             fragment["jobs"].update(steps)
     print("# DO NOT MODIFY MANUALLY!")
