@@ -178,9 +178,9 @@ builds:
   ###########
   #  4.9.y  #
   ###########
-  - {<< : *arm32_v7, << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,    << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,   << : *stable-4_9,       llvm: false, llvm_ias: false, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7, << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,    << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,   << : *stable-4_9,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
   ###########
   #  4.4.y  #
   ###########
