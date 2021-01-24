@@ -324,6 +324,6 @@ jobs:
       run: ./check_logs.py
 'on':
   schedule:
-  - cron: 0 0 * * *
+  - cron: 0 0,6,12,18 * * *
   workflow_dispatch: null
 
