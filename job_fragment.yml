@@ -4,6 +4,19 @@ on:
   schedule:
     - cron: "not echo 'replace me'"
 
+  # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths
+  push:
+    branches:
+      # Always run on the main branch
+      - main
+      # Allow testing on branches with a presubmit/ prefix
+      - presubmit/*
+    paths:
+      - "not echo 'replace me with tuxsuite'"
+      - "not echo 'replace me with github action'"
+      - check_logs.py
+      - utils.py
+
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch
   workflow_dispatch:
 jobs:
