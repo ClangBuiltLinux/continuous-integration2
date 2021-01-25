@@ -2,7 +2,6 @@ import json
 import os
 import sys
 
-
 # TODO: brittle, we should parse generator.yml for this, but requires adding
 # pyyaml dependency to workers...
 TOT_LLVM = 12

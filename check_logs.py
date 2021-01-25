@@ -70,13 +70,13 @@ def run_boot():
     cbl_arch = get_cbl_name()
     kernel_image = cwd() + "/" + get_image_name()
     try:
-        subprocess.run(["./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image],
-                       check=True)
+        subprocess.run(
+            ["./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image],
+            check=True)
     except subprocess.CalledProcessError as e:
         if e.returncode == 124:
             print_red("Image failed to boot")
         raise e
-
 
 
 def boot_test(build):
