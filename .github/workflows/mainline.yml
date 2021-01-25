@@ -325,5 +325,14 @@ jobs:
 'on':
   schedule:
   - cron: 0 0,6,12,18 * * *
+  push:
+    branches:
+    - main
+    - presubmit/*
+    paths:
+    - tuxsuite/mainline.tux.yml
+    - .github/workflows/mainline.yml
+    - check_logs.py
+    - utils.py
   workflow_dispatch: null
 

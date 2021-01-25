@@ -40,5 +40,14 @@ jobs:
 'on':
   schedule:
   - cron: 0 0 * * *
+  push:
+    branches:
+    - main
+    - presubmit/*
+    paths:
+    - tuxsuite/android-4.14.tux.yml
+    - .github/workflows/android-4.14.yml
+    - check_logs.py
+    - utils.py
   workflow_dispatch: null
 
