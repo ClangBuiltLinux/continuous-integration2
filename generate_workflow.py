@@ -46,12 +46,9 @@ def get_steps(build):
     name = get_job_name(build)
     return {
         sanitize_job_name(name): {
-            "runs-on":
-            "ubuntu-20.04",
-            "needs":
-            "kick_tuxsuite",
-            "name":
-            name,
+            "runs-on": "ubuntu-20.04",
+            "needs": "kick_tuxsuite",
+            "name": name,
             "env": {
                 "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
                 "LLVM_VERSION": build["llvm_version"],
@@ -78,7 +75,7 @@ def get_steps(build):
                 },
             ],
         }
-    }
+    } # yapf: disable
 
 
 def print_builds(config, tree_name):
