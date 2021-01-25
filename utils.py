@@ -41,7 +41,7 @@ def get_cbl_name():
     }
     if config in unique_defconfigs:
         return unique_defconfigs[config]
-    if config == "defconfig":
+    if "defconfig" in config:
         return "x86" if arch == "i386" else arch
     raise Exception("unknown CBL name")
 
