@@ -158,7 +158,7 @@ builds:
   #  5.4.y  #
   ###########
   - {<< : *arm32_v7,   << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,      << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   # mips and mipsel: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/1)
   # mips and mipsel: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
   # - {<< : *mips,       << : *stable-5_4,       << : *llvm,            boot: false, llvm_version: *llvm_tot}
@@ -167,12 +167,12 @@ builds:
   - {<< : *ppc32,      << : *stable-5_4,       << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64,      << : *stable-5_4,       << : *ppc64_llvm,      boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64le,    << : *stable-5_4,       << : *llvm,            boot: false, llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,     << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   ############
   #  4.19.y  #
   ############
   - {<< : *arm32_v7,   << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,      << : *stable-4_19,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   # ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
   - {<< : *ppc64le,    << : *stable-4_19,      << : *clang,           boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64,     << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -204,7 +204,7 @@ builds:
   # - {<< : *x86_64_gki, << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,  << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # - {<< : *x86_64_gki, << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64_gki,  << : *android-5_4,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_gki,  << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # - {<< : *x86_64_gki, << : *android-5_4,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,  << : *android-4_19,     << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   # - {<< : *x86_64_gki, << : *android-4_19,     << : *llvm,            boot: true,  llvm_version: *llvm_latest}

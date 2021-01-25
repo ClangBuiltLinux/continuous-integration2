@@ -37,10 +37,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _67c94813aa06abe3e7dc922510cafd03:
+  _047eb1aa64b9595252197636de0f1327:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 12
@@ -113,10 +113,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _58149403cbb75405099d3614664b2357:
+  _af6f80cfd25ab4381dfe6f974cb87ddc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 12
