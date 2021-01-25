@@ -6,7 +6,7 @@ import subprocess
 import sys
 import urllib.request
 
-from utils import get_build, get_image_name, get_image_path, print_red, print_yellow, get_cbl_name
+from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_name
 from install_deps import install_deps
 
 
@@ -34,31 +34,28 @@ def fetch_dtb(build):
         "multi_v5_defconfig": "aspeed-bmc-opp-palmetto.dtb",
         "aspeed_g5_defconfig": "aspeed-bmc-opp-romulus.dtb",
     }[config]
-    url = build["download_url"] + "dtbs/" + dtb
-    image_path = "arch/arm/boot/dts/"
+    dtb_path = "dtbs/" + dtb
+    url = build["download_url"] + dtb_path
     # mkdir -p
-    os.makedirs(image_path, exist_ok=True)
-    print_yellow("fetching DTB from: %s, to: %s" % (url, image_path + dtb))
-    urllib.request.urlretrieve(url, image_path + dtb)
+    os.makedirs(dtb_path.split("/")[0], exist_ok=True)
+    print_yellow("fetching DTB from: %s" % url)
+    urllib.request.urlretrieve(url, dtb_path)
     if os.path.exists:
-        print_yellow("Filesize: %d" % os.path.getsize(image_path + dtb))
+        print_yellow("Filesize: %d" % os.path.getsize(dtb_path))
     else:
         print_red("Unable to download dtb")
         sys.exit(1)
 
 
 def fetch_kernel_image(build):
-    image_fname = get_image_name()
-    url = build["download_url"] + image_fname
-    image_path = get_image_path()
-    # mkdir -p
-    os.makedirs(image_path, exist_ok=True)
-    print_yellow("fetching kernel image from: %s, to: %s" % (url, image_path + image_fname))
+    image_name = get_image_name()
+    url = build["download_url"] + image_name
+    print_yellow("fetching kernel image from: %s" % url)
     # TODO: use something more robust like python wget library.
-    urllib.request.urlretrieve(url, image_path + image_fname)
+    urllib.request.urlretrieve(url, image_name)
     # Suspect download is failing.
     if os.path.exists:
-        print_yellow("Filesize: %d" % os.path.getsize(image_path + image_fname))
+        print_yellow("Filesize: %d" % os.path.getsize(image_name))
     else:
         print_red("Unable to download kernel image")
         sys.exit(1)
@@ -71,8 +68,9 @@ def cwd():
 
 def run_boot():
     cbl_arch = get_cbl_name()
+    kernel_image = cwd() + "/" + get_image_name()
     try:
-        subprocess.run(["./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", cwd()],
+        subprocess.run(["./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image],
                        check=True)
     except subprocess.CalledProcessError as e:
         if e.returncode == 124:
