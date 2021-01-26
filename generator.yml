@@ -206,7 +206,7 @@ builds:
   # - {<< : *x86_64_gki, << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,  << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # - {<< : *x86_64_gki, << : *android-5_4,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64_gki,  << : *android-4_19,     << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_gki,  << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # - {<< : *x86_64_gki, << : *android-4_19,     << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_cut,  << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_latest}
   # - {<< : *x86_64_cut, << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_latest}
