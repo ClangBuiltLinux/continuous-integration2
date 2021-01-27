@@ -30,11 +30,27 @@ def get_repo_ref(config, tree_name):
             return tree["git_repo"], tree["git_ref"]
 
 
+def get_config_name(build):
+    config = build["config"]
+    return config[0] if type(config) is list else config
+
+
+def print_config_name(build):
+    config_name = get_config_name(build)
+    config = build["config"]
+    if type(config) is list:
+        i = 1
+        while i < len(config):
+            config_name += " + " + config[i]
+            i += 1
+    return config_name
+
+
 def get_job_name(build):
     return "ARCH=" + (build["ARCH"] if "ARCH" in build else "x86_64") \
     + " LLVM=" + str(int(build["llvm"])) + " LLVM_IAS=" + str(int(build["llvm_ias"])) \
     + " BOOT=" + str(int(build["boot"])) + " LLVM " + str(int(build["llvm_version"])) \
-    + " " + build["config"]
+    + " " + print_config_name(build)
 
 
 def sanitize_job_name(name):
@@ -54,7 +70,7 @@ def get_steps(build):
                 "LLVM_VERSION": build["llvm_version"],
                 "INSTALL_DEPS": 1,
                 "BOOT": int(build["boot"]),
-                "CONFIG": build["config"],
+                "CONFIG": get_config_name(build),
             },
             "steps": [
                 {
