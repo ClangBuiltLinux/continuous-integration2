@@ -62,7 +62,8 @@ defconfigs:
   - &ppc32      {config: ppc44x_defconfig,            << : *powerpc-triple,       << : *kernel_modules}
   - &ppc64      {config: pseries_defconfig,           << : *powerpc64-triple,     << : *kernel_modules}
   - &ppc64le    {config: powernv_defconfig,           << : *powerpc64le-triple,   << : *kernel_modules}
-  - &riscv      {config: defconfig,                   << : *riscv-triple,         << : *kernel_modules}
+  #                                  https://github.com/ClangBuiltLinux/linux/issues/1143
+  - &riscv      {config: [defconfig, CONFIG_EFI=n],   << : *riscv-triple,         << : *kernel_modules}
   - &s390       {config: defconfig,                   << : *s390-triple,          << : *kernel_modules}
   - &x86_64     {config: defconfig,                                               << : *kernel_modules}
   - &x86_64_gki {config: gki_defconfig,                                           << : *kernel_modules}
@@ -99,9 +100,8 @@ builds:
   - {<< : *ppc32,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64,      << : *mainline,         << : *ppc64_llvm,      boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64le,    << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
-  # riscv: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/18)
   # riscv: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
-  # - {<< : *riscv,      << : *mainline,         << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *riscv,      << : *mainline,         << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
   # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
   - {<< : *s390,       << : *mainline,         << : *clang,           boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -122,9 +122,8 @@ builds:
   - {<< : *ppc32,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64,      << : *next,             << : *ppc64_llvm,      boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64le,    << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
-  # riscv: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/18)
   # riscv: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
-  # - {<< : *riscv,      << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *riscv,      << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
   # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
   - {<< : *s390,       << : *next,             << : *clang,           boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -145,9 +144,8 @@ builds:
   - {<< : *ppc32,      << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64,      << : *stable-5_10,      << : *ppc64_llvm,      boot: false, llvm_version: *llvm_tot}
   - {<< : *ppc64le,    << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
-  # riscv: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/18)
   # riscv: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
-  # - {<< : *riscv,      << : *stable-5_10,      << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *riscv,      << : *stable-5_10,      << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
   # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
   - {<< : *s390,       << : *stable-5_10,      << : *clang,           boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64,     << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -226,6 +224,8 @@ builds:
   # - {<< : *ppc32,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
   # - {<< : *ppc64,      << : *mainline,         << : *ppc64_llvm,      boot: false, llvm_version: *llvm_latest}
   - {<< : *ppc64le,    << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  - {<< : *riscv,      << : *mainline,         << : *riscv_llvm_full, boot: false, llvm_version: *llvm_latest}
   # s390: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/42)
   - {<< : *s390,       << : *mainline,         << : *clang,           boot: false, llvm_version: *llvm_latest}
   - {<< : *x86_64,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
