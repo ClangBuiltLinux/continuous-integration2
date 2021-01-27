@@ -97,5 +97,14 @@ jobs:
 'on':
   schedule:
   - cron: 0 0 * * *
+  push:
+    branches:
+    - main
+    - presubmit/*
+    paths:
+    - tuxsuite/4.19.tux.yml
+    - .github/workflows/4.19.yml
+    - check_logs.py
+    - utils.py
   workflow_dispatch: null
 

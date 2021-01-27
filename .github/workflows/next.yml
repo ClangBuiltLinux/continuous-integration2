@@ -173,5 +173,14 @@ jobs:
 'on':
   schedule:
   - cron: 0 8 * * 1,2,3,4,5
+  push:
+    branches:
+    - main
+    - presubmit/*
+    paths:
+    - tuxsuite/next.tux.yml
+    - .github/workflows/next.yml
+    - check_logs.py
+    - utils.py
   workflow_dispatch: null
 
