@@ -18,13 +18,13 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _34e82ec121c8fa8e4f6b72f5713d06ab:
+  _211919418e4c74c4afad0f193106a1bf:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 gki_defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 gki_defconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 11
+      LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: gki_defconfig

@@ -75,15 +75,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _bdca785bdc0c5134fd914d100e925037:
+  _466993b5fba1fee8c6686ee986339040:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=x86_64 LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 12 defconfig
+    name: ARCH=x86_64 LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2

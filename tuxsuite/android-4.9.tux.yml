@@ -6,4 +6,4 @@
 sets:
   - name: cbl
     builds:
-      - {git_repo: "https://android.googlesource.com/kernel/common.git", git_ref: "android-4.9-q", target_arch: arm64, toolchain: clang-11, kconfig: cuttlefish_defconfig, targets: ['config', 'kernel', 'modules']}
+      - {git_repo: "https://android.googlesource.com/kernel/common.git", git_ref: "android-4.9-q", target_arch: arm64, toolchain: clang-nightly, kconfig: cuttlefish_defconfig, targets: ['config', 'kernel', 'modules']}
