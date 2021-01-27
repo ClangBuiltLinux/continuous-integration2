@@ -170,15 +170,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _da824abd4bb76b587a16b3e60ed8bbb4:
+  _45a3836ec9362ef4ae8a3e3ad370da98:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 defconfig
+    name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 12 defconfig
     env:
       ARCH: s390
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
@@ -341,15 +341,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _f8dea934d87b99f39977257fdd70a9ad:
+  _4d01af20d416ceae9d53bd9810955298:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 11 defconfig
+    name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 11 defconfig
     env:
       ARCH: s390
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
