@@ -151,6 +151,44 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _8a7d052b952a582ac7e1b377b45dbc43:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 BOOT=0 LLVM 12 defconfig + CONFIG_EFI=n
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _da824abd4bb76b587a16b3e60ed8bbb4:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 defconfig
+    env:
+      ARCH: s390
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _af6f80cfd25ab4381dfe6f974cb87ddc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
