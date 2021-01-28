@@ -18,10 +18,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _95a379afd39c4b025b41036895742537:
+  _a11abf02e18322177d92417220207cb8:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -37,10 +37,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _f4c4538a44eaf67226cfa0263ce0146b:
+  _6f7c758da41b41b25476334cfd2afd0e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -56,10 +56,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _151279e1b24d1b80de19121e970b8271:
+  _60ecbb939df9a7399fa560fa887f0132:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 12 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -75,10 +75,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _047eb1aa64b9595252197636de0f1327:
+  _4e7d23e292f62a4082a1d093ce1ae4f3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 12
@@ -94,10 +94,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _32c3369e9e6e96278dced880a0fde3e9:
+  _535ebd7ca1798dda46eccb404aea7620:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 ppc44x_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -113,10 +113,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _f87d1f728a0f4508f368bd49cc2f1794:
+  _a76a270fda7cd963fb2d6b24de9595cb:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 pseries_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -132,10 +132,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _0bd6d21eb758bae77cf890895efc123b:
+  _e296e30c07f6fef62558537fbe6bf035:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 12 powernv_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -151,10 +151,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _8a7d052b952a582ac7e1b377b45dbc43:
+  _a01df81d9ebc326609fa9a7da7d3808f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=riscv LLVM=1 LLVM_IAS=1 BOOT=0 LLVM 12 defconfig + CONFIG_EFI=n
+    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig + CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 12
@@ -170,10 +170,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _45a3836ec9362ef4ae8a3e3ad370da98:
+  _efcb2e4e81eb80fd4fdf114ea0296d0c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 12 defconfig
+    name: ARCH=s390 CC=clang LLVM_VERSION=12 defconfig
     env:
       ARCH: s390
       LLVM_VERSION: 12
@@ -189,10 +189,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _af6f80cfd25ab4381dfe6f974cb87ddc:
+  _d49633cca166398690b1f3ecad135a14:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 12 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 12
@@ -208,10 +208,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _ff4be0d30ce9e66e3d87c1e88b799030:
+  _326167b20a9a6ecc06fa9d1b2aba10f3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 11 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -227,10 +227,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _7c0abc629fc3d65cb62d3da4f39f2667:
+  _c60cf38875a5399afa4b11ba4d6ef6a7:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 11 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -246,10 +246,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _dcee7940d34d9b322062456e91e448f7:
+  _e568393d55ec884da44c831f42852904:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 BOOT=1 LLVM 11 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -265,10 +265,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _9148373ae5ea26c971bb54ffe784d924:
+  _1062027f7e3ec07f068a39cf6d23fd8a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 11
@@ -284,10 +284,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _47dd255af07f6c5f25b92143729a507f:
+  _6b25347145c5e89e498ca11233af4912:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig
     env:
       ARCH: i386
       LLVM_VERSION: 11
@@ -303,10 +303,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _65db0a68c04dece1d2e1b5630abfa2c5:
+  _78bca94ec9fce86c2275fb6a432820c4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 BOOT=0 LLVM 11 powernv_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=11 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 11
@@ -322,10 +322,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _d16cbcda56935df87acc46d374e94096:
+  _08eafe8217855002e96b6d6e6e26ecbd:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=riscv LLVM=1 LLVM_IAS=1 BOOT=0 LLVM 11 defconfig + CONFIG_EFI=n
+    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig + CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 11
@@ -341,10 +341,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _4d01af20d416ceae9d53bd9810955298:
+  _aab5675f3f257b359acd5cbd9b06b94f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=s390 LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 11 defconfig
+    name: ARCH=s390 CC=clang LLVM_VERSION=11 defconfig
     env:
       ARCH: s390
       LLVM_VERSION: 11
@@ -360,10 +360,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _ee7595d5ca720f6818bcb5e079ef8d63:
+  _73f8d728902a8cc9c807d77d1aaaedaf:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 BOOT=1 LLVM 11 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 11

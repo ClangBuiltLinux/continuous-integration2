@@ -18,10 +18,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _5a7ed50a2077625b3ae9258cec1724c7:
+  _5588d1d29070fa0aca77cfe8b79ad9cd:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 12 multi_v7_defconfig
+    name: ARCH=arm CC=clang LLVM_VERSION=12 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -37,10 +37,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _84e07f14027c19eb259c28adb3938259:
+  _c059d800b7798c47a8cdf08ae5b758ba:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm64 LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 12 defconfig
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=12 defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 12
@@ -56,10 +56,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _34b73f02e4d61a8ed5309f0225c3f605:
+  _40f6d0c14113f1f8498cd098a85518cb:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=powerpc LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 powernv_defconfig
+    name: ARCH=powerpc BOOT=0 CC=clang LLVM_VERSION=12 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -75,10 +75,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _466993b5fba1fee8c6686ee986339040:
+  _7757395244f6a71d79d238e74f26f8ed:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=x86_64 LLVM=0 LLVM_IAS=0 BOOT=0 LLVM 12 defconfig
+    name: ARCH=x86_64 BOOT=0 CC=clang LD=ld.lld LLVM_VERSION=12 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 12

@@ -26,8 +26,19 @@ The tuxsuite and github actions workflow configs should be updated when
 `generator.yml` changes. Ex.
 ```sh
 $ BRANCH=next
-$ ./generate_tuxsuite.py $BRANCH < generator.yml > $BRANCH.tux.yml
+$ ./generate_tuxsuite.py $BRANCH < generator.yml > tuxsuite/$BRANCH.tux.yml
 $ ./generate_workflow.py $BRANCH < generator.yml > .github/workflows/$BRANCH.yml
+```
+
+The `generate.sh` script will run this for you based on the trees that are fed
+to it. Ex.
+
+```
+# Generate just next and mainline TuxSuite and GitHub Action workflows
+$ ./generate.sh next mainline
+
+# Regenerate all of the current TuxSuite and GitHub Action workflows
+$ for BRANCH in tuxsuite/*.yml; do ./generate.sh "$(basename "${CONFIG//.tux.yml}")"; done
 ```
 
 The CI the child workflows run can be rerun locally via:

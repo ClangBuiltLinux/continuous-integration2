@@ -18,10 +18,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _074517ee155a4a4def4b0cf6c0a6e9a8:
+  _4c5fddb1a4a76a91c08e4940c3854d7f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm64 LLVM=0 LLVM_IAS=0 BOOT=1 LLVM 12 cuttlefish_defconfig
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=12 cuttlefish_defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 12

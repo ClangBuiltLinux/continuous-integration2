@@ -47,10 +47,26 @@ def print_config_name(build):
 
 
 def get_job_name(build):
-    return "ARCH=" + (build["ARCH"] if "ARCH" in build else "x86_64") \
-    + " LLVM=" + str(int(build["llvm"])) + " LLVM_IAS=" + str(int(build["llvm_ias"])) \
-    + " BOOT=" + str(int(build["boot"])) + " LLVM " + str(int(build["llvm_version"])) \
-    + " " + print_config_name(build)
+    job = "ARCH=" + (build["ARCH"] if "ARCH" in build else "x86_64")
+    # BOOT=1 is the default, only show if we have disabled it
+    if not build["boot"]:
+        job += " BOOT=0"
+    # LLVM=0 does not make much sense. Translate LLVM=0 into CC=clang
+    if build["llvm"]:
+        job += " LLVM=1"
+    else:
+        job += " CC=clang"
+    # If LD was specified, show what it is
+    if "make_variables" in build and "LD" in build["make_variables"]:
+        job += " LD=" + str(build["make_variables"]["LD"])
+    # LLVM_IAS=0 is the default. Only show when we have opted into LLVM_IAS.
+    if build["llvm_ias"]:
+        job += " LLVM_IAS=1"
+    # Having "LLVM <VER>" is a little hard to parse, make it look like
+    # an environment variable
+    job += " LLVM_VERSION=" + str(int(build["llvm_version"]))
+    job += " " + print_config_name(build)
+    return job
 
 
 def sanitize_job_name(name):
