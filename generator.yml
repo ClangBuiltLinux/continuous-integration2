@@ -1,6 +1,7 @@
 llvm_versions:
   - &llvm_tot 12
   - &llvm_latest 11
+  - &llvm_10 10
 urls:
   - &mainline-url https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
   - &next-url     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
@@ -75,6 +76,8 @@ tiers:
   - &lld                {llvm: false, llvm_ias: false, make_variables: {LD: ld.lld}}
   - &clang              {llvm: false, llvm_ias: false}
   # Architecture specific tiers
+  # ARM32 aspeed_g5_defconfig                                           https://github.com/ClangBuiltLinux/linux/issues/732
+  - &llvm_arm32_v6      {llvm: true,  llvm_ias: false, make_variables: {LD: arm-linux-gnueabihf-ld, LLVM: 1}}
   # MIPS big endian                                                     https://github.com/ClangBuiltLinux/linux/issues/1025
   - &mips_llvm          {llvm: true,  llvm_ias: false, make_variables: {LD: mips-linux-gnu-ld, LLVM: 1}}
   # PowerPC 64-bit big endian                                           https://github.com/ClangBuiltLinux/linux/issues/602
@@ -252,3 +255,44 @@ builds:
   - {<< : *riscv,      << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_latest}
   - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  #############
+  #  LLVM 10  #
+  #############
+  ##############
+  #  Mainline  #
+  ##############
+  - {<< : *arm32_v5,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v6,   << : *mainline,         << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v7,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm64,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *i386,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # mips and mipsel: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/1)
+  # mips and mipsel: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *mips,       << : *mainline,         << : *mips_llvm,       boot: false, llvm_version: *llvm_10}
+  # - {<< : *mipsel,     << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
+  # ppc32, ppc64, and ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *ppc32,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # - {<< : *ppc64,      << : *mainline,         << : *ppc64_llvm,      boot: false, llvm_version: *llvm_10}
+  - {<< : *ppc64le,    << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *s390,       << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_10}
+  - {<< : *x86_64,     << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  ##########
+  #  Next  #
+  ##########
+  - {<< : *arm32_v5,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v6,   << : *next,             << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm64,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *i386,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # mips and mipsel: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/1)
+  # mips and mipsel: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: false, llvm_version: *llvm_10}
+  # - {<< : *mipsel,     << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
+  # ppc32, ppc64, and ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
+  # - {<< : *ppc32,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # - {<< : *ppc64,      << : *next,             << : *ppc64_llvm,      boot: false, llvm_version: *llvm_10}
+  - {<< : *ppc64le,    << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_10}
+  - {<< : *x86_64,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
