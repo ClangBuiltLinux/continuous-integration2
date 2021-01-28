@@ -69,10 +69,13 @@ def cwd():
 def run_boot():
     cbl_arch = get_cbl_name()
     kernel_image = cwd() + "/" + get_image_name()
+    boot_qemu = [
+        "./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image
+    ]
+    if cbl_arch == "s390":
+        boot_qemu += ["--use-cbl-qemu"]
     try:
-        subprocess.run(
-            ["./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image],
-            check=True)
+        subprocess.run(boot_qemu, check=True)
     except subprocess.CalledProcessError as e:
         if e.returncode == 124:
             print_red("Image failed to boot")
