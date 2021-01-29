@@ -114,8 +114,7 @@ builds:
   - {<< : *arm32_v6,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,      << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # i386: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1210)
-  # - {<< : *i386,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *i386,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   # mips and mipsel: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/1)
   # mips and mipsel: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
   # - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: false, llvm_version: *llvm_tot}
