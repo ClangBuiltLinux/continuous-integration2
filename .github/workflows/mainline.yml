@@ -379,6 +379,158 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _fd8f5d7d3d038c2feafce905c5abfb27:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _a751f22e6ba9bbdb1039ee3895125370:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=arm LLVM=1 LD=arm-linux-gnueabihf-ld LLVM_VERSION=10 aspeed_g5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: aspeed_g5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _929ef902a624959eb09c397923751212:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v7_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _9a919af0584ad3314340747afd5e7e03:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=arm64 LLVM=1 LLVM_VERSION=10 defconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _eabd42e7d56b3a0a9c15e6397695d96d:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=i386 LLVM=1 LLVM_VERSION=10 defconfig
+    env:
+      ARCH: i386
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _f66c7b98f62205a5ef552b0bfce4a7f2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=10 powernv_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: powernv_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _77129a466d7b015c998bbca441d09b93:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=s390 CC=clang LLVM_VERSION=10 defconfig
+    env:
+      ARCH: s390
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _470bd3fa38c92f94b430e3a89466a304:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=x86_64 LLVM=1 LLVM_VERSION=10 defconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
 'on':
   schedule:
   - cron: 0 0,6,12,18 * * *
