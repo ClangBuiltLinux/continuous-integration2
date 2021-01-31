@@ -75,6 +75,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _e3c4e3aa2e54ba4664680c40c34c9a3f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig + CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig,CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _4e7d23e292f62a4082a1d093ce1ae4f3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
@@ -265,6 +284,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _b5ed9a0d58b8fafa60fa2c10f6295e19:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig + CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig,CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _1062027f7e3ec07f068a39cf6d23fd8a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
@@ -427,6 +465,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v7_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _4464398188e29e82218c592d271ca6c1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite
+    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v7_defconfig + CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig,CONFIG_THUMB2_KERNEL=y
     steps:
     - uses: actions/checkout@v2
       with:
