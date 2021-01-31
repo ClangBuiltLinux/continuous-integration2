@@ -160,7 +160,7 @@ jobs:
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: defconfig
+      CONFIG: defconfig,CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -331,7 +331,7 @@ jobs:
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: defconfig
+      CONFIG: defconfig,CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
       with:
