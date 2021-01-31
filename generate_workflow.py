@@ -30,19 +30,16 @@ def get_repo_ref(config, tree_name):
             return tree["git_repo"], tree["git_ref"]
 
 
-def get_config_name(build):
-    config = build["config"]
-    return config[0] if type(config) is list else config
-
-
-def print_config_name(build):
-    config_name = get_config_name(build)
+def print_config(build, delimeter):
     config = build["config"]
     if type(config) is list:
+        config_name = config[0]
         i = 1
         while i < len(config):
-            config_name += " + " + config[i]
+            config_name += delimeter + config[i]
             i += 1
+    else:
+        config_name = config
     return config_name
 
 
@@ -65,7 +62,7 @@ def get_job_name(build):
     # Having "LLVM <VER>" is a little hard to parse, make it look like
     # an environment variable
     job += " LLVM_VERSION=" + str(int(build["llvm_version"]))
-    job += " " + print_config_name(build)
+    job += " " + print_config(build, " + ")
     return job
 
 
@@ -86,7 +83,7 @@ def get_steps(build):
                 "LLVM_VERSION": build["llvm_version"],
                 "INSTALL_DEPS": 1,
                 "BOOT": int(build["boot"]),
-                "CONFIG": get_config_name(build),
+                "CONFIG": print_config(build, ","),
             },
             "steps": [
                 {
