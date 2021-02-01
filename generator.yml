@@ -70,7 +70,6 @@ defconfigs:
   - &x86_64     {config: defconfig,                                                                << : *kernel_modules}
   - &x86_64_gki {config: gki_defconfig,                                                            << : *kernel_modules}
   - &x86_64_cut {config: x86_64_cuttlefish_defconfig,                                              << : *kernel_modules}
-extra_configs:
 tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
   - &llvm_full          {llvm: true,  llvm_ias: true,  make_variables: {LLVM: 1, LLVM_IAS: 1}}
