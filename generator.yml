@@ -180,8 +180,7 @@ builds:
   - {<< : *arm64,      << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
   # ppc64le: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/27)
   - {<< : *ppc64le,    << : *stable-4_14,      << : *clang,           boot: false, llvm_version: *llvm_tot}
-  # x86_64: Boot disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/53)
-  - {<< : *x86_64,     << : *stable-4_14,      << : *lld,             boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64,     << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
   ###########
   #  4.9.y  #
   ###########
