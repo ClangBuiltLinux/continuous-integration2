@@ -75,16 +75,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _e3c4e3aa2e54ba4664680c40c34c9a3f:
+  _267d8195f8748ce0c5d40740008e5dde:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig + CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: multi_v7_defconfig,CONFIG_THUMB2_KERNEL=y
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -170,16 +170,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _a01df81d9ebc326609fa9a7da7d3808f:
+  _98aa9cca27fc530a6448efe7056a03c9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig + CONFIG_EFI=n
+    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: defconfig,CONFIG_EFI=n
+      CONFIG: defconfig+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
       with:

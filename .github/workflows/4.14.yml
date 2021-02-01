@@ -37,16 +37,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _2896e7821c01d6ef2d80de5295e9a151:
+  _1fbc7085d6d03b87ef04ffdc43d52141:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite
-    name: ARCH=arm CC=clang LLVM_VERSION=12 multi_v7_defconfig + CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm CC=clang LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: multi_v7_defconfig,CONFIG_THUMB2_KERNEL=y
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     steps:
     - uses: actions/checkout@v2
       with:
