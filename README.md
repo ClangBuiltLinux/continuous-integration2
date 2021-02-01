@@ -38,7 +38,7 @@ to it. Ex.
 $ ./generate.sh next mainline
 
 # Regenerate all of the current TuxSuite and GitHub Action workflows
-$ for BRANCH in tuxsuite/*.yml; do ./generate.sh "$(basename "${CONFIG//.tux.yml}")"; done
+$ for CONFIG in tuxsuite/*.yml; do ./generate.sh "$(basename "${CONFIG//.tux.yml}")"; done
 ```
 
 The CI the child workflows run can be rerun locally via:
