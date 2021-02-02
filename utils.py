@@ -62,12 +62,12 @@ def get_requested_llvm_version():
 
 def get_build():
     arch = os.environ["ARCH"]
-    configs = sorted(os.environ["CONFIG"].split("+"))
+    configs = os.environ["CONFIG"].split("+")
     llvm_version = get_requested_llvm_version()
     for build in _read_builds():
         if build["target_arch"] == arch and \
            build["toolchain"] == llvm_version and \
-           sorted(build["kconfig"]) == configs:
+           build["kconfig"] == configs:
             return build
     print_red("Unable to find build")
     sys.exit(1)
