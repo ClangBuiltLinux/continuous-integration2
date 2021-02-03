@@ -9,17 +9,19 @@ TOT_LLVM = 12
 
 def get_image_name():
     arch = os.environ["ARCH"]
-    # "ppc32": "uImage",
-    # "ppc64": "vmlinux",
-    # "ppc64le": "zImage.epapr",
     if arch == "powerpc":
-        return "zImage.epapr"
+        subarch = get_cbl_name()
+        return {
+            "ppc32": "uImage",
+            "ppc64": "vmlinux",
+            "ppc64le": "zImage.epapr"
+        }[subarch]
     return {
         "arm": "zImage",
         "arm64": "Image.gz",
         "i386": "bzImage",
         "mips": "vmlinux",
-        "riscv": "Image.gz",
+        "riscv": "Image",
         "s390": "bzImage",
         "x86_64": "bzImage",
     }[arch]
