@@ -65,6 +65,8 @@ def emit_tuxsuite_yml(config, tree):
                 "kconfig": build["config"],
                 "targets": build["targets"]
             }
+            if "kernel_image" in build:
+                current_build.update({"kernel_image": build["kernel_image"]})
             if "make_variables" in build:
                 current_build.update(
                     {"make_variables": build["make_variables"]})
