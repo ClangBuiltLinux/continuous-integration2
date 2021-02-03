@@ -50,26 +50,26 @@ targets:
   - &kernel_modules      {targets: [config,kernel,modules]}
   - &kernel_modules_dtbs {targets: [config,kernel,modules,dtbs]}
 defconfigs:
-  #              config:                                               [triples:] (Optional: x86)  targets to build
-  - &arm32_v5   {config: multi_v5_defconfig,                           << : *arm-triple,           << : *kernel_modules_dtbs}
-  - &arm32_v6   {config: aspeed_g5_defconfig,                          << : *arm-triple,           << : *kernel_modules_dtbs}
-  - &arm32_v7   {config: multi_v7_defconfig,                           << : *arm-triple,           << : *kernel_modules}
-  - &arm32_v7_t {config: [multi_v7_defconfig, CONFIG_THUMB2_KERNEL=y], << : *arm-triple,           << : *kernel_modules}
-  - &arm64      {config: defconfig,                                    << : *arm64-triple,         << : *kernel_modules}
-  - &arm64_gki  {config: gki_defconfig,                                << : *arm64-triple,         << : *kernel_modules}
-  - &arm64_cut  {config: cuttlefish_defconfig,                         << : *arm64-triple,         << : *kernel_modules}
-  - &i386       {config: defconfig,                                    << : *i386-triple,          << : *kernel_modules}
-  - &mips       {config: [malta_kvm_guest_defconfig, CONFIG_CPU_BIG_ENDIAN=y], kernel_image: vmlinux, << : *mips-triple,          << : *kernel_modules}
-  - &mipsel     {config: malta_kvm_guest_defconfig,                    kernel_image: vmlinux, << : *mipsel-triple,        << : *kernel_modules}
-  - &ppc32      {config: ppc44x_defconfig,                             kernel_image: uImage, << : *powerpc-triple,       << : *kernel_modules}
-  - &ppc64      {config: pseries_defconfig,                            kernel_image: vmlinux, << : *powerpc64-triple,     << : *kernel_modules}
-  - &ppc64le    {config: powernv_defconfig,                            kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
+  #              config:                                                       image target (optional)     [triples:] (Optional: x86)  targets to build
+  - &arm32_v5   {config: multi_v5_defconfig,                                                               << : *arm-triple,           << : *kernel_modules_dtbs}
+  - &arm32_v6   {config: aspeed_g5_defconfig,                                                              << : *arm-triple,           << : *kernel_modules_dtbs}
+  - &arm32_v7   {config: multi_v7_defconfig,                                                               << : *arm-triple,           << : *kernel_modules}
+  - &arm32_v7_t {config: [multi_v7_defconfig, CONFIG_THUMB2_KERNEL=y],                                     << : *arm-triple,           << : *kernel_modules}
+  - &arm64      {config: defconfig,                                                                        << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_gki  {config: gki_defconfig,                                                                    << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_cut  {config: cuttlefish_defconfig,                                                             << : *arm64-triple,         << : *kernel_modules}
+  - &i386       {config: defconfig,                                                                        << : *i386-triple,          << : *kernel_modules}
+  - &mips       {config: [malta_kvm_guest_defconfig, CONFIG_CPU_BIG_ENDIAN=y], kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
+  - &mipsel     {config: malta_kvm_guest_defconfig,                            kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
+  - &ppc32      {config: ppc44x_defconfig,                                     kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
+  - &ppc64      {config: pseries_defconfig,                                    kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
+  - &ppc64le    {config: powernv_defconfig,                                    kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
   #                                  https://github.com/ClangBuiltLinux/linux/issues/1143
-  - &riscv      {config: [defconfig, CONFIG_EFI=n],                    kernel_image: Image, << : *riscv-triple,         << : *kernel_modules}
-  - &s390       {config: defconfig,                                    << : *s390-triple,          << : *kernel_modules}
-  - &x86_64     {config: defconfig,                                                                << : *kernel_modules}
-  - &x86_64_gki {config: gki_defconfig,                                                            << : *kernel_modules}
-  - &x86_64_cut {config: x86_64_cuttlefish_defconfig,                                              << : *kernel_modules}
+  - &riscv      {config: [defconfig, CONFIG_EFI=n],                            kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
+  - &s390       {config: defconfig,                                                                        << : *s390-triple,          << : *kernel_modules}
+  - &x86_64     {config: defconfig,                                                                                                    << : *kernel_modules}
+  - &x86_64_gki {config: gki_defconfig,                                                                                                << : *kernel_modules}
+  - &x86_64_cut {config: x86_64_cuttlefish_defconfig,                                                                                  << : *kernel_modules}
 tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
   - &llvm_full          {llvm: true,  llvm_ias: true,  make_variables: {LLVM: 1, LLVM_IAS: 1}}
