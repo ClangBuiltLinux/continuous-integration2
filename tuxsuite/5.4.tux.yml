@@ -51,6 +51,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: uImage
     make_variables:
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -62,6 +63,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: vmlinux
     make_variables:
       LD: powerpc64le-linux-gnu-ld
       LLVM: 1
@@ -74,6 +76,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
