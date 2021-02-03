@@ -4,6 +4,13 @@ import yaml
 import sys
 
 
+# Aliases makes this YAML unreadable
+# https://ttl255.com/yaml-anchors-and-aliases-and-how-to-disable-them/
+class NoAliasDumper(yaml.SafeDumper):
+    def ignore_aliases(self, data):
+        return True
+
+
 def parse_args(trees):
     parser = argparse.ArgumentParser(description="Generate TuxSuite YML.")
     parser.add_argument("tree",
@@ -32,13 +39,16 @@ def emit_tuxsuite_yml(config, tree):
         format(tree, tree))
     print("# Invoke tuxsuite via:")
     print(
-        "# $ tuxsuite build-set --set-name cbl --json-out builds.json --tux-config tuxsuite/{}.tux.yml"
+        "# $ tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/{}.tux.yml"
         .format(tree))
-    print("""\
-sets:
-  - name: cbl
-    builds:\
-""")
+    tuxsuite_buildset = {
+        'sets': [
+            {
+                'name': 'defconfigs',
+                'builds': [],
+            }
+        ]
+    } # yapf: disable
     repo, ref = get_repo_ref(config, tree)
     max_version = max(config["llvm_versions"])
     for build in config["builds"]:
@@ -47,11 +57,24 @@ sets:
             toolchain = "clang-"
             toolchain += "nightly" if build[
                 "llvm_version"] == max_version else str(build["llvm_version"])
-            kconfig = build["config"]
-            make_variables = ", make_variables: " + str(
-                build["make_variables"]) if "make_variables" in build else ""
-            print("      - {{git_repo: \"{0}\", git_ref: \"{1}\", target_arch: {2}, toolchain: {3}, kconfig: {4}, targets: {5}{6}}}".format(\
-                    build["git_repo"], build["git_ref"], arch, toolchain, kconfig, build["targets"], make_variables))
+            current_build = {
+                "git_repo": build["git_repo"],
+                "git_ref": build["git_ref"],
+                "target_arch": arch,
+                "toolchain": toolchain,
+                "kconfig": build["config"],
+                "targets": build["targets"]
+            }
+            if "make_variables" in build:
+                current_build.update(
+                    {"make_variables": build["make_variables"]})
+            tuxsuite_buildset["sets"][0]["builds"] += [current_build]
+
+    print(
+        yaml.dump(tuxsuite_buildset,
+                  Dumper=NoAliasDumper,
+                  width=1000,
+                  sort_keys=False))
 
 
 if __name__ == "__main__":
