@@ -27,7 +27,7 @@ def get_image_name():
 
 def get_cbl_name():
     arch = os.environ["ARCH"]
-    config = os.environ["CONFIG"]
+    config = os.environ["CONFIG"].split("+")[0]
 
     unique_defconfigs = {
         "multi_v5_defconfig": "arm32_v5",
@@ -62,11 +62,12 @@ def get_requested_llvm_version():
 
 def get_build():
     arch = os.environ["ARCH"]
-    config = os.environ["CONFIG"]
+    configs = os.environ["CONFIG"].split("+")
     llvm_version = get_requested_llvm_version()
     for build in _read_builds():
-        if build["target_arch"] == arch and build["kconfig"][0] == config \
-                and build["toolchain"] == llvm_version:
+        if build["target_arch"] == arch and \
+           build["toolchain"] == llvm_version and \
+           build["kconfig"] == configs:
             return build
     print_red("Unable to find build")
     sys.exit(1)
