@@ -72,7 +72,7 @@ def run_boot():
     boot_qemu = [
         "./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image
     ]
-    if cbl_arch == "s390":
+    if cbl_arch == "riscv" or cbl_arch == "s390":
         boot_qemu += ["--use-cbl-qemu"]
     try:
         subprocess.run(boot_qemu, check=True)
