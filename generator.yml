@@ -59,7 +59,7 @@ defconfigs:
   - &arm64_gki  {config: gki_defconfig,                                << : *arm64-triple,         << : *kernel_modules}
   - &arm64_cut  {config: cuttlefish_defconfig,                         << : *arm64-triple,         << : *kernel_modules}
   - &i386       {config: defconfig,                                    << : *i386-triple,          << : *kernel_modules}
-  - &mips       {config: malta_kvm_guest_defconfig,                    << : *mips-triple,          << : *kernel_modules}
+  - &mips       {config: [malta_kvm_guest_defconfig, CONFIG_CPU_BIG_ENDIAN=y],                    << : *mips-triple,          << : *kernel_modules}
   - &mipsel     {config: malta_kvm_guest_defconfig,                    << : *mipsel-triple,        << : *kernel_modules}
   - &ppc32      {config: ppc44x_defconfig,                             << : *powerpc-triple,       << : *kernel_modules}
   - &ppc64      {config: pseries_defconfig,                            << : *powerpc64-triple,     << : *kernel_modules}
