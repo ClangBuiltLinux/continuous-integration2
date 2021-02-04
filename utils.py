@@ -27,20 +27,24 @@ def get_image_name():
 
 def get_cbl_name():
     arch = os.environ["ARCH"]
-    config = os.environ["CONFIG"].split("+")[0]
+    full_config = os.environ["CONFIG"]
+    base_config = full_config.split("+")[0]
 
     unique_defconfigs = {
         "multi_v5_defconfig": "arm32_v5",
         "aspeed_g5_defconfig": "arm32_v6",
         "multi_v7_defconfig": "arm32_v7",
-        "malta_kvm_guest_defconfig": "mips",
         "ppc44x_defconfig": "ppc32",
         "pseries_defconfig": "ppc64",
         "powernv_defconfig": "ppc64le",
     }
-    if config in unique_defconfigs:
-        return unique_defconfigs[config]
-    if "defconfig" in config:
+    if base_config in unique_defconfigs:
+        return unique_defconfigs[base_config]
+    if base_config == "malta_kvm_guest_defconfig":
+        if "CONFIG_CPU_BIG_ENDIAN=y" in full_config:
+            return "mips"
+        return "mipsel"
+    if "defconfig" in base_config:
         return "x86" if arch == "i386" else arch
     raise Exception("unknown CBL name")
 
