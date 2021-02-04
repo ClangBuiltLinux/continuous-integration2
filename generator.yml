@@ -202,19 +202,18 @@ builds:
   #############
   #  Android  #
   #############
-  # x86_64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/117)
   - {<< : *arm64_gki,  << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # - {<< : *x86_64_gki, << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki, << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,  << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # - {<< : *x86_64_gki, << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki, << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,  << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # - {<< : *x86_64_gki, << : *android-5_4,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki, << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,  << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # - {<< : *x86_64_gki, << : *android-4_19,     << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki, << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cut,  << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
-  # - {<< : *x86_64_cut, << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cut, << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cut,  << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  # - {<< : *x86_64_cut, << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cut, << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   #########################
   #  Latest LLVM release  #
   #########################
