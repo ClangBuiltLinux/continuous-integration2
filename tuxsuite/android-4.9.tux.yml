@@ -15,4 +15,13 @@ sets:
     - config
     - kernel
     - modules
+  - git_repo: https://android.googlesource.com/kernel/common.git
+    git_ref: android-4.9-q
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig: x86_64_cuttlefish_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
 
