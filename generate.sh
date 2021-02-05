@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
 CI=$(dirname "$(readlink -f "${0}")")
+cd "${CI}" || exit ${?}
 
-set -eu
-
-cd "${CI}"
-
+BRANCHES=()
 while ((${#})); do
-    ./generate_tuxsuite.py <generator.yml "${1}" >tuxsuite/"${1}".tux.yml
-    ./generate_workflow.py <generator.yml "${1}" >.github/workflows/"${1}".yml
+    case ${1} in
+        all) for FILE in tuxsuite/*.tux.yml; do BRANCHES+=("$(basename "${FILE//.tux.yml/}")"); done ;;
+        *) BRANCHES+=("${1}") ;;
+    esac
     shift
+done
+
+set -eux
+
+for BRANCH in "${BRANCHES[@]}"; do
+    ./generate_tuxsuite.py <generator.yml "${BRANCH}" >tuxsuite/"${BRANCH}".tux.yml
+    ./generate_workflow.py <generator.yml "${BRANCH}" >.github/workflows/"${BRANCH}".yml
 done
