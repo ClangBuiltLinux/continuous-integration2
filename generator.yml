@@ -133,7 +133,14 @@ builds:
   - {<< : *arm32_v6,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
+  # - {<< : *arm32_allmod, << : *next, << : *llvm, boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allno, << : *next, << : *llvm, boot: false, llvm_version: *llvm_tot}
+  # - {<< : *arm32_allyes, << : *next, << : *llvm, boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,      << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # - {<< : *arm64_allmod, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  # - {<< : *arm64_allyes, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -143,6 +150,10 @@ builds:
   - {<< : *riscv,      << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # x86_64 all{mod,yes}config disabled (https://lore.kernel.org/linux-next/20210122115918.63b56fa1@canb.auug.org.au/)
+  # - {<< : *x86_64_allmod, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allno, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  # - {<< : *x86_64_allyes, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
   ############
   #  5.10.y  #
   ############
@@ -252,7 +263,14 @@ builds:
   - {<< : *arm32_v6,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
+  # - {<< : *arm32_allmod, << : *next, << : *llvm, boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allno, << : *next, << : *llvm, boot: false, llvm_version: *llvm_latest}
+  # - {<< : *arm32_allyes, << : *next, << : *llvm, boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64,      << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # - {<< : *arm64_allmod, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allno, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_latest}
+  # - {<< : *arm64_allyes, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
@@ -263,6 +281,10 @@ builds:
   - {<< : *riscv,      << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # x86_64 all{mod,yes}config disabled (https://lore.kernel.org/linux-next/20210122115918.63b56fa1@canb.auug.org.au/)
+  # - {<< : *x86_64_allmod, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allno, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_latest}
+  # - {<< : *x86_64_allyes, << : *next, << : *llvm_full, boot: false, llvm_version: *llvm_latest}
   #############
   #  LLVM 10  #
   #############
@@ -300,7 +322,14 @@ builds:
   - {<< : *arm32_v6,   << : *next,             << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7_t, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
+  # - {<< : *arm32_allmod, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
+  - {<< : *arm32_allno, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
+  # - {<< : *arm32_allyes, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
   - {<< : *arm64,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # - {<< : *arm64_allmod, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
+  - {<< : *arm64_allno, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
+  # - {<< : *arm64_allyes, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
   - {<< : *i386,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
   - {<< : *mipsel,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
@@ -310,3 +339,7 @@ builds:
   - {<< : *ppc64le,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_10}
   - {<< : *x86_64,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # x86_64 all{mod,yes}config disabled (https://lore.kernel.org/linux-next/20210122115918.63b56fa1@canb.auug.org.au/)
+  # - {<< : *x86_64_allmod, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
+  - {<< : *x86_64_allno, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
+  # - {<< : *x86_64_allyes, << : *next, << : *llvm, boot: false, llvm_version: *llvm_10}
