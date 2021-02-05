@@ -161,7 +161,14 @@ builds:
   - {<< : *arm32_v6,   << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7,   << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t, << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  # arm32 all{mod,yes}config disabled (https://lore.kernel.org/r/20210205041351.GA2494386@localhost/)
+  # - {<< : *arm32_allmod, << : *stable-5_10, << : *llvm, boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allno, << : *stable-5_10, << : *llvm, boot: false, llvm_version: *llvm_tot}
+  # - {<< : *arm32_allyes, << : *stable-5_10, << : *llvm, boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,      << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod, << : *stable-5_10, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno, << : *stable-5_10, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allyes, << : *stable-5_10, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
   # i386: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1210)
   # - {<< : *i386,       << : *stable-5_10,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,       << : *stable-5_10,      << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
@@ -172,6 +179,9 @@ builds:
   - {<< : *riscv,      << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390,       << : *stable-5_10,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,     << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_allmod, << : *stable-5_10, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allno, << : *stable-5_10, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allyes, << : *stable-5_10, << : *llvm_full, boot: false, llvm_version: *llvm_tot}
   ###########
   #  5.4.y  #
   ###########
