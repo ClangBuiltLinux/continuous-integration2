@@ -88,15 +88,53 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _535ebd7ca1798dda46eccb404aea7620:
+  _b22d88ed6ca44e08b3ddced1f36b2681:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
+    name: ARCH=mips LLVM=1 LLVM_VERSION=12 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    env:
+      ARCH: mips
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _7b8e833ae066ea79f1a6e4ff3389a632:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=mips LLVM=1 LLVM_VERSION=12 malta_kvm_guest_defconfig
+    env:
+      ARCH: mips
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_kvm_guest_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _a3bacbe25d9b5eb02296db0c021ec75c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -107,15 +145,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _a76a270fda7cd963fb2d6b24de9595cb:
+  _dbfb1afee12b5bc2178bd79c1ca36bc9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: pseries_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -126,15 +164,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _e296e30c07f6fef62558537fbe6bf035:
+  _4929805e7a2ad956b20f06354ba6557f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2

@@ -44,6 +44,32 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
+    target_arch: mips
+    toolchain: clang-nightly
+    kconfig:
+    - malta_kvm_guest_defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.4.y
+    target_arch: mips
+    toolchain: clang-nightly
+    kconfig: malta_kvm_guest_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.4.y
     target_arch: powerpc
     toolchain: clang-nightly
     kconfig: ppc44x_defconfig
@@ -51,6 +77,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: uImage
     make_variables:
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -62,6 +89,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: vmlinux
     make_variables:
       LD: powerpc64le-linux-gnu-ld
       LLVM: 1
@@ -74,6 +102,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git

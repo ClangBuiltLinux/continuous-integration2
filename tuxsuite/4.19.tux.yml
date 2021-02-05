@@ -50,6 +50,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-4.19.y
     target_arch: x86_64
