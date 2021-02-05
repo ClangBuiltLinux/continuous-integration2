@@ -68,6 +68,33 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
+    target_arch: mips
+    toolchain: clang-nightly
+    kconfig:
+    - malta_kvm_guest_defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: mips-linux-gnu-ld
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: mips
+    toolchain: clang-nightly
+    kconfig: malta_kvm_guest_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
     target_arch: powerpc
     toolchain: clang-nightly
     kconfig: ppc44x_defconfig
@@ -214,6 +241,33 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
+    target_arch: mips
+    toolchain: clang-11
+    kconfig:
+    - malta_kvm_guest_defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: mips-linux-gnu-ld
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: mips
+    toolchain: clang-11
+    kconfig: malta_kvm_guest_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
     target_arch: powerpc
     toolchain: clang-11
     kconfig: powernv_defconfig
@@ -330,6 +384,33 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: mips
+    toolchain: clang-10
+    kconfig:
+    - malta_kvm_guest_defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: mips-linux-gnu-ld
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: mips
+    toolchain: clang-10
+    kconfig: malta_kvm_guest_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
     make_variables:
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
