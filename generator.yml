@@ -49,27 +49,36 @@ triples:
 targets:
   - &kernel_modules      {targets: [config,kernel,modules]}
   - &kernel_modules_dtbs {targets: [config,kernel,modules,dtbs]}
-defconfigs:
-  #              config:                                                       image target (optional)     [triples:] (Optional: x86)  targets to build
-  - &arm32_v5   {config: multi_v5_defconfig,                                                               << : *arm-triple,           << : *kernel_modules_dtbs}
-  - &arm32_v6   {config: aspeed_g5_defconfig,                                                              << : *arm-triple,           << : *kernel_modules_dtbs}
-  - &arm32_v7   {config: multi_v7_defconfig,                                                               << : *arm-triple,           << : *kernel_modules}
-  - &arm32_v7_t {config: [multi_v7_defconfig, CONFIG_THUMB2_KERNEL=y],                                     << : *arm-triple,           << : *kernel_modules}
-  - &arm64      {config: defconfig,                                                                        << : *arm64-triple,         << : *kernel_modules}
-  - &arm64_gki  {config: gki_defconfig,                                                                    << : *arm64-triple,         << : *kernel_modules}
-  - &arm64_cut  {config: cuttlefish_defconfig,                                                             << : *arm64-triple,         << : *kernel_modules}
-  - &i386       {config: defconfig,                                                                        << : *i386-triple,          << : *kernel_modules}
-  - &mips       {config: [malta_kvm_guest_defconfig, CONFIG_CPU_BIG_ENDIAN=y], kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
-  - &mipsel     {config: malta_kvm_guest_defconfig,                            kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
-  - &ppc32      {config: ppc44x_defconfig,                                     kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
-  - &ppc64      {config: pseries_defconfig,                                    kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
-  - &ppc64le    {config: powernv_defconfig,                                    kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
-  #                                  https://github.com/ClangBuiltLinux/linux/issues/1143
-  - &riscv      {config: [defconfig, CONFIG_EFI=n],                            kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
-  - &s390       {config: defconfig,                                                                        << : *s390-triple,          << : *kernel_modules}
-  - &x86_64     {config: defconfig,                                                                                                    << : *kernel_modules}
-  - &x86_64_gki {config: gki_defconfig,                                                                                                << : *kernel_modules}
-  - &x86_64_cut {config: x86_64_cuttlefish_defconfig,                                                                                  << : *kernel_modules}
+configs:
+  #                 config:                                                       image target (optional)     [triples:] (Optional: x86)  targets to build
+  - &arm32_v5      {config: multi_v5_defconfig,                                                               << : *arm-triple,           << : *kernel_modules_dtbs}
+  - &arm32_v6      {config: aspeed_g5_defconfig,                                                              << : *arm-triple,           << : *kernel_modules_dtbs}
+  - &arm32_v7      {config: multi_v7_defconfig,                                                               << : *arm-triple,           << : *kernel_modules}
+  - &arm32_v7_t    {config: [multi_v7_defconfig, CONFIG_THUMB2_KERNEL=y],                                     << : *arm-triple,           << : *kernel_modules}
+  - &arm32_allmod  {config: allmodconfig,                                                                     << : *arm-triple,           << : *kernel_modules}
+  - &arm32_allno   {config: allnoconfig,                                                                      << : *arm-triple,           << : *kernel_modules}
+  - &arm32_allyes  {config: allyesconfig,                                                                     << : *arm-triple,           << : *kernel_modules}
+  - &arm64         {config: defconfig,                                                                        << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_gki     {config: gki_defconfig,                                                                    << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_cut     {config: cuttlefish_defconfig,                                                             << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_allmod  {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                 << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_allno   {config: allnoconfig,                                                                      << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_allyes  {config: [allyesconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                 << : *arm64-triple,         << : *kernel_modules}
+  - &i386          {config: defconfig,                                                                        << : *i386-triple,          << : *kernel_modules}
+  - &mips          {config: [malta_kvm_guest_defconfig, CONFIG_CPU_BIG_ENDIAN=y], kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
+  - &mipsel        {config: malta_kvm_guest_defconfig,                            kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
+  - &ppc32         {config: ppc44x_defconfig,                                     kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
+  - &ppc64         {config: pseries_defconfig,                                    kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
+  - &ppc64le       {config: powernv_defconfig,                                    kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
+  #                                     https://github.com/ClangBuiltLinux/linux/issues/1143
+  - &riscv         {config: [defconfig, CONFIG_EFI=n],                            kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
+  - &s390          {config: defconfig,                                                                        << : *s390-triple,          << : *kernel_modules}
+  - &x86_64        {config: defconfig,                                                                                                    << : *kernel_modules}
+  - &x86_64_gki    {config: gki_defconfig,                                                                                                << : *kernel_modules}
+  - &x86_64_cut    {config: x86_64_cuttlefish_defconfig,                                                                                  << : *kernel_modules}
+  - &x86_64_allmod {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                                             << : *kernel_modules}
+  - &x86_64_allno  {config: allnoconfig,                                                                                                  << : *kernel_modules}
+  - &x86_64_allyes {config: [allyesconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                                             << : *kernel_modules}
 tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
   - &llvm_full          {llvm: true,  llvm_ias: true,  make_variables: {LLVM: 1, LLVM_IAS: 1}}
@@ -92,184 +101,255 @@ builds:
   ##############
   #  Mainline  #
   ##############
-  #  defconfigs:       trees:                  make_variables:        BOOT=1       llvm_versions:
-  - {<< : *arm32_v5,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v6,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7_t, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  #  configs:             trees:                  make_variables:        BOOT=1       llvm_versions:
+  - {<< : *arm32_v5,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7_t,    << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allno,   << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allyes,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno,   << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allyes,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   # i386: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1210)
-  # - {<< : *i386,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mips,       << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mipsel,     << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,      << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64le,    << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *riscv,      << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *s390,       << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # - {<< : *i386,          << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mips,          << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mipsel,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,         << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64,         << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *riscv,         << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *s390,          << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_allmod, << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allno,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allyes, << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ##########
   #  Next  #
   ##########
-  - {<< : *arm32_v5,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v6,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7_t, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *i386,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mipsel,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,      << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64le,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *riscv,      << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v5,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7_t,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
+  # - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  # - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno,   << : *next,             << : *llvm_full, boot: false, llvm_version: *llvm_tot}
+  # - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *i386,          << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64,         << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *riscv,         << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *s390,          << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # x86_64 all{mod,yes}config disabled (https://lore.kernel.org/linux-next/20210122115918.63b56fa1@canb.auug.org.au/)
+  # - {<< : *x86_64_allmod, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allno,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  # - {<< : *x86_64_allyes, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ############
   #  5.10.y  #
   ############
-  - {<< : *arm32_v5,   << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v6,   << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7,   << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7_t, << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v5,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v6,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7_t,    << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  # arm32 all{mod,yes}config disabled (https://lore.kernel.org/r/20210205041351.GA2494386@localhost/)
+  # - {<< : *arm32_allmod,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allno,   << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  # - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno,   << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allyes,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   # i386: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1210)
-  # - {<< : *i386,       << : *stable-5_10,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mips,       << : *stable-5_10,      << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mipsel,     << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,      << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64le,    << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *riscv,      << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
-  - {<< : *s390,       << : *stable-5_10,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # - {<< : *i386,          << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mips,          << : *stable-5_10,      << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mipsel,        << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,         << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64,         << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,       << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *riscv,         << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *s390,          << : *stable-5_10,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_allmod, << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allno,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allyes, << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ###########
   #  5.4.y  #
   ###########
-  - {<< : *arm32_v7,   << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7_t, << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mips,       << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *mipsel,     << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,      << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,      << : *stable-5_4,       << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64le,    << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7,      << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7_t,    << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mips,          << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *mipsel,        << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc32,         << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64,         << : *stable-5_4,       << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,       << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   ############
   #  4.19.y  #
   ############
-  - {<< : *arm32_v7,   << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7_t, << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64le,    << : *stable-4_19,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7,      << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7_t,    << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,       << : *stable-4_19,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   ############
   #  4.14.y  #
   ############
-  - {<< : *arm32_v7,   << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_v7_t, << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64le,    << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7,      << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7_t,    << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *ppc64le,       << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
   ###########
   #  4.9.y  #
   ###########
-  - {<< : *arm32_v7,   << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,      << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *stable-4_9,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_v7,      << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *stable-4_9,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
   ###########
   #  4.4.y  #
   ###########
-  - {<< : *arm64,      << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,     << : *stable-4_4,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *stable-4_4,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
   #############
   #  Android  #
   #############
-  - {<< : *arm64_gki,  << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_gki, << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_gki,  << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_gki, << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_gki,  << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_gki, << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_gki,  << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_gki, << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_cut,  << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_cut, << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_cut,  << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_cut, << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  #########################
-  #  Latest LLVM release  #
+  - {<< : *arm64_gki,     << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki,    << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_gki,     << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki,    << : *android-5_10,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_gki,     << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki,    << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_gki,     << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki,    << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cut,     << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cut,    << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cut,     << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cut,    << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  ########################
+  #  Latest LLVM release #
   #########################
   ##############
   #  Mainline  #
   ##############
-  - {<< : *arm32_v5,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v6,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v7,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v7_t, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64,      << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *i386,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *mips,       << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *mipsel,     << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v5,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v6,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v7,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v7_t,    << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allno,   << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allyes,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64,         << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_allmod,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allno,   << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allyes,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *i386,          << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *mips,          << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *mipsel,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
-  # - {<< : *ppc32,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  # - {<< : *ppc64,      << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc64le,    << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *riscv,      << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
-  - {<< : *s390,       << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # - {<< : *ppc32,         << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  # - {<< : *ppc64,         << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
+  - {<< : *ppc64le,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *riscv,         << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
+  - {<< : *s390,          << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,        << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_allmod, << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allno,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allyes, << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   ##########
   #  Next  #
   ##########
-  - {<< : *arm32_v5,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v6,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_v7_t, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64,      << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *i386,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *mipsel,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v5,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v6,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v7,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_v7_t,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
+  # - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  # - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allno,   << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  # - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *i386,          << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
-  # - {<< : *ppc32,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  # - {<< : *ppc64,      << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc64le,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *riscv,      << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
-  - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # - {<< : *ppc32,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  # - {<< : *ppc64,         << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
+  - {<< : *ppc64le,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  - {<< : *riscv,         << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
+  - {<< : *s390,          << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,        << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # x86_64 all{mod,yes}config disabled (https://lore.kernel.org/linux-next/20210122115918.63b56fa1@canb.auug.org.au/)
+  # - {<< : *x86_64_allmod, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allno,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  # - {<< : *x86_64_allyes, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   #############
   #  LLVM 10  #
   #############
   ##############
   #  Mainline  #
   ##############
-  - {<< : *arm32_v5,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v6,   << : *mainline,         << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v7,   << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v7_t, << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm64,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *i386,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *mips,       << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
-  - {<< : *mipsel,     << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v5,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v6,      << : *mainline,         << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v7,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v7_t,    << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_allmod,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *arm32_allno,   << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *arm32_allyes,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *arm64,         << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # arm64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm64_allmod,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *arm64_allno,   << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # - {<< : *arm64_allyes,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *i386,          << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *mips,          << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
+  - {<< : *mipsel,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
-  # - {<< : *ppc32,      << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # - {<< : *ppc64,      << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
-  - {<< : *ppc64le,    << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *s390,       << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_10}
-  - {<< : *x86_64,     << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # - {<< : *ppc32,         << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # - {<< : *ppc64,         << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
+  - {<< : *ppc64le,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *s390,          << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_10}
+  - {<< : *x86_64,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *x86_64_allmod, << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *x86_64_allno,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *x86_64_allyes, << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
   ##########
   #  Next  #
   ##########
-  - {<< : *arm32_v5,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v6,   << : *next,             << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v7,   << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v7_t, << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm64,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *i386,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *mips,       << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
-  - {<< : *mipsel,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v5,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v6,      << : *next,             << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v7,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v7_t,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
+  # - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *arm32_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # - {<< : *arm32_allyes,  << : *next,             << : *llvm,             boot: false, llvm_version: *llvm_10}
+  - {<< : *arm64,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # - {<< : *arm64_allmod,  << : *next,             << : *llvm,             boot: false, llvm_version: *llvm_10}
+  - {<< : *arm64_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # - {<< : *arm64_allyes,  << : *next,             << : *llvm,             boot: false, llvm_version: *llvm_10}
+  - {<< : *i386,          << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
+  - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
-  # - {<< : *ppc32,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # - {<< : *ppc64,      << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
-  - {<< : *ppc64le,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *s390,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_10}
-  - {<< : *x86_64,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # - {<< : *ppc32,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # - {<< : *ppc64,         << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
+  - {<< : *ppc64le,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  - {<< : *s390,          << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_10}
+  - {<< : *x86_64,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # x86_64 all{mod,yes}config disabled (https://lore.kernel.org/linux-next/20210122115918.63b56fa1@canb.auug.org.au/)
+  # - {<< : *x86_64_allmod, << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *x86_64_allno,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # - {<< : *x86_64_allyes, << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}

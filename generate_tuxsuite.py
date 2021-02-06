@@ -51,12 +51,15 @@ def emit_tuxsuite_yml(config, tree):
     } # yapf: disable
     repo, ref = get_repo_ref(config, tree)
     max_version = max(config["llvm_versions"])
+    defconfigs = []
+    allconfigs = []
     for build in config["builds"]:
         if build["git_repo"] == repo and build["git_ref"] == ref:
             arch = build["ARCH"] if "ARCH" in build else "x86_64"
             toolchain = "clang-"
             toolchain += "nightly" if build[
                 "llvm_version"] == max_version else str(build["llvm_version"])
+
             current_build = {
                 "git_repo": build["git_repo"],
                 "git_ref": build["git_ref"],
@@ -70,8 +73,18 @@ def emit_tuxsuite_yml(config, tree):
             if "make_variables" in build:
                 current_build.update(
                     {"make_variables": build["make_variables"]})
-            tuxsuite_buildset["sets"][0]["builds"] += [current_build]
 
+            if "defconfig" in str(build["config"]):
+                defconfigs.append(current_build)
+            else:
+                allconfigs.append(current_build)
+
+    tuxsuite_buildset["sets"][0]["builds"] = defconfigs
+    if allconfigs:
+        tuxsuite_buildset["sets"] += [{
+            "name": "allconfigs",
+            "builds": allconfigs
+        }]
     print(
         yaml.dump(tuxsuite_buildset,
                   Dumper=NoAliasDumper,
