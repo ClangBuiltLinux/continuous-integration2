@@ -75,9 +75,9 @@ def emit_tuxsuite_yml(config, tree):
                     {"make_variables": build["make_variables"]})
 
             if "defconfig" in str(build["config"]):
-                defconfigs += [current_build]
+                defconfigs.append(current_build)
             else:
-                allconfigs += [current_build]
+                allconfigs.append(current_build)
 
     tuxsuite_buildset["sets"][0]["builds"] = defconfigs
     if allconfigs:
