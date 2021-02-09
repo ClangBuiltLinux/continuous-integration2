@@ -768,6 +768,25 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
+  _b6004055e739b487ac5b79a2ecd21871:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allmodconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _67124def5a4f894c4fee22cb7d093342:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -778,6 +797,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _a17601dec744d5d8c2a4a9c67b744b30:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allyesconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -901,6 +939,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _e0faf7981c78617941c48bb39357dfa5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allmodconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _a3c122fc012130191ce34a8fc1ed2809:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -911,6 +968,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _ac352b89ff0b84ba7baaec44be7d4fd9:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allyesconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -1034,6 +1110,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _79c2e713ed9fc3c4381862731d8a664a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allmodconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _56d21d0eba24aae15e0e7ba0cdd3e62a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -1044,6 +1139,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _ee24c08b15f5892fb5e38906315c0280:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allyesconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
     steps:
     - uses: actions/checkout@v2
       with:
