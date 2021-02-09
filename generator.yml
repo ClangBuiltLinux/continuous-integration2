@@ -118,7 +118,8 @@ builds:
   - {<< : *mips,          << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,         << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,         << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
+  # - {<< : *ppc64,         << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *riscv,         << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390,          << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
@@ -145,7 +146,8 @@ builds:
   - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,         << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
+  # - {<< : *ppc64,         << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *riscv,         << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390,          << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
@@ -174,7 +176,8 @@ builds:
   - {<< : *mips,          << : *stable-5_10,      << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,        << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,         << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,         << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
+  # - {<< : *ppc64,         << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,       << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *riscv,         << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390,          << : *stable-5_10,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
@@ -191,7 +194,8 @@ builds:
   - {<< : *mips,          << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,        << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,         << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc64,         << : *stable-5_4,       << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
+  # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
+  # - {<< : *ppc64,         << : *stable-5_4,       << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,       << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   ############
