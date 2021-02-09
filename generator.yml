@@ -133,14 +133,13 @@ builds:
   - {<< : *arm32_v6,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
-  # - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
-  # - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  # - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
-  - {<< : *arm64_allno,   << : *next,             << : *llvm_full, boot: false, llvm_version: *llvm_tot}
-  # - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno,   << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,          << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -273,14 +272,13 @@ builds:
   - {<< : *arm32_v6,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
-  # - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
-  # - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  # - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allno,   << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
-  # - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,          << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
@@ -332,14 +330,14 @@ builds:
   - {<< : *arm32_v6,      << : *next,             << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7,      << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7_t,    << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # arm32 and arm64: all{mod,yes}config builds disabled (https://lore.kernel.org/linux-arm-kernel/202102030343.D9j1wukx-lkp@intel.com/)
-  # - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  - {<< : *arm32_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *arm32_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
-  # - {<< : *arm32_allyes,  << : *next,             << : *llvm,             boot: false, llvm_version: *llvm_10}
+  - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *arm64,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # - {<< : *arm64_allmod,  << : *next,             << : *llvm,             boot: false, llvm_version: *llvm_10}
+  # arm64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm64_allmod,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *arm64_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
-  # - {<< : *arm64_allyes,  << : *next,             << : *llvm,             boot: false, llvm_version: *llvm_10}
+  # - {<< : *arm64_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *i386,          << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
   - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
