@@ -259,6 +259,500 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _a11abf02e18322177d92417220207cb8:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _6f7c758da41b41b25476334cfd2afd0e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 aspeed_g5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: aspeed_g5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _60ecbb939df9a7399fa560fa887f0132:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _267d8195f8748ce0c5d40740008e5dde:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _4e7d23e292f62a4082a1d093ce1ae4f3:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _34f6759fcc54c90da20900a041d8014d:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=12 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    env:
+      ARCH: mips
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _7b8e833ae066ea79f1a6e4ff3389a632:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=mips LLVM=1 LLVM_VERSION=12 malta_kvm_guest_defconfig
+    env:
+      ARCH: mips
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_kvm_guest_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _a3bacbe25d9b5eb02296db0c021ec75c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: ppc44x_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _dbfb1afee12b5bc2178bd79c1ca36bc9:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: pseries_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _4929805e7a2ad956b20f06354ba6557f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: powernv_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _49b8454e1fcf8ba7fc36c5f5e6cc5299:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_EFI=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _efcb2e4e81eb80fd4fdf114ea0296d0c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=s390 CC=clang LLVM_VERSION=12 defconfig
+    env:
+      ARCH: s390
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _d49633cca166398690b1f3ecad135a14:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _326167b20a9a6ecc06fa9d1b2aba10f3:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _c60cf38875a5399afa4b11ba4d6ef6a7:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 aspeed_g5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: aspeed_g5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _e568393d55ec884da44c831f42852904:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _f32548095474a8341719241e481106cd:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _1062027f7e3ec07f068a39cf6d23fd8a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _a82a7c15d9664631e5324fb16007e6c8:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=11 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    env:
+      ARCH: mips
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _df6659605e188f908ee2328126b07a38:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=mips LLVM=1 LLVM_VERSION=11 malta_kvm_guest_defconfig
+    env:
+      ARCH: mips
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_kvm_guest_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _2f2c384e9ae91ede08b3403161a3d5eb:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=11 ppc44x_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: ppc44x_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _77589831d4669a1981dad16fdae71677:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=11 pseries_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: pseries_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _8190461c1f8057e418b9abae5f927a20:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=11 powernv_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: powernv_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _94771c21f822e6468d29dfe9257e8207:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_EFI=n
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_EFI=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _aab5675f3f257b359acd5cbd9b06b94f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=s390 CC=clang LLVM_VERSION=11 defconfig
+    env:
+      ARCH: s390
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _73f8d728902a8cc9c807d77d1aaaedaf:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   kick_tuxsuite_allconfigs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-20.04
@@ -395,6 +889,272 @@ jobs:
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _a3c122fc012130191ce34a8fc1ed2809:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allnoconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _15946cae556835669124d99cc1495757:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _02542a0d531fabec931217c22d933bbe:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allnoconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _dfd767301f17d7750eebc976bead3133:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _1233efb5e1bf8e77bdb11f3a8ab3accc:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _78a1c189b48cf1440cdce261b5ec5efe:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allnoconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _90331c9987646dae8803fe3df6389635:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _56d21d0eba24aae15e0e7ba0cdd3e62a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allnoconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _5e6f0531d2ceef138ecbcfea5d060bf5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _399a468064cf545cce40196c96162888:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allnoconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _72812ca68390d934a6076c3d083f2738:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _366260e9b426a311aef4725e4dad08a5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _d5032c6b0134fa08249732baa271b04a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allnoconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _55bbf29f7c8fd894a2f21b3027f992f1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
