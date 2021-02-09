@@ -163,10 +163,9 @@ builds:
   - {<< : *arm32_v6,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,    << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  # arm32 all{mod,yes}config disabled (https://lore.kernel.org/r/20210205041351.GA2494386@localhost/)
-  # - {<< : *arm32_allmod,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allno,   << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
-  # - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_allmod,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,   << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
@@ -304,10 +303,9 @@ builds:
   - {<< : *arm32_v6,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t,    << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  # arm32 all{mod,yes}config disabled (https://lore.kernel.org/r/20210205041351.GA2494386@localhost/)
-  # - {<< : *arm32_allmod,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_allno,   << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_latest}
-  # - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64,         << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_allmod,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allno,   << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
@@ -405,10 +403,9 @@ builds:
   - {<< : *arm32_v6,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_11}
   - {<< : *arm32_v7,      << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_11}
   - {<< : *arm32_v7_t,    << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_11}
-  # arm32 all{mod,yes}config disabled (https://lore.kernel.org/r/20210205041351.GA2494386@localhost/)
-  # - {<< : *arm32_allmod,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_11}
+  - {<< : *arm32_allmod,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm32_allno,   << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_11}
-  # - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_11}
+  - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm64,         << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *arm64_allmod,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allno,   << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
