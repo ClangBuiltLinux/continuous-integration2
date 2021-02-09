@@ -31,13 +31,13 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _e2d7c97a744bb18b18038623898956f6:
+  _bf41f851fcdaba3f8ff5598ee5a62c07:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 gki_defconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: gki_defconfig
@@ -50,13 +50,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _4fb2521d605de5401fc145b2b8a80bc8:
+  _35a5ee570535cd317c3ecd44077c7035:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 gki_defconfig
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: gki_defconfig

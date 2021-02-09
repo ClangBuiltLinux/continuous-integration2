@@ -31,13 +31,13 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _60ecbb939df9a7399fa560fa887f0132:
+  _c1e13055e5361c03be9afb991342ca79:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=13 multi_v7_defconfig
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v7_defconfig
@@ -50,13 +50,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _267d8195f8748ce0c5d40740008e5dde:
+  _61786e26a75b319fadc440c70c0e761a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
@@ -69,13 +69,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _eeeab5923ddd62111f525ffe6ef8171e:
+  _2621acf880170bfa716f50c7f7000ed9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_VERSION=12 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_VERSION=13 defconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
@@ -88,13 +88,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _ac9bf8d2e76250e3ebf48c66c09c1fe6:
+  _883da3595207ffacf848aca83da54bbc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=12 powernv_defconfig
+    name: ARCH=powerpc CC=clang LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: powernv_defconfig
@@ -107,13 +107,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _dc0ea45566ca9b4be41b88576e20bff5:
+  _8b9460f3f4acc112b75ac414b3b20bb0:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_VERSION=12 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_VERSION=13 defconfig
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig

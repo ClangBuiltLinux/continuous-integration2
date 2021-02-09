@@ -31,13 +31,13 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _5588d1d29070fa0aca77cfe8b79ad9cd:
+  _24063fc5fe64c66101a75dbf48842aba:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm CC=clang LLVM_VERSION=12 multi_v7_defconfig
+    name: ARCH=arm CC=clang LLVM_VERSION=13 multi_v7_defconfig
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v7_defconfig
@@ -50,13 +50,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _cef16b5af9b29a8c42c31286101ff2f6:
+  _68dfee76937d7d59b74356207524e3a7:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 CC=clang LLVM_VERSION=12 defconfig
+    name: ARCH=arm64 CC=clang LLVM_VERSION=13 defconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
@@ -69,13 +69,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _043d1835e2455597b49f5ffd0a372f78:
+  _ef7d1652d6697840a5167fb372bdd048:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=12 defconfig
+    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=13 defconfig
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig

@@ -31,13 +31,13 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _a11abf02e18322177d92417220207cb8:
+  _877f148925688b45a9565666a5c8c8c4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=13 multi_v5_defconfig
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v5_defconfig
@@ -50,13 +50,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _6f7c758da41b41b25476334cfd2afd0e:
+  _55053058bd54acae6c4c7812c32270f7:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=13 aspeed_g5_defconfig
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: aspeed_g5_defconfig
@@ -69,13 +69,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _60ecbb939df9a7399fa560fa887f0132:
+  _c1e13055e5361c03be9afb991342ca79:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_VERSION=13 multi_v7_defconfig
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v7_defconfig
@@ -88,13 +88,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _267d8195f8748ce0c5d40740008e5dde:
+  _61786e26a75b319fadc440c70c0e761a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
@@ -107,13 +107,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _4e7d23e292f62a4082a1d093ce1ae4f3:
+  _210faf86b075b31ec48b4fa5276daa01:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
@@ -126,13 +126,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _34f6759fcc54c90da20900a041d8014d:
+  _6acb2ffb0464f1277d7c72f929c386a7:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=12 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=13 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
@@ -145,13 +145,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _7b8e833ae066ea79f1a6e4ff3389a632:
+  _e22b407fd54e5a9525eb06be76c357d0:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=12 malta_kvm_guest_defconfig
+    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_kvm_guest_defconfig
     env:
       ARCH: mips
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: malta_kvm_guest_defconfig
@@ -164,13 +164,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _a3bacbe25d9b5eb02296db0c021ec75c:
+  _3ff9dd832a367410f07232e142fa8650:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
     env:
       ARCH: powerpc
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: ppc44x_defconfig
@@ -183,13 +183,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _dbfb1afee12b5bc2178bd79c1ca36bc9:
+  _ffc1134a05ecdc0f72e9a91ff18808f4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=13 pseries_defconfig
     env:
       ARCH: powerpc
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: pseries_defconfig
@@ -202,13 +202,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _4929805e7a2ad956b20f06354ba6557f:
+  _069dcf551c46228c7070e4764927aa88:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: powernv_defconfig
@@ -221,13 +221,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _49b8454e1fcf8ba7fc36c5f5e6cc5299:
+  _ea24606870e91e9589c8b50eea55772a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_EFI=n
     env:
       ARCH: riscv
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig+CONFIG_EFI=n
@@ -240,13 +240,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _efcb2e4e81eb80fd4fdf114ea0296d0c:
+  _fee5569ddd8b71b19e7fb517769de851:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=12 defconfig
+    name: ARCH=s390 CC=clang LLVM_VERSION=13 defconfig
     env:
       ARCH: s390
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
@@ -259,13 +259,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _d49633cca166398690b1f3ecad135a14:
+  _5725232ce5f790d6db053c3d226eead6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
@@ -293,13 +293,13 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _a3c122fc012130191ce34a8fc1ed2809:
+  _67124def5a4f894c4fee22cb7d093342:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allnoconfig
     env:
       ARCH: arm
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
@@ -312,13 +312,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _15946cae556835669124d99cc1495757:
+  _b86c2fed4878c657261f0aaced47fe44:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
@@ -331,13 +331,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _02542a0d531fabec931217c22d933bbe:
+  _c8ae7dd017d7273dcec747aadd9288fe:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allnoconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
@@ -350,13 +350,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _dfd767301f17d7750eebc976bead3133:
+  _12268e33f817573758ac2e21e69062dd:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
@@ -369,13 +369,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _1233efb5e1bf8e77bdb11f3a8ab3accc:
+  _0b3aedb344be0f120543dc88a408ed4f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
@@ -388,13 +388,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _78a1c189b48cf1440cdce261b5ec5efe:
+  _10bc1944d6f5f29611271ddc67d9e2bd:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allnoconfig
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
@@ -407,13 +407,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _90331c9987646dae8803fe3df6389635:
+  _101c426cf1270686524685b828ecda1e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n

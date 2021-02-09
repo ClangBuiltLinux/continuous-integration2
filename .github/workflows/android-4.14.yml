@@ -31,13 +31,13 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _4c5fddb1a4a76a91c08e4940c3854d7f:
+  _578ff8b3f8dccbf56540703bd5ab8af9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=12 cuttlefish_defconfig
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=13 cuttlefish_defconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: cuttlefish_defconfig
@@ -50,13 +50,13 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _6498b71b001db9fb3cc43fd0bf1c696b:
+  _815a65a53c192c1166e2fbac33f48fd9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=12 x86_64_cuttlefish_defconfig
+    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=13 x86_64_cuttlefish_defconfig
     env:
       ARCH: x86_64
-      LLVM_VERSION: 12
+      LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: x86_64_cuttlefish_defconfig
