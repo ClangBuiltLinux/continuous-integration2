@@ -63,6 +63,7 @@ configs:
   - &arm32_allno   {config: allnoconfig,                                                                      << : *arm-triple,           << : *kernel_modules}
   - &arm32_allyes  {config: allyesconfig,                                                                     << : *arm-triple,           << : *kernel_modules}
   - &arm64         {config: defconfig,                                                                        << : *arm64-triple,         << : *kernel_modules}
+  - &arm64be       {config: [defconfig, CONFIG_CPU_BIG_ENDIAN=y],                                             << : *arm64-triple,         << : *kernel_modules}
   - &arm64_lto     {config: [defconfig, thinlto.config],                                                      << : *arm64-triple,         << : *kernel_modules}
   - &arm64_cfi     {config: [defconfig, cfi.config],                                                          << : *arm64-triple,         << : *kernel_modules}
   - &arm64_gki     {config: gki_defconfig,                                                                    << : *arm64-triple,         << : *kernel_modules}
@@ -118,6 +119,7 @@ builds:
   - {<< : *arm32_allno,   << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allyes,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_allmod,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,   << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
@@ -146,6 +148,7 @@ builds:
   - {<< : *arm32_allno,   << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,   << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
@@ -173,6 +176,7 @@ builds:
   - {<< : *arm32_allno,   << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allyes,  << : *stable-5_10,      << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_allmod,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,   << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
@@ -196,6 +200,7 @@ builds:
   - {<< : *arm32_v7,      << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,    << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,          << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,        << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,         << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -209,6 +214,7 @@ builds:
   - {<< : *arm32_v7,      << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,    << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,       << : *stable-4_19,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *stable-4_19,      << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   ############
@@ -217,6 +223,7 @@ builds:
   - {<< : *arm32_v7,      << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,    << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,       << : *stable-4_14,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *stable-4_14,      << : *lld,             boot: true,  llvm_version: *llvm_tot}
   ###########
@@ -224,11 +231,13 @@ builds:
   ###########
   - {<< : *arm32_v7,      << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *stable-4_9,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
   ###########
   #  4.4.y  #
   ###########
   - {<< : *arm64,         << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *stable-4_4,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
   #############
   #  Android  #
