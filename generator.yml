@@ -63,6 +63,8 @@ configs:
   - &arm32_allno   {config: allnoconfig,                                                                      << : *arm-triple,           << : *kernel_modules}
   - &arm32_allyes  {config: allyesconfig,                                                                     << : *arm-triple,           << : *kernel_modules}
   - &arm64         {config: defconfig,                                                                        << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_lto     {config: [defconfig, thinlto.config],                                                      << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_cfi     {config: [defconfig, cfi.config],                                                          << : *arm64-triple,         << : *kernel_modules}
   - &arm64_gki     {config: gki_defconfig,                                                                    << : *arm64-triple,         << : *kernel_modules}
   - &arm64_cut     {config: cuttlefish_defconfig,                                                             << : *arm64-triple,         << : *kernel_modules}
   - &arm64_allmod  {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                 << : *arm64-triple,         << : *kernel_modules}
@@ -78,6 +80,8 @@ configs:
   - &riscv         {config: [defconfig, CONFIG_EFI=n],                            kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
   - &s390          {config: defconfig,                                                                        << : *s390-triple,          << : *kernel_modules}
   - &x86_64        {config: defconfig,                                                                                                    << : *kernel_modules}
+  - &x86_64_lto    {config: [defconfig, thinlto.config],                                                                                  << : *kernel_modules}
+  - &x86_64_cfi    {config: [defconfig, cfi.config],                                                                                      << : *kernel_modules}
   - &x86_64_gki    {config: gki_defconfig,                                                                                                << : *kernel_modules}
   - &x86_64_cut    {config: x86_64_cuttlefish_defconfig,                                                                                  << : *kernel_modules}
   - &x86_64_allmod {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                                             << : *kernel_modules}
