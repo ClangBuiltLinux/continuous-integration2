@@ -79,7 +79,6 @@ sets:
     - modules
     kernel_image: vmlinux
     make_variables:
-      LD: mips-linux-gnu-ld
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
