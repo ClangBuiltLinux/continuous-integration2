@@ -26,6 +26,17 @@ sets:
     - modules
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-4.9.y
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-4.9.y
     target_arch: x86_64
     toolchain: clang-nightly
     kconfig: defconfig
