@@ -458,6 +458,17 @@ builds:
   - {<< : *x86_64_allno,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *x86_64_allyes, << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   #############
+  #  LTO/CFI  #
+  #############
+  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  #############
   #  LLVM 10  #
   #############
   ##############
