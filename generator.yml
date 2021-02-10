@@ -411,8 +411,9 @@ builds:
   # - {<< : *i386,          << : *stable-5_10,      << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mips,          << : *stable-5_10,      << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,        << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_11}
-  - {<< : *ppc32,         << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_11}
-  - {<< : *ppc64,         << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_11}
+  # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
+  # - {<< : *ppc32,         << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_11}
+  # - {<< : *ppc64,         << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_11}
   - {<< : *ppc64le,       << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_11}
   - {<< : *riscv,         << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_11}
   - {<< : *s390,          << : *stable-5_10,      << : *clang,           boot: true,  llvm_version: *llvm_11}
