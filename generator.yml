@@ -360,7 +360,7 @@ builds:
   - {<< : *i386,          << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mips,          << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_11}
-  # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
+  # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,         << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_11}
   # - {<< : *ppc64,         << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_11}
   - {<< : *ppc64le,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_11}
@@ -387,7 +387,7 @@ builds:
   - {<< : *i386,          << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
-  # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
+  # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
   # - {<< : *ppc64,         << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_11}
   - {<< : *ppc64le,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
@@ -447,7 +447,7 @@ builds:
   - {<< : *i386,          << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *mips,          << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
   - {<< : *mipsel,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
+  # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,         << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # - {<< : *ppc64,         << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
   - {<< : *ppc64le,       << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
@@ -474,7 +474,7 @@ builds:
   - {<< : *i386,          << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *mips,          << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
   - {<< : *mipsel,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # ppc32 and ppc64: Build disabled (https://github.com/ClangBuiltLinux/continuous-integration2/issues/2)
+  # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,         << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # - {<< : *ppc64,         << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
   - {<< : *ppc64le,       << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
