@@ -639,44 +639,6 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _2f2c384e9ae91ede08b3403161a3d5eb:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=11 ppc44x_defconfig
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: ppc44x_defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
-  _77589831d4669a1981dad16fdae71677:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=11 pseries_defconfig
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: pseries_defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
   _8190461c1f8057e418b9abae5f927a20:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
