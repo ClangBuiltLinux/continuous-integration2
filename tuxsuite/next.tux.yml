@@ -696,7 +696,35 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
+    kconfig:
+    - allmodconfig
+    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
     kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - allyesconfig
+    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     targets:
     - config
     - kernel
@@ -781,7 +809,35 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-12
+    kconfig:
+    - allmodconfig
+    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
     kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - allyesconfig
+    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     targets:
     - config
     - kernel
@@ -866,7 +922,35 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-11
+    kconfig:
+    - allmodconfig
+    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
     kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - allyesconfig
+    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     targets:
     - config
     - kernel

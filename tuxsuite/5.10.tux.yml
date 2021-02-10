@@ -482,7 +482,29 @@ sets:
     git_ref: linux-5.10.y
     target_arch: arm
     toolchain: clang-nightly
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-nightly
     kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig: allyesconfig
     targets:
     - config
     - kernel
@@ -573,7 +595,29 @@ sets:
     git_ref: linux-5.10.y
     target_arch: arm
     toolchain: clang-12
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-12
     kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-12
+    kconfig: allyesconfig
     targets:
     - config
     - kernel
@@ -664,7 +708,29 @@ sets:
     git_ref: linux-5.10.y
     target_arch: arm
     toolchain: clang-11
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-11
     kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-11
+    kconfig: allyesconfig
     targets:
     - config
     - kernel
