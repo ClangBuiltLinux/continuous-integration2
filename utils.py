@@ -36,16 +36,18 @@ def get_cbl_name():
         "multi_v5_defconfig": "arm32_v5",
         "aspeed_g5_defconfig": "arm32_v6",
         "multi_v7_defconfig": "arm32_v7",
+        "malta_kvm_guest_defconfig": "mipsel",
         "ppc44x_defconfig": "ppc32",
         "pseries_defconfig": "ppc64",
         "powernv_defconfig": "ppc64le",
     }
+    if "CONFIG_CPU_BIG_ENDIAN=y" in full_config:
+        if arch == "arm64":
+            return "arm64be"
+        if arch == "mips":
+            return "mips"
     if base_config in unique_defconfigs:
         return unique_defconfigs[base_config]
-    if base_config == "malta_kvm_guest_defconfig":
-        if "CONFIG_CPU_BIG_ENDIAN=y" in full_config:
-            return "mips"
-        return "mipsel"
     if "defconfig" in base_config:
         return "x86" if arch == "i386" else arch
     raise Exception("unknown CBL name")
