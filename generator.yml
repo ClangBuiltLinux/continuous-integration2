@@ -245,6 +245,21 @@ builds:
   - {<< : *x86_64_cut,    << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cut,     << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cut,    << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  #############
+  #  LTO/CFI  #
+  #############
+  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cfi,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cfi,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cfi,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
   ########################
   #  Latest LLVM release #
   #########################
