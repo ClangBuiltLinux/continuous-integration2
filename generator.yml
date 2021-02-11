@@ -8,6 +8,7 @@ urls:
   - &next-url     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
   - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
   - &android-url  https://android.googlesource.com/kernel/common.git
+  - &lto-cfi-url  https://github.com/samitolvanen/linux.git
 schedules:
   - &six_hours {schedule: "0 0,6,12,18 * * *"}
   - &daily     {schedule: "0 0 * * *"}
@@ -28,6 +29,8 @@ trees:
   - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19,     << : *daily}
   - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14,     << : *daily}
   - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9,      << : *daily}
+  - &lto-cfi          {git_repo: *lto-cfi-url,  git_ref: clang-cfi,           name: lto-cfi,          << : *daily}
+  - &lto-cfi-tip      {git_repo: *lto-cfi-url,  git_ref: tip/clang-cfi,       name: lto-cfi-tip,      << : *daily}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
@@ -60,6 +63,8 @@ configs:
   - &arm32_allno   {config: allnoconfig,                                                                      << : *arm-triple,           << : *kernel_modules}
   - &arm32_allyes  {config: allyesconfig,                                                                     << : *arm-triple,           << : *kernel_modules}
   - &arm64         {config: defconfig,                                                                        << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_lto     {config: [defconfig, thinlto.config],                                                      << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_cfi     {config: [defconfig, cfi.config],                                                          << : *arm64-triple,         << : *kernel_modules}
   - &arm64_gki     {config: gki_defconfig,                                                                    << : *arm64-triple,         << : *kernel_modules}
   - &arm64_cut     {config: cuttlefish_defconfig,                                                             << : *arm64-triple,         << : *kernel_modules}
   - &arm64_allmod  {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                 << : *arm64-triple,         << : *kernel_modules}
@@ -75,6 +80,8 @@ configs:
   - &riscv         {config: [defconfig, CONFIG_EFI=n],                            kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
   - &s390          {config: defconfig,                                                                        << : *s390-triple,          << : *kernel_modules}
   - &x86_64        {config: defconfig,                                                                                                    << : *kernel_modules}
+  - &x86_64_lto    {config: [defconfig, thinlto.config],                                                                                  << : *kernel_modules}
+  - &x86_64_cfi    {config: [defconfig, cfi.config],                                                                                      << : *kernel_modules}
   - &x86_64_gki    {config: gki_defconfig,                                                                                                << : *kernel_modules}
   - &x86_64_cut    {config: x86_64_cuttlefish_defconfig,                                                                                  << : *kernel_modules}
   - &x86_64_allmod {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                                             << : *kernel_modules}
@@ -238,6 +245,21 @@ builds:
   - {<< : *x86_64_cut,    << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cut,     << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cut,    << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  #############
+  #  LTO/CFI  #
+  #############
+  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cfi,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cfi,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cfi,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
   ########################
   #  Latest LLVM release #
   #########################
@@ -337,6 +359,21 @@ builds:
   - {<< : *arm64_cut,     << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_cut,    << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_latest}
   #############
+  #  LTO/CFI  #
+  #############
+  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_cfi,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_cfi,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_cfi,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  #############
   #  LLVM 11  #
   #############
   ##############
@@ -421,6 +458,17 @@ builds:
   - {<< : *x86_64_allmod, << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *x86_64_allno,  << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *x86_64_allyes, << : *stable-5_10,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  #############
+  #  LTO/CFI  #
+  #############
+  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
   #############
   #  LLVM 10  #
   #############
