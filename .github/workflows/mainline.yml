@@ -145,10 +145,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _6acb2ffb0464f1277d7c72f929c386a7:
+  _bdc608b94eb1c0747e66613a5d86400e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=13 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 13
