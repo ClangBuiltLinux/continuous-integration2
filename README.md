@@ -15,6 +15,8 @@
 [![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/lto-cfi/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3Alto-cfi)
 [![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/lto-cfi-tip/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3Alto-cfi-tip)
 [![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/tip/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3Atip)
+[![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/arm64/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3Aarm64)
+[![Actions Status](https://github.com/clangbuiltlinux/continuous-integration2/workflows/arm64-fixes/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions?query=workflow%3Aarm64-fixes)
 
 
 Testing using [TuxSuite](https://gitlab.com/Linaro/tuxsuite) to build the Linux
