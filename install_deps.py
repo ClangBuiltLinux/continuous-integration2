@@ -20,7 +20,7 @@ def install_deps():
         "powerpc": ["qemu-system-ppc"],
         "x86_64": ["qemu-system-x86"],
         "s390": [],
-        "riscv": [],
+        "riscv": ["opensbi", "qemu-system-riscv64"],
     }
     if not arch in arch_dependencies:
         print("Unknown arch \"%s\", can't install dependencies" % arch,
