@@ -9,6 +9,7 @@ urls:
   - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
   - &android-url  https://android.googlesource.com/kernel/common.git
   - &lto-cfi-url  https://github.com/samitolvanen/linux.git
+  - &tip-url      https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
 schedules:
   - &six_hours {schedule: "0 0,6,12,18 * * *"}
   - &daily     {schedule: "0 0 * * *"}
@@ -31,6 +32,7 @@ trees:
   - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9,      << : *daily}
   - &lto-cfi          {git_repo: *lto-cfi-url,  git_ref: clang-cfi,           name: lto-cfi,          << : *daily}
   - &lto-cfi-tip      {git_repo: *lto-cfi-url,  git_ref: tip/clang-cfi,       name: lto-cfi-tip,      << : *daily}
+  - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip,              << : *daily}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
@@ -269,6 +271,14 @@ builds:
   - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cfi,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  #########
+  #  TIP  #
+  #########
+  - {<< : *i386,          << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_allmod, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allno,  << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allyes, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_tot}
   ########################
   #  Latest LLVM release #
   #########################
@@ -382,6 +392,14 @@ builds:
   - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_cfi,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  #########
+  #  TIP  #
+  #########
+  - {<< : *i386,          << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,        << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_allmod, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allno,  << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allyes, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_latest}
   #############
   #  LLVM 11  #
   #############
@@ -478,6 +496,14 @@ builds:
   - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  #########
+  #  TIP  #
+  #########
+  - {<< : *i386,          << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,        << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_allmod, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_11}
+  - {<< : *x86_64_allno,  << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_11}
+  - {<< : *x86_64_allyes, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_11}
   #############
   #  LLVM 10  #
   #############
