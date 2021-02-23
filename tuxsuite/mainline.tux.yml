@@ -995,33 +995,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-10
-    kconfig:
-    - allmodconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: x86_64
-    toolchain: clang-10
     kconfig: allnoconfig
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: x86_64
-    toolchain: clang-10
-    kconfig:
-    - allyesconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     targets:
     - config
     - kernel

@@ -1566,25 +1566,6 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _85672e9551add9737fe89c54d12aec50:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_VERSION=10 allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 10
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: allmodconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
   _7404b0f622477899bc4752b39f7c92fe:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -1595,25 +1576,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
-  _47ca9a90ed16ae711ae00e72a228407e:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_VERSION=10 allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 10
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: allyesconfig+CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
     steps:
     - uses: actions/checkout@v2
       with:
