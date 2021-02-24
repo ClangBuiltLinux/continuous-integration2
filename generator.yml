@@ -251,7 +251,8 @@ builds:
   - {<< : *arm64_gki,     << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_gki,    << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,     << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_gki,    << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # x86_64 gki_defconfig: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1269)
+  # - {<< : *x86_64_gki,    << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cut,     << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cut,    << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cut,     << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
@@ -372,7 +373,8 @@ builds:
   - {<< : *arm64_gki,     << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_gki,    << : *android-5_4,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,     << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64_gki,    << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # x86_64 gki_defconfig: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1269)
+  # - {<< : *x86_64_gki,    << : *android-4_19,     << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_cut,     << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_cut,    << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_cut,     << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_latest}
