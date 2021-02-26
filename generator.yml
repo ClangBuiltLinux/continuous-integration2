@@ -259,26 +259,26 @@ builds:
   #############
   #  LTO/CFI  #
   #############
-  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_cfi,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_cfi,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_cfi,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cfi,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cfi,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_cfi,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   #########
   #  TIP  #
   #########
-  - {<< : *i386,          << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,        << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_allmod, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_tot}
-  - {<< : *x86_64_allno,  << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_tot}
-  - {<< : *x86_64_allyes, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_tot}
+  - {<< : *i386,          << : *tip,              << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64,        << : *tip,              << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_allmod, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allno,  << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allyes, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ########################
   #  Latest LLVM release #
   #########################
@@ -380,26 +380,26 @@ builds:
   #############
   #  LTO/CFI  #
   #############
-  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64_cfi,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64_cfi,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64_cfi,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64,         << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_lto,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_cfi,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_lto,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_cfi,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64,         << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_lto,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_cfi,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_lto,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   #########
   #  TIP  #
   #########
-  - {<< : *i386,          << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64,        << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64_allmod, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_latest}
-  - {<< : *x86_64_allno,  << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_latest}
-  - {<< : *x86_64_allyes, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_latest}
+  - {<< : *i386,          << : *tip,              << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64,        << : *tip,              << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_allmod, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allno,  << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *x86_64_allyes, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   #############
   #  LLVM 11  #
   #############
@@ -488,22 +488,22 @@ builds:
   #############
   #  LTO/CFI  #
   #############
-  - {<< : *arm64,        << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *arm64_lto,    << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *x86_64,       << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *x86_64_lto,   << : *lto-cfi,          << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *arm64,        << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *arm64_lto,    << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *x86_64,       << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *x86_64_lto,   << : *lto-cfi-tip,      << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64,         << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_lto,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_lto,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64,         << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_lto,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_lto,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   #########
   #  TIP  #
   #########
-  - {<< : *i386,          << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *x86_64,        << : *tip,             << : *llvm_full,        boot: true,  llvm_version: *llvm_11}
-  - {<< : *x86_64_allmod, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_11}
-  - {<< : *x86_64_allno,  << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_11}
-  - {<< : *x86_64_allyes, << : *tip,             << : *llvm_full,        boot: false, llvm_version: *llvm_11}
+  - {<< : *i386,          << : *tip,              << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64,        << : *tip,              << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *x86_64_allmod, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *x86_64_allno,  << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *x86_64_allyes, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   #############
   #  LLVM 10  #
   #############
