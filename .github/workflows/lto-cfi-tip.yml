@@ -50,16 +50,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _f8f84420f95c49b857e0051ce7ef0ebb:
+  _8fbad23db8694016590b623a4a748b10:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+thinlto.config
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y
     env:
       ARCH: arm64
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+thinlto.config
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -107,16 +107,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _954068c9e77b4724d9f0276f53a8798a:
+  _40472006bdaaeeebdb5591dd0d8287f8:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+thinlto.config
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+thinlto.config
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -164,16 +164,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _27ec32bd686836205f937133b4f713a8:
+  _898799d6a651bf4dfbea81a2459ce7ed:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+thinlto.config
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_LTO_CLANG_THIN=y
     env:
       ARCH: arm64
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+thinlto.config
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -221,16 +221,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _154264a8ede98d1a25b31843aad1b3fe:
+  _c3c1abe5972bc7450bb77c614752b748:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+thinlto.config
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_LTO_CLANG_THIN=y
     env:
       ARCH: x86_64
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+thinlto.config
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -278,16 +278,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _c1799e9af291caaa0b5ac32628f68fa5:
+  _042b760d443056f07b0d0652b83237b7:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+thinlto.config
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_LTO_CLANG_THIN=y
     env:
       ARCH: arm64
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+thinlto.config
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -316,16 +316,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _8ee399955f6649f4d88f7496e7036573:
+  _d6ee0f1b2b09bec4fb0fb6707d7213a4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+thinlto.config
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_LTO_CLANG_THIN=y
     env:
       ARCH: x86_64
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+thinlto.config
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:

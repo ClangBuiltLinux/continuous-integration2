@@ -82,6 +82,20 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: i386
     toolchain: clang-nightly
     kconfig: defconfig
@@ -181,6 +195,20 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: arm
     toolchain: clang-12
     kconfig: multi_v5_defconfig
@@ -232,6 +260,20 @@ sets:
     target_arch: arm64
     toolchain: clang-12
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -354,6 +396,20 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: arm
     toolchain: clang-11
     kconfig: multi_v5_defconfig
@@ -405,6 +461,20 @@ sets:
     target_arch: arm64
     toolchain: clang-11
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -493,6 +563,20 @@ sets:
     target_arch: x86_64
     toolchain: clang-11
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
