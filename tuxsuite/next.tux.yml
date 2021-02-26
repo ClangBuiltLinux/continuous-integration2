@@ -18,6 +18,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: arm
@@ -41,6 +42,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: arm
@@ -654,6 +656,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: arm

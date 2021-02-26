@@ -768,10 +768,10 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _67124def5a4f894c4fee22cb7d093342:
+  _e3671bdb6f10d3349593b86cc9b324f6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
