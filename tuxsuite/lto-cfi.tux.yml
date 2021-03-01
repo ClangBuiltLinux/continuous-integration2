@@ -24,7 +24,7 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - defconfig
-    - thinlto.config
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -64,7 +64,7 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - defconfig
-    - thinlto.config
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -104,7 +104,7 @@ sets:
     toolchain: clang-12
     kconfig:
     - defconfig
-    - thinlto.config
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -144,7 +144,7 @@ sets:
     toolchain: clang-12
     kconfig:
     - defconfig
-    - thinlto.config
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -184,7 +184,7 @@ sets:
     toolchain: clang-11
     kconfig:
     - defconfig
-    - thinlto.config
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -210,7 +210,7 @@ sets:
     toolchain: clang-11
     kconfig:
     - defconfig
-    - thinlto.config
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel

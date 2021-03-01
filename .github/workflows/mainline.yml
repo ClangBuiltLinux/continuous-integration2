@@ -145,6 +145,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _8fbad23db8694016590b623a4a748b10:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _bdc608b94eb1c0747e66613a5d86400e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -278,6 +297,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _40472006bdaaeeebdb5591dd0d8287f8:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _a11abf02e18322177d92417220207cb8:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -364,6 +402,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _898799d6a651bf4dfbea81a2459ce7ed:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -525,6 +582,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _c3c1abe5972bc7450bb77c614752b748:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _326167b20a9a6ecc06fa9d1b2aba10f3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -611,6 +687,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _042b760d443056f07b0d0652b83237b7:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -744,6 +839,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _d6ee0f1b2b09bec4fb0fb6707d7213a4:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
