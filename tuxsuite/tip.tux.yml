@@ -84,9 +84,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig:
-    - allmodconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    kconfig: allmodconfig
     targets:
     - config
     - kernel
@@ -110,9 +108,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig:
-    - allyesconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    kconfig: allyesconfig
     targets:
     - config
     - kernel
@@ -124,9 +120,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-12
-    kconfig:
-    - allmodconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    kconfig: allmodconfig
     targets:
     - config
     - kernel
@@ -150,9 +144,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-12
-    kconfig:
-    - allyesconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    kconfig: allyesconfig
     targets:
     - config
     - kernel
@@ -164,9 +156,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-11
-    kconfig:
-    - allmodconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    kconfig: allmodconfig
     targets:
     - config
     - kernel
@@ -190,9 +180,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-11
-    kconfig:
-    - allyesconfig
-    - CONFIG_UBSAN_UNSIGNED_OVERFLOW=n
+    kconfig: allyesconfig
     targets:
     - config
     - kernel
