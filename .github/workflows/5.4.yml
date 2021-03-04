@@ -107,16 +107,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _bdc608b94eb1c0747e66613a5d86400e:
+  _dd0abd18f6fb089956a0981751bc6b0c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: malta_kvm_guest_defconfig+CONFIG_CPU_BIG_ENDIAN=y
+      CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -126,16 +126,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _e22b407fd54e5a9525eb06be76c357d0:
+  _4cbced3108106eb3201bf12eab9e65eb:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_kvm_guest_defconfig
+    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     env:
       ARCH: mips
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: malta_kvm_guest_defconfig
+      CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     steps:
     - uses: actions/checkout@v2
       with:
