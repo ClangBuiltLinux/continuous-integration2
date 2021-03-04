@@ -74,8 +74,8 @@ configs:
   - &arm64_allno   {config: allnoconfig,                                                                      << : *arm64-triple,         << : *kernel_modules}
   - &arm64_allyes  {config: allyesconfig,                                                                     << : *arm64-triple,         << : *kernel_modules}
   - &i386          {config: defconfig,                                                                        << : *i386-triple,          << : *kernel_modules}
-  - &mips          {config: [malta_kvm_guest_defconfig, CONFIG_CPU_BIG_ENDIAN=y], kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
-  - &mipsel        {config: malta_kvm_guest_defconfig,                            kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
+  - &mips          {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y], kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
+  - &mipsel        {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                            kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
   - &ppc32         {config: ppc44x_defconfig,                                     kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
   - &ppc64         {config: pseries_defconfig,                                    kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
   - &ppc64le       {config: powernv_defconfig,                                    kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
