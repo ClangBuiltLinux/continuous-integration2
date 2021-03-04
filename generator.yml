@@ -70,9 +70,9 @@ configs:
   - &arm64_cfi     {config: [defconfig, cfi.config],                                                          << : *arm64-triple,         << : *kernel_modules}
   - &arm64_gki     {config: gki_defconfig,                                                                    << : *arm64-triple,         << : *kernel_modules}
   - &arm64_cut     {config: cuttlefish_defconfig,                                                             << : *arm64-triple,         << : *kernel_modules}
-  - &arm64_allmod  {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                 << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_allmod  {config: allmodconfig,                                                                     << : *arm64-triple,         << : *kernel_modules}
   - &arm64_allno   {config: allnoconfig,                                                                      << : *arm64-triple,         << : *kernel_modules}
-  - &arm64_allyes  {config: [allyesconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                 << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_allyes  {config: allyesconfig,                                                                     << : *arm64-triple,         << : *kernel_modules}
   - &i386          {config: defconfig,                                                                        << : *i386-triple,          << : *kernel_modules}
   - &mips          {config: [malta_kvm_guest_defconfig, CONFIG_CPU_BIG_ENDIAN=y], kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
   - &mipsel        {config: malta_kvm_guest_defconfig,                            kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
@@ -87,9 +87,9 @@ configs:
   - &x86_64_cfi    {config: [defconfig, cfi.config],                                                                                      << : *kernel_modules}
   - &x86_64_gki    {config: gki_defconfig,                                                                                                << : *kernel_modules}
   - &x86_64_cut    {config: x86_64_cuttlefish_defconfig,                                                                                  << : *kernel_modules}
-  - &x86_64_allmod {config: [allmodconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                                             << : *kernel_modules}
+  - &x86_64_allmod {config: allmodconfig,                                                                                                 << : *kernel_modules}
   - &x86_64_allno  {config: allnoconfig,                                                                                                  << : *kernel_modules}
-  - &x86_64_allyes {config: [allyesconfig, CONFIG_UBSAN_UNSIGNED_OVERFLOW=n],                                                             << : *kernel_modules}
+  - &x86_64_allyes {config: allyesconfig,                                                                                                 << : *kernel_modules}
 tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
   - &llvm_full          {llvm: true,  llvm_ias: true,  make_variables: {LLVM: 1, LLVM_IAS: 1}}
