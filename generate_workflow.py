@@ -92,7 +92,7 @@ def get_job_name(build):
 
 
 def sanitize_job_name(name):
-    h = hashlib.new("md5", name.encode("utf-8"), usedForSecurity=False)
+    h = hashlib.new("md5", name.encode("utf-8"))
     return "_" + h.hexdigest()
 
 
