@@ -1,0 +1,14 @@
+name: Check clang version
+'on':
+  schedule:
+  - cron: 0 0 * * *
+  workflow_dispatch: null
+jobs:
+  check_check_version:
+    name: Check clang version
+    runs-on: ubuntu-20.04
+    container: tuxmake/x86_64_clang-nightly
+    steps:
+    - uses: actions/checkout@v2
+    - name: check-clang.sh
+      run: bash check-clang.sh
