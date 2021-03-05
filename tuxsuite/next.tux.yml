@@ -114,7 +114,8 @@ sets:
     target_arch: mips
     toolchain: clang-nightly
     kconfig:
-    - malta_kvm_guest_defconfig
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
     - config
@@ -127,7 +128,9 @@ sets:
     git_ref: master
     target_arch: mips
     toolchain: clang-nightly
-    kconfig: malta_kvm_guest_defconfig
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     targets:
     - config
     - kernel
@@ -301,7 +304,8 @@ sets:
     target_arch: mips
     toolchain: clang-12
     kconfig:
-    - malta_kvm_guest_defconfig
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
     - config
@@ -315,7 +319,9 @@ sets:
     git_ref: master
     target_arch: mips
     toolchain: clang-12
-    kconfig: malta_kvm_guest_defconfig
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     targets:
     - config
     - kernel
@@ -502,7 +508,8 @@ sets:
     target_arch: mips
     toolchain: clang-11
     kconfig:
-    - malta_kvm_guest_defconfig
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
     - config
@@ -516,7 +523,9 @@ sets:
     git_ref: master
     target_arch: mips
     toolchain: clang-11
-    kconfig: malta_kvm_guest_defconfig
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     targets:
     - config
     - kernel
@@ -663,7 +672,8 @@ sets:
     target_arch: mips
     toolchain: clang-10
     kconfig:
-    - malta_kvm_guest_defconfig
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
     - config
@@ -677,7 +687,9 @@ sets:
     git_ref: master
     target_arch: mips
     toolchain: clang-10
-    kconfig: malta_kvm_guest_defconfig
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     targets:
     - config
     - kernel

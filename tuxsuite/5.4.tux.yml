@@ -61,7 +61,8 @@ sets:
     target_arch: mips
     toolchain: clang-nightly
     kconfig:
-    - malta_kvm_guest_defconfig
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
     - config
@@ -74,7 +75,9 @@ sets:
     git_ref: linux-5.4.y
     target_arch: mips
     toolchain: clang-nightly
-    kconfig: malta_kvm_guest_defconfig
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
     targets:
     - config
     - kernel
