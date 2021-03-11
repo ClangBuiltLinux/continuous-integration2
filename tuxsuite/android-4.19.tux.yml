@@ -10,7 +10,10 @@ sets:
     git_ref: android-4.19-stable
     target_arch: arm64
     toolchain: clang-nightly
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_THINLTO=y
     targets:
     - config
     - kernel
@@ -22,7 +25,10 @@ sets:
     git_ref: android-4.19-stable
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_THINLTO=y
     targets:
     - config
     - kernel
@@ -34,7 +40,10 @@ sets:
     git_ref: android-4.19-stable
     target_arch: arm64
     toolchain: clang-12
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_THINLTO=y
     targets:
     - config
     - kernel
@@ -46,7 +55,10 @@ sets:
     git_ref: android-4.19-stable
     target_arch: x86_64
     toolchain: clang-12
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_THINLTO=y
     targets:
     - config
     - kernel

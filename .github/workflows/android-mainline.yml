@@ -31,16 +31,16 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _bf41f851fcdaba3f8ff5598ee5a62c07:
+  _3bc97cd2783b0bf23115828e6126f1e9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 gki_defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     env:
       ARCH: arm64
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: gki_defconfig
+      CONFIG: gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -50,16 +50,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _35a5ee570535cd317c3ecd44077c7035:
+  _7495b70996b95b3be1b1120501d0d965:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 gki_defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: gki_defconfig
+      CONFIG: gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -69,16 +69,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _e2d7c97a744bb18b18038623898956f6:
+  _4246fdba1e8e0a86e8fc324af80df35d:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     env:
       ARCH: arm64
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: gki_defconfig
+      CONFIG: gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -88,16 +88,16 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _4fb2521d605de5401fc145b2b8a80bc8:
+  _5943949abf4a311fe20a5b44abe485a5:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     env:
       ARCH: x86_64
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: gki_defconfig
+      CONFIG: gki_defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_THINLTO=y
     steps:
     - uses: actions/checkout@v2
       with:
