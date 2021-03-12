@@ -97,6 +97,7 @@ configs:
   - &x86_64_allmod_lto {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y],                                                         << : *kernel_modules}
   - &x86_64_allno      {config: allnoconfig,                                                                                                                           << : *kernel_modules}
   - &x86_64_allyes     {config: allyesconfig,                                                                                                                          << : *kernel_modules}
+  - &x86_64_gcov       {config: [defconfig, CONFIG_GCOV_KERNEL=y, CONFIG_GCOV_PROFILE_ALL=y],                                                                          << : *kernel_modules}
 tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
   - &llvm_full          {llvm: true,  llvm_ias: true,  make_variables: {LLVM: 1, LLVM_IAS: 1}}
@@ -185,6 +186,7 @@ builds:
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_gcov,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   ############
   #  5.10.y  #
   ############
