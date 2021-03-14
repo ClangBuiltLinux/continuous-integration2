@@ -82,6 +82,18 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
+    target_arch: i386
+    toolchain: clang-nightly
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
     target_arch: mips
     toolchain: clang-nightly
     kconfig:
@@ -221,6 +233,18 @@ sets:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
+    toolchain: clang-12
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: i386
     toolchain: clang-12
     kconfig: defconfig
     targets:
@@ -385,6 +409,18 @@ sets:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
+    toolchain: clang-11
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: i386
     toolchain: clang-11
     kconfig: defconfig
     targets:
