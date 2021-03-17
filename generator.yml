@@ -10,6 +10,7 @@ urls:
   - &android-url  https://android.googlesource.com/kernel/common.git
   - &lto-cfi-url  https://github.com/samitolvanen/linux.git
   - &tip-url      https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+  - &arm64-url    https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
 schedules:
   - &six_hours {schedule: "0 0,6,12,18 * * *"}
   - &daily     {schedule: "0 0 * * *"}
@@ -33,6 +34,8 @@ trees:
   - &lto-cfi          {git_repo: *lto-cfi-url,  git_ref: clang-cfi,           name: lto-cfi,          << : *daily}
   - &lto-cfi-tip      {git_repo: *lto-cfi-url,  git_ref: tip/clang-cfi,       name: lto-cfi-tip,      << : *daily}
   - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip,              << : *daily}
+  - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64,            << : *daily}
+  - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes,      << : *daily}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
@@ -283,6 +286,19 @@ builds:
   - {<< : *x86_64_allmod, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allno,  << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allyes, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  ###########
+  #  ARM64  #
+  ###########
+  - {<< : *arm64,         << : *arm64-core,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *arm64-core,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod,  << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno,   << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allyes,  << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64,         << : *arm64-fixes,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64be,       << : *arm64-fixes,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod,  << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allno,   << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allyes,  << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ########################
   #  Latest LLVM release #
   #########################
@@ -408,6 +424,17 @@ builds:
   - {<< : *x86_64_allmod, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *x86_64_allno,  << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *x86_64_allyes, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  ###########
+  #  ARM64  #
+  ###########
+  - {<< : *arm64,         << : *arm64-core,       << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_allmod,  << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allno,   << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allyes,  << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64,         << : *arm64-fixes,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_allmod,  << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allno,   << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm64_allyes,  << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   #############
   #  LLVM 11  #
   #############
@@ -516,6 +543,17 @@ builds:
   - {<< : *x86_64_allmod, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *x86_64_allno,  << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *x86_64_allyes, << : *tip,              << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  ###########
+  #  ARM64  #
+  ###########
+  - {<< : *arm64,         << : *arm64-core,       << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_allmod,  << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *arm64_allno,   << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *arm64_allyes,  << : *arm64-core,       << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *arm64,         << : *arm64-fixes,      << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *arm64_allmod,  << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *arm64_allno,   << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *arm64_allyes,  << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   #############
   #  LLVM 10  #
   #############
