@@ -129,8 +129,10 @@ builds:
   - {<< : *arm32_allyes,  << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64be,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto_full,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_lto_thin,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_allmod,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,   << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   # i386: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1210)
@@ -144,8 +146,10 @@ builds:
   - {<< : *riscv,         << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390,          << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_allmod, << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allmod_lto, << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allno,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allyes, << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ##########
@@ -160,8 +164,10 @@ builds:
   - {<< : *arm32_allyes,  << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64be,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto_full,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_lto_thin,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_allmod,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,   << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,          << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -174,8 +180,10 @@ builds:
   - {<< : *riscv,         << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390,          << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto_full,    << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_allmod, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allno,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allyes, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ############
@@ -271,15 +279,19 @@ builds:
   #  LTO/CFI  #
   #############
   - {<< : *arm64,         << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto_full,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_lto_thin,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cfi,     << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto_full,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_lto_thin,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cfi,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64,         << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_lto_full,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_lto_thin,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cfi,     << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_lto_full,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_lto_thin,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cfi,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   #########
