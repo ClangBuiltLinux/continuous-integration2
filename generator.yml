@@ -340,7 +340,8 @@ builds:
   - {<< : *mips,              << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
+  # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
+  # - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *riscv,             << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
@@ -372,7 +373,8 @@ builds:
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
+  # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
+  # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
@@ -402,7 +404,8 @@ builds:
   - {<< : *mips,              << : *stable-5_10,      << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc32,             << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc64,             << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
+  # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
+  # - {<< : *ppc64,             << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,           << : *stable-5_10,      << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *riscv,             << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390,              << : *stable-5_10,      << : *clang,           boot: true,  llvm_version: *llvm_latest}
