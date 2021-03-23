@@ -24,6 +24,20 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://github.com/samitolvanen/linux.git
+    git_ref: clang-cfi
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -64,6 +78,20 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://github.com/samitolvanen/linux.git
+    git_ref: clang-cfi
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -104,6 +132,20 @@ sets:
     toolchain: clang-12
     kconfig:
     - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://github.com/samitolvanen/linux.git
+    git_ref: clang-cfi
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -131,6 +173,20 @@ sets:
     target_arch: x86_64
     toolchain: clang-12
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://github.com/samitolvanen/linux.git
+    git_ref: clang-cfi
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
     targets:
     - config
     - kernel
@@ -184,6 +240,20 @@ sets:
     toolchain: clang-11
     kconfig:
     - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://github.com/samitolvanen/linux.git
+    git_ref: clang-cfi
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -197,6 +267,20 @@ sets:
     target_arch: x86_64
     toolchain: clang-11
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://github.com/samitolvanen/linux.git
+    git_ref: clang-cfi
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
     targets:
     - config
     - kernel

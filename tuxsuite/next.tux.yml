@@ -89,6 +89,20 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -205,6 +219,20 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -266,6 +294,20 @@ sets:
     target_arch: arm64
     toolchain: clang-12
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
     targets:
     - config
     - kernel
@@ -409,6 +451,20 @@ sets:
     toolchain: clang-12
     kconfig:
     - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -470,6 +526,20 @@ sets:
     target_arch: arm64
     toolchain: clang-11
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
     targets:
     - config
     - kernel
@@ -575,6 +645,20 @@ sets:
     target_arch: x86_64
     toolchain: clang-11
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
     targets:
     - config
     - kernel
@@ -781,6 +865,22 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-nightly
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
     kconfig: allnoconfig
     targets:
     - config
@@ -817,6 +917,22 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
     kconfig: allnoconfig
     targets:
     - config
@@ -886,6 +1002,22 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-12
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
     kconfig: allnoconfig
     targets:
     - config
@@ -911,6 +1043,22 @@ sets:
     target_arch: x86_64
     toolchain: clang-12
     kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
@@ -991,6 +1139,22 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-11
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
     kconfig: allnoconfig
     targets:
     - config
@@ -1016,6 +1180,22 @@ sets:
     target_arch: x86_64
     toolchain: clang-11
     kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
     - kernel
