@@ -1281,6 +1281,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _d6ae4ccd325979d638473228b3dd8c17:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _c8ae7dd017d7273dcec747aadd9288fe:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -1471,6 +1490,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _52911b17aeee5908f851ff37465065e7:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _02542a0d531fabec931217c22d933bbe:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -1652,6 +1690,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _5eef23383e7e212e3e1b286524ee0926:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     steps:
     - uses: actions/checkout@v2
       with:
