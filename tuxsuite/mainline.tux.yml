@@ -363,19 +363,6 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-12
-    kconfig: pseries_defconfig
-    targets:
-    - config
-    - kernel
-    - modules
-    kernel_image: vmlinux
-    make_variables:
-      LD: powerpc64le-linux-gnu-ld
-      LLVM: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: powerpc
-    toolchain: clang-12
     kconfig: powernv_defconfig
     targets:
     - config
