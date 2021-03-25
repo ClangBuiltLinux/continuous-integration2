@@ -186,7 +186,7 @@ builds:
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
-  - {<< : *x86_64_gcov,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   ############
   #  5.10.y  #
   ############
