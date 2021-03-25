@@ -373,6 +373,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _044b68165327772b2a5ec251950105f5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _a11abf02e18322177d92417220207cb8:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
