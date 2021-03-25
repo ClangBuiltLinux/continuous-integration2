@@ -275,24 +275,12 @@ builds:
   - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  #############
-  #  LTO/CFI  #
-  #############
-  - {<< : *arm64,             << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_lto_full,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_lto_thin,    << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  #########
+  #  CFI  #
+  #########
   - {<< : *arm64_cfi,         << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,            << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_lto_full,   << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_lto_thin,   << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cfi,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,             << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_lto_full,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64_lto_thin,    << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_cfi,         << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,            << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_lto_full,   << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_lto_thin,   << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cfi,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   #########
   #  TIP  #
