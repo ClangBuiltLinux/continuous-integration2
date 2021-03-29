@@ -31,6 +31,25 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
+  _f312f8cee59fa1e3e85e4b3262690a47:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _bf41f851fcdaba3f8ff5598ee5a62c07:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -69,6 +88,25 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
+  _b587e3b0e4be143723f0f01376e77b62:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
   _e2d7c97a744bb18b18038623898956f6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -98,6 +136,59 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: gki_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  kick_tuxsuite_allconfigs:
+    name: TuxSuite (allconfigs)
+    runs-on: ubuntu-20.04
+    container: tuxsuite/tuxsuite
+    env:
+      TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: tuxsuite
+      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/android-5.4.tux.yml || true
+    - name: save output
+      uses: actions/upload-artifact@v2
+      with:
+        path: builds.json
+        name: output_artifact
+  _697acf7d42a48e3722c6145f69814f68:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Boot Test
+      run: ./check_logs.py
+  _49eb3976558e569e0dc38562abcc30c6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
     steps:
     - uses: actions/checkout@v2
       with:
