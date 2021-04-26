@@ -630,7 +630,8 @@ builds:
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
-  - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # ppc64le: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1359)
+  # - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_10}
   - {<< : *x86_64,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # x86_64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
