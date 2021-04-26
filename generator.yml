@@ -174,7 +174,8 @@ builds:
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
+  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_tot}
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -264,19 +265,19 @@ builds:
   #############
   #  Android  #
   #############
-  - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_gki,        << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_allmod,      << : *android12-5_10,   << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,      << : *android12-5_10,   << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android12-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,         << : *android12-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_gki,        << : *android12-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm32_allmod,      << : *android12-5_4,    << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,      << : *android12-5_4,    << : *llvm,            boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android12-5_4,    << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,         << : *android12-5_4,    << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -370,7 +371,8 @@ builds:
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
+  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
@@ -413,19 +415,19 @@ builds:
   #############
   #  Android  #
   #############
-  - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_gki,        << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_allmod,      << : *android12-5_10,   << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,      << : *android12-5_10,   << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t,        << : *android12-5_10,   << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,         << : *android12-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_gki,        << : *android12-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm32_allmod,      << : *android12-5_4,    << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,      << : *android12-5_4,    << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t,        << : *android12-5_4,    << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,         << : *android12-5_4,    << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -628,7 +630,8 @@ builds:
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
-  - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
+  # ppc64le: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1359)
+  # - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_10}
   - {<< : *x86_64,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # x86_64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)

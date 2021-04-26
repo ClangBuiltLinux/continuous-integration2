@@ -94,7 +94,6 @@ sets:
     - modules
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
   - git_repo: https://android.googlesource.com/kernel/common.git
     git_ref: android-mainline
     target_arch: arm
@@ -106,5 +105,4 @@ sets:
     - modules
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
 
