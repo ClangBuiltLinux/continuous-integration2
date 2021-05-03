@@ -140,7 +140,8 @@ builds:
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
+  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
+  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_tot}
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -338,7 +339,8 @@ builds:
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
+  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
+  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
