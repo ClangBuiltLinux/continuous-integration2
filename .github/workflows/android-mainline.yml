@@ -160,10 +160,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _b6004055e739b487ac5b79a2ecd21871:
+  _697acf7d42a48e3722c6145f69814f68:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
