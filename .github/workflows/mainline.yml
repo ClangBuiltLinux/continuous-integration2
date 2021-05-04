@@ -240,15 +240,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _3ff9dd832a367410f07232e142fa8650:
+  _7ad08b1bcc47573b8a65a6f0b4e0ad5a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -563,15 +563,15 @@ jobs:
         name: output_artifact
     - name: Boot Test
       run: ./check_logs.py
-  _a3bacbe25d9b5eb02296db0c021ec75c:
+  _535ebd7ca1798dda46eccb404aea7620:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
