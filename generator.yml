@@ -72,7 +72,7 @@ configs:
   - &arm64be           {config: [defconfig, CONFIG_CPU_BIG_ENDIAN=y],                                                                      << : *arm64-triple,         << : *kernel_modules}
   - &arm64_lto_full    {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                      << : *arm64-triple,         << : *kernel_modules}
   - &arm64_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                      << : *arm64-triple,         << : *kernel_modules}
-  - &arm64_cfi         {config: [defconfig, cfi.config],                                                                                   << : *arm64-triple,         << : *kernel_modules}
+  - &arm64_cfi         {config: [defconfig, CONFIG_LTO_CLANG_THIN=y, CONFIG_CFI_CLANG=y],                                                  << : *arm64-triple,         << : *kernel_modules}
   - &arm64_gki         {config: gki_defconfig,                                                                                             << : *arm64-triple,         << : *kernel_modules}
   - &arm64_cut         {config: cuttlefish_defconfig,                                                                                      << : *arm64-triple,         << : *kernel_modules}
   - &arm64_allmod      {config: allmodconfig,                                                                                              << : *arm64-triple,         << : *kernel_modules}
@@ -91,7 +91,7 @@ configs:
   - &x86_64            {config: defconfig,                                                                                                                             << : *kernel_modules}
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                                  << : *kernel_modules}
   - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                                  << : *kernel_modules}
-  - &x86_64_cfi        {config: [defconfig, cfi.config],                                                                                                               << : *kernel_modules}
+  - &x86_64_cfi        {config: [defconfig, CONFIG_LTO_CLANG_THIN=y, CONFIG_CFI_CLANG=y],                                                                              << : *kernel_modules}
   - &x86_64_gki        {config: gki_defconfig,                                                                                                                         << : *kernel_modules}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                           << : *kernel_modules}
   - &x86_64_allmod     {config: allmodconfig,                                                                                                                          << : *kernel_modules}
