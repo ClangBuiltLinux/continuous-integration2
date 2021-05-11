@@ -24,6 +24,8 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
     - uses: actions/checkout@v2
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: tuxsuite
       run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/tip.tux.yml || true
     - name: save output
@@ -153,6 +155,8 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
     - uses: actions/checkout@v2
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: tuxsuite
       run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/tip.tux.yml || true
     - name: save output
