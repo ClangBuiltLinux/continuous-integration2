@@ -24,8 +24,6 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: tuxsuite
       run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/arm64-fixes.tux.yml || true
     - name: save output
@@ -50,6 +48,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _63a33d081dc4000b2eaf65e367d99441:
@@ -69,6 +69,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _4e7d23e292f62a4082a1d093ce1ae4f3:
@@ -88,6 +90,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _1062027f7e3ec07f068a39cf6d23fd8a:
@@ -107,6 +111,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   kick_tuxsuite_allconfigs:
@@ -117,8 +123,6 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: tuxsuite
       run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/arm64-fixes.tux.yml || true
     - name: save output
@@ -143,6 +147,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _c8ae7dd017d7273dcec747aadd9288fe:
@@ -162,6 +168,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _a575b3a0efaafab3765963157dfe45f2:
@@ -181,6 +189,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _40d38df5fba1ddfc0ada216733994225:
@@ -200,6 +210,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _02542a0d531fabec931217c22d933bbe:
@@ -219,6 +231,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _49b1b3bdbd9a67648407749094c083d4:
@@ -238,6 +252,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _51e2eff457ec186a91964ee9c06f04f3:
@@ -257,6 +273,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _399a468064cf545cce40196c96162888:
@@ -276,6 +294,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _8c8559e2e509a14a717cee01ec90bd39:
@@ -295,6 +315,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
 
