@@ -111,10 +111,6 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
                     "uses": "actions/checkout@v2"
                 },
                 {
-                    "name": "Register clang error/warning problem matcher",
-                    "run": 'echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"'
-                },
-                {
                     "name": "tuxsuite",
                     "run": "tuxsuite build-set --set-name {} --json-out builds.json --tux-config {} || true".format(build_set, tuxsuite_yml)
                 },
@@ -157,6 +153,10 @@ def get_steps(build, build_set):
                     "with": {
                         "name": "output_artifact"
                     },
+                },
+                {
+                    "name": "Register clang error/warning problem matcher",
+                    "run": 'echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"'
                 },
                 {
                     "name": "Boot Test",
