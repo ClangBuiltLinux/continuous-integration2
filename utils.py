@@ -1,10 +1,7 @@
 import json
 import os
+import pathlib
 import sys
-
-# TODO: brittle, we should parse generator.yml for this, but requires adding
-# pyyaml dependency to workers...
-TOT_LLVM = 13
 
 
 def get_image_name():
@@ -65,7 +62,10 @@ def _read_builds():
 
 def get_requested_llvm_version():
     ver = int(os.environ["LLVM_VERSION"])
-    return "clang-" + ("nightly" if ver == TOT_LLVM else str(ver))
+    ci_folder = pathlib.Path(__file__).resolve().parent
+    with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
+        llvm_tot_version = int(f.read())
+    return "clang-" + ("nightly" if ver == llvm_tot_version else str(ver))
 
 
 def get_build():
