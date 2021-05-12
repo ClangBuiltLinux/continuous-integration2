@@ -24,8 +24,6 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: tuxsuite
       run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/4.14.tux.yml || true
     - name: save output
@@ -50,6 +48,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _e3cdf2669388fbb2f01c99215522a0c1:
@@ -69,6 +69,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _dfc7cb9a81693bca2e6a190f779350d7:
@@ -88,6 +90,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _9e742681f02420d47b4f491b12ccfacb:
@@ -107,6 +111,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _883da3595207ffacf848aca83da54bbc:
@@ -126,6 +132,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _ef7d1652d6697840a5167fb372bdd048:
@@ -145,6 +153,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
 

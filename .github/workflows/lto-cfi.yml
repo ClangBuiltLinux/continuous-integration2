@@ -24,8 +24,6 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: tuxsuite
       run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/lto-cfi.tux.yml || true
     - name: save output
@@ -50,6 +48,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _be409d8468fc6bfdb5d967daf5c9da6d:
@@ -69,6 +69,8 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
 
