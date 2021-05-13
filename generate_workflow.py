@@ -119,7 +119,7 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
                     "uses": "actions/upload-artifact@v2",
                     "with": {
                         "path": "builds.json",
-                        "name": "output_artifact"
+                        "name": "output_artifact_{}".format(build_set)
                     },
                 }
             ]
@@ -151,7 +151,7 @@ def get_steps(build, build_set):
                 {
                     "uses": "actions/download-artifact@v2",
                     "with": {
-                        "name": "output_artifact"
+                        "name": "output_artifact_{}".format(build_set)
                     },
                 },
                 {
