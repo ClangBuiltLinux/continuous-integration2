@@ -86,7 +86,7 @@ def get_job_name(build):
         job += " LLVM_IAS=1"
     # Having "LLVM <VER>" is a little hard to parse, make it look like
     # an environment variable
-    job += " LLVM_VERSION=" + str(int(build["llvm_version"]))
+    job += " LLVM_VERSION=" + str(build["llvm_version"])
     job += " " + print_config(build)
     return job
 

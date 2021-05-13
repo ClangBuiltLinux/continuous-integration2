@@ -115,4 +115,46 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
+  _ef1b3f898096c0a30af926f992e7d15d:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=android cuttlefish_defconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: cuttlefish_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _c6ac34bb506025217f40515638b3521e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=android x86_64_cuttlefish_defconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: x86_64_cuttlefish_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
 

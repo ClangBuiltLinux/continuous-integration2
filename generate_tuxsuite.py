@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import argparse
-import yaml
+import pathlib
 import sys
+import yaml
 
 
 # Aliases makes this YAML unreadable
@@ -50,7 +51,9 @@ def emit_tuxsuite_yml(config, tree):
         ]
     } # yapf: disable
     repo, ref = get_repo_ref(config, tree)
-    max_version = max(config["llvm_versions"])
+    ci_folder = pathlib.Path(__file__).resolve().parent
+    with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
+        max_version = int(f.read())
     defconfigs = []
     allconfigs = []
     for build in config["builds"]:
