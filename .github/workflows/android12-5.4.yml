@@ -235,10 +235,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact
-  _b6004055e739b487ac5b79a2ecd21871:
+  _697acf7d42a48e3722c6145f69814f68:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -277,10 +277,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _11a0db5926cfedaac47a461c1f768b52:
+  _af49aa812051ce9df4b6608fee8f3653:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=android allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: android
