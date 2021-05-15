@@ -61,11 +61,11 @@ def _read_builds():
 
 
 def get_requested_llvm_version():
-    ver = int(os.environ["LLVM_VERSION"])
+    ver = os.environ["LLVM_VERSION"]
     ci_folder = pathlib.Path(__file__).resolve().parent
     with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
-        llvm_tot_version = int(f.read())
-    return "clang-" + ("nightly" if ver == llvm_tot_version else str(ver))
+        llvm_tot_version = str(int(f.read())).strip()
+    return "clang-" + ("nightly" if ver == llvm_tot_version else ver)
 
 
 def get_build():
