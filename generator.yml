@@ -41,6 +41,7 @@ trees:
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
+ - &hexagon-arch hexagon
  - &i386-arch    i386
  - &mips-arch    mips
  - &powerpc-arch powerpc
@@ -49,6 +50,7 @@ architectures:
 triples:
   - &arm-triple         {CROSS_COMPILE: arm-linux-gnueabi-,    ARCH: *arm-arch}
   - &arm64-triple       {CROSS_COMPILE: aarch64-linux-gnu-,    ARCH: *arm64-arch}
+  - &hexagon-triple     {CROSS_COMPILE: hexagon-linux-musl-,   ARCH: *hexagon-arch}
   - &i386-triple        {CROSS_COMPILE: "",                    ARCH: *i386-arch}
   - &mips-triple        {CROSS_COMPILE: mips-linux-gnu-,       ARCH: *mips-arch}
   - &mipsel-triple      {CROSS_COMPILE: mipsel-linux-gnu-,     ARCH: *mips-arch}
@@ -80,6 +82,7 @@ configs:
   - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y],                             << : *arm64-triple,         << : *kernel_modules}
   - &arm64_allno       {config: allnoconfig,                                                                                               << : *arm64-triple,         << : *kernel_modules}
   - &arm64_allyes      {config: allyesconfig,                                                                                              << : *arm64-triple,         << : *kernel_modules}
+  - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *kernel_modules}
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel_modules}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
@@ -139,6 +142,7 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,       << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,      << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -175,6 +179,7 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -319,7 +324,7 @@ builds:
   - {<< : *arm64_allyes,      << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   ########################
   #  Latest LLVM release #
-  #########################
+  ########################
   ##############
   #  Mainline  #
   ##############
@@ -338,6 +343,7 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allno,       << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allyes,      << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
@@ -373,6 +379,7 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
@@ -486,6 +493,7 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allno,       << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allyes,      << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_11}
@@ -519,6 +527,7 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
