@@ -52,10 +52,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _55053058bd54acae6c4c7812c32270f7:
+  _3dcc2dad9e1ef4e6a3f358ffef73f7fe:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=13 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -1453,10 +1453,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact_allconfigs
-  _b6004055e739b487ac5b79a2ecd21871:
+  _697acf7d42a48e3722c6145f69814f68:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -1495,10 +1495,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a17601dec744d5d8c2a4a9c67b744b30:
+  _3c8f7d269bad99a182ef6b8286ce326b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
