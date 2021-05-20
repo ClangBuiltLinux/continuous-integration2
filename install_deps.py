@@ -15,6 +15,7 @@ def install_deps():
     arch_dependencies = {
         "arm64": ["qemu-system-aarch64"],
         "arm": ["qemu-system-arm"],
+        "hexagon": [],
         "i386": ["qemu-system-x86"],
         "mips": ["qemu-system-mips"],
         "powerpc": ["qemu-system-ppc"],

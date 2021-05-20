@@ -91,6 +91,7 @@ def boot_test(build):
         return
     fetch_kernel_image(build)
     fetch_dtb(build)
+    install_deps()
     run_boot()
 
 
@@ -102,5 +103,4 @@ if __name__ == "__main__":
     build = get_build()
     print(json.dumps(build, indent=4))
     check_log(build)
-    install_deps()
     boot_test(build)
