@@ -1543,27 +1543,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _66d5f7613f33d6225179b4f74b52c782:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_CPU_BIG_ENDIAN=y
-    env:
-      ARCH: arm64
-      LLVM_VERSION: android
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _012f9698c8641a28bfe42b1f88c3eeed:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
