@@ -304,15 +304,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _63e725810102bc3681f74e56c15317da:
+  _fa42c3c6e90d51941b6d1b39e6511ed5:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=13 ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     steps:
     - uses: actions/checkout@v2
