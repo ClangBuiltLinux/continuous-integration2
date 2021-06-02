@@ -189,7 +189,8 @@ builds:
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1389)
+  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -389,7 +390,8 @@ builds:
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1389)
+  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_latest}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -536,7 +538,8 @@ builds:
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_11}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
-  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_11}
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1389)
+  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_11}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
