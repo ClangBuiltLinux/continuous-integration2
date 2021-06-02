@@ -187,6 +187,21 @@ sets:
     target_arch: powerpc
     toolchain: clang-nightly
     kconfig:
+    - pseries_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-nightly
+    kconfig:
     - powernv_defconfig
     - CONFIG_PPC_DISABLE_WERROR=y
     targets:
@@ -434,6 +449,21 @@ sets:
     - modules
     kernel_image: uImage
     make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-12
+    kconfig:
+    - pseries_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
