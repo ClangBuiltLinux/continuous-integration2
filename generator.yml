@@ -180,7 +180,8 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
-  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  # hexagon: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1381)
+  # - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -381,7 +382,8 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
-  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  # hexagon: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1381)
+  # - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
@@ -530,7 +532,8 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
-  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  # hexagon: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1381)
+  # - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
