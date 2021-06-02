@@ -86,9 +86,10 @@ configs:
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel_modules}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
-  - &ppc32             {config: ppc44x_defconfig,                                                              kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
-  - &ppc64             {config: pseries_defconfig,                                                             kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
-  - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
+  # PowerPC builds disable -Werror for now: https://github.com/ClangBuiltLinux/linux/issues/1386
+  - &ppc32             {config: [ppc44x_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                               kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
+  - &ppc64             {config: [pseries_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
+  - &ppc64le           {config: [powernv_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
   #                                         https://github.com/ClangBuiltLinux/linux/issues/1143
   - &riscv             {config: [defconfig, CONFIG_EFI=n],                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
   - &s390              {config: defconfig,                                                                                                 << : *s390-triple,          << : *kernel_modules}
@@ -179,7 +180,8 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
-  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  # hexagon: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1381)
+  # - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -188,7 +190,8 @@ builds:
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_tot}
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1389)
+  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_tot}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -379,7 +382,8 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
-  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  # hexagon: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1381)
+  # - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
@@ -388,7 +392,8 @@ builds:
   # ppc64: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1292)
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_latest}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
-  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1389)
+  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_latest}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -527,7 +532,8 @@ builds:
   - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
-  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
+  # hexagon: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1381)
+  # - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
@@ -535,7 +541,8 @@ builds:
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
   # - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_11}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
-  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_11}
+  # riscv: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1389)
+  - {<< : *riscv,             << : *next,             << : *riscv_llvm_full, boot: false, llvm_version: *llvm_11}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}

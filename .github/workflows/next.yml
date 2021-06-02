@@ -220,27 +220,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _e23f00f1b9cec9a3a69e648c386400ad:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    env:
-      ARCH: hexagon
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _7dde147b804e95998e110f5dfe487e8f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -304,16 +283,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _7ad08b1bcc47573b8a65a6f0b4e0ad5a:
+  _63e725810102bc3681f74e56c15317da:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=13 ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: ppc44x_defconfig
+      CONFIG: ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -325,16 +304,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _069dcf551c46228c7070e4764927aa88:
+  _46f22d98976f9ab6804a50e3c373b252:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig
+      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -346,15 +325,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ea24606870e91e9589c8b50eea55772a:
+  _c12f83b6090125ba3d6b7d4da76160e3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: defconfig+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
@@ -640,27 +619,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _e7c5cf48eb39a0ec57c7b51ec921b5e1:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
-    env:
-      ARCH: hexagon
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _300d5ea669ce6bad5b1433d2643b416d:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -724,16 +682,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _535ebd7ca1798dda46eccb404aea7620:
+  _48b82759be3dfc699febdff2c100550b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: ppc44x_defconfig
+      CONFIG: ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -745,16 +703,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4929805e7a2ad956b20f06354ba6557f:
+  _1b6369d133fcc6b3c0f04f2ab019494a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig
+      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -766,15 +724,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _49b8454e1fcf8ba7fc36c5f5e6cc5299:
+  _98aa9cca27fc530a6448efe7056a03c9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: defconfig+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
@@ -1018,27 +976,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _f9f79b9f447e3c9e709435e7975747ca:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig
-    env:
-      ARCH: hexagon
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _6b25347145c5e89e498ca11233af4912:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -1102,16 +1039,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _8190461c1f8057e418b9abae5f927a20:
+  _4761930fb3185292c157074cdf5031ca:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=11 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=11 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig
+      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     steps:
     - uses: actions/checkout@v2
       with:
@@ -1123,15 +1060,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _94771c21f822e6468d29dfe9257e8207:
+  _2e696b01553124e0893a0b89cfd2b934:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: defconfig+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2

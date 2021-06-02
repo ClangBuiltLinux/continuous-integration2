@@ -125,7 +125,9 @@ sets:
     git_ref: linux-5.10.y
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig: ppc44x_defconfig
+    kconfig:
+    - ppc44x_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -137,7 +139,9 @@ sets:
     git_ref: linux-5.10.y
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -288,7 +292,9 @@ sets:
     git_ref: linux-5.10.y
     target_arch: powerpc
     toolchain: clang-12
-    kconfig: ppc44x_defconfig
+    kconfig:
+    - ppc44x_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -300,7 +306,9 @@ sets:
     git_ref: linux-5.10.y
     target_arch: powerpc
     toolchain: clang-12
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -451,7 +459,9 @@ sets:
     git_ref: linux-5.10.y
     target_arch: powerpc
     toolchain: clang-11
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
