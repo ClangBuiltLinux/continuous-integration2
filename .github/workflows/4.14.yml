@@ -115,16 +115,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _883da3595207ffacf848aca83da54bbc:
+  _a3e1013167dc541e6b7fecc6043a090a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=13 powernv_defconfig
+    name: ARCH=powerpc CC=clang LLVM_VERSION=13 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig
+      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     steps:
     - uses: actions/checkout@v2
       with:

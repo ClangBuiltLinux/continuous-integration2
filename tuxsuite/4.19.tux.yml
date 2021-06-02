@@ -58,7 +58,9 @@ sets:
     git_ref: linux-4.19.y
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel

@@ -129,18 +129,6 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
-    target_arch: hexagon
-    toolchain: clang-nightly
-    kconfig: defconfig
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
-    git_ref: master
     target_arch: i386
     toolchain: clang-nightly
     kconfig: defconfig
@@ -184,7 +172,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig: ppc44x_defconfig
+    kconfig:
+    - ppc44x_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -196,7 +186,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -389,18 +381,6 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
-    target_arch: hexagon
-    toolchain: clang-12
-    kconfig: defconfig
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
-    git_ref: master
     target_arch: i386
     toolchain: clang-12
     kconfig: defconfig
@@ -445,7 +425,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-12
-    kconfig: ppc44x_defconfig
+    kconfig:
+    - ppc44x_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -457,7 +439,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-12
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -620,18 +604,6 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
-    target_arch: hexagon
-    toolchain: clang-11
-    kconfig: defconfig
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
-    git_ref: master
     target_arch: i386
     toolchain: clang-11
     kconfig: defconfig
@@ -676,7 +648,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-11
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
