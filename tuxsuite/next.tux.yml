@@ -129,6 +129,18 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: hexagon
+    toolchain: clang-nightly
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: i386
     toolchain: clang-nightly
     kconfig: defconfig
@@ -396,6 +408,18 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: hexagon
+    toolchain: clang-12
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: i386
     toolchain: clang-12
     kconfig: defconfig
@@ -625,6 +649,18 @@ sets:
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: hexagon
+    toolchain: clang-11
+    kconfig: defconfig
     targets:
     - config
     - kernel
