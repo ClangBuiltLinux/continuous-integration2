@@ -227,16 +227,13 @@ sets:
     git_ref: master
     target_arch: riscv
     toolchain: clang-nightly
-    kconfig:
-    - defconfig
-    - CONFIG_EFI=n
+    kconfig: defconfig
     targets:
     - config
     - kernel
     - modules
     kernel_image: Image
     make_variables:
-      LD: riscv64-linux-gnu-ld
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git

@@ -283,16 +283,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ea24606870e91e9589c8b50eea55772a:
+  _4908c92c4d725c03f7b7115b6b457e9e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+CONFIG_EFI=n
+      CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
       with:
