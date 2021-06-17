@@ -829,27 +829,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _efcb2e4e81eb80fd4fdf114ea0296d0c:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=12 defconfig
-    env:
-      ARCH: s390
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _d49633cca166398690b1f3ecad135a14:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -1186,27 +1165,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _aab5675f3f257b359acd5cbd9b06b94f:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=11 defconfig
-    env:
-      ARCH: s390
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _73f8d728902a8cc9c807d77d1aaaedaf:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -1427,27 +1385,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _77129a466d7b015c998bbca441d09b93:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=10 defconfig
-    env:
-      ARCH: s390
-      LLVM_VERSION: 10
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
       with:
