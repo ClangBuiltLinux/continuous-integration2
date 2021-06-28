@@ -13,7 +13,7 @@ name: next
     - tuxsuite/next.tux.yml
     - .github/workflows/next.yml
   schedule:
-  - cron: 0 8 * * 1,2,3,4,5
+  - cron: 0 12 * * 1,2,3,4,5
   workflow_dispatch: null
 jobs:
   kick_tuxsuite_defconfigs:
