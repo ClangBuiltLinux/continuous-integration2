@@ -15,8 +15,8 @@ urls:
 schedules:
   - &six_hours {schedule: "0 0,6,12,18 * * *"}
   - &daily     {schedule: "0 0 * * *"}
-  # -next updates M-F in the evening EAST, which is 8:00 UTC
-  - &weekdays  {schedule: "0 8 * * 1,2,3,4,5"}
+  # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
+  - &weekdays  {schedule: "0 12 * * 1,2,3,4,5"}
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline,         << : *six_hours}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next,             << : *weekdays}
