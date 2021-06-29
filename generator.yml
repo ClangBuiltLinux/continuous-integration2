@@ -113,7 +113,7 @@ tiers:
   - &clang              {llvm: false, llvm_ias: false}
   # Architecture specific tiers
   # ARM32 aspeed_g5_defconfig                                           https://github.com/ClangBuiltLinux/linux/issues/732
-  - &llvm_arm32_v6      {llvm: true,  llvm_ias: false, make_variables: {LD: arm-linux-gnueabihf-ld, LLVM: 1}}
+  - &arm32_v6_llvm      {llvm: true,  llvm_ias: false, make_variables: {LD: arm-linux-gnueabihf-ld, LLVM: 1}}
   # MIPS big endian                                                     https://github.com/ClangBuiltLinux/linux/issues/1025
   - &mips_llvm          {llvm: true,  llvm_ias: false, make_variables: {LD: mips-linux-gnu-ld, LLVM: 1}}
   # PowerPC 64-bit big endian                                           https://github.com/ClangBuiltLinux/linux/issues/602
@@ -607,7 +607,7 @@ builds:
   #  Mainline  #
   ##############
   - {<< : *arm32_v5,          << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v6,          << : *mainline,         << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v6,          << : *mainline,         << : *arm32_v6_llvm,   boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7,          << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
@@ -635,7 +635,7 @@ builds:
   #  Next  #
   ##########
   - {<< : *arm32_v5,          << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v6,          << : *next,             << : *llvm_arm32_v6,   boot: true,  llvm_version: *llvm_10}
+  - {<< : *arm32_v6,          << : *next,             << : *arm32_v6_llvm,   boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7,          << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7_t,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
