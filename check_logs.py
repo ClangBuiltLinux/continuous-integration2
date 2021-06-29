@@ -83,8 +83,8 @@ def run_boot():
 
 
 def boot_test(build):
-    if build["errors_count"] > 0:
-        print_red("errors encountered during build, skipping boot")
+    if build["result"] == "fail":
+        print_red("fatal build errors encountered during build, skipping boot")
         sys.exit(1)
     if "BOOT" in os.environ and os.environ["BOOT"] == "0":
         print_yellow("boot test disabled via config, skipping boot")
