@@ -40,7 +40,6 @@ sets:
     - kernel
     - modules
     make_variables:
-      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
