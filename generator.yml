@@ -231,7 +231,7 @@ builds:
   ###########
   - {<< : *arm32_v7,          << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,        << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64,             << : *stable-5_4,       << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64,             << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64be,           << : *stable-5_4,       << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mips,              << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *stable-5_4,       << : *llvm,            boot: true,  llvm_version: *llvm_tot}
