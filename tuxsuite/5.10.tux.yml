@@ -176,6 +176,7 @@ sets:
     - modules
     kernel_image: Image
     make_variables:
+      LD: riscv64-linux-gnu-ld
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
