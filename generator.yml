@@ -353,7 +353,8 @@ builds:
   # https://github.com/ClangBuiltLinux/linux/issues/1023
   # https://github.com/ClangBuiltLinux/linux/issues/1143
   - {<< : *riscv_no_efi,      << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_latest}
-  - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
+  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
+  # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -508,7 +509,8 @@ builds:
   # https://github.com/ClangBuiltLinux/linux/issues/1023
   # https://github.com/ClangBuiltLinux/linux/issues/1143
   - {<< : *riscv_no_efi,      << : *mainline,         << : *riscv_llvm_full, boot: true,  llvm_version: *llvm_11}
-  - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_11}
+  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
+  # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
@@ -627,7 +629,8 @@ builds:
   # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
   - {<< : *ppc64le,           << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
-  - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_10}
+  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
+  # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_10}
   - {<< : *x86_64,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # x86_64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
   # - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
