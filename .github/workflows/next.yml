@@ -1396,6 +1396,27 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
+  _a9d15cb6e4d3398b2fd067ab6a1fff56:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=10 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 10
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
   _470bd3fa38c92f94b430e3a89466a304:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs

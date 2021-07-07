@@ -883,6 +883,21 @@ sets:
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: powerpc
+    toolchain: clang-10
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: x86_64
     toolchain: clang-10
     kconfig: defconfig

@@ -716,6 +716,7 @@ sets:
     - modules
     kernel_image: zImage.epapr
     make_variables:
+      LD: powerpc64le-linux-gnu-ld
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
@@ -896,6 +897,7 @@ sets:
     - modules
     kernel_image: zImage.epapr
     make_variables:
+      LD: powerpc64le-linux-gnu-ld
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
