@@ -367,15 +367,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _33ad25088921cc373b349749664a8adc:
+  _4908c92c4d725c03f7b7115b6b457e9e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
@@ -808,15 +808,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _98aa9cca27fc530a6448efe7056a03c9:
+  _49b8454e1fcf8ba7fc36c5f5e6cc5299:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: defconfig+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
@@ -1144,15 +1144,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _2e696b01553124e0893a0b89cfd2b934:
+  _94771c21f822e6468d29dfe9257e8207:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv BOOT=0 LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: defconfig+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
