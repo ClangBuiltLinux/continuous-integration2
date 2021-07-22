@@ -170,6 +170,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: mips
@@ -184,6 +185,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -436,6 +438,7 @@ sets:
     make_variables:
       LD: mips-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: mips
@@ -450,6 +453,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
