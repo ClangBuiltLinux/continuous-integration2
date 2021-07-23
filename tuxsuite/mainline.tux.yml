@@ -987,6 +987,19 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
+    target_arch: riscv
+    toolchain: clang-nightly
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
     kconfig: allmodconfig
@@ -1127,6 +1140,18 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
+    target_arch: riscv
+    toolchain: clang-12
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
     target_arch: x86_64
     toolchain: clang-12
     kconfig: allmodconfig
@@ -1265,6 +1290,18 @@ sets:
       CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: riscv
+    toolchain: clang-11
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
