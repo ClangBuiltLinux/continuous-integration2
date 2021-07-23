@@ -60,6 +60,45 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig: imx_v4_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig: omap2plus_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_ARM_LPAE=y
+    - CONFIG_UNWINDER_FRAME_POINTER=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: arm64
     toolchain: clang-nightly
     kconfig: defconfig
@@ -354,6 +393,42 @@ sets:
       LLVM: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig: imx_v4_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig: omap2plus_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_ARM_LPAE=y
+    - CONFIG_UNWINDER_FRAME_POINTER=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: arm64
     toolchain: clang-12
     kconfig: defconfig
@@ -606,6 +681,42 @@ sets:
     kconfig:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig: imx_v4_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig: omap2plus_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_ARM_LPAE=y
+    - CONFIG_UNWINDER_FRAME_POINTER=y
     targets:
     - config
     - kernel
