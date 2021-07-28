@@ -139,7 +139,7 @@ builds:
   - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_imx,         << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_omap,        << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
-  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_allmod,      << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allno,       << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allyes,      << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
@@ -177,7 +177,7 @@ builds:
   - {<< : *arm32_v7_t,        << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_imx,         << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_omap,        << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
-  - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_allyes,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
@@ -341,7 +341,7 @@ builds:
   - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_imx,         << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_omap,        << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
-  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_allno,       << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_latest}
@@ -382,7 +382,7 @@ builds:
   - {<< : *arm32_v7_t,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_imx,         << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_omap,        << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
-  - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_allno,       << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_latest}
@@ -503,7 +503,7 @@ builds:
   - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_11}
   - {<< : *arm32_imx,         << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm32_omap,        << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_11}
-  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_11}
+  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_11}
   - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm32_allno,       << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_11}
@@ -543,7 +543,7 @@ builds:
   - {<< : *arm32_v7_t,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
   - {<< : *arm32_imx,         << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm32_omap,        << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_11}
-  - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_11}
+  - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm32_allno,       << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_11}
   - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_11}
