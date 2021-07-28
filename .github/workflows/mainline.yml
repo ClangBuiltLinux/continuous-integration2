@@ -157,15 +157,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _f507df836d7d0d55d87d547768e5a159:
+  _a626e641850a6dd63ebbb6625691b9bc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     env:
       ARCH: arm
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     steps:
     - uses: actions/checkout@v2
@@ -661,15 +661,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _993be3fb0c9a39f614c1f6a4062050f5:
+  _b2f35e5f085a2fcb0f38aef8b1e7ea7d:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     env:
       ARCH: arm
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     steps:
     - uses: actions/checkout@v2
@@ -1123,15 +1123,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _25a0b3bb0912eb643c1ee01955624d6c:
+  _c5c2fd6a0796369d8a9a14eef4111c2c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     env:
       ARCH: arm
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
-      BOOT: 0
+      BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     steps:
     - uses: actions/checkout@v2
