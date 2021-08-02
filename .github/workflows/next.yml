@@ -304,16 +304,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fa42c3c6e90d51941b6d1b39e6511ed5:
+  _3ff9dd832a367410f07232e142fa8650:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -325,16 +325,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ea05e1cee7edc100c8d2e4d8be3bab04:
+  _ffc1134a05ecdc0f72e9a91ff18808f4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=13 pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=13 pseries_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: pseries_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -346,16 +346,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _46f22d98976f9ab6804a50e3c373b252:
+  _069dcf551c46228c7070e4764927aa88:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -745,16 +745,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _48b82759be3dfc699febdff2c100550b:
+  _535ebd7ca1798dda46eccb404aea7620:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -766,16 +766,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _0c341c35d03f3e5fc1fea9054152b13e:
+  _dbfb1afee12b5bc2178bd79c1ca36bc9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: pseries_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -787,16 +787,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _1b6369d133fcc6b3c0f04f2ab019494a:
+  _4929805e7a2ad956b20f06354ba6557f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -1123,16 +1123,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _3f3a86728b9bc2f14f25d79aec646231:
+  _1f78fa93ea4d3467dfbba5688f76a298:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=11 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=11 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -1396,16 +1396,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a9d15cb6e4d3398b2fd067ab6a1fff56:
+  _fdfe2bd2dd6501370696b38b3fb41fc3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=10 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=10 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 10
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2
       with:

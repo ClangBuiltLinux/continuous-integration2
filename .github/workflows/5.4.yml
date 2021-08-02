@@ -157,16 +157,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fa42c3c6e90d51941b6d1b39e6511ed5:
+  _3ff9dd832a367410f07232e142fa8650:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: ppc44x_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -178,16 +178,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ea05e1cee7edc100c8d2e4d8be3bab04:
+  _ffc1134a05ecdc0f72e9a91ff18808f4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=13 pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=13 pseries_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: pseries_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -199,16 +199,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _46f22d98976f9ab6804a50e3c373b252:
+  _069dcf551c46228c7070e4764927aa88:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: powernv_defconfig
     steps:
     - uses: actions/checkout@v2
       with:
