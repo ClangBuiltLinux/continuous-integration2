@@ -86,6 +86,7 @@ configs:
   - &arm32_allmod      {config: allmodconfig,                                                                                              << : *arm-triple,           << : *kernel_modules}
   - &arm32_allno       {config: allnoconfig,                                                                                               << : *arm-triple,           << : *kernel_modules}
   - &arm32_allyes      {config: allyesconfig,                                                                                              << : *arm-triple,           << : *kernel_modules}
+  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &arm32_fedora      {config: [*arm32-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          << : *arm-triple,           << : *kernel_modules}
   - &arm32_suse        {config: *arm32-suse-config-url,                                                                                    << : *arm-triple,           << : *kernel_modules}
   - &arm64             {config: defconfig,                                                                                                 << : *arm64-triple,         << : *kernel_modules}
@@ -106,6 +107,7 @@ configs:
   - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *kernel_modules}
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel_modules}
   - &i686_fedora       {config: [*i686-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           << : *i386-triple,          << : *kernel_modules}
+  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &i386_suse         {config: *i386-suse-config-url,                                                                                     << : *i386-triple,          << : *kernel_modules}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
@@ -113,12 +115,14 @@ configs:
   - &ppc32             {config: [ppc44x_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                               kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
   - &ppc64             {config: [pseries_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
   - &ppc64le           {config: [powernv_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
+  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                        << : *powerpc64le-triple,   << : *kernel_modules}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                                                  << : *powerpc64le-triple,   << : *kernel_modules}
   - &riscv             {config: defconfig,                                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
   #                                         https://github.com/ClangBuiltLinux/linux/issues/1143
   - &riscv_no_efi      {config: [defconfig, CONFIG_EFI=n],                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
   - &s390              {config: defconfig,                                                                                                 << : *s390-triple,          << : *kernel_modules}
+  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           << : *s390-triple,          << : *kernel_modules}
   - &s390_suse         {config: *s390-suse-config-url,                                                                                     << : *s390-triple,          << : *kernel_modules}
   - &x86_64            {config: defconfig,                                                                                                                             << : *kernel_modules}
