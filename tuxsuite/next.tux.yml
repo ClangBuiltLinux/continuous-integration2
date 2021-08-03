@@ -1251,6 +1251,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: powerpc
@@ -1260,6 +1261,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: s390
@@ -1547,6 +1549,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: powerpc
@@ -1556,6 +1559,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: x86_64
@@ -1823,6 +1827,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: powerpc
@@ -1832,6 +1837,7 @@ sets:
     - config
     - kernel
     - modules
+    kernel_image: zImage.epapr
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: x86_64
