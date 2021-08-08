@@ -173,12 +173,16 @@ def print_builds(config, tree_name):
     github_yml = ".github/workflows/{}.yml".format(tree_name)
 
     check_logs_defconfigs = {}
+    check_logs_distribution_configs = {}
     check_logs_allconfigs = {}
     for build in config["builds"]:
         if build["git_repo"] == repo and build["git_ref"] == ref:
             cron_schedule = build["schedule"]
             if "defconfig" in str(build["config"]):
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
+            elif "https://" in str(build["config"]):
+                check_logs_distribution_configs.update(
+                    get_steps(build, "distribution_configs"))
             else:
                 check_logs_allconfigs.update(get_steps(build, "allconfigs"))
 
@@ -186,6 +190,11 @@ def print_builds(config, tree_name):
                                 github_yml)
     workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))
     workflow["jobs"].update(check_logs_defconfigs)
+
+    if check_logs_distribution_configs:
+        workflow["jobs"].update(
+            tuxsuite_setups("distribution_configs", tuxsuite_yml))
+        workflow["jobs"].update(check_logs_distribution_configs)
 
     if check_logs_allconfigs:
         workflow["jobs"].update(tuxsuite_setups("allconfigs", tuxsuite_yml))
