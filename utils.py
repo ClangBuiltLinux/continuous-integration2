@@ -36,24 +36,25 @@ def get_cbl_name():
                 "aarch64": "arm64",
                 "armv7hl": "arm32_v7",
                 "i686": "x86",
-                "s390x": "s390"
+                "ppc64le": "ppc64le",
+                "s390x": "s390",
+                "x86_64": "x86_64"
             }
             # The URL is https://.../kernel-<arch>-fedora.config
             fedora_arch = base_config.split("/")[-1].split("-")[1]
-            if fedora_arch in fedora_to_cbl:
-                return fedora_to_cbl[fedora_arch]
-            return fedora_arch
+            return fedora_to_cbl[fedora_arch]
         if "openSUSE" in base_config:
             suse_to_cbl = {
+                "arm64": "arm64",
                 "armv7hl": "arm32_v7",
                 "i386": "x86",
-                "s390x": "s390"
+                "ppc64le": "ppc64le",
+                "s390x": "s390",
+                "x86_64": "x86_64"
             }
             # The URL is https://.../<arch>/default
             suse_arch = base_config.split("/")[-2]
-            if suse_arch in suse_to_cbl:
-                return suse_to_cbl[suse_arch]
-            return suse_arch
+            return suse_to_cbl[suse_arch]
         # Arch Linux is x86_64 only
         if "archlinux" in base_config:
             return "x86_64"
