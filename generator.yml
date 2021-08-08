@@ -89,10 +89,9 @@ configs:
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel_modules}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
-  # PowerPC builds disable -Werror for now: https://github.com/ClangBuiltLinux/linux/issues/1386
-  - &ppc32             {config: [ppc44x_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                               kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
-  - &ppc64             {config: [pseries_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
-  - &ppc64le           {config: [powernv_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
+  - &ppc32             {config: ppc44x_defconfig,                                                              kernel_image: uImage,       << : *powerpc-triple,       << : *kernel_modules}
+  - &ppc64             {config: pseries_defconfig,                                                             kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel_modules}
+  - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel_modules}
   - &riscv             {config: defconfig,                                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
   #                                         https://github.com/ClangBuiltLinux/linux/issues/1143
   - &riscv_no_efi      {config: [defconfig, CONFIG_EFI=n],                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}

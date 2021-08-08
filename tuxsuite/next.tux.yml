@@ -229,9 +229,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig:
-    - ppc44x_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: ppc44x_defconfig
     targets:
     - config
     - kernel
@@ -243,9 +241,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig:
-    - pseries_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: pseries_defconfig
     targets:
     - config
     - kernel
@@ -258,9 +254,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig:
-    - powernv_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: powernv_defconfig
     targets:
     - config
     - kernel
@@ -548,9 +542,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-12
-    kconfig:
-    - ppc44x_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: ppc44x_defconfig
     targets:
     - config
     - kernel
@@ -562,9 +554,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-12
-    kconfig:
-    - pseries_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: pseries_defconfig
     targets:
     - config
     - kernel
@@ -577,9 +567,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-12
-    kconfig:
-    - powernv_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: powernv_defconfig
     targets:
     - config
     - kernel
@@ -828,9 +816,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-11
-    kconfig:
-    - powernv_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: powernv_defconfig
     targets:
     - config
     - kernel
@@ -1000,9 +986,7 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-10
-    kconfig:
-    - powernv_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: powernv_defconfig
     targets:
     - config
     - kernel
