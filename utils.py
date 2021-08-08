@@ -29,6 +29,36 @@ def get_cbl_name():
     full_config = os.environ["CONFIG"]
     base_config = full_config.split("+")[0]
 
+    # Distribution configurations have a URL
+    if "https://" in base_config:
+        if "fedora" in base_config:
+            fedora_to_cbl = {
+                "aarch64": "arm64",
+                "armv7hl": "arm32_v7",
+                "i686": "x86",
+                "ppc64le": "ppc64le",
+                "s390x": "s390",
+                "x86_64": "x86_64"
+            }
+            # The URL is https://.../kernel-<arch>-fedora.config
+            fedora_arch = base_config.split("/")[-1].split("-")[1]
+            return fedora_to_cbl[fedora_arch]
+        if "openSUSE" in base_config:
+            suse_to_cbl = {
+                "arm64": "arm64",
+                "armv7hl": "arm32_v7",
+                "i386": "x86",
+                "ppc64le": "ppc64le",
+                "s390x": "s390",
+                "x86_64": "x86_64"
+            }
+            # The URL is https://.../<arch>/default
+            suse_arch = base_config.split("/")[-2]
+            return suse_to_cbl[suse_arch]
+        # Arch Linux is x86_64 only
+        if "archlinux" in base_config:
+            return "x86_64"
+
     unique_defconfigs = {
         "multi_v5_defconfig": "arm32_v5",
         "aspeed_g5_defconfig": "arm32_v6",
