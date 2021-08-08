@@ -194,7 +194,7 @@ builds:
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -246,7 +246,7 @@ builds:
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_tot}
@@ -423,7 +423,7 @@ builds:
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm_full,  boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
@@ -476,7 +476,7 @@ builds:
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *mips,              << : *next,             << : *mips_llvm_full,  boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
@@ -608,7 +608,7 @@ builds:
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
-  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_11}
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
@@ -660,7 +660,7 @@ builds:
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
   - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
-  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_11}
+  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  llvm_version: *llvm_11}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_11}
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
