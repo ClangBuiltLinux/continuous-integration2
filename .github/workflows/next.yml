@@ -2146,15 +2146,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _7d7e6932e4fa70d72021a7a8d6c9530a:
+  _a806c79f399d017938fc07b0c8ab38ac:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     env:
       ARCH: i386
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     steps:
     - uses: actions/checkout@v2
@@ -2671,15 +2671,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _d4f800b141fef5d53cb2aec8f488f6c0:
+  _bf9bb3c64ad778b54ba684acca2dfd0e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     env:
       ARCH: i386
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     steps:
     - uses: actions/checkout@v2
@@ -3154,15 +3154,15 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a9cc8683f998f11d14e36a4fb98d77b3:
+  _e354fa32480781c0b26f27b46a1cf7cd:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     env:
       ARCH: i386
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     steps:
     - uses: actions/checkout@v2
