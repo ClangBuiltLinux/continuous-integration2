@@ -24,6 +24,21 @@ sets:
   - git_repo: https://github.com/samitolvanen/linux.git
     git_ref: clang-cfi
     target_arch: x86_64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_CFI_CLANG=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://github.com/samitolvanen/linux.git
+    git_ref: clang-cfi
+    target_arch: x86_64
     toolchain: clang-12
     kconfig:
     - defconfig

@@ -31,6 +31,28 @@ sets:
   - git_repo: https://android.googlesource.com/kernel/common.git
     git_ref: android-4.14-stable
     target_arch: arm64
+    toolchain: clang-13
+    kconfig: cuttlefish_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LD: ld.lld
+  - git_repo: https://android.googlesource.com/kernel/common.git
+    git_ref: android-4.14-stable
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: x86_64_cuttlefish_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LD: ld.lld
+  - git_repo: https://android.googlesource.com/kernel/common.git
+    git_ref: android-4.14-stable
+    target_arch: arm64
     toolchain: clang-12
     kconfig: cuttlefish_defconfig
     targets:
