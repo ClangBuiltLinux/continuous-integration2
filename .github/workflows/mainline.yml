@@ -2110,6 +2110,1029 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
+  kick_tuxsuite_distribution_configs:
+    name: TuxSuite (distribution_configs)
+    runs-on: ubuntu-20.04
+    container: tuxsuite/tuxsuite
+    env:
+      TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: tuxsuite
+      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
+    - name: save output
+      uses: actions/upload-artifact@v2
+      with:
+        path: builds.json
+        name: output_artifact_distribution_configs
+  _9417efa1a2a916b417a8798be9c16791:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f68ffc140cb41005f45ddf889b6a0d4b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _621b2a474cb5c9a9224adf1ab39c6263:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _11ad024a78719b99adcd1e644afc9fd0:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _831adaa701b4d758e7e6adca97c72b07:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _acd418378c0559207a0517e13bee439a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _aee5ba6d550b366b3aadb4a0bfd9906e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e8fe479b70c34d11aad415d50bf69af1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _dde2b10dd09a89c70b6a2be1755c8a0f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: s390
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6161e9074b74a20558e1cbad2b391df3:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    env:
+      ARCH: s390
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _4295d6942bf6d93fad93458fcc60d014:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _bd6bf8eb7ad8d3024a2701877fa59e3f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e5847df4ed51e927f78146158a6b23e7:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _2dd1b5be6535967701a383add1a82022:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _1435de1ebd93ba0b4f841682571dd69b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0ed6feea25f3902a8c968a744a0240f2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _dfc9970609310645c60d53981a32a0e3:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e0cfa5482bb9dc5112b2335a8cadd84c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a806c79f399d017938fc07b0c8ab38ac:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _17f0345420b6ade6aeacc3497eb5fe79:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _409b28e38bc385e6d3d3068f3489ea8c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _306cd6f0d8de501c4ecfdc903ce9f4a1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: s390
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _20c70aed2de0e5913ffc04e55d5b2480:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    env:
+      ARCH: s390
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _cd3a9116f9c669b21bb4476766660a71:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _1eb07c3aa26899e71a54a11f89ca7e32:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e62bd1fdb88a0712c30c1204bd627466:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _5956d62ae6edadd4596591a4267ef913:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _c65a27b37c5a7caf522020d62a097166:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0a44165bfd4228a9d39675e56d3c53cd:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6ae741efccfa2695b3ccecad36497666:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _2fe036afc32d903b62d526a522143edc:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _bf9bb3c64ad778b54ba684acca2dfd0e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6f15f90c890fd785747516d4c39c77a6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a1c5ea612cdbf834b80c6187336f6949:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6f25f53bece84b18b9d20700a1a6cba2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _7c8ef3a6268a98f6b98b58a56bd4164e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _2e27aae6c7af96a6e71e587a8821c0b6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _9787aef428bca7a8aa1b80968a889942:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a56d649bf59d04b145998497ffd3d36c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _9f6b4e77f8d82842e93b9fa15e162f15:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _454027d957e18d9446250bb284322ced:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _21d491b74db1095a72c015b4469234e2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e354fa32480781c0b26f27b46a1cf7cd:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _33c4e124f55a998679c38207caccf044:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _25f87da1043f926ba53aee8e9493b399:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _8f357523d123bc85ac5e9d9a752e8a17:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _dcce07616b216e4083cf8d3583f67061:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _bc9a67d0e7f6688b7d9750c9eacca429:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
   kick_tuxsuite_allconfigs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-20.04
@@ -2177,48 +3200,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _9417efa1a2a916b417a8798be9c16791:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _f68ffc140cb41005f45ddf889b6a0d4b:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-    env:
-      ARCH: arm
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2314,132 +3295,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _621b2a474cb5c9a9224adf1ab39c6263:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _11ad024a78719b99adcd1e644afc9fd0:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _831adaa701b4d758e7e6adca97c72b07:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _acd418378c0559207a0517e13bee439a:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    env:
-      ARCH: i386
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _aee5ba6d550b366b3aadb4a0bfd9906e:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _e8fe479b70c34d11aad415d50bf69af1:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _29621856361ed320d093c47e1d789771:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -2450,48 +3305,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allmodconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _dde2b10dd09a89c70b6a2be1755c8a0f:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: s390
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _6161e9074b74a20558e1cbad2b391df3:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
-    env:
-      ARCH: s390
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2587,69 +3400,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4295d6942bf6d93fad93458fcc60d014:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _bd6bf8eb7ad8d3024a2701877fa59e3f:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _e5847df4ed51e927f78146158a6b23e7:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _697acf7d42a48e3722c6145f69814f68:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -2702,48 +3452,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _2dd1b5be6535967701a383add1a82022:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _1435de1ebd93ba0b4f841682571dd69b:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-    env:
-      ARCH: arm
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2839,132 +3547,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _0ed6feea25f3902a8c968a744a0240f2:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _dfc9970609310645c60d53981a32a0e3:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _e0cfa5482bb9dc5112b2335a8cadd84c:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _a806c79f399d017938fc07b0c8ab38ac:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    env:
-      ARCH: i386
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _17f0345420b6ade6aeacc3497eb5fe79:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _409b28e38bc385e6d3d3068f3489ea8c:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _3466aa72f105769b96bdc3e356c9d91a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -2975,48 +3557,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allmodconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _306cd6f0d8de501c4ecfdc903ce9f4a1:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: s390
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _20c70aed2de0e5913ffc04e55d5b2480:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
-    env:
-      ARCH: s390
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -3112,69 +3652,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _cd3a9116f9c669b21bb4476766660a71:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _1eb07c3aa26899e71a54a11f89ca7e32:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _e62bd1fdb88a0712c30c1204bd627466:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _8a7f0138d12509886a29c0b8b2b90e80:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -3227,48 +3704,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _5956d62ae6edadd4596591a4267ef913:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _c65a27b37c5a7caf522020d62a097166:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-    env:
-      ARCH: arm
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -3353,132 +3788,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _0a44165bfd4228a9d39675e56d3c53cd:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _6ae741efccfa2695b3ccecad36497666:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _2fe036afc32d903b62d526a522143edc:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _bf9bb3c64ad778b54ba684acca2dfd0e:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    env:
-      ARCH: i386
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _6f15f90c890fd785747516d4c39c77a6:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _a1c5ea612cdbf834b80c6187336f6949:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -3595,69 +3904,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _6f25f53bece84b18b9d20700a1a6cba2:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _7c8ef3a6268a98f6b98b58a56bd4164e:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _2e27aae6c7af96a6e71e587a8821c0b6:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _565b3ebd0db7f13bc44114dbc4ce6faa:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -3710,48 +3956,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _9787aef428bca7a8aa1b80968a889942:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _a56d649bf59d04b145998497ffd3d36c:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-    env:
-      ARCH: arm
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -3836,132 +4040,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _9f6b4e77f8d82842e93b9fa15e162f15:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _454027d957e18d9446250bb284322ced:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _21d491b74db1095a72c015b4469234e2:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _e354fa32480781c0b26f27b46a1cf7cd:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    env:
-      ARCH: i386
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _33c4e124f55a998679c38207caccf044:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _25f87da1043f926ba53aee8e9493b399:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     steps:
     - uses: actions/checkout@v2
       with:
@@ -4067,69 +4145,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _8f357523d123bc85ac5e9d9a752e8a17:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _dcce07616b216e4083cf8d3583f67061:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _bc9a67d0e7f6688b7d9750c9eacca429:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
     steps:
     - uses: actions/checkout@v2
       with:
