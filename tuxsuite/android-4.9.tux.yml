@@ -15,6 +15,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://android.googlesource.com/kernel/common.git
     git_ref: android-4.9-q
     target_arch: x86_64
@@ -24,6 +26,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://android.googlesource.com/kernel/common.git
     git_ref: android-4.9-q
     target_arch: arm64
@@ -33,6 +37,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://android.googlesource.com/kernel/common.git
     git_ref: android-4.9-q
     target_arch: x86_64
@@ -42,6 +48,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://android.googlesource.com/kernel/common.git
     git_ref: android-4.9-q
     target_arch: arm64
@@ -51,6 +59,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://android.googlesource.com/kernel/common.git
     git_ref: android-4.9-q
     target_arch: x86_64
@@ -60,4 +70,6 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
 

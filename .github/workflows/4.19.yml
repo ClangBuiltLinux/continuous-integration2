@@ -31,10 +31,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact_defconfigs
-  _c1e13055e5361c03be9afb991342ca79:
+  _66217275b440ea529e2b7432462ab897:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=13 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -52,10 +52,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _61786e26a75b319fadc440c70c0e761a:
+  _dccb2e73fc9decea9e1a7d4a932299a6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -73,10 +73,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _2621acf880170bfa716f50c7f7000ed9:
+  _27eec8ad442e6c80c936801a2dca77cc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_VERSION=13 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -94,10 +94,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _86b0b67912039ca35e7e909168b14a21:
+  _9eb09c7190bf44727170b34b8557352d:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_VERSION=13 defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 defconfig+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -115,10 +115,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _883da3595207ffacf848aca83da54bbc:
+  _f4d3de3db46c87da313d87e1f3f6dc29:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=13 powernv_defconfig
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -136,10 +136,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _8b9460f3f4acc112b75ac414b3b20bb0:
+  _7c47476f557cfe69821df8c29bb9c4ac:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_VERSION=13 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 13

@@ -15,6 +15,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-4.4.y
     target_arch: arm64
@@ -26,6 +28,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-4.4.y
     target_arch: x86_64
@@ -37,4 +41,5 @@ sets:
     - modules
     make_variables:
       LD: ld.lld
+      LLVM_IAS: 0
 

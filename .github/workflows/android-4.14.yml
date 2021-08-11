@@ -31,10 +31,10 @@ jobs:
       with:
         path: builds.json
         name: output_artifact_defconfigs
-  _578ff8b3f8dccbf56540703bd5ab8af9:
+  _6fc223e1966ab7052b25026d1082ebff:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=13 cuttlefish_defconfig
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=13 cuttlefish_defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -52,10 +52,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _815a65a53c192c1166e2fbac33f48fd9:
+  _6f3686139820fd568cad0dcb30bdf6c8:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=13 x86_64_cuttlefish_defconfig
+    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=13 x86_64_cuttlefish_defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -73,10 +73,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4c5fddb1a4a76a91c08e4940c3854d7f:
+  _1c4c36bd309bb6f780cfdcb0ac801fb1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=12 cuttlefish_defconfig
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=12 cuttlefish_defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 12
@@ -94,10 +94,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _6498b71b001db9fb3cc43fd0bf1c696b:
+  _a3d0345916f4a8b408b5e5bdf8f9cbec:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=12 x86_64_cuttlefish_defconfig
+    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=12 x86_64_cuttlefish_defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 12
@@ -115,10 +115,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ef1b3f898096c0a30af926f992e7d15d:
+  _f41a40b9ca513a23053de3c8ddbc5909:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_VERSION=android cuttlefish_defconfig
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=android cuttlefish_defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: android
@@ -136,10 +136,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _c6ac34bb506025217f40515638b3521e:
+  _3c9cc1628795dbafc5b9170f79d448ce:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_VERSION=android x86_64_cuttlefish_defconfig
+    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=android x86_64_cuttlefish_defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: android
