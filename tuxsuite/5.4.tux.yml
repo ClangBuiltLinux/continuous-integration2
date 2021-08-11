@@ -17,6 +17,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
     target_arch: arm
@@ -30,6 +31,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
     target_arch: arm64
@@ -71,6 +73,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
     target_arch: mips
@@ -85,6 +88,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
     target_arch: powerpc
@@ -97,6 +101,7 @@ sets:
     kernel_image: uImage
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
     target_arch: powerpc
@@ -110,6 +115,7 @@ sets:
     make_variables:
       LD: powerpc64le-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
     target_arch: powerpc
@@ -122,6 +128,7 @@ sets:
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.4.y
     target_arch: x86_64

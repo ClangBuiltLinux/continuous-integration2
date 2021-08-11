@@ -367,10 +367,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _3ff9dd832a367410f07232e142fa8650:
+  _48a57be25b36aba020e19ff27fcc54a4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -388,10 +388,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ffc1134a05ecdc0f72e9a91ff18808f4:
+  _c0b585545a490a64b13d51c861610e3c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=13 pseries_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=13 pseries_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -409,10 +409,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _069dcf551c46228c7070e4764927aa88:
+  _848b558acb7e2487ba2d59cd1a85aa7a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -451,10 +451,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fee5569ddd8b71b19e7fb517769de851:
+  _5efcbae1959e140c37060595422c0e64:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=13 defconfig
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 defconfig
     env:
       ARCH: s390
       LLVM_VERSION: 13
@@ -535,10 +535,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a11abf02e18322177d92417220207cb8:
+  _39967e62e3e6ddc7694ef9844103270f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -556,10 +556,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _6f7c758da41b41b25476334cfd2afd0e:
+  _2d617a0693d6cbc319274e7d1a888bc5:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -577,10 +577,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _60ecbb939df9a7399fa560fa887f0132:
+  _fa79ae3dbe7872500bce9bf269972939:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -598,10 +598,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _267d8195f8748ce0c5d40740008e5dde:
+  _770b21725a2daf535b47afe6f68001bc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -619,10 +619,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _83682cb2a47ad2c91afee3391d07e27d:
+  _a980878231cd6e2db930c1452d3825c2:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 imx_v4_v5_defconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 imx_v4_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -640,10 +640,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _7720719bb45ee91fc437e4e2b9b4849d:
+  _aa063a2bed61222ee081b8f9d5cef4bb:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 omap2plus_defconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 omap2plus_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -661,10 +661,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _b2f35e5f085a2fcb0f38aef8b1e7ea7d:
+  _c13599a70b23e23c511f4c327c9aea77:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -850,10 +850,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _535ebd7ca1798dda46eccb404aea7620:
+  _6a30520d164c342e0191a1a2f5c3ae67:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -871,10 +871,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _dbfb1afee12b5bc2178bd79c1ca36bc9:
+  _2731e549c1005e11869f2cbf544e46e1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=12 pseries_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=12 pseries_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -892,10 +892,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4929805e7a2ad956b20f06354ba6557f:
+  _e7d400a7f60ea696f730ba8de7f3d281:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -997,10 +997,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _326167b20a9a6ecc06fa9d1b2aba10f3:
+  _3ae3531548c624e92b5e217f7cebdcc2:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1018,10 +1018,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _c60cf38875a5399afa4b11ba4d6ef6a7:
+  _75528eaffeb79bcc9118acaee19466a9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1039,10 +1039,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _e568393d55ec884da44c831f42852904:
+  _f045ace3044bbc7c295921e10b3bc6d1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1060,10 +1060,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _f32548095474a8341719241e481106cd:
+  _27376e72305e073694aefb13f554665f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1081,10 +1081,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _8580b9e52c1bf221a87bcea328a1e26b:
+  _050101081cc5af5e12c7347491bfbb57:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 imx_v4_v5_defconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 imx_v4_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1102,10 +1102,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fa2ffecc19a6f5e0e73ac93f10279e98:
+  _1ae1af112dbdceec19311ed66924bb9a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 omap2plus_defconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 omap2plus_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1123,10 +1123,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _c5c2fd6a0796369d8a9a14eef4111c2c:
+  _4afa87435ae9249b1597002b8bed68d2:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1249,10 +1249,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _d5751ecccab4f8123d49f1ff7e7c87f5:
+  _772f9a8c79e52c6ee000b01cab13b4f6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 11
@@ -1270,10 +1270,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4199aee554a613fda64b1eacc81b5add:
+  _91bbbe2f66767e2566aad8a1f0e4ada4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     env:
       ARCH: mips
       LLVM_VERSION: 11
@@ -1291,10 +1291,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _1f78fa93ea4d3467dfbba5688f76a298:
+  _e96b0d0f9698e45a12b0f7d394eaa634:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=11 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=11 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 11
@@ -1396,10 +1396,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fd8f5d7d3d038c2feafce905c5abfb27:
+  _6692825e3a7b84aa03ce5982176b9200:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1417,10 +1417,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a751f22e6ba9bbdb1039ee3895125370:
+  _7ce6505ac8e3234bf7f120923864f556:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LD=arm-linux-gnueabihf-ld LLVM_VERSION=10 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LD=arm-linux-gnueabihf-ld LLVM_IAS=0 LLVM_VERSION=10 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1438,10 +1438,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _929ef902a624959eb09c397923751212:
+  _8d4c408eb0725ebb7d15550f73f0d1af:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1459,10 +1459,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _63a27c3bcba04fab80b30ca454b2a2a9:
+  _907678d6077bc2f81d0595856d171e8c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1480,10 +1480,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _9a919af0584ad3314340747afd5e7e03:
+  _137b9762bccbb06542ad04fc36291b3b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_VERSION=10 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 10
@@ -1501,10 +1501,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _eabd42e7d56b3a0a9c15e6397695d96d:
+  _29bfb1df7da745aeb69bab0885f5ed33:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=i386 LLVM=1 LLVM_VERSION=10 defconfig
+    name: ARCH=i386 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 defconfig
     env:
       ARCH: i386
       LLVM_VERSION: 10
@@ -1522,10 +1522,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _020e9ff944ea1e8472762c351ebd39dd:
+  _498b595c528a335a6f8a07ad5a1e04a1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 10
@@ -1543,10 +1543,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _bc8fce7c23996324100110dee4d6e7b6:
+  _edab6b2cb7f6bf3b3449fd8b1d3c9e3f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     env:
       ARCH: mips
       LLVM_VERSION: 10
@@ -1564,10 +1564,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fdfe2bd2dd6501370696b38b3fb41fc3:
+  _f5f31e26bad48603013ba892645efe90:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_VERSION=10 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=10 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 10
@@ -1585,10 +1585,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _470bd3fa38c92f94b430e3a89466a304:
+  _f88da53785133963cbd4590f904b7a18:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_VERSION=10 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 10
@@ -1894,10 +1894,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _8ac7dc49dd78e3da5da453b0286a3db9:
+  _17f0345420b6ade6aeacc3497eb5fe79:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -1915,10 +1915,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _8e99d599d12ce5188c1eec382f5d381a:
+  _409b28e38bc385e6d3d3068f3489ea8c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -1957,10 +1957,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _f146445a237ee546fe925cad19fbf487:
+  _306cd6f0d8de501c4ecfdc903ce9f4a1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: s390
       LLVM_VERSION: 13
@@ -1978,10 +1978,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _bbd010a085fe128a785768612e27d1ac:
+  _20c70aed2de0e5913ffc04e55d5b2480:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     env:
       ARCH: s390
       LLVM_VERSION: 13
@@ -2146,10 +2146,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _e0faf7981c78617941c48bb39357dfa5:
+  _8a7f0138d12509886a29c0b8b2b90e80:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -2167,10 +2167,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a3c122fc012130191ce34a8fc1ed2809:
+  _83e582866c8e77c704428984335400c0:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allnoconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -2188,10 +2188,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ac352b89ff0b84ba7baaec44be7d4fd9:
+  _f67567decbe181f7dac1cebae6b752c2:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -2209,10 +2209,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _5158262b2037b7eef0a164fb221f1a07:
+  _5956d62ae6edadd4596591a4267ef913:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -2230,10 +2230,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _5bea09f74c984839f9223c0d5a33c49e:
+  _c65a27b37c5a7caf522020d62a097166:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -2419,10 +2419,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _21204a078408fce7503dbbd442ca56e8:
+  _6f15f90c890fd785747516d4c39c77a6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -2440,10 +2440,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a162457ff11356e18e60fd1fb96e5767:
+  _a1c5ea612cdbf834b80c6187336f6949:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -2461,10 +2461,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _69780c23496313bf0a3a6ce2b25e491f:
+  _0445e3ea394f4e6c3ab23a8dfa84d3e4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_VERSION=12 allmodconfig
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allmodconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 12
@@ -2629,10 +2629,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _79c2e713ed9fc3c4381862731d8a664a:
+  _565b3ebd0db7f13bc44114dbc4ce6faa:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -2650,10 +2650,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _56d21d0eba24aae15e0e7ba0cdd3e62a:
+  _98be35eea81be1fc7cfea5f125dacb85:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allnoconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -2671,10 +2671,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ee24c08b15f5892fb5e38906315c0280:
+  _e4b5a7cb392bd67d52690ece87b3e80f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -2692,10 +2692,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _99880280cc3f7095b53004becdf63d5f:
+  _9787aef428bca7a8aa1b80968a889942:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -2713,10 +2713,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _94905be3aafbbbb231e98c69ffb260c3:
+  _a56d649bf59d04b145998497ffd3d36c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -2902,10 +2902,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _3e6d01dabfb8d9bc7913f180879d45d2:
+  _33c4e124f55a998679c38207caccf044:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: powerpc
       LLVM_VERSION: 11
@@ -2923,10 +2923,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4b76e11587e4317d4934b8028dab781c:
+  _25f87da1043f926ba53aee8e9493b399:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=powerpc CC=clang LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     env:
       ARCH: powerpc
       LLVM_VERSION: 11
@@ -2944,10 +2944,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _6112162abd0dfe3104d1695d1fea246a:
+  _c71a33af9a96021296554421ae3e3cfb:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_VERSION=11 allmodconfig
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allmodconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 11
@@ -3112,10 +3112,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ddf8469de853cf3933134d74e60236c8:
+  _56f04e51c99a42d025a820038622edb0:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=10 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -3133,10 +3133,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _2583338fda83d6bb9e0812d6893b5e66:
+  _b608d3f0e09f3a645090be6332486080:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=10 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allnoconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -3154,10 +3154,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _bdbb31074288296e76bd079fa36d9c51:
+  _bc95ad4fabbd7c72e2ce72553f0aa944:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=10 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -3175,10 +3175,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a378f3a9640f6d51ad394cfd3e58cdcf:
+  _24ddbfe1b6a9f253ab32bd9549a4dab3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_VERSION=10 allnoconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allnoconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 10
@@ -3196,10 +3196,10 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _7404b0f622477899bc4752b39f7c92fe:
+  _c8dc16fb21bddc7841fe84996396c772:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_VERSION=10 allnoconfig
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allnoconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 10

@@ -81,9 +81,7 @@ def get_job_name(build):
     # If LD was specified, show what it is
     if "make_variables" in build and "LD" in build["make_variables"]:
         job += " LD=" + str(build["make_variables"]["LD"])
-    # LLVM_IAS=0 is the default. Only show when we have opted into LLVM_IAS.
-    if build["llvm_ias"]:
-        job += " LLVM_IAS=1"
+    job += " LLVM_IAS=" + str(build["make_variables"]["LLVM_IAS"])
     # Having "LLVM <VER>" is a little hard to parse, make it look like
     # an environment variable
     job += " LLVM_VERSION=" + str(build["llvm_version"])
