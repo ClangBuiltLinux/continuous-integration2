@@ -33,6 +33,30 @@ sets:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
     git_ref: master
     target_arch: i386
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+    git_ref: master
+    target_arch: i386
     toolchain: clang-12
     kconfig: defconfig
     targets:
@@ -108,6 +132,42 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
     kconfig: allyesconfig
     targets:
     - config
