@@ -31,6 +31,7 @@ jobs:
       with:
         path: builds.json
         name: output_artifact_defconfigs
+        if-no-files-found: error
   _8b6514fc2e63bf7f97f781e252c04550:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -172,6 +173,7 @@ jobs:
       with:
         path: builds.json
         name: output_artifact_allconfigs
+        if-no-files-found: error
   _efbb08e8e064234fb6815e8f0019fb48:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
