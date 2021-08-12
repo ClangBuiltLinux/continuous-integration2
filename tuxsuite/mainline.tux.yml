@@ -1413,6 +1413,7 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
     - CONFIG_BPF_PRELOAD=n
     targets:
     - config
@@ -1581,6 +1582,7 @@ sets:
     toolchain: clang-13
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
     - CONFIG_BPF_PRELOAD=n
     targets:
     - config
@@ -1749,6 +1751,7 @@ sets:
     toolchain: clang-12
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
     - CONFIG_BPF_PRELOAD=n
     targets:
     - config
@@ -1893,6 +1896,7 @@ sets:
     toolchain: clang-11
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
     - CONFIG_BPF_PRELOAD=n
     targets:
     - config

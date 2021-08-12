@@ -2209,16 +2209,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _831adaa701b4d758e7e6adca97c72b07:
+  _56e6880015e5f4109c6aaf83e07bfcc5:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: i386
       LLVM_VERSION: 14
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2482,16 +2482,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _e0cfa5482bb9dc5112b2335a8cadd84c:
+  _a16d4940633b739bdef0667943f0b9a8:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: i386
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2755,16 +2755,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _2fe036afc32d903b62d526a522143edc:
+  _d1e2b995470e409e284ae6dadbf703a6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: i386
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2986,16 +2986,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _21d491b74db1095a72c015b4469234e2:
+  _09238b29fc27aba9cd6fbf0fc8ae74fa:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: i386
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:
