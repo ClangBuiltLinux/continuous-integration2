@@ -117,7 +117,8 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
                     "uses": "actions/upload-artifact@v2",
                     "with": {
                         "path": "builds.json",
-                        "name": "output_artifact_{}".format(build_set)
+                        "name": "output_artifact_{}".format(build_set),
+                        "if-no-files-found": "error"
                     },
                 }
             ]
