@@ -110,8 +110,9 @@ configs:
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         << : *arm64-triple,         << : *kernel_modules}
   - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *kernel_modules}
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel_modules}
-  - &i686_fedora       {config: [*i686-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           << : *i386-triple,          << : *kernel_modules}
+  # CONFIG_ATOMIC64_SELFTEST disabled: https://github.com/ClangBuiltLinux/linux/issues/1437
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
+  - &i686_fedora       {config: [*i686-fedora-config-url, CONFIG_ATOMIC64_SELFTEST=n, CONFIG_BPF_PRELOAD=n],                               << : *i386-triple,          << : *kernel_modules}
   - &i386_suse         {config: *i386-suse-config-url,                                                                                     << : *i386-triple,          << : *kernel_modules}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      << : *mips-triple,          << : *kernel_modules}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel_modules}
