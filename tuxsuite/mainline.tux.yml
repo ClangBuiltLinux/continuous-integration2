@@ -342,6 +342,22 @@ sets:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
+    target_arch: s390
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
     kconfig: defconfig
@@ -755,6 +771,22 @@ sets:
     target_arch: s390
     toolchain: clang-13
     kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: s390
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
     targets:
     - config
     - kernel
