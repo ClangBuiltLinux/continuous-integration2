@@ -79,7 +79,11 @@ def run_boot(build):
     if "CONFIG_KASAN=y" in build["kconfig"] or \
        "CONFIG_KCSAN=y" in build["kconfig"] or \
        "CONFIG_UBSAN=y" in build["kconfig"]:
-        boot_qemu += ["-s", "4", "-t", "10m"]
+        boot_qemu += ["-s", "4"]
+        if "CONFIG_KASAN=y" in build["kconfig"]:
+            boot_qemu += ["-t", "15m"]
+        else:
+            boot_qemu += ["-t", "10m"]
     try:
         subprocess.run(boot_qemu, check=True)
     except subprocess.CalledProcessError as e:
