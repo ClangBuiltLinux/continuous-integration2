@@ -293,7 +293,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-nightly
-    kconfig: pseries_defconfig
+    kconfig:
+    - pseries_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -729,7 +731,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-13
-    kconfig: pseries_defconfig
+    kconfig:
+    - pseries_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
@@ -1152,7 +1156,9 @@ sets:
     git_ref: master
     target_arch: powerpc
     toolchain: clang-12
-    kconfig: pseries_defconfig
+    kconfig:
+    - pseries_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - config
     - kernel
