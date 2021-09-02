@@ -131,6 +131,7 @@ configs:
   #                                         https://github.com/ClangBuiltLinux/linux/issues/1143
   - &riscv_no_efi      {config: [defconfig, CONFIG_EFI=n],                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel_modules}
   - &s390              {config: defconfig,                                                                                                 << : *s390-triple,          << : *kernel_modules}
+  - &s390_kasan        {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            << : *s390-triple,          << : *kernel_modules}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           << : *s390-triple,          << : *kernel_modules}
   - &s390_suse         {config: *s390-suse-config-url,                                                                                     << : *s390-triple,          << : *kernel_modules}
@@ -217,6 +218,7 @@ builds:
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *s390_kasan,        << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390_fedora,       << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390_suse,         << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -275,6 +277,7 @@ builds:
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
+  - {<< : *s390_kasan,        << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390_fedora,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *s390_suse,         << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -460,6 +463,7 @@ builds:
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
+  - {<< : *s390_kasan,        << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390_fedora,       << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390_suse,         << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -518,6 +522,7 @@ builds:
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
+  - {<< : *s390_kasan,        << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390_fedora,       << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *s390_suse,         << : *next,             << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
