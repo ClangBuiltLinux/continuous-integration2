@@ -1,0 +1,12 @@
+# GitHub limits a workflow matrix to 256 jobs
+# https://docs.github.com/en/actions/reference/usage-limits-billing-and-administration#usage-limits
+name: Check workflow matrices
+on: [push, pull_request]
+jobs:
+  check_check_version:
+    name: Check workflow matrices
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: check-matrix.sh
+      run: bash check-matrix.sh
