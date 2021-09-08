@@ -81,7 +81,7 @@ def run_boot(build):
        "CONFIG_UBSAN=y" in build["kconfig"]:
         boot_qemu += ["-s", "4"]
         if "CONFIG_KASAN=y" in build["kconfig"]:
-            boot_qemu += ["-t", "15m"]
+            boot_qemu += ["-t", "20m"]
         else:
             boot_qemu += ["-t", "10m"]
     try:
