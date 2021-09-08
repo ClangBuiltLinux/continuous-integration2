@@ -174,16 +174,16 @@ jobs:
         path: builds.json
         name: output_artifact_allconfigs
         if-no-files-found: error
-  _efbb08e8e064234fb6815e8f0019fb48:
+  _f6b527ec66316b0d133ad408849fbf42:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 14
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allmodconfig
+      CONFIG: allmodconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -216,16 +216,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _cd3b353c4d93128d6d06d81e4df38d43:
+  _3298ed7231f32a513243cd02fe45c064:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allyesconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allyesconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 14
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allyesconfig
+      CONFIG: allyesconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -237,16 +237,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _bc93ab0a758b33cf3167fdbdeb2b0705:
+  _3b0dbbefa80e939e712f96093114744a:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allmodconfig
+      CONFIG: allmodconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -279,16 +279,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a575b3a0efaafab3765963157dfe45f2:
+  _f0a7a9f1bf046cec44065ea240f66c98:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allyesconfig
+      CONFIG: allyesconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -300,16 +300,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _40d38df5fba1ddfc0ada216733994225:
+  _7ab46834d7cc85742f3051c0305604d3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allmodconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allmodconfig
+      CONFIG: allmodconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -342,16 +342,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _49b1b3bdbd9a67648407749094c083d4:
+  _174327284581ce9fc9319c12ab693a53:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allyesconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 allyesconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allyesconfig
+      CONFIG: allyesconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -363,16 +363,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _51e2eff457ec186a91964ee9c06f04f3:
+  _61405b5bc7dd59acad465db347d382a3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allmodconfig
+      CONFIG: allmodconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -405,16 +405,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _8c8559e2e509a14a717cee01ec90bd39:
+  _de31c0d55408a0065c789754fe70d907:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig+CONFIG_WERROR=n
     env:
       ARCH: arm64
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 0
-      CONFIG: allyesconfig
+      CONFIG: allyesconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:

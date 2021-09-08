@@ -2415,7 +2415,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-nightly
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2439,7 +2441,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-nightly
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2451,7 +2455,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-nightly
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2468,6 +2474,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -2493,7 +2500,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-nightly
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2506,7 +2515,9 @@ sets:
     git_ref: master
     target_arch: riscv
     toolchain: clang-nightly
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2519,7 +2530,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2535,6 +2548,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -2559,7 +2573,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2571,7 +2587,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-13
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2595,7 +2613,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-13
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2607,7 +2627,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-13
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2624,6 +2646,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -2649,7 +2672,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-13
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2662,7 +2687,9 @@ sets:
     git_ref: master
     target_arch: riscv
     toolchain: clang-13
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2675,7 +2702,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-13
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2691,6 +2720,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -2715,7 +2745,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-13
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2727,7 +2759,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-12
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2751,7 +2785,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-12
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2763,7 +2799,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-12
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2780,6 +2818,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -2805,7 +2844,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-12
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2818,7 +2859,9 @@ sets:
     git_ref: master
     target_arch: riscv
     toolchain: clang-12
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2831,7 +2874,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-12
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2847,6 +2892,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -2871,7 +2917,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-12
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2883,7 +2931,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-11
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2907,7 +2957,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-11
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2919,7 +2971,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-11
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2936,6 +2990,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -2961,7 +3016,9 @@ sets:
     git_ref: master
     target_arch: arm64
     toolchain: clang-11
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2974,7 +3031,9 @@ sets:
     git_ref: master
     target_arch: riscv
     toolchain: clang-11
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -2987,7 +3046,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-11
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -3003,6 +3064,7 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
+    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - config
@@ -3027,7 +3089,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-11
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -3039,7 +3103,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-10
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -3063,7 +3129,9 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-10
-    kconfig: allyesconfig
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel

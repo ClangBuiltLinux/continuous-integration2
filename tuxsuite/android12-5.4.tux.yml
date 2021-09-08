@@ -167,7 +167,9 @@ sets:
     git_ref: android12-5.4
     target_arch: arm
     toolchain: clang-nightly
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -179,7 +181,9 @@ sets:
     git_ref: android12-5.4
     target_arch: arm
     toolchain: clang-13
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -191,7 +195,9 @@ sets:
     git_ref: android12-5.4
     target_arch: arm
     toolchain: clang-12
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
@@ -203,7 +209,9 @@ sets:
     git_ref: android12-5.4
     target_arch: arm
     toolchain: clang-android
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
