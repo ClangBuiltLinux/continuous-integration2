@@ -39,9 +39,16 @@ def emit_tuxsuite_yml(config, tree):
         "# $ ./generate_tuxsuite.py < generator.yml {} > tuxsuite/{}.tux.yml".
         format(tree, tree))
     print("# Invoke tuxsuite via:")
-    print(
-        "# $ tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/{}.tux.yml"
-        .format(tree))
+
+    command_string = "# $ tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/{}.tux.yml".format(
+        tree)
+    ci_folder = pathlib.Path(__file__).resolve().parent
+    mbox = ci_folder.joinpath("patches", "%s.mbox" % tree)
+    if mbox.exists():
+        mbox_rel_path = mbox.relative_to(ci_folder).as_posix()
+        command_string += " --patch-series {}".format(mbox_rel_path)
+    print(command_string)
+
     tuxsuite_buildset = {
         'sets': [
             {
@@ -51,7 +58,6 @@ def emit_tuxsuite_yml(config, tree):
         ]
     } # yapf: disable
     repo, ref = get_repo_ref(config, tree)
-    ci_folder = pathlib.Path(__file__).resolve().parent
     with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
         max_version = int(f.read())
     defconfigs = []
