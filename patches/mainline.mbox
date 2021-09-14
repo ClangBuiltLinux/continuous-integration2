@@ -1,0 +1,113 @@
+From 4d2cb0a5ecdac0ff328eba7ce88fb77dd8a3476c Mon Sep 17 00:00:00 2001
+From: Jason Gunthorpe <jgg@nvidia.com>
+Date: Mon, 13 Sep 2021 16:25:56 -0300
+Subject: [PATCH 1/3] FROMGIT: IB/qib: Fix clang confusion of NULL pointer
+ comparison
+
+clang becomes confused due to the comparison to NULL in a integer constant
+expression context:
+
+ >> drivers/infiniband/hw/qib/qib_sysfs.c:413:1: error: static_assert expression is not an integral constant expression
+    QIB_DIAGC_ATTR(rc_resends);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+    drivers/infiniband/hw/qib/qib_sysfs.c:406:16: note: expanded from macro 'QIB_DIAGC_ATTR'
+            static_assert(&((struct qib_ibport *)0)->rvp.n_##N != (u64 *)NULL);    \
+
+Nathan found __same_type that solves this problem nicely, so use it instead.
+
+Reported-by: kernel test robot <lkp@intel.com>
+Suggested-by: Nathan Chancellor <nathan@kernel.org>
+Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
+Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+Link: https://git.kernel.org/rdma/rdma/c/3110b942d36b961858664486d72f815d78c956c3
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ drivers/infiniband/hw/qib/qib_sysfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/infiniband/hw/qib/qib_sysfs.c b/drivers/infiniband/hw/qib/qib_sysfs.c
+index 452e2355d24e..0a3b28142c05 100644
+--- a/drivers/infiniband/hw/qib/qib_sysfs.c
++++ b/drivers/infiniband/hw/qib/qib_sysfs.c
+@@ -403,7 +403,7 @@ static ssize_t diagc_attr_store(struct ib_device *ibdev, u32 port_num,
+ }
+ 
+ #define QIB_DIAGC_ATTR(N)                                                      \
+-	static_assert(&((struct qib_ibport *)0)->rvp.n_##N != (u64 *)NULL);    \
++	static_assert(__same_type(((struct qib_ibport *)0)->rvp.n_##N, u64));  \
+ 	static struct qib_diagc_attr qib_diagc_attr_##N = {                    \
+ 		.attr = __ATTR(N, 0664, diagc_attr_show, diagc_attr_store),    \
+ 		.counter =                                                     \
+-- 
+2.33.0
+
+
+From 237ff1c66fc64922293143af5ad8b41529c61235 Mon Sep 17 00:00:00 2001
+From: Nick Desaulniers <ndesaulniers@google.com>
+Date: Mon, 30 Aug 2021 14:38:43 -0700
+Subject: [PATCH 2/3] FROMLIST: ARM: select HAVE_FUTEX_CMPXCHG
+
+tglx notes:
+  This function [futex_detect_cmpxchg] is only needed when an
+  architecture has to runtime discover whether the CPU supports it or
+  not.  ARM has unconditional support for this, so the obvious thing to
+  do is the below.
+
+Fixes linkage failure from Clang randconfigs:
+kernel/futex.o:(.text.fixup+0x5c): relocation truncated to fit: R_ARM_JUMP24 against `.init.text'
+and boot failures for CONFIG_THUMB2_KERNEL.
+
+Link: https://github.com/ClangBuiltLinux/linux/issues/325
+Reported-by: Arnd Bergmann <arnd@arndb.de>
+Reported-by: Nathan Chancellor <nathan@kernel.org>
+Suggested-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
+Tested-by: Nathan Chancellor <nathan@kernel.org>
+Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
+Link: https://lore.kernel.org/r/20210830213846.2609349-1-ndesaulniers@google.com
+---
+ arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index fc196421b2ce..b760dd45b734 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -92,6 +92,7 @@ config ARM
+ 	select HAVE_FTRACE_MCOUNT_RECORD if !XIP_KERNEL
+ 	select HAVE_FUNCTION_GRAPH_TRACER if !THUMB2_KERNEL && !CC_IS_CLANG
+ 	select HAVE_FUNCTION_TRACER if !XIP_KERNEL
++	select HAVE_FUTEX_CMPXCHG if FUTEX
+ 	select HAVE_GCC_PLUGINS
+ 	select HAVE_HW_BREAKPOINT if PERF_EVENTS && (CPU_V6 || CPU_V6K || CPU_V7)
+ 	select HAVE_IRQ_TIME_ACCOUNTING
+-- 
+2.33.0
+
+
+From 2c18ca54a5795e8e5f19f22f26f0e313abe558b7 Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Mon, 13 Sep 2021 15:31:47 -0700
+Subject: [PATCH 3/3] HACK: block: Disable BLK_DEV_NBD with clang <= 13
+
+Link: https://github.com/ClangBuiltLinux/linux/issues/1438
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ drivers/block/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
+index ab3e37aa1830..281bca82e7c4 100644
+--- a/drivers/block/Kconfig
++++ b/drivers/block/Kconfig
+@@ -231,6 +231,7 @@ source "drivers/block/drbd/Kconfig"
+ config BLK_DEV_NBD
+ 	tristate "Network block device support"
+ 	depends on NET
++	depends on !CC_IS_CLANG || CLANG_VERSION >= 140000
+ 	help
+ 	  Saying Y here will allow your computer to be a client for network
+ 	  block devices, i.e. it will be able to use block devices exported by
+-- 
+2.33.0
+
