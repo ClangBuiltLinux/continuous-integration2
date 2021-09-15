@@ -835,11 +835,6 @@ builds:
   - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_12}
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_12}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_12}
-  #############
-  #  LTO/CFI  #
-  #############
-  - {<< : *x86_64_cfi,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
-  - {<< : *x86_64_cfi,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
   #########
   #  TIP  #
   #########
