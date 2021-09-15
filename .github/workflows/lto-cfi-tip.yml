@@ -74,25 +74,4 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _be409d8468fc6bfdb5d967daf5c9da6d:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
 
