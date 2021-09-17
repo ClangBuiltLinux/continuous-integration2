@@ -10,12 +10,22 @@ from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_na
 from install_deps import install_deps
 
 
-def fetch_logs(build):
-    url = build["download_url"] + "build.log"
-    print_yellow("fetching logs from %s" % build["download_url"])
+def _fetch(title, url, dest):
+    print_yellow("fetching %s from: %s" % (title, url))
     # TODO: use something more robust like python wget library.
-    response = urllib.request.urlopen(url).read().decode("UTF-8")
-    print(response)
+    urllib.request.urlretrieve(url, dest)
+    if os.path.exists(dest):
+        print_yellow("Filesize: %d" % os.path.getsize(dest))
+    else:
+        print_red("Unable to download %s" % (title))
+        sys.exit(1)
+
+
+def fetch_logs(build):
+    log = "build.log"
+    url = build["download_url"] + log
+    _fetch("logs", url, log)
+    print(open(log).read())
 
 
 def check_log(build):
@@ -38,27 +48,13 @@ def fetch_dtb(build):
     url = build["download_url"] + dtb_path
     # mkdir -p
     os.makedirs(dtb_path.split("/")[0], exist_ok=True)
-    print_yellow("fetching DTB from: %s" % url)
-    urllib.request.urlretrieve(url, dtb_path)
-    if os.path.exists(dtb_path):
-        print_yellow("Filesize: %d" % os.path.getsize(dtb_path))
-    else:
-        print_red("Unable to download dtb")
-        sys.exit(1)
+    _fetch("DTB", url, dtb_path)
 
 
 def fetch_kernel_image(build):
     image_name = get_image_name()
     url = build["download_url"] + image_name
-    print_yellow("fetching kernel image from: %s" % url)
-    # TODO: use something more robust like python wget library.
-    urllib.request.urlretrieve(url, image_name)
-    # Suspect download is failing.
-    if os.path.exists(image_name):
-        print_yellow("Filesize: %d" % os.path.getsize(image_name))
-    else:
-        print_red("Unable to download kernel image")
-        sys.exit(1)
+    _fetch("kernel image", url, image_name)
 
 
 def cwd():
