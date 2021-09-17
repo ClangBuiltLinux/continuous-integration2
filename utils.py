@@ -81,11 +81,14 @@ def get_cbl_name():
 
 
 def _read_builds():
+    builds = "builds.json"
+    if os.environ.get("MOCK"):
+        builds = "mock.builds.json"
     try:
-        with open("builds.json") as f:
+        with open(builds) as f:
             builds = json.load(f)
     except FileNotFoundError as e:
-        print_red("Unable to find builds.json. Artifact not saved?")
+        print_red("Unable to find %s. Artifact not saved?" % (builds))
         raise e
     return builds
 
