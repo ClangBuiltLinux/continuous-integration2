@@ -57,6 +57,58 @@ def fetch_kernel_image(build):
     _fetch("kernel image", url, image_name)
 
 
+def fetch_built_config(build):
+    url = build["download_url"] + "config"
+    _fetch("built .config", url, ".config")
+
+
+def check_built_config(build):
+    # Only check built configs if we have specific CONFIGs requested.
+    custom = False
+    for config in build["kconfig"]:
+        if 'CONFIG' in config:
+            custom = True
+    if not custom:
+        return
+
+    fetch_built_config(build)
+    # Build dictionary of CONFIG_NAME: y/m/n ("is not set" translates to 'n').
+    configs = dict()
+    for line in open(".config"):
+        line = line.strip()
+        if len(line) == 0:
+            continue
+
+        name = None
+        state = None
+        if '=' in line:
+            name, state = line.split('=')
+        elif line.startswith("# CONFIG_"):
+            name, state = line.split(" ", 2)[1:]
+            if state != "is not set":
+                print_yellow("Could not parse '%s' from .config line '%s'!?" %
+                             (name, line))
+            state = 'n'
+        elif not line.startswith("#"):
+            print_yellow("Could not parse .config line '%s'!?" % (line))
+        configs[name] = state
+
+    # Compare requested configs against the loaded dictionary.
+    fail = False
+    for config in build["kconfig"]:
+        if not 'CONFIG' in config:
+            continue
+        name, state = config.split('=')
+        # If a config is missing from the dictionary, it is considered 'n'.
+        if state != configs.get(name, 'n'):
+            print_red("FAIL: %s not found in .config!" % (config))
+            fail = True
+        else:
+            print("ok: %s=%s" % (name, state))
+    if fail:
+        sys.exit(1)
+
+
 def cwd():
     os.chdir(os.path.dirname(__file__))
     return os.getcwd()
@@ -114,4 +166,5 @@ if __name__ == "__main__":
     build = get_build()
     print(json.dumps(build, indent=4))
     check_log(build)
+    check_built_config(build)
     boot_test(build)
