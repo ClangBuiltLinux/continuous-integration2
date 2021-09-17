@@ -6,7 +6,7 @@ import subprocess
 import sys
 import urllib.request
 
-from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_name
+from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_name, show_builds
 from install_deps import install_deps
 
 
@@ -102,10 +102,15 @@ def boot_test(build):
 
 
 if __name__ == "__main__":
+    missing = []
     for var in ["ARCH", "CONFIG", "LLVM_VERSION"]:
         if not var in os.environ:
+            missing.append(var)
+    if len(missing):
+        for var in missing:
             print_red("$%s must be specified" % var)
-            sys.exit(1)
+        show_builds()
+        sys.exit(1)
     build = get_build()
     print(json.dumps(build, indent=4))
     check_log(build)

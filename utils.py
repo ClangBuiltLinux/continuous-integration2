@@ -101,6 +101,14 @@ def get_requested_llvm_version():
     return "clang-" + ("nightly" if ver == llvm_tot_version else ver)
 
 
+def show_builds():
+    print_yellow("Available builds:")
+    for build in _read_builds():
+        print_yellow("\tARCH=%s LLVM_VERSION=%s CONFIG=%s" %
+                     (build["target_arch"], build["toolchain"].split(
+                         '-', 1)[1], "+".join(build["kconfig"])))
+
+
 def get_build():
     arch = os.environ["ARCH"]
     configs = os.environ["CONFIG"].split("+")
@@ -111,6 +119,7 @@ def get_build():
            build["kconfig"] == configs:
             return build
     print_red("Unable to find build")
+    show_builds()
     sys.exit(1)
 
 
