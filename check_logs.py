@@ -40,7 +40,7 @@ def fetch_dtb(build):
     os.makedirs(dtb_path.split("/")[0], exist_ok=True)
     print_yellow("fetching DTB from: %s" % url)
     urllib.request.urlretrieve(url, dtb_path)
-    if os.path.exists:
+    if os.path.exists(dtb_path):
         print_yellow("Filesize: %d" % os.path.getsize(dtb_path))
     else:
         print_red("Unable to download dtb")
@@ -54,7 +54,7 @@ def fetch_kernel_image(build):
     # TODO: use something more robust like python wget library.
     urllib.request.urlretrieve(url, image_name)
     # Suspect download is failing.
-    if os.path.exists:
+    if os.path.exists(image_name):
         print_yellow("Filesize: %d" % os.path.getsize(image_name))
     else:
         print_red("Unable to download kernel image")
