@@ -132,6 +132,12 @@ def run_boot(build):
             boot_qemu += ["-t", "20m"]
         else:
             boot_qemu += ["-t", "10m"]
+
+    # Before spawning a process with potentially different IO buffering,
+    # flush the existing buffers so output is ordered correctly.
+    sys.stdout.flush()
+    sys.stderr.flush()
+
     try:
         subprocess.run(boot_qemu, check=True)
     except subprocess.CalledProcessError as e:

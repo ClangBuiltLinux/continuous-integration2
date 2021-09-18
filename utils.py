@@ -126,10 +126,12 @@ def get_build():
 
 def print_red(msg):
     print("\033[91m%s\033[0m" % msg, file=sys.stderr)
+    sys.stderr.flush()
 
 
 def print_yellow(msg):
-    print("\033[93m%s\033[0m" % msg)
+    print("\033[93m%s\033[0m" % msg, file=sys.stdout)
+    sys.stdout.flush()
 
 
 def patch_series_flag(tree):
