@@ -2,8 +2,9 @@
 
 import argparse
 import hashlib
-import yaml
+import pathlib
 import sys
+import yaml
 
 
 def parse_args(trees):
@@ -94,7 +95,7 @@ def sanitize_job_name(name):
     return "_" + h.hexdigest()
 
 
-def tuxsuite_setups(build_set, tuxsuite_yml):
+def tuxsuite_setups(build_set, tuxsuite_yml, patch_series):
     return {
         "kick_tuxsuite_{}".format(build_set): {
             "name": "TuxSuite ({})".format(build_set),
@@ -110,7 +111,7 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
                 },
                 {
                     "name": "tuxsuite",
-                    "run": "tuxsuite build-set --set-name {} --json-out builds.json --tux-config {} || true".format(build_set, tuxsuite_yml)
+                    "run": "tuxsuite build-set --set-name {} --json-out builds.json --tux-config {}{} || true".format(build_set, tuxsuite_yml, patch_series)
                 },
                 {
                     "name": "save output",
@@ -166,6 +167,13 @@ def get_steps(build, build_set):
     } # yapf: disable
 
 
+def patch_series(tree_name):
+    ci_folder = pathlib.Path(__file__).resolve().parent
+    mbox = ci_folder.joinpath("patches", "%s.mbox" % tree_name)
+    mbox_rel_path = mbox.relative_to(ci_folder).as_posix()
+    return " --patch-series {}".format(mbox_rel_path) if mbox.exists() else ""
+
+
 def print_builds(config, tree_name):
     repo, ref = get_repo_ref(config, tree_name)
     tuxsuite_yml = "tuxsuite/{}.tux.yml".format(tree_name)
@@ -187,16 +195,20 @@ def print_builds(config, tree_name):
 
     workflow = initial_workflow(tree_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
-    workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))
+    workflow["jobs"].update(
+        tuxsuite_setups("defconfigs", tuxsuite_yml, patch_series(tree_name)))
     workflow["jobs"].update(check_logs_defconfigs)
 
     if check_logs_distribution_configs:
         workflow["jobs"].update(
-            tuxsuite_setups("distribution_configs", tuxsuite_yml))
+            tuxsuite_setups("distribution_configs", tuxsuite_yml,
+                            patch_series(tree_name)))
         workflow["jobs"].update(check_logs_distribution_configs)
 
     if check_logs_allconfigs:
-        workflow["jobs"].update(tuxsuite_setups("allconfigs", tuxsuite_yml))
+        workflow["jobs"].update(
+            tuxsuite_setups("allconfigs", tuxsuite_yml,
+                            patch_series(tree_name)))
         workflow["jobs"].update(check_logs_allconfigs)
 
     print("# DO NOT MODIFY MANUALLY!")
