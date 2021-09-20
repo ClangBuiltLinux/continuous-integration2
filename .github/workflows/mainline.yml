@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
+      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml --patch-series patches/mainline.mbox || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
@@ -1775,16 +1775,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _49b8454e1fcf8ba7fc36c5f5e6cc5299:
+  _4139749c3a5a024757514a7720f76f36:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+CONFIG_EFI=n
+      CONFIG: defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2300,16 +2300,16 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _94771c21f822e6468d29dfe9257e8207:
+  _0128613cab362cfaef4cb6f1bb1ccbc6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
     env:
       ARCH: riscv
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+CONFIG_EFI=n
+      CONFIG: defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2666,7 +2666,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
+      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml --patch-series patches/mainline.mbox || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
@@ -3690,7 +3690,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
+      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml --patch-series patches/mainline.mbox || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:

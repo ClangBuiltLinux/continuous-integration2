@@ -1219,6 +1219,7 @@ sets:
     toolchain: clang-12
     kconfig:
     - defconfig
+    - CONFIG_BLK_DEV_NVME=n
     - CONFIG_EFI=n
     targets:
     - config
@@ -1577,6 +1578,7 @@ sets:
     toolchain: clang-11
     kconfig:
     - defconfig
+    - CONFIG_BLK_DEV_NVME=n
     - CONFIG_EFI=n
     targets:
     - config
