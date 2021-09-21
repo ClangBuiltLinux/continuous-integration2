@@ -29,7 +29,7 @@ def install_deps():
         sys.exit(1)
     # Not specific to any arch.
     dependencies = [
-        "expect",  # unbuffer command used by boot-utils/boot-qemu.sh.
+        # Add arch agnostic dependencies here.
     ] + arch_dependencies[arch]
     print("Installing:", dependencies)
 
