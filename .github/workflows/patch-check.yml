@@ -1,0 +1,10 @@
+name: Check patch series
+on: [push, pull_request]
+jobs:
+  check_patch_series:
+    name: Check patches
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: check-patches.sh
+      run: bash check-patches.sh
