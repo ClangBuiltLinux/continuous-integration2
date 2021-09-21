@@ -1,0 +1,3 @@
+0001-x86-fpu-signal-Negate-error-code-in-save_xstate_epil.patch
+20210830_ndesaulniers_arm_select_have_futex_cmpxchg.patch
+20210920_ndesaulniers_nbd_use_shifts_rather_than_multiplies.patch

@@ -1,12 +1,11 @@
-From MAILER-DAEMON Mon Sep 20 23:50:28 2021
-Date: Mon, 20 Sep 2021 16:25:33 -0700
-Message-Id: <20210920232533.4092046-1-ndesaulniers@google.com>
-X-Mailing-List: llvm@lists.linux.dev
-List-Id: <llvm.lists.linux.dev>
+From git@z Thu Jan  1 00:00:00 1970
 Subject: [PATCH] nbd: use shifts rather than multiplies
 From: Nick Desaulniers <ndesaulniers@google.com>
+Date: Mon, 20 Sep 2021 16:25:33 -0700
+Message-Id: <20210920232533.4092046-1-ndesaulniers@google.com>
 To: Josef Bacik <josef@toxicpanda.com>
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, stable@vger.kernel.org, Arnd Bergmann <arnd@kernel.org>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, Naresh Kamboju <naresh.kamboju@linaro.org>, Nathan Chancellor <nathan@kernel.org>, Stephen Rothwell <sfr@canb.auug.org.au>, Kees Cook <keescook@chromium.org>, Linus Torvalds <torvalds@linux-foundation.org>, Pavel Machek <pavel@ucw.cz>, Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org, nbd@other.debian.org, linux-kernel@vger.kernel.org, llvm@lists.linux.dev
+List-Id: <llvm.lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -64,6 +63,7 @@ Suggested-by: Kees Cook <keescook@chromium.org>
 Suggested-by: Linus Torvalds <torvalds@linux-foundation.org>
 Suggested-by: Pavel Machek <pavel@ucw.cz>
 Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
+Link: https://lore.kernel.org/r/20210920232533.4092046-1-ndesaulniers@google.com
 ---
 This patch is kind of a v3 for solving this problem.
 v2: https://lore.kernel.org/stable/20210914002318.2298583-1-ndesaulniers@google.com/
@@ -186,6 +186,8 @@ index 5170a630778d..1183f7872b71 100644
  }
 
 base-commit: 4c17ca27923c16fd73bbb9ad033c7d749c3bcfcc
+
 -- 
 2.33.0.464.g1972c5931b-goog
+
 

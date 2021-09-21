@@ -1,0 +1,41 @@
+From 3110b942d36b961858664486d72f815d78c956c3 Mon Sep 17 00:00:00 2001
+From: Jason Gunthorpe <jgg@nvidia.com>
+Date: Mon, 13 Sep 2021 16:25:56 -0300
+Subject: IB/qib: Fix clang confusion of NULL pointer comparison
+
+clang becomes confused due to the comparison to NULL in a integer constant
+expression context:
+
+ >> drivers/infiniband/hw/qib/qib_sysfs.c:413:1: error: static_assert expression is not an integral constant expression
+    QIB_DIAGC_ATTR(rc_resends);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+    drivers/infiniband/hw/qib/qib_sysfs.c:406:16: note: expanded from macro 'QIB_DIAGC_ATTR'
+            static_assert(&((struct qib_ibport *)0)->rvp.n_##N != (u64 *)NULL);    \
+
+Nathan found __same_type that solves this problem nicely, so use it instead.
+
+Reported-by: kernel test robot <lkp@intel.com>
+Suggested-by: Nathan Chancellor <nathan@kernel.org>
+Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
+Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+Link: https://git.kernel.org/rdma/rdma/c/3110b942d36b961858664486d72f815d78c956c3
+---
+ drivers/infiniband/hw/qib/qib_sysfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/infiniband/hw/qib/qib_sysfs.c b/drivers/infiniband/hw/qib/qib_sysfs.c
+index 452e2355d24ee..0a3b28142c05b 100644
+--- a/drivers/infiniband/hw/qib/qib_sysfs.c
++++ b/drivers/infiniband/hw/qib/qib_sysfs.c
+@@ -403,7 +403,7 @@ static ssize_t diagc_attr_store(struct ib_device *ibdev, u32 port_num,
+ }
+ 
+ #define QIB_DIAGC_ATTR(N)                                                      \
+-	static_assert(&((struct qib_ibport *)0)->rvp.n_##N != (u64 *)NULL);    \
++	static_assert(__same_type(((struct qib_ibport *)0)->rvp.n_##N, u64));  \
+ 	static struct qib_diagc_attr qib_diagc_attr_##N = {                    \
+ 		.attr = __ATTR(N, 0664, diagc_attr_show, diagc_attr_store),    \
+ 		.counter =                                                     \
+-- 
+cgit 1.2.3-1.el7
+

@@ -1,0 +1,42 @@
+From c61ffbe812cbb0ccfb5e7c0d0e3095ff1c5fb334 Mon Sep 17 00:00:00 2001
+From: Nick Desaulniers <ndesaulniers@google.com>
+Date: Mon, 30 Aug 2021 14:38:43 -0700
+Subject: [PATCH 2/3] FROMLIST: ARM: select HAVE_FUTEX_CMPXCHG
+
+tglx notes:
+  This function [futex_detect_cmpxchg] is only needed when an
+  architecture has to runtime discover whether the CPU supports it or
+  not.  ARM has unconditional support for this, so the obvious thing to
+  do is the below.
+
+Fixes linkage failure from Clang randconfigs:
+kernel/futex.o:(.text.fixup+0x5c): relocation truncated to fit: R_ARM_JUMP24 against `.init.text'
+and boot failures for CONFIG_THUMB2_KERNEL.
+
+Link: https://github.com/ClangBuiltLinux/linux/issues/325
+Reported-by: Arnd Bergmann <arnd@arndb.de>
+Reported-by: Nathan Chancellor <nathan@kernel.org>
+Suggested-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
+Tested-by: Nathan Chancellor <nathan@kernel.org>
+Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
+Link: https://lore.kernel.org/r/20210830213846.2609349-1-ndesaulniers@google.com
+---
+ arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index fc196421b2ce..b760dd45b734 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -92,6 +92,7 @@ config ARM
+ 	select HAVE_FTRACE_MCOUNT_RECORD if !XIP_KERNEL
+ 	select HAVE_FUNCTION_GRAPH_TRACER if !THUMB2_KERNEL && !CC_IS_CLANG
+ 	select HAVE_FUNCTION_TRACER if !XIP_KERNEL
++	select HAVE_FUTEX_CMPXCHG if FUTEX
+ 	select HAVE_GCC_PLUGINS
+ 	select HAVE_HW_BREAKPOINT if PERF_EVENTS && (CPU_V6 || CPU_V6K || CPU_V7)
+ 	select HAVE_IRQ_TIME_ACCOUNTING
+-- 
+2.33.0
+

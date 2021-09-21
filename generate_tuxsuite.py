@@ -4,6 +4,8 @@ import pathlib
 import sys
 import yaml
 
+from utils import patch_series_flag
+
 
 # Aliases makes this YAML unreadable
 # https://ttl255.com/yaml-anchors-and-aliases-and-how-to-disable-them/
@@ -39,15 +41,9 @@ def emit_tuxsuite_yml(config, tree):
         "# $ ./generate_tuxsuite.py < generator.yml {} > tuxsuite/{}.tux.yml".
         format(tree, tree))
     print("# Invoke tuxsuite via:")
-
-    command_string = "# $ tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/{}.tux.yml".format(
-        tree)
-    ci_folder = pathlib.Path(__file__).resolve().parent
-    mbox = ci_folder.joinpath("patches", "%s.mbox" % tree)
-    if mbox.exists():
-        mbox_rel_path = mbox.relative_to(ci_folder).as_posix()
-        command_string += " --patch-series {}".format(mbox_rel_path)
-    print(command_string)
+    print(
+        "# $ tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/{}.tux.yml{}"
+        .format(tree, patch_series_flag(tree)))
 
     tuxsuite_buildset = {
         'sets': [
@@ -58,6 +54,7 @@ def emit_tuxsuite_yml(config, tree):
         ]
     } # yapf: disable
     repo, ref = get_repo_ref(config, tree)
+    ci_folder = pathlib.Path(__file__).resolve().parent
     with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
         max_version = int(f.read())
     defconfigs = []
