@@ -1,3 +1,4 @@
+import glob
 import json
 import os
 import pathlib
@@ -117,3 +118,12 @@ def print_red(msg):
 
 def print_yellow(msg):
     print("\033[93m%s\033[0m" % msg)
+
+
+def patch_series_flag(tree):
+    ci_folder = pathlib.Path(__file__).resolve().parent
+    patches_folder = pathlib.Path("patches").joinpath(tree)
+    patch_files = glob.glob(
+        ci_folder.joinpath(patches_folder).as_posix() + "/*.patch")
+    return " --patch-series {}".format(
+        patches_folder.as_posix()) if patch_files else ""
