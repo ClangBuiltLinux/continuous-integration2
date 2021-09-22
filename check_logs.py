@@ -82,7 +82,7 @@ def check_built_config(build):
         name = None
         state = None
         if '=' in line:
-            name, state = line.split('=')
+            name, state = line.split('=', 1)
         elif line.startswith("# CONFIG_"):
             name, state = line.split(" ", 2)[1:]
             if state != "is not set":
