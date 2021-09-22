@@ -173,6 +173,7 @@ if __name__ == "__main__":
     print(json.dumps(build, indent=4))
     print_yellow("Register clang error/warning problem matchers")
     print("::add-matcher::.github/problem-matchers/compiler-source.json")
+    print("::add-matcher::.github/problem-matchers/compiler-non-source.json")
     check_log(build)
     check_built_config(build)
     boot_test(build)
