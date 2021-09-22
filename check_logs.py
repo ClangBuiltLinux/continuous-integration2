@@ -171,6 +171,8 @@ if __name__ == "__main__":
         sys.exit(1)
     build = get_build()
     print(json.dumps(build, indent=4))
+    print_yellow("Register clang error/warning problem matchers")
+    print("::add-matcher::.github/problem-matchers/clang-errors-warnings.json")
     check_log(build)
     check_built_config(build)
     boot_test(build)
