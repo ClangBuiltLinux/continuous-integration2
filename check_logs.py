@@ -122,6 +122,7 @@ def run_boot(build):
     ]
     if cbl_arch == "s390":
         boot_qemu += ["--use-cbl-qemu"]
+    problem_matcher = "linux-kernel-oopses.json"
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower
     if "CONFIG_KASAN=y" in build["kconfig"] or \
@@ -132,6 +133,15 @@ def run_boot(build):
             boot_qemu += ["-t", "20m"]
         else:
             boot_qemu += ["-t", "10m"]
+        if "CONFIG_KASAN_KUNIT_TEST=y" in build["kconfig"] or \
+           "CONFIG_KCSAN_KUNIT_TEST=y" in build["kconfig"]:
+            print_yellow(
+                "Skipping Oops problem matcher under Sanitizer KUnit build")
+            problem_matcher = None
+
+    if problem_matcher:
+        print_yellow("Register kernel Oops problem matcher")
+        print("::add-matcher::.github/problem-matchers/%s" % (problem_matcher))
 
     # Before spawning a process with potentially different IO buffering,
     # flush the existing buffers so output is ordered correctly.
