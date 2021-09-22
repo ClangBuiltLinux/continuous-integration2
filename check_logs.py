@@ -6,16 +6,26 @@ import subprocess
 import sys
 import urllib.request
 
-from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_name
+from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_name, show_builds
 from install_deps import install_deps
 
 
-def fetch_logs(build):
-    url = build["download_url"] + "build.log"
-    print_yellow("fetching logs from %s" % build["download_url"])
+def _fetch(title, url, dest):
+    print_yellow("fetching %s from: %s" % (title, url))
     # TODO: use something more robust like python wget library.
-    response = urllib.request.urlopen(url).read().decode("UTF-8")
-    print(response)
+    urllib.request.urlretrieve(url, dest)
+    if os.path.exists(dest):
+        print_yellow("Filesize: %d" % os.path.getsize(dest))
+    else:
+        print_red("Unable to download %s" % (title))
+        sys.exit(1)
+
+
+def fetch_logs(build):
+    log = "build.log"
+    url = build["download_url"] + log
+    _fetch("logs", url, log)
+    print(open(log).read())
 
 
 def check_log(build):
@@ -38,26 +48,64 @@ def fetch_dtb(build):
     url = build["download_url"] + dtb_path
     # mkdir -p
     os.makedirs(dtb_path.split("/")[0], exist_ok=True)
-    print_yellow("fetching DTB from: %s" % url)
-    urllib.request.urlretrieve(url, dtb_path)
-    if os.path.exists:
-        print_yellow("Filesize: %d" % os.path.getsize(dtb_path))
-    else:
-        print_red("Unable to download dtb")
-        sys.exit(1)
+    _fetch("DTB", url, dtb_path)
 
 
 def fetch_kernel_image(build):
     image_name = get_image_name()
     url = build["download_url"] + image_name
-    print_yellow("fetching kernel image from: %s" % url)
-    # TODO: use something more robust like python wget library.
-    urllib.request.urlretrieve(url, image_name)
-    # Suspect download is failing.
-    if os.path.exists:
-        print_yellow("Filesize: %d" % os.path.getsize(image_name))
-    else:
-        print_red("Unable to download kernel image")
+    _fetch("kernel image", url, image_name)
+
+
+def fetch_built_config(build):
+    url = build["download_url"] + "config"
+    _fetch("built .config", url, ".config")
+
+
+def check_built_config(build):
+    # Only check built configs if we have specific CONFIGs requested.
+    custom = False
+    for config in build["kconfig"]:
+        if 'CONFIG' in config:
+            custom = True
+    if not custom:
+        return
+
+    fetch_built_config(build)
+    # Build dictionary of CONFIG_NAME: y/m/n ("is not set" translates to 'n').
+    configs = dict()
+    for line in open(".config"):
+        line = line.strip()
+        if len(line) == 0:
+            continue
+
+        name = None
+        state = None
+        if '=' in line:
+            name, state = line.split('=')
+        elif line.startswith("# CONFIG_"):
+            name, state = line.split(" ", 2)[1:]
+            if state != "is not set":
+                print_yellow("Could not parse '%s' from .config line '%s'!?" %
+                             (name, line))
+            state = 'n'
+        elif not line.startswith("#"):
+            print_yellow("Could not parse .config line '%s'!?" % (line))
+        configs[name] = state
+
+    # Compare requested configs against the loaded dictionary.
+    fail = False
+    for config in build["kconfig"]:
+        if not 'CONFIG' in config:
+            continue
+        name, state = config.split('=')
+        # If a config is missing from the dictionary, it is considered 'n'.
+        if state != configs.get(name, 'n'):
+            print_red("FAIL: %s not found in .config!" % (config))
+            fail = True
+        else:
+            print("ok: %s=%s" % (name, state))
+    if fail:
         sys.exit(1)
 
 
@@ -106,11 +154,17 @@ def boot_test(build):
 
 
 if __name__ == "__main__":
+    missing = []
     for var in ["ARCH", "CONFIG", "LLVM_VERSION"]:
         if not var in os.environ:
+            missing.append(var)
+    if len(missing):
+        for var in missing:
             print_red("$%s must be specified" % var)
-            sys.exit(1)
+        show_builds()
+        sys.exit(1)
     build = get_build()
     print(json.dumps(build, indent=4))
     check_log(build)
+    check_built_config(build)
     boot_test(build)
