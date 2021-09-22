@@ -2930,27 +2930,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _b0ecbe2a369a0aaf6357ba0cbe25a175:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: android
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   kick_tuxsuite_distribution_configs:
     name: TuxSuite (distribution_configs)
     runs-on: ubuntu-20.04
@@ -3040,27 +3019,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_distribution_configs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _56e6880015e5f4109c6aaf83e07bfcc5:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -3324,27 +3282,6 @@ jobs:
       run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a16d4940633b739bdef0667943f0b9a8:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_distribution_configs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
   _a806c79f399d017938fc07b0c8ab38ac:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_distribution_configs
@@ -3586,27 +3523,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_distribution_configs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
-      run: ./check_logs.py
-  _d1e2b995470e409e284ae6dadbf703a6:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:

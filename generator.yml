@@ -265,7 +265,8 @@ builds:
   - {<< : *arm64_suse,        << : *next,             << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
+  # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -510,7 +511,8 @@ builds:
   - {<< : *arm64_suse,        << : *next,             << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
+  # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -753,7 +755,8 @@ builds:
   - {<< : *arm64_suse,        << : *next,             << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_12}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_12}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
-  - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
+  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
+  # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_12}
   - {<< : *mips,              << : *next,             << : *mips_llvm_full,  boot: true,  llvm_version: *llvm_12}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
@@ -1112,7 +1115,9 @@ builds:
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
   - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
-  - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
+  # CONFIG_GCOV_KERNEL requires __attribute__((no_profile_instrument_function)),
+  # which AOSP LLVM does not currently have
+  # - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   #############
   #  Android  #
   #############
