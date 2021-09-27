@@ -49,9 +49,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _f83a8a60320f3abf313f8a5759c5391c:
     runs-on: ubuntu-20.04
@@ -70,9 +68,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _7dde147b804e95998e110f5dfe487e8f:
     runs-on: ubuntu-20.04
@@ -91,9 +87,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _5725232ce5f790d6db053c3d226eead6:
     runs-on: ubuntu-20.04
@@ -112,9 +106,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _300d5ea669ce6bad5b1433d2643b416d:
     runs-on: ubuntu-20.04
@@ -133,9 +125,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _d49633cca166398690b1f3ecad135a14:
     runs-on: ubuntu-20.04
@@ -154,9 +144,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _6b25347145c5e89e498ca11233af4912:
     runs-on: ubuntu-20.04
@@ -175,9 +163,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _73f8d728902a8cc9c807d77d1aaaedaf:
     runs-on: ubuntu-20.04
@@ -196,9 +182,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_defconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   kick_tuxsuite_allconfigs:
     name: TuxSuite (allconfigs)
@@ -233,9 +217,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _8d8410b3d3cd0717d60c680bff498577:
     runs-on: ubuntu-20.04
@@ -254,9 +236,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _d1f6821de38423146e72153d995ad97f:
     runs-on: ubuntu-20.04
@@ -275,9 +255,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _3d883b6dd7ce3b5941eac52b8e5d255a:
     runs-on: ubuntu-20.04
@@ -296,9 +274,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _10bc1944d6f5f29611271ddc67d9e2bd:
     runs-on: ubuntu-20.04
@@ -317,9 +293,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _24a02828373c02a9d349a03fab7edbb8:
     runs-on: ubuntu-20.04
@@ -338,9 +312,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _fa482dc7e25eed59da05016a93e8278c:
     runs-on: ubuntu-20.04
@@ -359,9 +331,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _78a1c189b48cf1440cdce261b5ec5efe:
     runs-on: ubuntu-20.04
@@ -380,9 +350,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _34a42eb37f34ff66ca3fcb80b692fc4d:
     runs-on: ubuntu-20.04
@@ -401,9 +369,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _0d027f6d4a4d947cffb7496e1c16a135:
     runs-on: ubuntu-20.04
@@ -422,9 +388,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _d5032c6b0134fa08249732baa271b04a:
     runs-on: ubuntu-20.04
@@ -443,9 +407,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
   _7325bb746df1b067e4e5f94ea088cb6d:
     runs-on: ubuntu-20.04
@@ -464,8 +426,6 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: output_artifact_allconfigs
-    - name: Register clang error/warning problem matcher
-      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
-    - name: Boot Test
+    - name: Check Build and Boot Logs
       run: ./check_logs.py
 

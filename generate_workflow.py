@@ -158,11 +158,7 @@ def get_steps(build, build_set):
                     },
                 },
                 {
-                    "name": "Register clang error/warning problem matcher",
-                    "run": 'echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"'
-                },
-                {
-                    "name": "Boot Test",
+                    "name": "Check Build and Boot Logs",
                     "run": "./check_logs.py",
                 },
             ],
