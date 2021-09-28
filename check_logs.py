@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import glob
 import json
 import os
 import subprocess
@@ -122,7 +123,6 @@ def run_boot(build):
     ]
     if cbl_arch == "s390":
         boot_qemu += ["--use-cbl-qemu"]
-    problem_matcher = "linux-kernel-oopses.json"
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower
     if "CONFIG_KASAN=y" in build["kconfig"] or \
@@ -136,12 +136,8 @@ def run_boot(build):
         if "CONFIG_KASAN_KUNIT_TEST=y" in build["kconfig"] or \
            "CONFIG_KCSAN_KUNIT_TEST=y" in build["kconfig"]:
             print_yellow(
-                "Skipping Oops problem matcher under Sanitizer KUnit build")
-            problem_matcher = None
-
-    if problem_matcher:
-        print_yellow("Register kernel Oops problem matcher")
-        print("::add-matcher::.github/problem-matchers/%s" % (problem_matcher))
+                "Disabling Oops problem matcher under Sanitizer KUnit build")
+            print("::remove-matcher owner=linux-kernel-oopses")
 
     # Before spawning a process with potentially different IO buffering,
     # flush the existing buffers so output is ordered correctly.
@@ -182,8 +178,8 @@ if __name__ == "__main__":
     build = get_build()
     print(json.dumps(build, indent=4))
     print_yellow("Register clang error/warning problem matchers")
-    print("::add-matcher::.github/problem-matchers/compiler-source.json")
-    print("::add-matcher::.github/problem-matchers/compiler-non-source.json")
+    for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
+        print("::add-matcher::%s" % (problem_matcher))
     check_log(build)
     check_built_config(build)
     boot_test(build)
