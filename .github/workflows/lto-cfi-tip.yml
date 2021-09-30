@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/lto-cfi-tip.tux.yml --patch-series patches/lto-cfi-tip || true
+      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/lto-cfi-tip.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
