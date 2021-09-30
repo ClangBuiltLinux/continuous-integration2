@@ -1,0 +1,16 @@
+{
+    "problemMatcher": [
+        {
+            "__comment_owner": "match modpost warnings/errors",
+            "owner": "modpost",
+            "pattern": [
+                {
+                    "__comment_regexp1": "ERROR: modpost: devm_drm_of_get_bridge [drivers/gpu/drm/vc4/vc4.ko] undefined!",
+                    "regexp": "^(WARNING|ERROR|FATAL):\\s+modpost:\\s+(.*)$",
+                    "severity": 1,
+                    "message": 2
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "problemMatcher": [
+        {
+            "__comment_owner": "match dtc parsing errors",
+            "owner": "dtc",
+            "pattern": [
+                {
+                    "__comment_regexp1": "Error: arch/arm64/boot/dts/qcom/sc7280-idp.dts:27.1-9 Label or path apps_rs not found",
+                    "regexp": "^(Error):\\s+([^:]+):([0-9]+)\\.([0-9]+)(?:[-0-9\\.]+)?\\s+(.*)$",
+                    "severity": 1,
+                    "file": 2,
+                    "line": 3,
+                    "column": 4,
+                    "message": 5
+                }
+            ]
+        }
+    ]
+}
