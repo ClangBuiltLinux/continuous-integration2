@@ -4,6 +4,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 import urllib.request
 
 from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_name, show_builds
@@ -13,7 +14,43 @@ from install_deps import install_deps
 def _fetch(title, url, dest):
     print_yellow("fetching %s from: %s" % (title, url))
     # TODO: use something more robust like python wget library.
-    urllib.request.urlretrieve(url, dest)
+    retries = 0
+    max_retries = 7
+    retry_codes = [500, 504]
+    while retries < max_retries:
+        try:
+            if retries:
+                time.sleep(2**retries)
+            retries += 1
+            urllib.request.urlretrieve(url, dest)
+            break
+        except ConnectionResetError as err:
+            print_yellow('%s download error ("%s"), retrying...' %
+                         (title, str(err)))
+            pass
+        except HTTPError as err:
+            if err.code in retry_codes:
+                print_yellow("%s download error (%d), retrying..." %
+                             (title, err.code))
+                pass
+            elif err.code == 404:
+                print_red(
+                    "%s could not be found (404 error), did the build timeout?"
+                    % (title))
+                sys.exit(1)
+            else:
+                print_red("%d error trying to download %s" % (err.code, title))
+                sys.exit(1)
+        except URLError as err:
+            print_yellow('%s download error ("%s"), retrying...' %
+                         (title, str(err)))
+            pass
+
+    if retries == max_retries:
+        print_red("Unable to download %s after %d tries" %
+                  (title, max_retries))
+        sys.exit(1)
+
     if os.path.exists(dest):
         print_yellow("Filesize: %d" % os.path.getsize(dest))
     else:
