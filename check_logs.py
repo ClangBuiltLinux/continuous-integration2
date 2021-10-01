@@ -29,7 +29,7 @@ def _fetch(title, url, dest):
             print_yellow('%s download error ("%s"), retrying...' %
                          (title, str(err)))
             pass
-        except HTTPError as err:
+        except urllib.error.HTTPError as err:
             if err.code in retry_codes:
                 print_yellow("%s download error (%d), retrying..." %
                              (title, err.code))
@@ -42,7 +42,7 @@ def _fetch(title, url, dest):
             else:
                 print_red("%d error trying to download %s" % (err.code, title))
                 sys.exit(1)
-        except URLError as err:
+        except urllib.error.URLError as err:
             print_yellow('%s download error ("%s"), retrying...' %
                          (title, str(err)))
             pass
