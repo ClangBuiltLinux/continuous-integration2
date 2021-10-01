@@ -1,3 +1,2 @@
-0001-FROMGIT-IB-qib-Fix-clang-confusion-of-NULL-pointer-c.patch
 0002-FROMLIST-ARM-select-HAVE_FUTEX_CMPXCHG.patch
 20210920_ndesaulniers_nbd_use_shifts_rather_than_multiplies.patch
