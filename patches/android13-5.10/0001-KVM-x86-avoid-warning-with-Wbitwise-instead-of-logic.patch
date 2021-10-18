@@ -1,0 +1,43 @@
+From eb1a0b2ad0b444eb2ec424684c6fe53ebf1a650e Mon Sep 17 00:00:00 2001
+From: Paolo Bonzini <pbonzini@redhat.com>
+Date: Mon, 18 Oct 2021 10:41:58 -0700
+Subject: [PATCH] KVM: x86: avoid warning with -Wbitwise-instead-of-logical
+
+This is a new warning in clang top-of-tree (will be clang 14):
+
+In file included from arch/x86/kvm/mmu/mmu.c:27:
+arch/x86/kvm/mmu/spte.h:318:9: error: use of bitwise '|' with boolean operands [-Werror,-Wbitwise-instead-of-logical]
+        return __is_bad_mt_xwr(rsvd_check, spte) |
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                 ||
+arch/x86/kvm/mmu/spte.h:318:9: note: cast one or both operands to int to silence this warning
+
+Reported-by: torvic9@mailbox.org
+Suggested-by: Jim Mattson <jmattson@google.com>
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Reviewed-by: Nathan Chancellor <nathan@kernel.org>
+Acked-by: Nick Desaulniers <ndesaulniers@google.com>
+[nd: backport due to missing 961f84457cd4]
+Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
+---
+ arch/x86/kvm/mmu/mmu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/kvm/mmu/mmu.c b/arch/x86/kvm/mmu/mmu.c
+index 060d9a906535..a1ea4168152c 100644
+--- a/arch/x86/kvm/mmu/mmu.c
++++ b/arch/x86/kvm/mmu/mmu.c
+@@ -3545,8 +3545,8 @@ static bool get_mmio_spte(struct kvm_vcpu *vcpu, u64 addr, u64 *sptep)
+ 		 * reserved bit and EPT's invalid memtype/XWR checks to avoid
+ 		 * adding a Jcc in the loop.
+ 		 */
+-		reserved |= __is_bad_mt_xwr(rsvd_check, sptes[level - 1]) |
+-			    __is_rsvd_bits_set(rsvd_check, sptes[level - 1],
++		reserved |= __is_bad_mt_xwr(rsvd_check, sptes[level - 1]);
++		reserted |= __is_rsvd_bits_set(rsvd_check, sptes[level - 1],
+ 					       level);
+ 	}
+ 
+-- 
+2.33.0.1079.g6e70778dc9-goog
+
