@@ -31,7 +31,7 @@ jobs:
           ${{ runner.os }}-go-
     - name: Run shfmt
       run: |
-        GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+        go install mvdan.cc/sh/v3/cmd/shfmt@latest
         while read -r f; do
           PATH=$HOME/go/bin:$PATH shfmt -ci -d -i 4 $f
         done < <(find . -type f -name "*.sh")
