@@ -6,6 +6,7 @@ parse_parameters() {
     while [[ ${#} -gt 0 ]]; do
         case ${1} in
             -c | --check) action=check ;;
+            -p | --print-info) action=print ;;
         esac
         shift
     done
@@ -16,12 +17,13 @@ parse_parameters() {
 
 parse_clang_version() {
     # The format of clang --version with apt.llvm.org builds looks like:
-    # $ clang-9 --version
-    # clang version 9.0.0-svn356030-1~exp1+0~20190313082415.405~1.gbp505100 (trunk)
+    # $ clang-14 --version
+    # Debian clang version 14.0.0-++20210912100611+368af7558e55-1~exp1~20210912201415.4242
     # Target: x86_64-pc-linux-gnu
     # Thread model: posix
-    # InstalledDir: /usr/bin
-    clang_date=$(clang --version | head -n1 | cut -d '~' -f 3 | cut -d . -f 1)
+    # InstalledDir: /usr/local/bin
+    clang_date=$(clang --version | head -n1 | cut -d + -f 3)
+    clang_hash=$(clang --version | head -n1 | cut -d + -f 4 | cut -d - -f 1)
 
     # Next, we need to parse the date into a format the date binary can understand
     # We use bash substring expansion: https://wiki.bash-hackers.org/syntax/pe#substring_expansion
@@ -44,6 +46,19 @@ check_action() {
         echo
         exit 1
     fi
+}
+
+print_action() {
+    set +x
+    echo
+    echo "current date: $(date -u)"
+    echo
+    echo "clang checkout date: $(date -u -d "${clang_date:?}")"
+    echo
+    echo "clang revision: ${clang_hash}"
+    echo
+    echo "clang revision link: https://github.com/llvm/llvm-project/commit/${clang_hash}"
+    echo
 }
 
 parse_parameters "${@}"
