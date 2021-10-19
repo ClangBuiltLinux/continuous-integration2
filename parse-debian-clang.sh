@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-set -x
-
 parse_parameters() {
     while [[ ${#} -gt 0 ]]; do
         case ${1} in
             -c | --check) action=check ;;
+            -d | --debug) debug=true ;;
             -p | --print-info) action=print ;;
             -v | --version-string)
                 shift
@@ -18,11 +17,16 @@ parse_parameters() {
     # Default action is check
     [[ -z ${action} ]] && action=check
 
+    # Script should be quiet by default
+    [[ -z ${debug} ]] && debug=false
+
     # If the user did not supply a version string, get one from the current clang
     [[ -z ${version_string} ]] && version_string=$(clang --version | head -n1)
 }
 
 parse_clang_version() {
+    ${debug} && set -x
+
     # The format of clang --version with apt.llvm.org builds looks like:
     # $ clang-14 --version
     # Debian clang version 14.0.0-++20210912100611+368af7558e55-1~exp1~20210912201415.4242
