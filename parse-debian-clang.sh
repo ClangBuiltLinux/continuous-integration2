@@ -7,12 +7,19 @@ parse_parameters() {
         case ${1} in
             -c | --check) action=check ;;
             -p | --print-info) action=print ;;
+            -v | --version-string)
+                shift
+                version_string=${1}
+                ;;
         esac
         shift
     done
 
     # Default action is check
     [[ -z ${action} ]] && action=check
+
+    # If the user did not supply a version string, get one from the current clang
+    [[ -z ${version_string} ]] && version_string=$(clang --version | head -n1)
 }
 
 parse_clang_version() {
@@ -22,8 +29,8 @@ parse_clang_version() {
     # Target: x86_64-pc-linux-gnu
     # Thread model: posix
     # InstalledDir: /usr/local/bin
-    clang_date=$(clang --version | head -n1 | cut -d + -f 3)
-    clang_hash=$(clang --version | head -n1 | cut -d + -f 4 | cut -d - -f 1)
+    clang_date=$(echo "${version_string}" | cut -d + -f 3)
+    clang_hash=$(echo "${version_string}" | cut -d + -f 4 | cut -d - -f 1)
 
     # Next, we need to parse the date into a format the date binary can understand
     # We use bash substring expansion: https://wiki.bash-hackers.org/syntax/pe#substring_expansion
