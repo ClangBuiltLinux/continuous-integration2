@@ -8,7 +8,7 @@ import sys
 import time
 import urllib.request
 
-from utils import get_build, get_image_name, print_red, print_yellow, get_cbl_name, show_builds
+from utils import get_build, get_image_name, get_requested_llvm_version, print_red, print_yellow, get_cbl_name, show_builds
 from install_deps import install_deps
 
 
@@ -147,6 +147,25 @@ def check_built_config(build):
         sys.exit(1)
 
 
+def print_clang_info(build):
+    # There is no point in printing the clang version information for anything
+    # other than clang-nightly because the stable branches are very unlikely to
+    # have regressions that require triage based on build date and revision
+    # information
+    if get_requested_llvm_version() != "clang-nightly":
+        return
+
+    metadata_file = "metadata.json"
+    url = build["download_url"] + metadata_file
+    _fetch(metadata_file, url, metadata_file)
+    metadata_json = json.loads(open(metadata_file).read())
+    print_yellow("Printing clang-nightly checkout date and hash")
+    subprocess.run([
+        "./parse-debian-clang.sh", "--print-info", "--version-string",
+        metadata_json["compiler"]["version_full"]
+    ])
+
+
 def cwd():
     os.chdir(os.path.dirname(__file__))
     return os.getcwd()
@@ -217,6 +236,7 @@ if __name__ == "__main__":
     print_yellow("Register clang error/warning problem matchers")
     for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
         print("::add-matcher::%s" % (problem_matcher))
+    print_clang_info(build)
     check_log(build)
     check_built_config(build)
     boot_test(build)
