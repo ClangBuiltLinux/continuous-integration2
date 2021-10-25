@@ -1,7 +1,7 @@
-From ac3dbb0cb8b3cab57f6828cdd82aa9eb8cb43b8f Mon Sep 17 00:00:00 2001
+From 3d5e7a28b1ea2d603dea478e58e37ce75b9597ab Mon Sep 17 00:00:00 2001
 From: Paolo Bonzini <pbonzini@redhat.com>
-Date: Fri, 15 Oct 2021 04:51:48 -0400
-Subject: [PATCH] KVM: x86: avoid warning with -Wbitwise-instead-of-logical
+Date: Fri, 15 Oct 2021 04:50:01 -0400
+Subject: KVM: x86: avoid warning with -Wbitwise-instead-of-logical
 
 This is a new warning in clang top-of-tree (will be clang 14):
 
@@ -12,34 +12,33 @@ arch/x86/kvm/mmu/spte.h:318:9: error: use of bitwise '|' with boolean operands [
                                                  ||
 arch/x86/kvm/mmu/spte.h:318:9: note: cast one or both operands to int to silence this warning
 
+The code is fine, but change it anyway to shut up this clever clogs
+of a compiler.
+
 Reported-by: torvic9@mailbox.org
-Suggested-by: Jim Mattson <jmattson@google.com>
 Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
-Reviewed-by: Nathan Chancellor <nathan@kernel.org>
-Acked-by: Nick Desaulniers <ndesaulniers@google.com>
 ---
- arch/x86/kvm/mmu/spte.h | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ arch/x86/kvm/mmu/spte.h | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/arch/x86/kvm/mmu/spte.h b/arch/x86/kvm/mmu/spte.h
-index eb7b227fc6cf..32bc7268c9ea 100644
+index 7c0b094613496..fcda5abc7dc0f 100644
 --- a/arch/x86/kvm/mmu/spte.h
 +++ b/arch/x86/kvm/mmu/spte.h
-@@ -314,9 +314,12 @@ static __always_inline bool is_rsvd_spte(struct rsvd_bits_validate *rsvd_check,
- 	 * Use a bitwise-OR instead of a logical-OR to aggregate the reserved
- 	 * bits and EPT's invalid memtype/XWR checks to avoid an extra Jcc
- 	 * (this is extremely unlikely to be short-circuited as true).
-+	 *
-+	 * (int) avoids clang's "use of bitwise '|' with boolean operands"
-+	 * warning.
- 	 */
+@@ -310,12 +310,7 @@ static inline bool __is_bad_mt_xwr(struct rsvd_bits_validate *rsvd_check,
+ static __always_inline bool is_rsvd_spte(struct rsvd_bits_validate *rsvd_check,
+ 					 u64 spte, int level)
+ {
+-	/*
+-	 * Use a bitwise-OR instead of a logical-OR to aggregate the reserved
+-	 * bits and EPT's invalid memtype/XWR checks to avoid an extra Jcc
+-	 * (this is extremely unlikely to be short-circuited as true).
+-	 */
 -	return __is_bad_mt_xwr(rsvd_check, spte) |
--	       __is_rsvd_bits_set(rsvd_check, spte, level);
-+	return (int)__is_bad_mt_xwr(rsvd_check, spte) |
-+	       (int)__is_rsvd_bits_set(rsvd_check, spte, level);
++	return __is_bad_mt_xwr(rsvd_check, spte) ||
+ 	       __is_rsvd_bits_set(rsvd_check, spte, level);
  }
  
- static inline bool spte_can_locklessly_be_made_writable(u64 spte)
 -- 
-2.33.0.1079.g6e70778dc9-goog
+cgit 1.2.3-1.el7
 
