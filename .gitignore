@@ -1,5 +1,6 @@
 dtbs/
 __pycache__/
 builds.json
+metadata.json
 *Image*
 vmlinux
