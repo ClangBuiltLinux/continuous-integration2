@@ -1187,19 +1187,15 @@ sets:
     git_ref: master
     target_arch: riscv
     toolchain: clang-12
-    kconfig:
-    - defconfig
-    - CONFIG_BLK_DEV_NVME=n
-    - CONFIG_EFI=n
+    kconfig: defconfig
     targets:
     - config
     - kernel
     - modules
     kernel_image: Image
     make_variables:
-      LD: riscv64-linux-gnu-ld
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -1546,19 +1542,15 @@ sets:
     git_ref: master
     target_arch: riscv
     toolchain: clang-11
-    kconfig:
-    - defconfig
-    - CONFIG_BLK_DEV_NVME=n
-    - CONFIG_EFI=n
+    kconfig: defconfig
     targets:
     - config
     - kernel
     - modules
     kernel_image: Image
     make_variables:
-      LD: riscv64-linux-gnu-ld
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -1692,18 +1684,6 @@ sets:
     kconfig:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 0
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: arm64
-    toolchain: clang-10
-    kconfig: defconfig
     targets:
     - config
     - kernel
@@ -3060,35 +3040,7 @@ sets:
     git_ref: master
     target_arch: arm
     toolchain: clang-10
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 0
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: arm
-    toolchain: clang-10
     kconfig: allnoconfig
-    targets:
-    - config
-    - kernel
-    - modules
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 0
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: arm
-    toolchain: clang-10
-    kconfig:
-    - allyesconfig
-    - CONFIG_WERROR=n
     targets:
     - config
     - kernel
