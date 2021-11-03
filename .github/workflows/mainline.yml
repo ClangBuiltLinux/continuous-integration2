@@ -1609,16 +1609,16 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _4139749c3a5a024757514a7720f76f36:
+  _e828ae2b8ec171d2da57111c2403f0c6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 defconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
+      CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2084,16 +2084,16 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _0128613cab362cfaef4cb6f1bb1ccbc6:
+  _00fb8deb929aa2863f0bd8339f772325:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 defconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 11
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+CONFIG_BLK_DEV_NVME=n+CONFIG_EFI=n
+      CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2284,25 +2284,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
-  _137b9762bccbb06542ad04fc36291b3b:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 defconfig
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 10
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
       with:
@@ -4206,25 +4187,6 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _0f12b7bfdc9c27936248be8116696e12:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allmodconfig+CONFIG_WERROR=n
-    env:
-      ARCH: arm
-      LLVM_VERSION: 10
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _b608d3f0e09f3a645090be6332486080:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -4235,25 +4197,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allnoconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
-  _c4427d05158c03a9b0a1cd302e8092e1:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allyesconfig+CONFIG_WERROR=n
-    env:
-      ARCH: arm
-      LLVM_VERSION: 10
-      INSTALL_DEPS: 1
-      BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
     steps:
     - uses: actions/checkout@v2
       with:
