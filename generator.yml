@@ -1029,11 +1029,12 @@ builds:
   - {<< : *arm32_v6,          << : *mainline,         << : *arm32_v6_llvm,   boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7,          << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # arm32: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *arm32_allno,       << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *arm64,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # arm64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # arm64: {def,all{mod,yes}}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm64,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # - {<< : *arm64_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *arm64_allno,       << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
   # - {<< : *arm64_allyes,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
@@ -1058,11 +1059,12 @@ builds:
   - {<< : *arm32_v6,          << : *next,             << : *arm32_v6_llvm,   boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7,          << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   - {<< : *arm32_v7_t,        << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # arm32: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *arm32_allno,       << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *arm64,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # arm64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
+  # arm64: {def,all{mod,yes}}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
+  # - {<< : *arm64,             << : *next,             << : *llvm,            boot: true,  llvm_version: *llvm_10}
   # - {<< : *arm64_allmod,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
   - {<< : *arm64_allno,       << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
   # - {<< : *arm64_allyes,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_10}
