@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml --patch-series patches/mainline || true
+      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
@@ -2416,7 +2416,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml --patch-series patches/mainline || true
+      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
@@ -2490,25 +2490,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_distribution_configs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
-  _56e6880015e5f4109c6aaf83e07bfcc5:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 14
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -2746,25 +2727,6 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _a16d4940633b739bdef0667943f0b9a8:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 13
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_distribution_configs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _a806c79f399d017938fc07b0c8ab38ac:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_distribution_configs
@@ -2984,25 +2946,6 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_distribution_configs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
-  _d1e2b995470e409e284ae6dadbf703a6:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -3344,7 +3287,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml --patch-series patches/mainline || true
+      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/mainline.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
