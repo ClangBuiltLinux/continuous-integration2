@@ -1,2 +1,4 @@
 0001-HACK-arch-arm-Assume-__builtin_thread_pointer-is-bro.patch
 this_cpu_has_cap_export.patch
+v2_20211105_nathan_power_reset_ltc2952_fix_use_of_floating_point_literals.patch
+v2_20211105_nathan_usb_dwc2_hcd_queue_fix_use_of_floating_point_literal.patch
