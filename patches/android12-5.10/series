@@ -1,1 +1,1 @@
-0001-KVM-x86-avoid-warning-with-Wbitwise-instead-of-logic.patch
+kvm-x86-avoid-warning-with-wbitwise-instead-of-logical.patch
