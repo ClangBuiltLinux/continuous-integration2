@@ -98,7 +98,8 @@ def sanitize_job_name(name):
 
 
 def tuxsuite_setups(build_set, tuxsuite_yml):
-    patch_series = patch_series_flag(tuxsuite_yml.split("/")[1].split(".")[0])
+    patch_series = patch_series_flag(
+        tuxsuite_yml.split("/")[1].split(".tux.yml")[0])
     return {
         "kick_tuxsuite_{}".format(build_set): {
             "name": "TuxSuite ({})".format(build_set),
