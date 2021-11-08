@@ -53,7 +53,7 @@ done
 # Check that if '--patch-series' exists in a workflow file, it has a series
 # of patches (removed patches, did not run generate.sh)
 for workflow in "${repo}"/.github/workflows/*.yml; do
-    tree=$(basename "${workflow}" | cut -d . -f 1)
+    tree=$(basename "${workflow}" | sed 's/.yml//')
     patches=${repo}/patches/${tree}
     if grep -q -- "--patch-series" "${workflow}" && [[ ! -d ${patches} ]]; then
         echo "${patches} does not exist but '--patch-series' present in ${workflow}?"
