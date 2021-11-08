@@ -52,24 +52,17 @@ check_action() {
     # Error out if days_since is greater than five days
     if [[ ${days_since} -ge 5 ]]; then
         set +x
-        echo
         echo "clang hasn't been updated in ${days_since} days!"
-        echo
         exit 1
     fi
 }
 
 print_action() {
     set +x
-    echo
     echo "current date: $(date -u)"
-    echo
     echo "clang checkout date: $(date -u -d "${clang_date:?}")"
-    echo
     echo "clang revision: ${clang_hash}"
-    echo
     echo "clang revision link: https://github.com/llvm/llvm-project/commit/${clang_hash}"
-    echo
 }
 
 parse_parameters "${@}"
