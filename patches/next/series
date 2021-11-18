@@ -1,2 +1,3 @@
 0001-HACK-arch-arm-Assume-__builtin_thread_pointer-is-bro.patch
+0001-HACK-ARM-Don-t-enable-CONFIG_CURRENT_POINTER_IN_TPID.patch
 v2_20211105_nathan_power_reset_ltc2952_fix_use_of_floating_point_literals.patch
