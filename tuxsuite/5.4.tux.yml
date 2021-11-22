@@ -36,7 +36,9 @@ sets:
     git_ref: linux-5.4.y
     target_arch: arm64
     toolchain: clang-nightly
-    kconfig: defconfig
+    kconfig:
+    - defconfig
+    - CONFIG_COMPAT_VDSO=n
     targets:
     - config
     - kernel
@@ -173,7 +175,9 @@ sets:
     git_ref: linux-5.4.y
     target_arch: arm64
     toolchain: clang-13
-    kconfig: defconfig
+    kconfig:
+    - defconfig
+    - CONFIG_COMPAT_VDSO=n
     targets:
     - config
     - kernel

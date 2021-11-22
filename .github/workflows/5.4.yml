@@ -70,16 +70,16 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _8b6514fc2e63bf7f97f781e252c04550:
+  _b47eaab7c36202f985db8ea18a308034:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_COMPAT_VDSO=n
     env:
       ARCH: arm64
       LLVM_VERSION: 14
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig
+      CONFIG: defconfig+CONFIG_COMPAT_VDSO=n
     steps:
     - uses: actions/checkout@v2
       with:
@@ -260,16 +260,16 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _210faf86b075b31ec48b4fa5276daa01:
+  _916863380983edf50c119ce943b212ff:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_COMPAT_VDSO=n
     env:
       ARCH: arm64
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig
+      CONFIG: defconfig+CONFIG_COMPAT_VDSO=n
     steps:
     - uses: actions/checkout@v2
       with:
