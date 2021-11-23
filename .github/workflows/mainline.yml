@@ -3408,6 +3408,25 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _e606f3957a2810671c53ac83d3ab6b75:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig
+    env:
+      ARCH: hexagon
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _d95abc502ea347d9e174e4ada03a7ee5:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
@@ -3627,6 +3646,25 @@ jobs:
       INSTALL_DEPS: 1
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _ac59a19d0d87514204c03df7f611c521:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
+    env:
+      ARCH: hexagon
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
     steps:
     - uses: actions/checkout@v2
       with:
