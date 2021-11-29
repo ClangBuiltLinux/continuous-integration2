@@ -113,6 +113,7 @@ configs:
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         << : *arm64-triple,         << : *kernel_modules}
   - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *kernel_modules}
+  - &hexagon_allmod    {config: allmodconfig,                                                                                              << : *hexagon-triple,       << : *kernel_modules}
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel_modules}
   # CONFIG_ATOMIC64_SELFTEST disabled: https://github.com/ClangBuiltLinux/linux/issues/1437
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
@@ -206,6 +207,7 @@ builds:
   - {<< : *arm64_fedora,      << : *mainline,         << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_suse,        << : *mainline,         << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
   # - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -266,6 +268,7 @@ builds:
   - {<< : *arm64_fedora,      << : *next,             << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_suse,        << : *next,             << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_tot}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
   # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -513,6 +516,7 @@ builds:
   - {<< : *arm64_fedora,      << : *mainline,         << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_suse,        << : *mainline,         << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
   # - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -573,6 +577,7 @@ builds:
   - {<< : *arm64_fedora,      << : *next,             << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_suse,        << : *next,             << : *arm64_llvm_full, boot: true,  llvm_version: *llvm_latest}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
   # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}

@@ -2624,6 +2624,18 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
+    target_arch: hexagon
+    toolchain: clang-nightly
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
     target_arch: riscv
     toolchain: clang-nightly
     kconfig:
@@ -2792,6 +2804,18 @@ sets:
     - modules
     make_variables:
       CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: hexagon
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
