@@ -17,7 +17,7 @@ def _fetch(title, url, dest):
     # TODO: use something more robust like python wget library.
     retries = 0
     max_retries = 7
-    retry_codes = [500, 504]
+    retry_codes = [404, 500, 504]
     while retries < max_retries:
         try:
             if retries:
@@ -34,11 +34,6 @@ def _fetch(title, url, dest):
                 print_yellow("%s download error (%d), retrying..." %
                              (title, err.code))
                 pass
-            elif err.code == 404:
-                print_red(
-                    "%s could not be found (404 error), did the build timeout?"
-                    % (title))
-                sys.exit(1)
             else:
                 print_red("%d error trying to download %s" % (err.code, title))
                 sys.exit(1)
