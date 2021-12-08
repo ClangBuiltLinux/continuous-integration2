@@ -17,7 +17,7 @@ def _fetch(title, url, dest):
     # TODO: use something more robust like python wget library.
     retries = 0
     max_retries = 7
-    retry_codes = [500, 504]
+    retry_codes = [404, 500, 504]
     while retries < max_retries:
         try:
             if retries:
@@ -34,11 +34,6 @@ def _fetch(title, url, dest):
                 print_yellow("%s download error (%d), retrying..." %
                              (title, err.code))
                 pass
-            elif err.code == 404:
-                print_red(
-                    "%s could not be found (404 error), did the build timeout?"
-                    % (title))
-                sys.exit(1)
             else:
                 print_red("%d error trying to download %s" % (err.code, title))
                 sys.exit(1)
@@ -57,6 +52,34 @@ def _fetch(title, url, dest):
     else:
         print_red("Unable to download %s" % (title))
         sys.exit(1)
+
+
+def verify_build():
+    build = get_build()
+
+    # If the build was neither fail nor pass, we need to fetch the status.json
+    # of the particular build to try and get an updated result. We attempt this
+    # up to 7 times.
+    retries = 0
+    max_retries = 7
+    while retries < max_retries:
+        if build["result"] == "fail" or build["result"] == "pass":
+            break
+
+        if retries:
+            time.sleep(2**retries)
+        retries += 1
+
+        status_json = "status.json"
+        url = build["download_url"] + status_json
+        _fetch("status.json", url, status_json)
+        build = json.load(open(status_json))
+
+    if retries == max_retries:
+        print_red("status.json did not give a pass/fail result!")
+        sys.exit(1)
+
+    return build
 
 
 def fetch_logs(build):
@@ -231,7 +254,7 @@ if __name__ == "__main__":
             print_red("$%s must be specified" % var)
         show_builds()
         sys.exit(1)
-    build = get_build()
+    build = verify_build()
     print(json.dumps(build, indent=4))
     print_yellow("Register clang error/warning problem matchers")
     for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
