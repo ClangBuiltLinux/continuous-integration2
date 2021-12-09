@@ -12,9 +12,7 @@ sets:
     toolchain: clang-nightly
     kconfig: cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -24,9 +22,7 @@ sets:
     toolchain: clang-nightly
     kconfig: x86_64_cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -36,9 +32,7 @@ sets:
     toolchain: clang-13
     kconfig: cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -48,9 +42,7 @@ sets:
     toolchain: clang-13
     kconfig: x86_64_cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -60,9 +52,7 @@ sets:
     toolchain: clang-12
     kconfig: cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -72,9 +62,7 @@ sets:
     toolchain: clang-12
     kconfig: x86_64_cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -84,9 +72,7 @@ sets:
     toolchain: clang-android
     kconfig: cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -96,9 +82,7 @@ sets:
     toolchain: clang-android
     kconfig: x86_64_cuttlefish_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0

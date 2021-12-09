@@ -12,9 +12,7 @@ sets:
     toolchain: clang-nightly
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -24,9 +22,7 @@ sets:
     toolchain: clang-nightly
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -36,9 +32,7 @@ sets:
     toolchain: clang-13
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -48,9 +42,7 @@ sets:
     toolchain: clang-13
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -60,9 +52,7 @@ sets:
     toolchain: clang-12
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -72,9 +62,7 @@ sets:
     toolchain: clang-12
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -84,9 +72,7 @@ sets:
     toolchain: clang-android
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -96,9 +82,7 @@ sets:
     toolchain: clang-android
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1

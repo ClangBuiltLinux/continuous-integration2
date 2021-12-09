@@ -15,9 +15,7 @@ sets:
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_CFI_CLANG=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -30,9 +28,7 @@ sets:
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_CFI_CLANG=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1

@@ -12,9 +12,7 @@ sets:
     toolchain: clang-nightly
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -25,9 +23,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -36,9 +32,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -50,9 +44,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -62,9 +54,7 @@ sets:
     toolchain: clang-nightly
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -74,9 +64,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -86,9 +74,7 @@ sets:
     toolchain: clang-13
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -99,9 +85,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -110,9 +94,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -124,9 +106,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -136,9 +116,7 @@ sets:
     toolchain: clang-13
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -148,9 +126,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0

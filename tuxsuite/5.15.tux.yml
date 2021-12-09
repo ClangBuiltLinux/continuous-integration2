@@ -12,9 +12,7 @@ sets:
     toolchain: clang-nightly
     kconfig: multi_v5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -25,9 +23,7 @@ sets:
     toolchain: clang-nightly
     kconfig: aspeed_g5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -38,9 +34,7 @@ sets:
     toolchain: clang-nightly
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -52,9 +46,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -64,9 +56,7 @@ sets:
     toolchain: clang-nightly
     kconfig: imx_v4_v5_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -76,9 +66,7 @@ sets:
     toolchain: clang-nightly
     kconfig: omap2plus_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -91,9 +79,7 @@ sets:
     - CONFIG_ARM_LPAE=y
     - CONFIG_UNWINDER_FRAME_POINTER=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -103,9 +89,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -117,9 +101,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -131,9 +113,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -145,9 +125,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -160,9 +138,7 @@ sets:
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_CFI_CLANG=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -177,9 +153,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -194,9 +168,7 @@ sets:
     - CONFIG_KASAN_SW_TAGS=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -208,9 +180,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -220,9 +190,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -232,9 +200,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -247,9 +213,7 @@ sets:
     - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
@@ -262,9 +226,7 @@ sets:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
@@ -275,9 +237,7 @@ sets:
     toolchain: clang-nightly
     kconfig: ppc44x_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: uImage
     make_variables:
       LLVM: 1
@@ -290,9 +250,7 @@ sets:
     - pseries_defconfig
     - CONFIG_PPC_DISABLE_WERROR=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LD: powerpc64le-linux-gnu-ld
@@ -304,9 +262,7 @@ sets:
     toolchain: clang-nightly
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
@@ -317,9 +273,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -330,9 +284,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -346,9 +298,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -357,9 +307,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -371,9 +319,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -385,9 +331,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -402,9 +346,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -418,9 +360,7 @@ sets:
     - CONFIG_KCSAN_KUNIT_TEST=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -432,9 +372,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -444,9 +382,7 @@ sets:
     toolchain: clang-13
     kconfig: multi_v5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -457,9 +393,7 @@ sets:
     toolchain: clang-13
     kconfig: aspeed_g5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -470,9 +404,7 @@ sets:
     toolchain: clang-13
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -484,9 +416,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -496,9 +426,7 @@ sets:
     toolchain: clang-13
     kconfig: imx_v4_v5_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -508,9 +436,7 @@ sets:
     toolchain: clang-13
     kconfig: omap2plus_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -523,9 +449,7 @@ sets:
     - CONFIG_ARM_LPAE=y
     - CONFIG_UNWINDER_FRAME_POINTER=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -535,9 +459,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -549,9 +471,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -563,9 +483,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -577,9 +495,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -592,9 +508,7 @@ sets:
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_CFI_CLANG=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -609,9 +523,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -626,9 +538,7 @@ sets:
     - CONFIG_KASAN_SW_TAGS=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -640,9 +550,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -652,9 +560,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -664,9 +570,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -679,9 +583,7 @@ sets:
     - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
@@ -694,9 +596,7 @@ sets:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
@@ -707,9 +607,7 @@ sets:
     toolchain: clang-13
     kconfig: ppc44x_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: uImage
     make_variables:
       LLVM: 1
@@ -722,9 +620,7 @@ sets:
     - pseries_defconfig
     - CONFIG_PPC_DISABLE_WERROR=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LD: powerpc64le-linux-gnu-ld
@@ -736,9 +632,7 @@ sets:
     toolchain: clang-13
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
@@ -749,9 +643,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -762,9 +654,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -778,9 +668,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -789,9 +677,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -803,9 +689,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -817,9 +701,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -834,9 +716,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -850,9 +730,7 @@ sets:
     - CONFIG_KCSAN_KUNIT_TEST=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -864,9 +742,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -876,9 +752,7 @@ sets:
     toolchain: clang-12
     kconfig: multi_v5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -889,9 +763,7 @@ sets:
     toolchain: clang-12
     kconfig: aspeed_g5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -902,9 +774,7 @@ sets:
     toolchain: clang-12
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -916,9 +786,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -928,9 +796,7 @@ sets:
     toolchain: clang-12
     kconfig: imx_v4_v5_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -940,9 +806,7 @@ sets:
     toolchain: clang-12
     kconfig: omap2plus_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -955,9 +819,7 @@ sets:
     - CONFIG_ARM_LPAE=y
     - CONFIG_UNWINDER_FRAME_POINTER=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -967,9 +829,7 @@ sets:
     toolchain: clang-12
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -981,9 +841,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -995,9 +853,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1010,9 +866,7 @@ sets:
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_CFI_CLANG=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1027,9 +881,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1044,9 +896,7 @@ sets:
     - CONFIG_KASAN_SW_TAGS=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1058,9 +908,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1070,9 +918,7 @@ sets:
     toolchain: clang-12
     kconfig: defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1082,9 +928,7 @@ sets:
     toolchain: clang-12
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1097,9 +941,7 @@ sets:
     - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LD: mips-linux-gnu-ld
@@ -1113,9 +955,7 @@ sets:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
@@ -1126,9 +966,7 @@ sets:
     toolchain: clang-12
     kconfig: ppc44x_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: uImage
     make_variables:
       LLVM: 1
@@ -1141,9 +979,7 @@ sets:
     - pseries_defconfig
     - CONFIG_PPC_DISABLE_WERROR=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LD: powerpc64le-linux-gnu-ld
@@ -1155,9 +991,7 @@ sets:
     toolchain: clang-12
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
@@ -1168,9 +1002,7 @@ sets:
     toolchain: clang-12
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -1181,9 +1013,7 @@ sets:
     toolchain: clang-12
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1195,9 +1025,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1209,9 +1037,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1226,9 +1052,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1242,9 +1066,7 @@ sets:
     - CONFIG_KCSAN_KUNIT_TEST=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1256,9 +1078,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1268,9 +1088,7 @@ sets:
     toolchain: clang-11
     kconfig: multi_v5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -1281,9 +1099,7 @@ sets:
     toolchain: clang-11
     kconfig: aspeed_g5_defconfig
     targets:
-    - config
     - kernel
-    - modules
     - dtbs
     make_variables:
       LLVM: 1
@@ -1294,9 +1110,7 @@ sets:
     toolchain: clang-11
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -1308,9 +1122,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -1320,9 +1132,7 @@ sets:
     toolchain: clang-11
     kconfig: imx_v4_v5_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -1332,9 +1142,7 @@ sets:
     toolchain: clang-11
     kconfig: omap2plus_defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -1347,9 +1155,7 @@ sets:
     - CONFIG_ARM_LPAE=y
     - CONFIG_UNWINDER_FRAME_POINTER=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -1359,9 +1165,7 @@ sets:
     toolchain: clang-11
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1373,9 +1177,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1387,9 +1189,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1404,9 +1204,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1421,9 +1219,7 @@ sets:
     - CONFIG_KASAN_SW_TAGS=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1435,9 +1231,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1447,9 +1241,7 @@ sets:
     toolchain: clang-11
     kconfig: defconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1459,9 +1251,7 @@ sets:
     toolchain: clang-11
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1474,9 +1264,7 @@ sets:
     - CONFIG_BLK_DEV_INITRD=y
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LD: mips-linux-gnu-ld
@@ -1490,9 +1278,7 @@ sets:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
@@ -1503,9 +1289,7 @@ sets:
     toolchain: clang-11
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LD: powerpc64le-linux-gnu-ld
@@ -1517,9 +1301,7 @@ sets:
     toolchain: clang-11
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -1530,9 +1312,7 @@ sets:
     toolchain: clang-11
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1544,9 +1324,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1558,9 +1336,7 @@ sets:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1575,9 +1351,7 @@ sets:
     - CONFIG_KASAN_VMALLOC=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1591,9 +1365,7 @@ sets:
     - CONFIG_KCSAN_KUNIT_TEST=y
     - CONFIG_KUNIT=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1605,9 +1377,7 @@ sets:
     - defconfig
     - CONFIG_UBSAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1621,9 +1391,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1633,9 +1401,7 @@ sets:
     toolchain: clang-nightly
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1647,9 +1413,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1661,9 +1425,7 @@ sets:
     - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
     - CONFIG_DEBUG_INFO_BTF=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1673,9 +1435,7 @@ sets:
     toolchain: clang-nightly
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1687,9 +1447,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -1699,9 +1457,7 @@ sets:
     toolchain: clang-nightly
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -1713,9 +1469,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -1724,9 +1478,7 @@ sets:
     toolchain: clang-nightly
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -1735,9 +1487,7 @@ sets:
     toolchain: clang-nightly
     kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1747,9 +1497,7 @@ sets:
     toolchain: clang-nightly
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1759,9 +1507,7 @@ sets:
     toolchain: clang-nightly
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1773,9 +1519,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1785,9 +1529,7 @@ sets:
     toolchain: clang-13
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1799,9 +1541,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1813,9 +1553,7 @@ sets:
     - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
     - CONFIG_DEBUG_INFO_BTF=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1825,9 +1563,7 @@ sets:
     toolchain: clang-13
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1839,9 +1575,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -1851,9 +1585,7 @@ sets:
     toolchain: clang-13
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -1865,9 +1597,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -1876,9 +1606,7 @@ sets:
     toolchain: clang-13
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -1887,9 +1615,7 @@ sets:
     toolchain: clang-13
     kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1899,9 +1625,7 @@ sets:
     toolchain: clang-13
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1911,9 +1635,7 @@ sets:
     toolchain: clang-13
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1925,9 +1647,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -1937,9 +1657,7 @@ sets:
     toolchain: clang-12
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -1951,9 +1669,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1965,9 +1681,7 @@ sets:
     - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
     - CONFIG_DEBUG_INFO_BTF=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1977,9 +1691,7 @@ sets:
     toolchain: clang-12
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -1991,9 +1703,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -2003,9 +1713,7 @@ sets:
     toolchain: clang-12
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -2015,9 +1723,7 @@ sets:
     toolchain: clang-12
     kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2027,9 +1733,7 @@ sets:
     toolchain: clang-12
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2039,9 +1743,7 @@ sets:
     toolchain: clang-12
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2053,9 +1755,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2065,9 +1765,7 @@ sets:
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2079,9 +1777,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2093,9 +1789,7 @@ sets:
     - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
     - CONFIG_DEBUG_INFO_BTF=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2108,9 +1802,7 @@ sets:
     - CONFIG_ATOMIC64_SELFTEST=n
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2120,9 +1812,7 @@ sets:
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2134,9 +1824,7 @@ sets:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     - CONFIG_BPF_PRELOAD=n
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -2146,9 +1834,7 @@ sets:
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -2158,9 +1844,7 @@ sets:
     toolchain: clang-11
     kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2170,9 +1854,7 @@ sets:
     toolchain: clang-11
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2182,9 +1864,7 @@ sets:
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2198,9 +1878,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2210,9 +1888,7 @@ sets:
     toolchain: clang-nightly
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2224,9 +1900,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2238,9 +1912,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2255,9 +1927,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2267,9 +1937,7 @@ sets:
     toolchain: clang-nightly
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2281,9 +1949,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2295,9 +1961,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -2310,9 +1974,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2327,9 +1989,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2339,9 +1999,7 @@ sets:
     toolchain: clang-nightly
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2353,9 +2011,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2367,9 +2023,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2379,9 +2033,7 @@ sets:
     toolchain: clang-13
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2393,9 +2045,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2407,9 +2057,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2424,9 +2072,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2436,9 +2082,7 @@ sets:
     toolchain: clang-13
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2450,9 +2094,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2464,9 +2106,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -2479,9 +2119,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2496,9 +2134,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2508,9 +2144,7 @@ sets:
     toolchain: clang-13
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2522,9 +2156,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2536,9 +2168,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2548,9 +2178,7 @@ sets:
     toolchain: clang-12
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2562,9 +2190,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2576,9 +2202,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2593,9 +2217,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2605,9 +2227,7 @@ sets:
     toolchain: clang-12
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2619,9 +2239,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2633,9 +2251,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -2648,9 +2264,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2665,9 +2279,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2677,9 +2289,7 @@ sets:
     toolchain: clang-12
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2691,9 +2301,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2705,9 +2313,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2717,9 +2323,7 @@ sets:
     toolchain: clang-11
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2731,9 +2335,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -2745,9 +2347,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2762,9 +2362,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2774,9 +2372,7 @@ sets:
     toolchain: clang-11
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2788,9 +2384,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2802,9 +2396,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     kernel_image: Image
     make_variables:
       LLVM: 1
@@ -2817,9 +2409,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2834,9 +2424,7 @@ sets:
     - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2846,9 +2434,7 @@ sets:
     toolchain: clang-11
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -2860,9 +2446,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1

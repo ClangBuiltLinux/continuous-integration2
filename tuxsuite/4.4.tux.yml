@@ -12,9 +12,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -25,9 +23,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -36,9 +32,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
@@ -48,9 +42,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -61,9 +53,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -72,9 +62,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LD: ld.lld
       LLVM_IAS: 0
