@@ -12,9 +12,7 @@ sets:
     toolchain: clang-nightly
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -26,9 +24,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -38,9 +34,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -52,9 +46,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -64,9 +56,7 @@ sets:
     toolchain: clang-nightly
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -76,9 +66,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -88,9 +76,7 @@ sets:
     toolchain: clang-13
     kconfig: multi_v7_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -102,9 +88,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -114,9 +98,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -128,9 +110,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -140,9 +120,7 @@ sets:
     toolchain: clang-13
     kconfig: powernv_defconfig
     targets:
-    - config
     - kernel
-    - modules
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
@@ -152,9 +130,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0

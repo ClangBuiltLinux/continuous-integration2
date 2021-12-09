@@ -14,9 +14,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -26,9 +24,7 @@ sets:
     toolchain: clang-nightly
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -38,9 +34,7 @@ sets:
     toolchain: clang-nightly
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -52,9 +46,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -64,9 +56,7 @@ sets:
     toolchain: clang-13
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -76,9 +66,7 @@ sets:
     toolchain: clang-13
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -90,9 +78,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -102,9 +88,7 @@ sets:
     toolchain: clang-12
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -114,9 +98,7 @@ sets:
     toolchain: clang-12
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -128,9 +110,7 @@ sets:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -140,9 +120,7 @@ sets:
     toolchain: clang-android
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -152,9 +130,7 @@ sets:
     toolchain: clang-android
     kconfig: gki_defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -168,9 +144,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -182,9 +156,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -196,9 +168,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
@@ -210,9 +180,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1

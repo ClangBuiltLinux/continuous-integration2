@@ -12,9 +12,7 @@ sets:
     toolchain: clang-nightly
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -26,9 +24,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -38,9 +34,7 @@ sets:
     toolchain: clang-13
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -52,9 +46,7 @@ sets:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -64,9 +56,7 @@ sets:
     toolchain: clang-12
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -76,9 +66,7 @@ sets:
     toolchain: clang-11
     kconfig: defconfig
     targets:
-    - config
     - kernel
-    - modules
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -92,9 +80,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -104,9 +90,7 @@ sets:
     toolchain: clang-nightly
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -118,9 +102,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -132,9 +114,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -144,9 +124,7 @@ sets:
     toolchain: clang-13
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -158,9 +136,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -172,9 +148,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -184,9 +158,7 @@ sets:
     toolchain: clang-12
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -198,9 +170,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -212,9 +182,7 @@ sets:
     - allmodconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -224,9 +192,7 @@ sets:
     toolchain: clang-11
     kconfig: allnoconfig
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -238,9 +204,7 @@ sets:
     - allyesconfig
     - CONFIG_WERROR=n
     targets:
-    - config
-    - kernel
-    - modules
+    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
