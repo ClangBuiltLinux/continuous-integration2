@@ -77,8 +77,8 @@ triples:
   - &riscv-triple       {CROSS_COMPILE: riscv64-linux-gnu,     ARCH: *riscv-arch}
   - &s390-triple        {CROSS_COMPILE: s390x-linux-gnu,       ARCH: *s390-arch}
 targets:
-  - &kernel      {targets: [config,kernel]}
-  - &kernel_dtbs {targets: [config,kernel,dtbs]}
+  - &kernel      {targets: [kernel]}
+  - &kernel_dtbs {targets: [kernel,dtbs]}
 configs:
   #                     config:                                                                                image target (optional)     [triples:] (Optional: x86)  targets to build
   - &arm32_v5          {config: multi_v5_defconfig,                                                                                        << : *arm-triple,           << : *kernel_dtbs}
