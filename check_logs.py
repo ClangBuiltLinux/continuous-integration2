@@ -76,6 +76,8 @@ def verify_build():
         _fetch("status.json", url, status_json)
         build = json.load(open(status_json))
 
+    print(json.dumps(build, indent=4))
+
     if retries == max_retries:
         print_red("status.json did not give a pass/fail result!")
         sys.exit(1)
@@ -256,7 +258,6 @@ if __name__ == "__main__":
         show_builds()
         sys.exit(1)
     build = verify_build()
-    print(json.dumps(build, indent=4))
     print_yellow("Register clang error/warning problem matchers")
     for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
         print("::add-matcher::%s" % (problem_matcher))
