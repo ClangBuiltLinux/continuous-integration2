@@ -13,7 +13,8 @@ from install_deps import install_deps
 
 
 def _fetch(title, url, dest):
-    print_yellow("fetching %s from: %s" % (title, url))
+    current_time = time.strftime("%H:%M:%S", time.localtime())
+    print_yellow("%s: fetching %s from: %s" % (current_time, title, url))
     # TODO: use something more robust like python wget library.
     retries = 0
     max_retries = 7
