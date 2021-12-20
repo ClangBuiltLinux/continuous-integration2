@@ -13,7 +13,8 @@ from install_deps import install_deps
 
 
 def _fetch(title, url, dest):
-    print_yellow("fetching %s from: %s" % (title, url))
+    current_time = time.strftime("%H:%M:%S", time.localtime())
+    print_yellow("%s: fetching %s from: %s" % (current_time, title, url))
     # TODO: use something more robust like python wget library.
     retries = 0
     max_retries = 7
@@ -74,6 +75,8 @@ def verify_build():
         url = build["download_url"] + status_json
         _fetch("status.json", url, status_json)
         build = json.load(open(status_json))
+
+    print(json.dumps(build, indent=4))
 
     if retries == max_retries:
         print_red("status.json did not give a pass/fail result!")
@@ -255,7 +258,6 @@ if __name__ == "__main__":
         show_builds()
         sys.exit(1)
     build = verify_build()
-    print(json.dumps(build, indent=4))
     print_yellow("Register clang error/warning problem matchers")
     for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
         print("::add-matcher::%s" % (problem_matcher))
