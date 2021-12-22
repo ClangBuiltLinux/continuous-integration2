@@ -82,6 +82,13 @@ def verify_build():
         print_red("status.json did not give a pass/fail result!")
         sys.exit(1)
 
+    if build["status_message"] == "Unable to apply kernel patch":
+        print_red(
+            "Patch failed to apply to current kernel tree, does it need to be removed or updated?"
+        )
+        fetch_logs(build)
+        sys.exit(1)
+
     return build
 
 
