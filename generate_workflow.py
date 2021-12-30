@@ -104,7 +104,7 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
         "kick_tuxsuite_{}".format(build_set): {
             "name": "TuxSuite ({})".format(build_set),
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-            "runs-on": "ubuntu-20.04",
+            "runs-on": "ubuntu-latest",
             "container": "tuxsuite/tuxsuite",
             "env": {
                 "TUXSUITE_TOKEN": "${{ secrets.TUXSUITE_TOKEN }}"
@@ -135,7 +135,7 @@ def get_steps(build, build_set):
     name = get_job_name(build)
     return {
         sanitize_job_name(name): {
-            "runs-on": "ubuntu-20.04",
+            "runs-on": "ubuntu-latest",
             "needs": "kick_tuxsuite_{}".format(build_set),
             "name": name,
             "env": {
