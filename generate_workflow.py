@@ -141,10 +141,10 @@ def get_steps(build, build_set):
             "env": {
                 "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
                 "LLVM_VERSION": build["llvm_version"],
-                "INSTALL_DEPS": 1,
                 "BOOT": int(build["boot"]),
                 "CONFIG": print_config(build),
             },
+            "container": "ghcr.io/clangbuiltlinux/qemu",
             "steps": [
                 {
                     "uses": "actions/checkout@v2",
