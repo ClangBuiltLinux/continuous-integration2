@@ -10,6 +10,7 @@ from utils import patch_series_flag
 # Aliases makes this YAML unreadable
 # https://ttl255.com/yaml-anchors-and-aliases-and-how-to-disable-them/
 class NoAliasDumper(yaml.SafeDumper):
+
     def ignore_aliases(self, data):
         return True
 

@@ -9,7 +9,6 @@ import time
 import urllib.request
 
 from utils import get_build, get_image_name, get_requested_llvm_version, print_red, print_yellow, get_cbl_name, show_builds
-from install_deps import install_deps
 
 
 def _fetch(title, url, dest):
@@ -210,8 +209,6 @@ def run_boot(build):
     boot_qemu = [
         "./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image
     ]
-    if cbl_arch == "s390":
-        boot_qemu += ["--use-cbl-qemu"]
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower
     if "CONFIG_KASAN=y" in build["kconfig"] or \
@@ -250,7 +247,6 @@ def boot_test(build):
         return
     fetch_kernel_image(build)
     fetch_dtb(build)
-    install_deps()
     run_boot(build)
 
 
