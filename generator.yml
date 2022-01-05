@@ -11,7 +11,6 @@ urls:
   - &next-url     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
   - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
   - &android-url  https://android.googlesource.com/kernel/common.git
-  - &lto-cfi-url  https://github.com/samitolvanen/linux.git
   - &tip-url      https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
   - &arm64-url    https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
   # Configuration URLs
@@ -50,8 +49,6 @@ trees:
   - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19,     << : *daily}
   - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14,     << : *daily}
   - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9,      << : *daily}
-  - &lto-cfi          {git_repo: *lto-cfi-url,  git_ref: clang-cfi,           name: lto-cfi,          << : *daily}
-  - &lto-cfi-tip      {git_repo: *lto-cfi-url,  git_ref: tip/clang-cfi,       name: lto-cfi-tip,      << : *daily}
   - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip,              << : *daily}
   - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64,            << : *daily}
   - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes,      << : *daily}
@@ -458,11 +455,6 @@ builds:
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_tot}
   #########
-  #  CFI  #
-  #########
-  - {<< : *x86_64_cfi,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64_cfi,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
-  #########
   #  TIP  #
   #########
   - {<< : *i386,              << : *tip,              << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -766,11 +758,6 @@ builds:
   - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  llvm_version: *llvm_latest}
-  #########
-  #  CFI  #
-  #########
-  - {<< : *x86_64_cfi,        << : *lto-cfi,          << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64_cfi,        << : *lto-cfi-tip,      << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   #########
   #  TIP  #
   #########
