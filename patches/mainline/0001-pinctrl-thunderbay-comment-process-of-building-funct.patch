@@ -1,0 +1,75 @@
+From 65fb749ae8fe352269323eb456c1a5ba7545a406 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
+Date: Tue, 11 Jan 2022 18:29:18 +0100
+Subject: [PATCH 1/2] pinctrl: thunderbay: comment process of building
+ functions a bit
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This should make code a bit easier to follow. While at it use some "for"
+loops to simplify array iteration loops.
+
+Ref: 5d0674999cc5 ("pinctrl: keembay: comment process of building functions a bit")
+Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+Link: https://lore.kernel.org/r/20220111172919.6567-1-zajec5@gmail.com
+---
+ drivers/pinctrl/pinctrl-thunderbay.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/pinctrl/pinctrl-thunderbay.c b/drivers/pinctrl/pinctrl-thunderbay.c
+index b5b47f4dd774..4756a23ca572 100644
+--- a/drivers/pinctrl/pinctrl-thunderbay.c
++++ b/drivers/pinctrl/pinctrl-thunderbay.c
+@@ -839,27 +839,30 @@ static int thunderbay_build_functions(struct thunderbay_pinctrl *tpc)
+ 	void *ptr;
+ 	int pin;
+ 
+-	/* Total number of functions is unknown at this point. Allocate first. */
++	/*
++	 * Allocate maximum possible number of functions. Assume every pin
++	 * being part of 8 (hw maximum) globally unique muxes.
++	 */
+ 	tpc->nfuncs = 0;
+ 	thunderbay_funcs = kcalloc(tpc->soc->npins * 8,
+ 				   sizeof(*thunderbay_funcs), GFP_KERNEL);
+ 	if (!thunderbay_funcs)
+ 		return -ENOMEM;
+ 
+-	/* Find total number of functions and each's properties */
++	/* Setup 1 function for each unique mux */
+ 	for (pin = 0; pin < tpc->soc->npins; pin++) {
+ 		const struct pinctrl_pin_desc *pin_info = thunderbay_pins + pin;
+-		struct thunderbay_mux_desc *pin_mux = pin_info->drv_data;
++		struct thunderbay_mux_desc *pin_mux;
+ 
+-		while (pin_mux->name) {
+-			struct function_desc *func = thunderbay_funcs;
++		for (pin_mux = pin_info->drv_data; pin_mux->name; pin_mux++) {
++			struct function_desc *func;
+ 
+-			while (func->name) {
++			/* Check if we already have function for this mux */
++			for (func = thunderbay_funcs; func->name; func++) {
+ 				if (!strcmp(pin_mux->name, func->name)) {
+ 					func->num_group_names++;
+ 					break;
+ 				}
+-				func++;
+ 			}
+ 
+ 			if (!func->name) {
+@@ -868,8 +871,6 @@ static int thunderbay_build_functions(struct thunderbay_pinctrl *tpc)
+ 				func->data = (int *)&pin_mux->mode;
+ 				tpc->nfuncs++;
+ 			}
+-
+-			pin_mux++;
+ 		}
+ 	}
+ 
+
+base-commit: 81ff0be4b9e3bcfee022d71cf89d72f7e2ed41ba
+-- 
+2.34.1
+
