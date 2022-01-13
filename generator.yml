@@ -3,7 +3,6 @@ llvm_versions:
   - &llvm_latest 13
   - &llvm_12 12
   - &llvm_11 11
-  - &llvm_10 10
   - &llvm_android android
 urls:
   # git repo URLs
@@ -1247,39 +1246,6 @@ builds:
   - {<< : *arm64_allmod,      << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allno,       << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
   - {<< : *arm64_allyes,      << : *arm64-fixes,      << : *llvm_full,       boot: false, llvm_version: *llvm_11}
-  #############
-  #  LLVM 10  #
-  #############
-  ##############
-  #  Mainline  #
-  ##############
-  - {<< : *arm32_v5,          << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v6,          << : *mainline,         << : *arm32_v6_llvm,   boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v7,          << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # arm32: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
-  # - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *arm32_allno,       << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  # - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  # arm64: {def,all{mod,yes}}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
-  # - {<< : *arm64,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # - {<< : *arm64_allmod,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *arm64_allno,       << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  # - {<< : *arm64_allyes,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *i386,              << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  - {<< : *mips,              << : *mainline,         << : *mips_llvm,       boot: true,  llvm_version: *llvm_10}
-  - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
-  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
-  - {<< : *ppc64le,           << : *mainline,         << : *ppc64_llvm,      boot: true,  llvm_version: *llvm_10}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  llvm_version: *llvm_10}
-  - {<< : *x86_64,            << : *mainline,         << : *llvm,            boot: true,  llvm_version: *llvm_10}
-  # x86_64: all{mod,yes}config builds disabled (https://github.com/ClangBuiltLinux/linux/issues/1293)
-  # - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  - {<< : *x86_64_allno,      << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
-  # - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm,            boot: false, llvm_version: *llvm_10}
   ##################
   #  Android LLVM  #
   ##################
