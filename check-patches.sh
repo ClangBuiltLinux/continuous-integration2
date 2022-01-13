@@ -50,17 +50,31 @@ for folder in "${repo}"/patches/*; do
 
 done
 
-# Check that if '--patch-series' exists in a workflow file, it has a series
-# of patches (removed patches, did not run generate.sh)
 for workflow in "${repo}"/.github/workflows/*.yml; do
     tree=$(basename "${workflow}" | sed 's/.yml//')
     patches=${repo}/patches/${tree}
+
+    # Check for '--patch-series' and no patches (removed patches, did not
+    # regenerate)
     if grep -q -- "--patch-series" "${workflow}" && [[ ! -d ${patches} ]]; then
         echo "${patches} does not exist but '--patch-series' present in ${workflow}?"
         echo
         echo "Regenerate the TuxSuite and workflow files:"
         echo
         echo "$ ./generate.sh ${tree}"
+        exit 1
+    fi
+
+    # Check for patches and no '--patch-series' (added patches, did not
+    # regenerate)
+    if ! grep -q -- "--patch-series" "${workflow}" && [[ -d ${patches} ]]; then
+        echo "${patches} exists but '--patch-series' not present in ${workflow}?"
+        echo
+        echo "Regenerate the TuxSuite and workflow files:"
+        echo
+        echo "$ ./generate.sh ${tree}"
+        echo
+        echo "or remove the patches if they are no longer being used."
         exit 1
     fi
 done
