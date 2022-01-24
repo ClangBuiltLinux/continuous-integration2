@@ -2350,6 +2350,25 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _66d5f7613f33d6225179b4f74b52c782:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    container: ghcr.io/clangbuiltlinux/qemu
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _012f9698c8641a28bfe42b1f88c3eeed:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs

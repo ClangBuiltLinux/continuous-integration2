@@ -1260,8 +1260,7 @@ builds:
   - {<< : *arm32_allno,       << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
   - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, llvm_version: *llvm_android}
   - {<< : *arm64,             << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
-  # https://github.com/ClangBuiltLinux/continuous-integration2/issues/141
-  # - {<< : *arm64be,           << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
+  - {<< : *arm64be,           << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   - {<< : *arm64_lto_full,    << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   - {<< : *arm64_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   - {<< : *arm64_allmod,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
