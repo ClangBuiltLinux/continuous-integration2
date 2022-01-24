@@ -1276,9 +1276,7 @@ builds:
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
   - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, llvm_version: *llvm_android}
-  # CONFIG_GCOV_KERNEL requires __attribute__((no_profile_instrument_function)),
-  # which AOSP LLVM does not currently have
-  # - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
+  - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   #############
   #  Android  #
   #############
