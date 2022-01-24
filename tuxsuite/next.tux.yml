@@ -1529,6 +1529,19 @@ sets:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-android
+    kconfig:
+    - defconfig
+    - CONFIG_GCOV_KERNEL=y
+    - CONFIG_GCOV_PROFILE_ALL=y
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
 - name: distribution_configs
   builds:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
