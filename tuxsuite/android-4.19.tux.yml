@@ -10,7 +10,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: arm64
     toolchain: clang-nightly
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -20,7 +22,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -30,7 +34,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: arm64
     toolchain: clang-13
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -40,7 +46,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: x86_64
     toolchain: clang-13
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -50,7 +58,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: arm64
     toolchain: clang-12
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -60,7 +70,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: x86_64
     toolchain: clang-12
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -70,7 +82,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: arm64
     toolchain: clang-android
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -80,7 +94,9 @@ sets:
     git_ref: android-4.19-stable
     target_arch: x86_64
     toolchain: clang-android
-    kconfig: gki_defconfig
+    kconfig:
+    - gki_defconfig
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:

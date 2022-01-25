@@ -101,7 +101,7 @@ configs:
   - &arm64_kasan       {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            << : *arm64-triple,         << : *kernel}
   - &arm64_kasan_sw    {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_SW_TAGS=y, CONFIG_KUNIT=y],            << : *arm64-triple,         << : *kernel}
   - &arm64_ubsan       {config: [defconfig, CONFIG_UBSAN=y],                                                                               << : *arm64-triple,         << : *kernel}
-  - &arm64_gki         {config: gki_defconfig,                                                                                             << : *arm64-triple,         << : *kernel}
+  - &arm64_gki         {config: [gki_defconfig, CONFIG_DEBUG_INFO_BTF=n],                                                                  << : *arm64-triple,         << : *kernel}
   - &arm64_cut         {config: cuttlefish_defconfig,                                                                                      << : *arm64-triple,         << : *kernel}
   - &arm64_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                                                           << : *arm64-triple,         << : *default}
   - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_WERROR=n, CONFIG_LTO_CLANG_THIN=y],            << : *arm64-triple,         << : *default}
@@ -140,7 +140,7 @@ configs:
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                                  << : *kernel}
   - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                                  << : *kernel}
   - &x86_64_cfi        {config: [defconfig, CONFIG_LTO_CLANG_THIN=y, CONFIG_CFI_CLANG=y],                                                                              << : *kernel}
-  - &x86_64_gki        {config: gki_defconfig,                                                                                                                         << : *kernel}
+  - &x86_64_gki        {config: [gki_defconfig, CONFIG_DEBUG_INFO_BTF=n],                                                                                              << : *kernel}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                           << : *kernel}
   - &x86_64_allmod     {config: [allmodconfig, CONFIG_WERROR=n],                                                                                                       << : *default}
   - &x86_64_allmod_lto {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_WERROR=n, CONFIG_LTO_CLANG_THIN=y],                                        << : *default}
