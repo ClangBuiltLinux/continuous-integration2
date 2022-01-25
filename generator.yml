@@ -42,6 +42,7 @@ trees:
   - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9",            << : *daily}
   - &stable-4_4       {git_repo: *stable-url,   git_ref: linux-4.4.y,         name: "4.4",            << : *daily}
   - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline, << : *daily}
+  - &android13-5_15   {git_repo: *android-url,  git_ref: android13-5.15,      name: android13-5.15,   << : *daily}
   - &android13-5_10   {git_repo: *android-url,  git_ref: android13-5.10,      name: android13-5.10,   << : *daily}
   - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10,   << : *daily}
   - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4,    << : *daily}
@@ -435,6 +436,10 @@ builds:
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm32_allmod,      << : *android13-5_15,   << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
+  - {<< : *arm32_v7_t,        << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *arm64_gki,         << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
+  - {<< : *x86_64_gki,        << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm_full,       boot: false, llvm_version: *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_tot}
@@ -739,6 +744,10 @@ builds:
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm32_allmod,      << : *android13-5_15,   << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
+  - {<< : *arm32_v7_t,        << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *arm64_gki,         << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
+  - {<< : *x86_64_gki,        << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm_full,       boot: false, llvm_version: *llvm_latest}
   - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_latest}
@@ -990,6 +999,10 @@ builds:
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm,            boot: true,  llvm_version: *llvm_12}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
+  - {<< : *arm32_allmod,      << : *android13-5_15,   << : *llvm,            boot: false, llvm_version: *llvm_12}
+  - {<< : *arm32_v7_t,        << : *android13-5_15,   << : *llvm,            boot: true,  llvm_version: *llvm_12}
+  - {<< : *arm64_gki,         << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
+  - {<< : *x86_64_gki,        << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
   - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm,            boot: false, llvm_version: *llvm_12}
   - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm,            boot: true,  llvm_version: *llvm_12}
   - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_12}
@@ -1283,6 +1296,10 @@ builds:
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
+  - {<< : *arm32_allmod,      << : *android13-5_15,   << : *llvm_full,       boot: false, llvm_version: *llvm_android}
+  - {<< : *arm32_v7_t,        << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
+  - {<< : *arm64_gki,         << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
+  - {<< : *x86_64_gki,        << : *android13-5_15,   << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm_full,       boot: false, llvm_version: *llvm_android}
   - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
   - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  llvm_version: *llvm_android}
