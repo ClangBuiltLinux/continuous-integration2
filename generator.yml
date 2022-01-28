@@ -90,7 +90,8 @@ configs:
   - &arm32_allno       {config: allnoconfig,                                                                                               << : *arm-triple,           << : *default}
   - &arm32_allyes      {config: [allyesconfig, CONFIG_WERROR=n],                                                                           << : *arm-triple,           << : *default}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &arm32_fedora      {config: [*arm32-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          << : *arm-triple,           << : *kernel}
+  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
+  - &arm32_fedora      {config: [*arm32-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],                                 << : *arm-triple,           << : *kernel}
   - &arm32_suse        {config: *arm32-suse-config-url,                                                                                    << : *arm-triple,           << : *kernel}
   - &arm64             {config: defconfig,                                                                                                 << : *arm64-triple,         << : *kernel}
   #                                         https://github.com/ClangBuiltLinux/linux/issues/595
@@ -109,7 +110,8 @@ configs:
   - &arm64_allno       {config: allnoconfig,                                                                                               << : *arm64-triple,         << : *default}
   - &arm64_allyes      {config: [allyesconfig, CONFIG_WERROR=n],                                                                           << : *arm64-triple,         << : *default}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &arm64_fedora      {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          << : *arm64-triple,         << : *kernel}
+  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
+  - &arm64_fedora      {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],                                 << : *arm64-triple,         << : *kernel}
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         << : *arm64-triple,         << : *kernel}
   - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *default}
@@ -135,7 +137,8 @@ configs:
   - &s390              {config: defconfig,                                                                                                 << : *s390-triple,          << : *kernel}
   - &s390_kasan        {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            << : *s390-triple,          << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           << : *s390-triple,          << : *kernel}
+  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
+  - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],                                  << : *s390-triple,          << : *kernel}
   - &s390_suse         {config: *s390-suse-config-url,                                                                                     << : *s390-triple,          << : *kernel}
   - &x86_64            {config: defconfig,                                                                                                                             << : *kernel}
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                                  << : *kernel}
@@ -152,7 +155,8 @@ configs:
   - &x86_64_kcsan      {config: [defconfig, CONFIG_KCSAN=y, CONFIG_KCSAN_KUNIT_TEST=y, CONFIG_KUNIT=y],                                                                << : *kernel}
   - &x86_64_ubsan      {config: [defconfig, CONFIG_UBSAN=y],                                                                                                           << : *kernel}
   - &x86_64_arch       {config: *x86_64-arch-config-url,                                                                                                               << : *kernel}
-  - &x86_64_fedora     {config: *x86_64-fedora-config-url,                                                                                                             << : *kernel}
+  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
+  - &x86_64_fedora     {config: [*x86_64-fedora-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                                                  << : *kernel}
   - &x86_64_suse       {config: *x86_64-suse-config-url,                                                                                                               << : *kernel}
 tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
