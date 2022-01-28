@@ -1563,6 +1563,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1585,6 +1586,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1641,6 +1643,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1668,7 +1671,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1691,6 +1696,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1713,6 +1719,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1769,6 +1776,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1796,7 +1804,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-13
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1819,6 +1829,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1841,6 +1852,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1904,7 +1916,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-12
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1927,6 +1941,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -1949,6 +1964,7 @@ sets:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_BPF_PRELOAD=n
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
@@ -2025,7 +2041,9 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-11
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
     make_variables:
