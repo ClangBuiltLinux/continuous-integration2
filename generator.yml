@@ -90,8 +90,7 @@ configs:
   - &arm32_allno       {config: allnoconfig,                                                                                               << : *arm-triple,           << : *default}
   - &arm32_allyes      {config: [allyesconfig, CONFIG_WERROR=n],                                                                           << : *arm-triple,           << : *default}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
-  - &arm32_fedora      {config: [*arm32-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],                                 << : *arm-triple,           << : *kernel}
+  - &arm32_fedora      {config: [*arm32-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          << : *arm-triple,           << : *kernel}
   - &arm32_suse        {config: *arm32-suse-config-url,                                                                                    << : *arm-triple,           << : *kernel}
   - &arm64             {config: defconfig,                                                                                                 << : *arm64-triple,         << : *kernel}
   #                                         https://github.com/ClangBuiltLinux/linux/issues/595
@@ -128,7 +127,8 @@ configs:
   - &ppc64             {config: [pseries_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel}
   - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
+  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
+  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],   kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                      kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   - &riscv             {config: defconfig,                                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel}
   - &riscv_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                               kernel_image: Image,        << : *riscv-triple,         << : *default}
