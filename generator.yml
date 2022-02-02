@@ -1,5 +1,5 @@
 llvm_versions:
-  - &llvm_tot 14
+  - &llvm_tot 15
   - &llvm_latest 13
   - &llvm_12 12
   - &llvm_11 11
