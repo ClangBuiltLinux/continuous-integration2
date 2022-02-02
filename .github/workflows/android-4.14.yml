@@ -32,13 +32,13 @@ jobs:
         path: builds.json
         name: output_artifact_defconfigs
         if-no-files-found: error
-  _524451a8302126df1422580acd7db20f:
+  _f4fcbdbec68a8eb4a07b5734bcfab1de:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=14 cuttlefish_defconfig
+    name: ARCH=arm64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=15 cuttlefish_defconfig
     env:
       ARCH: arm64
-      LLVM_VERSION: 14
+      LLVM_VERSION: 15
       BOOT: 1
       CONFIG: cuttlefish_defconfig
     container: ghcr.io/clangbuiltlinux/qemu
@@ -51,13 +51,13 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _ef863dc39f2a6ed49f7d57f3ab3e12cb:
+  _437d21f4895c51f5fa0eef1f84f27ffb:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=14 x86_64_cuttlefish_defconfig
+    name: ARCH=x86_64 CC=clang LD=ld.lld LLVM_IAS=0 LLVM_VERSION=15 x86_64_cuttlefish_defconfig
     env:
       ARCH: x86_64
-      LLVM_VERSION: 14
+      LLVM_VERSION: 15
       BOOT: 1
       CONFIG: x86_64_cuttlefish_defconfig
     container: ghcr.io/clangbuiltlinux/qemu
