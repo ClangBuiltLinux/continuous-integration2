@@ -40,7 +40,6 @@ trees:
   - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19",           << : *daily}
   - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14",           << : *daily}
   - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9",            << : *daily}
-  - &stable-4_4       {git_repo: *stable-url,   git_ref: linux-4.4.y,         name: "4.4",            << : *daily}
   - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline, << : *daily}
   - &android13-5_15   {git_repo: *android-url,  git_ref: android13-5.15,      name: android13-5.15,   << : *daily}
   - &android13-5_10   {git_repo: *android-url,  git_ref: android13-5.10,      name: android13-5.10,   << : *daily}
@@ -427,12 +426,6 @@ builds:
   - {<< : *arm64,             << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *arm64be,           << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
   - {<< : *x86_64,            << : *stable-4_9,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
-  ###########
-  #  4.4.y  #
-  ###########
-  - {<< : *arm64,             << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *arm64be,           << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_tot}
-  - {<< : *x86_64,            << : *stable-4_4,       << : *lld,             boot: true,  llvm_version: *llvm_tot}
   #############
   #  Android  #
   #############
@@ -735,12 +728,6 @@ builds:
   - {<< : *arm64,             << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *arm64be,           << : *stable-4_9,       << : *clang,           boot: true,  llvm_version: *llvm_latest}
   - {<< : *x86_64,            << : *stable-4_9,       << : *lld,             boot: true,  llvm_version: *llvm_latest}
-  ###########
-  #  4.4.y  #
-  ###########
-  - {<< : *arm64,             << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_latest}
-  - {<< : *arm64be,           << : *stable-4_4,       << : *clang,           boot: true,  llvm_version: *llvm_latest}
-  - {<< : *x86_64,            << : *stable-4_4,       << : *lld,             boot: true,  llvm_version: *llvm_latest}
   #############
   #  Android  #
   #############
