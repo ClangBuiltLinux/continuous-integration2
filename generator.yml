@@ -101,15 +101,14 @@ configs:
   - &arm64_kasan       {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            << : *arm64-triple,         << : *kernel}
   - &arm64_kasan_sw    {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_SW_TAGS=y, CONFIG_KUNIT=y],            << : *arm64-triple,         << : *kernel}
   - &arm64_ubsan       {config: [defconfig, CONFIG_UBSAN=y],                                                                               << : *arm64-triple,         << : *kernel}
-  - &arm64_gki         {config: [gki_defconfig, CONFIG_DEBUG_INFO_BTF=n],                                                                  << : *arm64-triple,         << : *kernel}
+  - &arm64_gki         {config: gki_defconfig,                                                                                             << : *arm64-triple,         << : *kernel}
   - &arm64_cut         {config: cuttlefish_defconfig,                                                                                      << : *arm64-triple,         << : *kernel}
   - &arm64_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                                                           << : *arm64-triple,         << : *default}
   - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_WERROR=n, CONFIG_LTO_CLANG_THIN=y],            << : *arm64-triple,         << : *default}
   - &arm64_allno       {config: allnoconfig,                                                                                               << : *arm64-triple,         << : *default}
   - &arm64_allyes      {config: [allyesconfig, CONFIG_WERROR=n],                                                                           << : *arm64-triple,         << : *default}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
-  - &arm64_fedora      {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],                                 << : *arm64-triple,         << : *kernel}
+  - &arm64_fedora      {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          << : *arm64-triple,         << : *kernel}
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         << : *arm64-triple,         << : *kernel}
   - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *default}
@@ -126,8 +125,7 @@ configs:
   - &ppc64             {config: [pseries_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel}
   - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
-  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],   kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
+  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                      kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   - &riscv             {config: defconfig,                                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel}
   - &riscv_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                               kernel_image: Image,        << : *riscv-triple,         << : *default}
@@ -136,14 +134,13 @@ configs:
   - &s390              {config: defconfig,                                                                                                 << : *s390-triple,          << : *kernel}
   - &s390_kasan        {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            << : *s390-triple,          << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
-  - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_DEBUG_INFO_BTF=n],                                  << : *s390-triple,          << : *kernel}
+  - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           << : *s390-triple,          << : *kernel}
   - &s390_suse         {config: *s390-suse-config-url,                                                                                     << : *s390-triple,          << : *kernel}
   - &x86_64            {config: defconfig,                                                                                                                             << : *kernel}
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                                  << : *kernel}
   - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                                  << : *kernel}
   - &x86_64_cfi        {config: [defconfig, CONFIG_LTO_CLANG_THIN=y, CONFIG_CFI_CLANG=y],                                                                              << : *kernel}
-  - &x86_64_gki        {config: [gki_defconfig, CONFIG_DEBUG_INFO_BTF=n],                                                                                              << : *kernel}
+  - &x86_64_gki        {config: gki_defconfig,                                                                                                                         << : *kernel}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                           << : *kernel}
   - &x86_64_allmod     {config: [allmodconfig, CONFIG_WERROR=n],                                                                                                       << : *default}
   - &x86_64_allmod_lto {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_WERROR=n, CONFIG_LTO_CLANG_THIN=y],                                        << : *default}
@@ -154,8 +151,7 @@ configs:
   - &x86_64_kcsan      {config: [defconfig, CONFIG_KCSAN=y, CONFIG_KCSAN_KUNIT_TEST=y, CONFIG_KUNIT=y],                                                                << : *kernel}
   - &x86_64_ubsan      {config: [defconfig, CONFIG_UBSAN=y],                                                                                                           << : *kernel}
   - &x86_64_arch       {config: *x86_64-arch-config-url,                                                                                                               << : *kernel}
-  # CONFIG_DEBUG_INFO_BTF disabled: https://github.com/ClangBuiltLinux/continuous-integration2/issues/290
-  - &x86_64_fedora     {config: [*x86_64-fedora-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                                                  << : *kernel}
+  - &x86_64_fedora     {config: *x86_64-fedora-config-url,                                                                                                             << : *kernel}
   - &x86_64_suse       {config: *x86_64-suse-config-url,                                                                                                               << : *kernel}
 tiers:
   # Generic tiers       LLVM=1       LLVM_IAS=1        Make variables to pass to TuxSuite
