@@ -16,6 +16,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: check-matrix.sh
       run: bash check-matrix.sh
+  check_generated_files:
+    name: Check generated files
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: generate.sh
+      run: bash generate.sh --check all
   check_patch_series:
     name: Check patches series
     runs-on: ubuntu-latest

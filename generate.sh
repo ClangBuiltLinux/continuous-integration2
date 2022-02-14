@@ -9,6 +9,7 @@ curl -LSs https://raw.githubusercontent.com/llvm/llvm-project/main/llvm/CMakeLis
 BRANCHES=()
 while ((${#})); do
     case ${1} in
+        -c | --check) CHECK=true ;;
         all) for FILE in tuxsuite/*.tux.yml; do BRANCHES+=("$(basename "${FILE//.tux.yml/}")"); done ;;
         *) BRANCHES+=("${1}") ;;
     esac
@@ -21,3 +22,22 @@ for BRANCH in "${BRANCHES[@]}"; do
     ./generate_tuxsuite.py <generator.yml "${BRANCH}" >tuxsuite/"${BRANCH}".tux.yml
     ./generate_workflow.py <generator.yml "${BRANCH}" >.github/workflows/"${BRANCH}".yml
 done
+
+if ${CHECK:=false}; then
+    if ! git rev-parse --git-dir &>/dev/null; then
+        set +x
+        echo "Script is not being run inside a git repository!"
+        exit 1
+    fi
+
+    if [[ -n "$(git --no-optional-locks status -uno --porcelain 2>/dev/null)" ]]; then
+        set +x
+        echo
+        echo "Running 'generate.sh all' generated the following diff:"
+        echo
+        git diff HEAD
+        echo
+        echo "Please run 'generate.sh all' locally and commit then push the changes it creates!"
+        exit 1
+    fi
+fi
