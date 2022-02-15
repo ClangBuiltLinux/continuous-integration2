@@ -19,8 +19,8 @@ done
 set -eux
 
 for BRANCH in "${BRANCHES[@]}"; do
-    ./generate_tuxsuite.py "${BRANCH}" >tuxsuite/"${BRANCH}".tux.yml
-    ./generate_workflow.py "${BRANCH}" >.github/workflows/"${BRANCH}".yml
+    ./generate_tuxsuite.py "${BRANCH}"
+    ./generate_workflow.py "${BRANCH}"
 done
 
 if ${CHECK:=false}; then
