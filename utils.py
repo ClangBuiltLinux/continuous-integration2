@@ -136,6 +136,21 @@ def get_build():
     sys.exit(1)
 
 
+def get_repo_ref(config, tree_name):
+    for tree in config["trees"]:
+        if tree["name"] == tree_name:
+            return tree["git_repo"], tree["git_ref"]
+
+
+def get_llvm_versions(config, tree_name):
+    llvm_versions = set()
+    repo, ref = get_repo_ref(config, tree_name)
+    for build in config["builds"]:
+        if build["git_repo"] == repo and build["git_ref"] == ref:
+            llvm_versions.add(build["llvm_version"])
+    return llvm_versions
+
+
 def print_red(msg):
     print("\033[91m%s\033[0m" % msg, file=sys.stderr)
     sys.stderr.flush()
