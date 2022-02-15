@@ -31,8 +31,8 @@ The tuxsuite and github actions workflow configs should be updated when
 `generator.yml` changes. Ex.
 ```sh
 $ BRANCH=next
-$ ./generate_tuxsuite.py $BRANCH < generator.yml > tuxsuite/$BRANCH.tux.yml
-$ ./generate_workflow.py $BRANCH < generator.yml > .github/workflows/$BRANCH.yml
+$ ./generate_tuxsuite.py $BRANCH > tuxsuite/$BRANCH.tux.yml
+$ ./generate_workflow.py $BRANCH > .github/workflows/$BRANCH.yml
 ```
 
 The `generate.sh` script will run this for you based on the trees that are fed

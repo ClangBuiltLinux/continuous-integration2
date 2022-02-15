@@ -3,6 +3,18 @@ import json
 import os
 import pathlib
 import sys
+import yaml
+
+
+def get_config():
+    # Trusted input.
+    # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
+    try:
+        with open("generator.yml") as f:
+            return yaml.load(f, Loader=yaml.FullLoader)
+    except FileNotFoundError as e:
+        print_red("generator.yml not found?")
+        raise e
 
 
 def get_image_name():
