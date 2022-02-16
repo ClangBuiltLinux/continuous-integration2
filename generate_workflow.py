@@ -179,7 +179,8 @@ def print_builds(config, tree_name, llvm_version):
             else:
                 check_logs_allconfigs.update(get_steps(build, "allconfigs"))
 
-    workflow = initial_workflow(tree_name, cron_schedule, tuxsuite_yml,
+    workflow_name = "{} ({})".format(tree_name, toolchain)
+    workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
     workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))
     workflow["jobs"].update(check_logs_defconfigs)
