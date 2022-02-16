@@ -51,7 +51,7 @@ for folder in "${repo}"/patches/*; do
 done
 
 for workflow in "${repo}"/.github/workflows/*.yml; do
-    tree=$(basename "${workflow}" | sed 's/.yml//')
+    tree=$(basename "${workflow}" | sed 's/-clang-.*.yml//')
     patches=${repo}/patches/${tree}
 
     # Check for '--patch-series' and no patches (removed patches, did not

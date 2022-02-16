@@ -9,9 +9,18 @@ curl -LSs https://raw.githubusercontent.com/llvm/llvm-project/main/llvm/CMakeLis
 BRANCHES=()
 while ((${#})); do
     case ${1} in
-        -c | --check) CHECK=true ;;
-        all) for FILE in tuxsuite/*.tux.yml; do BRANCHES+=("$(basename "${FILE//.tux.yml/}")"); done ;;
-        *) BRANCHES+=("${1}") ;;
+        -c | --check)
+            CHECK=true
+            ;;
+        all)
+            for FILE in tuxsuite/*.tux.yml; do
+                BRANCH_NAME=$(basename "${FILE}" | sed 's/-clang-.*.tux.yml//')
+                echo "${BRANCHES[*]}" | grep -Eq "(^|\s)${BRANCH_NAME}($|\s)" || BRANCHES+=("${BRANCH_NAME}")
+            done
+            ;;
+        *)
+            BRANCHES+=("${1}")
+            ;;
     esac
     shift
 done
@@ -19,8 +28,8 @@ done
 set -eux
 
 for BRANCH in "${BRANCHES[@]}"; do
-    ./generate_tuxsuite.py <generator.yml "${BRANCH}" >tuxsuite/"${BRANCH}".tux.yml
-    ./generate_workflow.py <generator.yml "${BRANCH}" >.github/workflows/"${BRANCH}".yml
+    ./generate_tuxsuite.py "${BRANCH}"
+    ./generate_workflow.py "${BRANCH}"
 done
 
 if ${CHECK:=false}; then
