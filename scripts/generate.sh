@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CI=$(dirname "$(readlink -f "${0}")")
+CI=$(dirname "$(dirname "$(readlink -f "${0}")")")
 cd "${CI}" || exit ${?}
 
 # Ensure that LLVM_TOT_VERSION is up to date
