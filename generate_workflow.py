@@ -157,15 +157,32 @@ def get_steps(build, build_set):
     } # yapf: disable
 
 
-def get_cron(tree_name):
+def get_cron(tree_name, llvm_version):
     six_hours = "0 0,6,12,18 * * *"
     daily = "0 0 * * *"
     weekdays = "0 12 * * 1,2,3,4,5"
+    sundays = "0 0 * * 0"
+    wednesdays = "0 0 * * 3"
+
+    # Versions of clang that are EOL that we still test in CI
+    eol_llvm_versions = [11, 12, 13]
+    # Stable Linux versions (https://kernel.org/category/releases.html)
+    stable_linux_versions = ["4.9", "4.14", "4.19", "5.4", "5.10", "5.15"]
 
     if tree_name == "mainline":
         return six_hours
     elif tree_name == "next":
         return weekdays
+    elif llvm_version in eol_llvm_versions:
+        # The stable and Android trees do not update as frequently so there is
+        # little point to testing unsupported clang versions daily with these
+        # trees
+        if tree_name in stable_linux_versions:
+            return wednesdays
+        elif "android" in tree_name:
+            return sundays
+        else:
+            return daily
     else:
         return daily
 
@@ -192,7 +209,7 @@ def print_builds(config, tree_name, llvm_version):
                 check_logs_allconfigs.update(get_steps(build, "allconfigs"))
 
     workflow_name = "{} ({})".format(tree_name, toolchain)
-    cron_schedule = get_cron(tree_name)
+    cron_schedule = get_cron(tree_name, llvm_version)
     workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
     workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))
