@@ -27,31 +27,26 @@ urls:
   - &x86_64-arch-config-url    https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
   - &x86_64-fedora-config-url  https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
   - &x86_64-suse-config-url    https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-schedules:
-  - &six_hours {schedule: "0 0,6,12,18 * * *"}
-  - &daily     {schedule: "0 0 * * *"}
-  # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
-  - &weekdays  {schedule: "0 12 * * 1,2,3,4,5"}
 trees:
-  - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline,         << : *six_hours}
-  - &next             {git_repo: *next-url,     git_ref: master,              name: next,             << : *weekdays}
-  - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15",           << : *daily}
-  - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10",           << : *daily}
-  - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4",            << : *daily}
-  - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19",           << : *daily}
-  - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14",           << : *daily}
-  - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9",            << : *daily}
-  - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline, << : *daily}
-  - &android13-5_15   {git_repo: *android-url,  git_ref: android13-5.15,      name: android13-5.15,   << : *daily}
-  - &android13-5_10   {git_repo: *android-url,  git_ref: android13-5.10,      name: android13-5.10,   << : *daily}
-  - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10,   << : *daily}
-  - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4,    << : *daily}
-  - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19,     << : *daily}
-  - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14,     << : *daily}
-  - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9,      << : *daily}
-  - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip,              << : *daily}
-  - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64,            << : *daily}
-  - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes,      << : *daily}
+  - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
+  - &next             {git_repo: *next-url,     git_ref: master,              name: next}
+  - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
+  - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
+  - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
+  - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19"}
+  - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14"}
+  - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9"}
+  - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
+  - &android13-5_15   {git_repo: *android-url,  git_ref: android13-5.15,      name: android13-5.15}
+  - &android13-5_10   {git_repo: *android-url,  git_ref: android13-5.10,      name: android13-5.10}
+  - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10}
+  - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4}
+  - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19}
+  - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14}
+  - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9}
+  - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
+  - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64}
+  - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64

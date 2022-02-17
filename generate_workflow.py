@@ -157,6 +157,19 @@ def get_steps(build, build_set):
     } # yapf: disable
 
 
+def get_cron(tree_name):
+    six_hours = "0 0,6,12,18 * * *"
+    daily = "0 0 * * *"
+    weekdays = "0 12 * * 1,2,3,4,5"
+
+    if tree_name == "mainline":
+        return six_hours
+    elif tree_name == "next":
+        return weekdays
+    else:
+        return daily
+
+
 def print_builds(config, tree_name, llvm_version):
     repo, ref = get_repo_ref(config, tree_name)
     toolchain = "clang-{}".format(llvm_version)
@@ -170,7 +183,6 @@ def print_builds(config, tree_name, llvm_version):
         if build["git_repo"] == repo and \
            build["git_ref"] == ref and \
            build["llvm_version"] == llvm_version:
-            cron_schedule = build["schedule"]
             if "defconfig" in str(build["config"]):
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
             elif "https://" in str(build["config"]):
@@ -180,6 +192,7 @@ def print_builds(config, tree_name, llvm_version):
                 check_logs_allconfigs.update(get_steps(build, "allconfigs"))
 
     workflow_name = "{} ({})".format(tree_name, toolchain)
+    cron_schedule = get_cron(tree_name)
     workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
     workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))
