@@ -159,7 +159,10 @@ def get_steps(build, build_set):
 
 def get_cron(tree_name, llvm_version):
     six_hours = "0 0,6,12,18 * * *"
-    daily = "0 0 * * *"
+    daily_midnight = "0 0 * * *"
+    daily_six = "0 6 * * *"
+    daily_noon = "0 12 * * *"
+    daily_eighteen = "0 18 * * *"
     weekdays = "0 12 * * 1,2,3,4,5"
     sundays = "0 0 * * 0"
     wednesdays = "0 0 * * 3"
@@ -182,9 +185,15 @@ def get_cron(tree_name, llvm_version):
         elif "android" in tree_name:
             return sundays
         else:
-            return daily
+            return daily_eighteen
     else:
-        return daily
+        # Spread out the other daily builds across three different times to
+        # help with build pressure on GitHub Actions
+        if tree_name in stable_linux_versions:
+            return daily_noon
+        elif "android" in tree_name:
+            return daily_six
+        return daily_midnight
 
 
 def print_builds(config, tree_name, llvm_version):
