@@ -30,6 +30,7 @@ urls:
 schedules:
   - &six_hours      {schedule: "0 0,6,12,18 * * *"}
   - &daily_midnight {schedule: "0 0 * * *"}
+  - &daily_noon     {schedule: "0 12 * * *"}
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
   - &weekdays       {schedule: "0 12 * * 1,2,3,4,5"}
   - &sundays        {schedule: "0 0 * * 0"}
@@ -66,27 +67,27 @@ tree_schedules:
   - &next_llvm_12                  {<< : *llvm_12,      << : *next,             << : *weekdays}
   - &next_llvm_11                  {<< : *llvm_11,      << : *next,             << : *weekdays}
   - &next_llvm_android             {<< : *llvm_android, << : *next,             << : *weekdays}
-  - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *daily_midnight}
-  - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *daily_midnight}
+  - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *daily_noon}
+  - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *daily_noon}
   - &stable-5_15_llvm_13           {<< : *llvm_13,      << : *stable-5_15,      << : *wednesdays}
   - &stable-5_15_llvm_12           {<< : *llvm_12,      << : *stable-5_15,      << : *wednesdays}
   - &stable-5_15_llvm_11           {<< : *llvm_11,      << : *stable-5_15,      << : *wednesdays}
-  - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *daily_midnight}
-  - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *daily_midnight}
+  - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *daily_noon}
+  - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *daily_noon}
   - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *wednesdays}
   - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *wednesdays}
   - &stable-5_10_llvm_11           {<< : *llvm_11,      << : *stable-5_10,      << : *wednesdays}
-  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *daily_midnight}
-  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *daily_midnight}
+  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *daily_noon}
+  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *daily_noon}
   - &stable-5_4_llvm_13            {<< : *llvm_13,      << : *stable-5_4,       << : *wednesdays}
-  - &stable-4_19_llvm_tot          {<< : *llvm_tot,     << : *stable-4_19,      << : *daily_midnight}
-  - &stable-4_19_llvm_latest       {<< : *llvm_latest,  << : *stable-4_19,      << : *daily_midnight}
+  - &stable-4_19_llvm_tot          {<< : *llvm_tot,     << : *stable-4_19,      << : *daily_noon}
+  - &stable-4_19_llvm_latest       {<< : *llvm_latest,  << : *stable-4_19,      << : *daily_noon}
   - &stable-4_19_llvm_13           {<< : *llvm_13,      << : *stable-4_19,      << : *wednesdays}
-  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *daily_midnight}
-  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *daily_midnight}
+  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *daily_noon}
+  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *daily_noon}
   - &stable-4_14_llvm_13           {<< : *llvm_13,      << : *stable-4_14,      << : *wednesdays}
-  - &stable-4_9_llvm_tot           {<< : *llvm_tot,     << : *stable-4_9,       << : *daily_midnight}
-  - &stable-4_9_llvm_latest        {<< : *llvm_latest,  << : *stable-4_9,       << : *daily_midnight}
+  - &stable-4_9_llvm_tot           {<< : *llvm_tot,     << : *stable-4_9,       << : *daily_noon}
+  - &stable-4_9_llvm_latest        {<< : *llvm_latest,  << : *stable-4_9,       << : *daily_noon}
   - &stable-4_9_llvm_13            {<< : *llvm_13,      << : *stable-4_9,       << : *wednesdays}
   - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *daily_midnight}
   - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *daily_midnight}
