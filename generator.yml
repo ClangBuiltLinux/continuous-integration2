@@ -28,10 +28,10 @@ urls:
   - &x86_64-fedora-config-url  https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
   - &x86_64-suse-config-url    https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
 schedules:
-  - &six_hours {schedule: "0 0,6,12,18 * * *"}
-  - &daily     {schedule: "0 0 * * *"}
+  - &six_hours      {schedule: "0 0,6,12,18 * * *"}
+  - &daily_midnight {schedule: "0 0 * * *"}
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
-  - &weekdays  {schedule: "0 12 * * 1,2,3,4,5"}
+  - &weekdays       {schedule: "0 12 * * 1,2,3,4,5"}
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
@@ -64,83 +64,83 @@ tree_schedules:
   - &next_llvm_12                  {<< : *llvm_12,      << : *next,             << : *weekdays}
   - &next_llvm_11                  {<< : *llvm_11,      << : *next,             << : *weekdays}
   - &next_llvm_android             {<< : *llvm_android, << : *next,             << : *weekdays}
-  - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *daily}
-  - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *daily}
-  - &stable-5_15_llvm_13           {<< : *llvm_13,      << : *stable-5_15,      << : *daily}
-  - &stable-5_15_llvm_12           {<< : *llvm_12,      << : *stable-5_15,      << : *daily}
-  - &stable-5_15_llvm_11           {<< : *llvm_11,      << : *stable-5_15,      << : *daily}
-  - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *daily}
-  - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *daily}
-  - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *daily}
-  - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *daily}
-  - &stable-5_10_llvm_11           {<< : *llvm_11,      << : *stable-5_10,      << : *daily}
-  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *daily}
-  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *daily}
-  - &stable-5_4_llvm_13            {<< : *llvm_13,      << : *stable-5_4,       << : *daily}
-  - &stable-4_19_llvm_tot          {<< : *llvm_tot,     << : *stable-4_19,      << : *daily}
-  - &stable-4_19_llvm_latest       {<< : *llvm_latest,  << : *stable-4_19,      << : *daily}
-  - &stable-4_19_llvm_13           {<< : *llvm_13,      << : *stable-4_19,      << : *daily}
-  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *daily}
-  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *daily}
-  - &stable-4_14_llvm_13           {<< : *llvm_13,      << : *stable-4_14,      << : *daily}
-  - &stable-4_9_llvm_tot           {<< : *llvm_tot,     << : *stable-4_9,       << : *daily}
-  - &stable-4_9_llvm_latest        {<< : *llvm_latest,  << : *stable-4_9,       << : *daily}
-  - &stable-4_9_llvm_13            {<< : *llvm_13,      << : *stable-4_9,       << : *daily}
-  - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *daily}
-  - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *daily}
-  - &android-mainline_llvm_13      {<< : *llvm_13,      << : *android-mainline, << : *daily}
-  - &android-mainline_llvm_12      {<< : *llvm_12,      << : *android-mainline, << : *daily}
-  - &android-mainline_llvm_android {<< : *llvm_android, << : *android-mainline, << : *daily}
-  - &android13-5_15_llvm_tot       {<< : *llvm_tot,     << : *android13-5_15,   << : *daily}
-  - &android13-5_15_llvm_latest    {<< : *llvm_latest,  << : *android13-5_15,   << : *daily}
-  - &android13-5_15_llvm_13        {<< : *llvm_13,      << : *android13-5_15,   << : *daily}
-  - &android13-5_15_llvm_12        {<< : *llvm_12,      << : *android13-5_15,   << : *daily}
-  - &android13-5_15_llvm_android   {<< : *llvm_android, << : *android13-5_15,   << : *daily}
-  - &android13-5_10_llvm_tot       {<< : *llvm_tot,     << : *android13-5_10,   << : *daily}
-  - &android13-5_10_llvm_latest    {<< : *llvm_latest,  << : *android13-5_10,   << : *daily}
-  - &android13-5_10_llvm_13        {<< : *llvm_13,      << : *android13-5_10,   << : *daily}
-  - &android13-5_10_llvm_12        {<< : *llvm_12,      << : *android13-5_10,   << : *daily}
-  - &android13-5_10_llvm_android   {<< : *llvm_android, << : *android13-5_10,   << : *daily}
-  - &android12-5_10_llvm_tot       {<< : *llvm_tot,     << : *android12-5_10,   << : *daily}
-  - &android12-5_10_llvm_latest    {<< : *llvm_latest,  << : *android12-5_10,   << : *daily}
-  - &android12-5_10_llvm_13        {<< : *llvm_13,      << : *android12-5_10,   << : *daily}
-  - &android12-5_10_llvm_12        {<< : *llvm_12,      << : *android12-5_10,   << : *daily}
-  - &android12-5_10_llvm_android   {<< : *llvm_android, << : *android12-5_10,   << : *daily}
-  - &android12-5_4_llvm_tot        {<< : *llvm_tot,     << : *android12-5_4,    << : *daily}
-  - &android12-5_4_llvm_latest     {<< : *llvm_latest,  << : *android12-5_4,    << : *daily}
-  - &android12-5_4_llvm_13         {<< : *llvm_13,      << : *android12-5_4,    << : *daily}
-  - &android12-5_4_llvm_12         {<< : *llvm_12,      << : *android12-5_4,    << : *daily}
-  - &android12-5_4_llvm_android    {<< : *llvm_android, << : *android12-5_4,    << : *daily}
-  - &android-4_19_llvm_tot         {<< : *llvm_tot,     << : *android-4_19,     << : *daily}
-  - &android-4_19_llvm_latest      {<< : *llvm_latest,  << : *android-4_19,     << : *daily}
-  - &android-4_19_llvm_13          {<< : *llvm_13,      << : *android-4_19,     << : *daily}
-  - &android-4_19_llvm_12          {<< : *llvm_12,      << : *android-4_19,     << : *daily}
-  - &android-4_19_llvm_android     {<< : *llvm_android, << : *android-4_19,     << : *daily}
-  - &android-4_14_llvm_tot         {<< : *llvm_tot,     << : *android-4_14,     << : *daily}
-  - &android-4_14_llvm_latest      {<< : *llvm_latest,  << : *android-4_14,     << : *daily}
-  - &android-4_14_llvm_13          {<< : *llvm_13,      << : *android-4_14,     << : *daily}
-  - &android-4_14_llvm_12          {<< : *llvm_12,      << : *android-4_14,     << : *daily}
-  - &android-4_14_llvm_android     {<< : *llvm_android, << : *android-4_14,     << : *daily}
-  - &android-4_9_llvm_tot          {<< : *llvm_tot,     << : *android-4_9,      << : *daily}
-  - &android-4_9_llvm_latest       {<< : *llvm_latest,  << : *android-4_9,      << : *daily}
-  - &android-4_9_llvm_13           {<< : *llvm_13,      << : *android-4_9,      << : *daily}
-  - &android-4_9_llvm_12           {<< : *llvm_12,      << : *android-4_9,      << : *daily}
-  - &android-4_9_llvm_android      {<< : *llvm_android, << : *android-4_9,      << : *daily}
-  - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *daily}
-  - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *daily}
-  - &tip_llvm_13                   {<< : *llvm_13,      << : *tip,              << : *daily}
-  - &tip_llvm_12                   {<< : *llvm_12,      << : *tip,              << : *daily}
-  - &tip_llvm_11                   {<< : *llvm_11,      << : *tip,              << : *daily}
-  - &arm64-core_llvm_tot           {<< : *llvm_tot,     << : *arm64-core,       << : *daily}
-  - &arm64-core_llvm_latest        {<< : *llvm_latest,  << : *arm64-core,       << : *daily}
-  - &arm64-core_llvm_13            {<< : *llvm_13,      << : *arm64-core,       << : *daily}
-  - &arm64-core_llvm_12            {<< : *llvm_12,      << : *arm64-core,       << : *daily}
-  - &arm64-core_llvm_11            {<< : *llvm_11,      << : *arm64-core,       << : *daily}
-  - &arm64-fixes_llvm_tot          {<< : *llvm_tot,     << : *arm64-fixes,      << : *daily}
-  - &arm64-fixes_llvm_latest       {<< : *llvm_latest,  << : *arm64-fixes,      << : *daily}
-  - &arm64-fixes_llvm_13           {<< : *llvm_13,      << : *arm64-fixes,      << : *daily}
-  - &arm64-fixes_llvm_12           {<< : *llvm_12,      << : *arm64-fixes,      << : *daily}
-  - &arm64-fixes_llvm_11           {<< : *llvm_11,      << : *arm64-fixes,      << : *daily}
+  - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *daily_midnight}
+  - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *daily_midnight}
+  - &stable-5_15_llvm_13           {<< : *llvm_13,      << : *stable-5_15,      << : *daily_midnight}
+  - &stable-5_15_llvm_12           {<< : *llvm_12,      << : *stable-5_15,      << : *daily_midnight}
+  - &stable-5_15_llvm_11           {<< : *llvm_11,      << : *stable-5_15,      << : *daily_midnight}
+  - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *daily_midnight}
+  - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *daily_midnight}
+  - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *daily_midnight}
+  - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *daily_midnight}
+  - &stable-5_10_llvm_11           {<< : *llvm_11,      << : *stable-5_10,      << : *daily_midnight}
+  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *daily_midnight}
+  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *daily_midnight}
+  - &stable-5_4_llvm_13            {<< : *llvm_13,      << : *stable-5_4,       << : *daily_midnight}
+  - &stable-4_19_llvm_tot          {<< : *llvm_tot,     << : *stable-4_19,      << : *daily_midnight}
+  - &stable-4_19_llvm_latest       {<< : *llvm_latest,  << : *stable-4_19,      << : *daily_midnight}
+  - &stable-4_19_llvm_13           {<< : *llvm_13,      << : *stable-4_19,      << : *daily_midnight}
+  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *daily_midnight}
+  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *daily_midnight}
+  - &stable-4_14_llvm_13           {<< : *llvm_13,      << : *stable-4_14,      << : *daily_midnight}
+  - &stable-4_9_llvm_tot           {<< : *llvm_tot,     << : *stable-4_9,       << : *daily_midnight}
+  - &stable-4_9_llvm_latest        {<< : *llvm_latest,  << : *stable-4_9,       << : *daily_midnight}
+  - &stable-4_9_llvm_13            {<< : *llvm_13,      << : *stable-4_9,       << : *daily_midnight}
+  - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *daily_midnight}
+  - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *daily_midnight}
+  - &android-mainline_llvm_13      {<< : *llvm_13,      << : *android-mainline, << : *daily_midnight}
+  - &android-mainline_llvm_12      {<< : *llvm_12,      << : *android-mainline, << : *daily_midnight}
+  - &android-mainline_llvm_android {<< : *llvm_android, << : *android-mainline, << : *daily_midnight}
+  - &android13-5_15_llvm_tot       {<< : *llvm_tot,     << : *android13-5_15,   << : *daily_midnight}
+  - &android13-5_15_llvm_latest    {<< : *llvm_latest,  << : *android13-5_15,   << : *daily_midnight}
+  - &android13-5_15_llvm_13        {<< : *llvm_13,      << : *android13-5_15,   << : *daily_midnight}
+  - &android13-5_15_llvm_12        {<< : *llvm_12,      << : *android13-5_15,   << : *daily_midnight}
+  - &android13-5_15_llvm_android   {<< : *llvm_android, << : *android13-5_15,   << : *daily_midnight}
+  - &android13-5_10_llvm_tot       {<< : *llvm_tot,     << : *android13-5_10,   << : *daily_midnight}
+  - &android13-5_10_llvm_latest    {<< : *llvm_latest,  << : *android13-5_10,   << : *daily_midnight}
+  - &android13-5_10_llvm_13        {<< : *llvm_13,      << : *android13-5_10,   << : *daily_midnight}
+  - &android13-5_10_llvm_12        {<< : *llvm_12,      << : *android13-5_10,   << : *daily_midnight}
+  - &android13-5_10_llvm_android   {<< : *llvm_android, << : *android13-5_10,   << : *daily_midnight}
+  - &android12-5_10_llvm_tot       {<< : *llvm_tot,     << : *android12-5_10,   << : *daily_midnight}
+  - &android12-5_10_llvm_latest    {<< : *llvm_latest,  << : *android12-5_10,   << : *daily_midnight}
+  - &android12-5_10_llvm_13        {<< : *llvm_13,      << : *android12-5_10,   << : *daily_midnight}
+  - &android12-5_10_llvm_12        {<< : *llvm_12,      << : *android12-5_10,   << : *daily_midnight}
+  - &android12-5_10_llvm_android   {<< : *llvm_android, << : *android12-5_10,   << : *daily_midnight}
+  - &android12-5_4_llvm_tot        {<< : *llvm_tot,     << : *android12-5_4,    << : *daily_midnight}
+  - &android12-5_4_llvm_latest     {<< : *llvm_latest,  << : *android12-5_4,    << : *daily_midnight}
+  - &android12-5_4_llvm_13         {<< : *llvm_13,      << : *android12-5_4,    << : *daily_midnight}
+  - &android12-5_4_llvm_12         {<< : *llvm_12,      << : *android12-5_4,    << : *daily_midnight}
+  - &android12-5_4_llvm_android    {<< : *llvm_android, << : *android12-5_4,    << : *daily_midnight}
+  - &android-4_19_llvm_tot         {<< : *llvm_tot,     << : *android-4_19,     << : *daily_midnight}
+  - &android-4_19_llvm_latest      {<< : *llvm_latest,  << : *android-4_19,     << : *daily_midnight}
+  - &android-4_19_llvm_13          {<< : *llvm_13,      << : *android-4_19,     << : *daily_midnight}
+  - &android-4_19_llvm_12          {<< : *llvm_12,      << : *android-4_19,     << : *daily_midnight}
+  - &android-4_19_llvm_android     {<< : *llvm_android, << : *android-4_19,     << : *daily_midnight}
+  - &android-4_14_llvm_tot         {<< : *llvm_tot,     << : *android-4_14,     << : *daily_midnight}
+  - &android-4_14_llvm_latest      {<< : *llvm_latest,  << : *android-4_14,     << : *daily_midnight}
+  - &android-4_14_llvm_13          {<< : *llvm_13,      << : *android-4_14,     << : *daily_midnight}
+  - &android-4_14_llvm_12          {<< : *llvm_12,      << : *android-4_14,     << : *daily_midnight}
+  - &android-4_14_llvm_android     {<< : *llvm_android, << : *android-4_14,     << : *daily_midnight}
+  - &android-4_9_llvm_tot          {<< : *llvm_tot,     << : *android-4_9,      << : *daily_midnight}
+  - &android-4_9_llvm_latest       {<< : *llvm_latest,  << : *android-4_9,      << : *daily_midnight}
+  - &android-4_9_llvm_13           {<< : *llvm_13,      << : *android-4_9,      << : *daily_midnight}
+  - &android-4_9_llvm_12           {<< : *llvm_12,      << : *android-4_9,      << : *daily_midnight}
+  - &android-4_9_llvm_android      {<< : *llvm_android, << : *android-4_9,      << : *daily_midnight}
+  - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *daily_midnight}
+  - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *daily_midnight}
+  - &tip_llvm_13                   {<< : *llvm_13,      << : *tip,              << : *daily_midnight}
+  - &tip_llvm_12                   {<< : *llvm_12,      << : *tip,              << : *daily_midnight}
+  - &tip_llvm_11                   {<< : *llvm_11,      << : *tip,              << : *daily_midnight}
+  - &arm64-core_llvm_tot           {<< : *llvm_tot,     << : *arm64-core,       << : *daily_midnight}
+  - &arm64-core_llvm_latest        {<< : *llvm_latest,  << : *arm64-core,       << : *daily_midnight}
+  - &arm64-core_llvm_13            {<< : *llvm_13,      << : *arm64-core,       << : *daily_midnight}
+  - &arm64-core_llvm_12            {<< : *llvm_12,      << : *arm64-core,       << : *daily_midnight}
+  - &arm64-core_llvm_11            {<< : *llvm_11,      << : *arm64-core,       << : *daily_midnight}
+  - &arm64-fixes_llvm_tot          {<< : *llvm_tot,     << : *arm64-fixes,      << : *daily_midnight}
+  - &arm64-fixes_llvm_latest       {<< : *llvm_latest,  << : *arm64-fixes,      << : *daily_midnight}
+  - &arm64-fixes_llvm_13           {<< : *llvm_13,      << : *arm64-fixes,      << : *daily_midnight}
+  - &arm64-fixes_llvm_12           {<< : *llvm_12,      << : *arm64-fixes,      << : *daily_midnight}
+  - &arm64-fixes_llvm_11           {<< : *llvm_11,      << : *arm64-fixes,      << : *daily_midnight}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
