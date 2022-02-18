@@ -13,7 +13,7 @@ name: 4.9 (clang-14)
     - tuxsuite/4.9-clang-14.tux.yml
     - .github/workflows/4.9-clang-14.yml
   schedule:
-  - cron: 0 0 * * *
+  - cron: 0 12 * * *
   workflow_dispatch: null
 jobs:
   kick_tuxsuite_defconfigs:
