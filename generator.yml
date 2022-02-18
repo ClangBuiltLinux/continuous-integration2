@@ -32,6 +32,7 @@ schedules:
   - &daily_midnight {schedule: "0 0 * * *"}
   - &daily_six      {schedule: "0 6 * * *"}
   - &daily_noon     {schedule: "0 12 * * *"}
+  - &daily_eighteen {schedule: "0 18 * * *"}
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
   - &weekdays       {schedule: "0 12 * * 1,2,3,4,5"}
   - &sundays        {schedule: "0 0 * * 0"}
@@ -132,19 +133,19 @@ tree_schedules:
   - &android-4_9_llvm_android      {<< : *llvm_android, << : *android-4_9,      << : *daily_six}
   - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *daily_midnight}
   - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *daily_midnight}
-  - &tip_llvm_13                   {<< : *llvm_13,      << : *tip,              << : *daily_midnight}
-  - &tip_llvm_12                   {<< : *llvm_12,      << : *tip,              << : *daily_midnight}
-  - &tip_llvm_11                   {<< : *llvm_11,      << : *tip,              << : *daily_midnight}
+  - &tip_llvm_13                   {<< : *llvm_13,      << : *tip,              << : *daily_eighteen}
+  - &tip_llvm_12                   {<< : *llvm_12,      << : *tip,              << : *daily_eighteen}
+  - &tip_llvm_11                   {<< : *llvm_11,      << : *tip,              << : *daily_eighteen}
   - &arm64-core_llvm_tot           {<< : *llvm_tot,     << : *arm64-core,       << : *daily_midnight}
   - &arm64-core_llvm_latest        {<< : *llvm_latest,  << : *arm64-core,       << : *daily_midnight}
-  - &arm64-core_llvm_13            {<< : *llvm_13,      << : *arm64-core,       << : *daily_midnight}
-  - &arm64-core_llvm_12            {<< : *llvm_12,      << : *arm64-core,       << : *daily_midnight}
-  - &arm64-core_llvm_11            {<< : *llvm_11,      << : *arm64-core,       << : *daily_midnight}
+  - &arm64-core_llvm_13            {<< : *llvm_13,      << : *arm64-core,       << : *daily_eighteen}
+  - &arm64-core_llvm_12            {<< : *llvm_12,      << : *arm64-core,       << : *daily_eighteen}
+  - &arm64-core_llvm_11            {<< : *llvm_11,      << : *arm64-core,       << : *daily_eighteen}
   - &arm64-fixes_llvm_tot          {<< : *llvm_tot,     << : *arm64-fixes,      << : *daily_midnight}
   - &arm64-fixes_llvm_latest       {<< : *llvm_latest,  << : *arm64-fixes,      << : *daily_midnight}
-  - &arm64-fixes_llvm_13           {<< : *llvm_13,      << : *arm64-fixes,      << : *daily_midnight}
-  - &arm64-fixes_llvm_12           {<< : *llvm_12,      << : *arm64-fixes,      << : *daily_midnight}
-  - &arm64-fixes_llvm_11           {<< : *llvm_11,      << : *arm64-fixes,      << : *daily_midnight}
+  - &arm64-fixes_llvm_13           {<< : *llvm_13,      << : *arm64-fixes,      << : *daily_eighteen}
+  - &arm64-fixes_llvm_12           {<< : *llvm_12,      << : *arm64-fixes,      << : *daily_eighteen}
+  - &arm64-fixes_llvm_11           {<< : *llvm_11,      << : *arm64-fixes,      << : *daily_eighteen}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
