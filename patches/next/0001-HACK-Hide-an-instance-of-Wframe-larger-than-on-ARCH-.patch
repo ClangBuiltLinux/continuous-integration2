@@ -1,0 +1,26 @@
+From de9ee0344296ba5a703037a19ec894b2bbb9cfc2 Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Fri, 18 Feb 2022 13:33:51 -0700
+Subject: [PATCH] HACK: Hide an instance of -Wframe-larger-than= on
+ ARCH=hexagon allmodconfig
+
+Link: https://github.com/ClangBuiltLinux/linux/issues/1600
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ drivers/gpu/drm/selftests/Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/gpu/drm/selftests/Makefile b/drivers/gpu/drm/selftests/Makefile
+index 0856e4b12f70..c1ef1b2322d9 100644
+--- a/drivers/gpu/drm/selftests/Makefile
++++ b/drivers/gpu/drm/selftests/Makefile
+@@ -5,3 +5,6 @@ test-drm_modeset-y := test-drm_modeset_common.o test-drm_plane_helper.o \
+ 		      test-drm_rect.o
+ 
+ obj-$(CONFIG_DRM_DEBUG_SELFTEST) += test-drm_mm.o test-drm_modeset.o test-drm_cmdline_parser.o
++ifdef CONFIG_HEXAGON
++CFLAGS_test-drm_plane_helper.o := -Wframe-larger-than=1200
++endif
+-- 
+2.35.1
+
