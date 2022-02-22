@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/mainline-clang-11.tux.yml || true
+      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/mainline-clang-11.tux.yml --patch-series patches/mainline || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
@@ -516,7 +516,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/mainline-clang-11.tux.yml || true
+      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/mainline-clang-11.tux.yml --patch-series patches/mainline || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
@@ -741,7 +741,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tuxsuite
-      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/mainline-clang-11.tux.yml || true
+      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/mainline-clang-11.tux.yml --patch-series patches/mainline || true
     - name: save output
       uses: actions/upload-artifact@v2
       with:
