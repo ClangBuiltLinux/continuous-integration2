@@ -6,7 +6,7 @@ import pathlib
 import sys
 import yaml
 
-from utils import get_config, get_llvm_versions, get_repo_ref, patch_series_flag
+from utils import get_config, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
 
 
 def parse_args(trees):
@@ -157,6 +157,16 @@ def get_steps(build, build_set):
     } # yapf: disable
 
 
+def get_cron_schedule(schedules, tree_name, llvm_version):
+    for item in schedules:
+        if item["name"] == tree_name and \
+           item["llvm_version"] == llvm_version:
+            return item["schedule"]
+    print_red("Could not find schedule for {} clang-{}?".format(
+        tree_name, llvm_version))
+    exit(1)
+
+
 def print_builds(config, tree_name, llvm_version):
     repo, ref = get_repo_ref(config, tree_name)
     toolchain = "clang-{}".format(llvm_version)
@@ -170,7 +180,6 @@ def print_builds(config, tree_name, llvm_version):
         if build["git_repo"] == repo and \
            build["git_ref"] == ref and \
            build["llvm_version"] == llvm_version:
-            cron_schedule = build["schedule"]
             if "defconfig" in str(build["config"]):
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
             elif "https://" in str(build["config"]):
@@ -180,6 +189,8 @@ def print_builds(config, tree_name, llvm_version):
                 check_logs_allconfigs.update(get_steps(build, "allconfigs"))
 
     workflow_name = "{} ({})".format(tree_name, toolchain)
+    cron_schedule = get_cron_schedule(config["tree_schedules"], tree_name,
+                                      llvm_version)
     workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
     workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))

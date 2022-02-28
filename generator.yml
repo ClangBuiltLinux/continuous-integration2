@@ -33,25 +33,114 @@ schedules:
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
   - &weekdays  {schedule: "0 12 * * 1,2,3,4,5"}
 trees:
-  - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline,         << : *six_hours}
-  - &next             {git_repo: *next-url,     git_ref: master,              name: next,             << : *weekdays}
-  - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15",           << : *daily}
-  - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10",           << : *daily}
-  - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4",            << : *daily}
-  - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19",           << : *daily}
-  - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14",           << : *daily}
-  - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9",            << : *daily}
-  - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline, << : *daily}
-  - &android13-5_15   {git_repo: *android-url,  git_ref: android13-5.15,      name: android13-5.15,   << : *daily}
-  - &android13-5_10   {git_repo: *android-url,  git_ref: android13-5.10,      name: android13-5.10,   << : *daily}
-  - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10,   << : *daily}
-  - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4,    << : *daily}
-  - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19,     << : *daily}
-  - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14,     << : *daily}
-  - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9,      << : *daily}
-  - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip,              << : *daily}
-  - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64,            << : *daily}
-  - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes,      << : *daily}
+  - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
+  - &next             {git_repo: *next-url,     git_ref: master,              name: next}
+  - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
+  - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
+  - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
+  - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19"}
+  - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14"}
+  - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9"}
+  - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
+  - &android13-5_15   {git_repo: *android-url,  git_ref: android13-5.15,      name: android13-5.15}
+  - &android13-5_10   {git_repo: *android-url,  git_ref: android13-5.10,      name: android13-5.10}
+  - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10}
+  - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4}
+  - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19}
+  - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14}
+  - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9}
+  - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
+  - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64}
+  - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes}
+tree_schedules:
+  - &mainline_llvm_tot             {<< : *llvm_tot,     << : *mainline,         << : *six_hours}
+  - &mainline_llvm_latest          {<< : *llvm_latest,  << : *mainline,         << : *six_hours}
+  - &mainline_llvm_13              {<< : *llvm_13,      << : *mainline,         << : *six_hours}
+  - &mainline_llvm_12              {<< : *llvm_12,      << : *mainline,         << : *six_hours}
+  - &mainline_llvm_11              {<< : *llvm_11,      << : *mainline,         << : *six_hours}
+  - &next_llvm_tot                 {<< : *llvm_tot,     << : *next,             << : *weekdays}
+  - &next_llvm_latest              {<< : *llvm_latest,  << : *next,             << : *weekdays}
+  - &next_llvm_13                  {<< : *llvm_13,      << : *next,             << : *weekdays}
+  - &next_llvm_12                  {<< : *llvm_12,      << : *next,             << : *weekdays}
+  - &next_llvm_11                  {<< : *llvm_11,      << : *next,             << : *weekdays}
+  - &next_llvm_android             {<< : *llvm_android, << : *next,             << : *weekdays}
+  - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *daily}
+  - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *daily}
+  - &stable-5_15_llvm_13           {<< : *llvm_13,      << : *stable-5_15,      << : *daily}
+  - &stable-5_15_llvm_12           {<< : *llvm_12,      << : *stable-5_15,      << : *daily}
+  - &stable-5_15_llvm_11           {<< : *llvm_11,      << : *stable-5_15,      << : *daily}
+  - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *daily}
+  - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *daily}
+  - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *daily}
+  - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *daily}
+  - &stable-5_10_llvm_11           {<< : *llvm_11,      << : *stable-5_10,      << : *daily}
+  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *daily}
+  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *daily}
+  - &stable-5_4_llvm_13            {<< : *llvm_13,      << : *stable-5_4,       << : *daily}
+  - &stable-4_19_llvm_tot          {<< : *llvm_tot,     << : *stable-4_19,      << : *daily}
+  - &stable-4_19_llvm_latest       {<< : *llvm_latest,  << : *stable-4_19,      << : *daily}
+  - &stable-4_19_llvm_13           {<< : *llvm_13,      << : *stable-4_19,      << : *daily}
+  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *daily}
+  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *daily}
+  - &stable-4_14_llvm_13           {<< : *llvm_13,      << : *stable-4_14,      << : *daily}
+  - &stable-4_9_llvm_tot           {<< : *llvm_tot,     << : *stable-4_9,       << : *daily}
+  - &stable-4_9_llvm_latest        {<< : *llvm_latest,  << : *stable-4_9,       << : *daily}
+  - &stable-4_9_llvm_13            {<< : *llvm_13,      << : *stable-4_9,       << : *daily}
+  - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *daily}
+  - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *daily}
+  - &android-mainline_llvm_13      {<< : *llvm_13,      << : *android-mainline, << : *daily}
+  - &android-mainline_llvm_12      {<< : *llvm_12,      << : *android-mainline, << : *daily}
+  - &android-mainline_llvm_android {<< : *llvm_android, << : *android-mainline, << : *daily}
+  - &android13-5_15_llvm_tot       {<< : *llvm_tot,     << : *android13-5_15,   << : *daily}
+  - &android13-5_15_llvm_latest    {<< : *llvm_latest,  << : *android13-5_15,   << : *daily}
+  - &android13-5_15_llvm_13        {<< : *llvm_13,      << : *android13-5_15,   << : *daily}
+  - &android13-5_15_llvm_12        {<< : *llvm_12,      << : *android13-5_15,   << : *daily}
+  - &android13-5_15_llvm_android   {<< : *llvm_android, << : *android13-5_15,   << : *daily}
+  - &android13-5_10_llvm_tot       {<< : *llvm_tot,     << : *android13-5_10,   << : *daily}
+  - &android13-5_10_llvm_latest    {<< : *llvm_latest,  << : *android13-5_10,   << : *daily}
+  - &android13-5_10_llvm_13        {<< : *llvm_13,      << : *android13-5_10,   << : *daily}
+  - &android13-5_10_llvm_12        {<< : *llvm_12,      << : *android13-5_10,   << : *daily}
+  - &android13-5_10_llvm_android   {<< : *llvm_android, << : *android13-5_10,   << : *daily}
+  - &android12-5_10_llvm_tot       {<< : *llvm_tot,     << : *android12-5_10,   << : *daily}
+  - &android12-5_10_llvm_latest    {<< : *llvm_latest,  << : *android12-5_10,   << : *daily}
+  - &android12-5_10_llvm_13        {<< : *llvm_13,      << : *android12-5_10,   << : *daily}
+  - &android12-5_10_llvm_12        {<< : *llvm_12,      << : *android12-5_10,   << : *daily}
+  - &android12-5_10_llvm_android   {<< : *llvm_android, << : *android12-5_10,   << : *daily}
+  - &android12-5_4_llvm_tot        {<< : *llvm_tot,     << : *android12-5_4,    << : *daily}
+  - &android12-5_4_llvm_latest     {<< : *llvm_latest,  << : *android12-5_4,    << : *daily}
+  - &android12-5_4_llvm_13         {<< : *llvm_13,      << : *android12-5_4,    << : *daily}
+  - &android12-5_4_llvm_12         {<< : *llvm_12,      << : *android12-5_4,    << : *daily}
+  - &android12-5_4_llvm_android    {<< : *llvm_android, << : *android12-5_4,    << : *daily}
+  - &android-4_19_llvm_tot         {<< : *llvm_tot,     << : *android-4_19,     << : *daily}
+  - &android-4_19_llvm_latest      {<< : *llvm_latest,  << : *android-4_19,     << : *daily}
+  - &android-4_19_llvm_13          {<< : *llvm_13,      << : *android-4_19,     << : *daily}
+  - &android-4_19_llvm_12          {<< : *llvm_12,      << : *android-4_19,     << : *daily}
+  - &android-4_19_llvm_android     {<< : *llvm_android, << : *android-4_19,     << : *daily}
+  - &android-4_14_llvm_tot         {<< : *llvm_tot,     << : *android-4_14,     << : *daily}
+  - &android-4_14_llvm_latest      {<< : *llvm_latest,  << : *android-4_14,     << : *daily}
+  - &android-4_14_llvm_13          {<< : *llvm_13,      << : *android-4_14,     << : *daily}
+  - &android-4_14_llvm_12          {<< : *llvm_12,      << : *android-4_14,     << : *daily}
+  - &android-4_14_llvm_android     {<< : *llvm_android, << : *android-4_14,     << : *daily}
+  - &android-4_9_llvm_tot          {<< : *llvm_tot,     << : *android-4_9,      << : *daily}
+  - &android-4_9_llvm_latest       {<< : *llvm_latest,  << : *android-4_9,      << : *daily}
+  - &android-4_9_llvm_13           {<< : *llvm_13,      << : *android-4_9,      << : *daily}
+  - &android-4_9_llvm_12           {<< : *llvm_12,      << : *android-4_9,      << : *daily}
+  - &android-4_9_llvm_android      {<< : *llvm_android, << : *android-4_9,      << : *daily}
+  - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *daily}
+  - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *daily}
+  - &tip_llvm_13                   {<< : *llvm_13,      << : *tip,              << : *daily}
+  - &tip_llvm_12                   {<< : *llvm_12,      << : *tip,              << : *daily}
+  - &tip_llvm_11                   {<< : *llvm_11,      << : *tip,              << : *daily}
+  - &arm64-core_llvm_tot           {<< : *llvm_tot,     << : *arm64-core,       << : *daily}
+  - &arm64-core_llvm_latest        {<< : *llvm_latest,  << : *arm64-core,       << : *daily}
+  - &arm64-core_llvm_13            {<< : *llvm_13,      << : *arm64-core,       << : *daily}
+  - &arm64-core_llvm_12            {<< : *llvm_12,      << : *arm64-core,       << : *daily}
+  - &arm64-core_llvm_11            {<< : *llvm_11,      << : *arm64-core,       << : *daily}
+  - &arm64-fixes_llvm_tot          {<< : *llvm_tot,     << : *arm64-fixes,      << : *daily}
+  - &arm64-fixes_llvm_latest       {<< : *llvm_latest,  << : *arm64-fixes,      << : *daily}
+  - &arm64-fixes_llvm_13           {<< : *llvm_13,      << : *arm64-fixes,      << : *daily}
+  - &arm64-fixes_llvm_12           {<< : *llvm_12,      << : *arm64-fixes,      << : *daily}
+  - &arm64-fixes_llvm_11           {<< : *llvm_11,      << : *arm64-fixes,      << : *daily}
 architectures:
  - &arm-arch     arm
  - &arm64-arch   arm64
