@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ci_root=$(dirname "$0")
+ci_root=$(dirname "$(dirname "$(readlink -f "$0")")")
 
 echo "Copy and paste the output below into README.md:"
 echo

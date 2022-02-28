@@ -3,7 +3,7 @@
 if [[ -n ${GITHUB_ACTIONS} ]]; then
     repo=${GITHUB_WORKSPACE}
 else
-    repo=$(dirname "$(readlink -f "${0}")")
+    repo=$(dirname "$(dirname "$(readlink -f "${0}")")")
 fi
 
 function update_series_commands() {
