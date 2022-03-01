@@ -61,7 +61,7 @@ for workflow in "${repo}"/.github/workflows/*.yml; do
         echo
         echo "Regenerate the TuxSuite and workflow files:"
         echo
-        echo "$ ./generate.sh ${tree}"
+        echo "$ scripts/generate.sh ${tree}"
         exit 1
     fi
 
@@ -72,7 +72,7 @@ for workflow in "${repo}"/.github/workflows/*.yml; do
         echo
         echo "Regenerate the TuxSuite and workflow files:"
         echo
-        echo "$ ./generate.sh ${tree}"
+        echo "$ scripts/generate.sh ${tree}"
         echo
         echo "or remove the patches if they are no longer being used."
         exit 1

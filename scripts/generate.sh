@@ -42,11 +42,11 @@ if ${CHECK:=false}; then
     if [[ -n "$(git --no-optional-locks status -uno --porcelain 2>/dev/null)" ]]; then
         set +x
         echo
-        echo "Running 'generate.sh all' generated the following diff:"
+        echo "Running 'scripts/generate.sh all' generated the following diff:"
         echo
         git diff HEAD
         echo
-        echo "Please run 'generate.sh all' locally and commit then push the changes it creates!"
+        echo "Please run 'scripts/generate.sh all' locally and commit then push the changes it creates!"
         exit 1
     fi
 fi
