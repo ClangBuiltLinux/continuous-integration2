@@ -109,10 +109,10 @@ to it. Ex.
 
 ```
 # Generate just next and mainline TuxSuite and GitHub Action workflows
-$ ./generate.sh next mainline
+$ scripts/generate.sh next mainline
 
 # Regenerate all of the current TuxSuite and GitHub Action workflows
-$ ./generate.sh all
+$ scripts/generate.sh all
 ```
 
 The CI the child workflows run can be rerun locally via:
