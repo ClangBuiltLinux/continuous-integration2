@@ -1,3 +1,3 @@
-0001-HACK-Hide-an-instance-of-Wframe-larger-than-on-ARCH-.patch
 20220223_seanjc_kvm_x86_fix_pointer_mistmatch_warning_when_patching_ret0_static_calls.patch
+20220302_nathan_drm_selftest_plane_helper_put_test_structures_in_static_storage.patch
 v2_20220203_tzimmermann_drm_panel_select_drm_dp_helper_for_drm_panel_edp.patch
