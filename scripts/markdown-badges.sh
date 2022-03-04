@@ -10,5 +10,5 @@ for workflow in "$ci_root"/.github/workflows/*.yml; do
     grep -q tuxsuite "$workflow" || continue
 
     workflow_url=https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/$(basename "$workflow")
-    echo "[![Actions Status]($workflow_url/badge.svg)]($workflow_url)"
+    echo "[![$(basename "$workflow" | sed 's/.yml//') build status]($workflow_url/badge.svg)]($workflow_url)"
 done
