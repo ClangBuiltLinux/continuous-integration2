@@ -101,7 +101,7 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
             },
             "steps": [
                 {
-                    "uses": "actions/checkout@v2"
+                    "uses": "actions/checkout@v3"
                 },
                 {
                     "name": "tuxsuite",
