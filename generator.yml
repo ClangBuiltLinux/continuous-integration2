@@ -308,9 +308,10 @@ builds:
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le_suse,      << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # SUSE ppc64le build with LLVM_IAS=0: https://github.com/ClangBuiltLinux/linux/issues/1418
+  - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
@@ -369,9 +370,9 @@ builds:
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le_fedora,    << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le_suse,      << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *s390,              << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
