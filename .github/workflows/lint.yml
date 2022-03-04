@@ -13,21 +13,21 @@ jobs:
     name: Check workflow matrices
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: check-matrix.sh
       run: bash scripts/check-matrix.sh
   check_generated_files:
     name: Check generated files
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: generate.sh
       run: bash scripts/generate.sh --check all
   check_patch_series:
     name: Check patches series
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: check-patches.sh
       run: bash scripts/check-patches.sh
   shellcheck:
