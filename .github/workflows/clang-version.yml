@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-20.04
     container: tuxmake/x86_64_clang-nightly
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: parse-debian-clang.sh --check
       run: bash parse-debian-clang.sh --check

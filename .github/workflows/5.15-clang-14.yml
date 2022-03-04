@@ -23,7 +23,7 @@ jobs:
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/5.15-clang-14.tux.yml || true
     - name: save output
@@ -628,7 +628,7 @@ jobs:
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/5.15-clang-14.tux.yml || true
     - name: save output
@@ -872,7 +872,7 @@ jobs:
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/5.15-clang-14.tux.yml || true
     - name: save output

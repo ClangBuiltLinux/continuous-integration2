@@ -23,7 +23,7 @@ jobs:
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/arm64-fixes-clang-12.tux.yml --patch-series patches/arm64-fixes || true
     - name: save output
@@ -58,7 +58,7 @@ jobs:
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/arm64-fixes-clang-12.tux.yml --patch-series patches/arm64-fixes || true
     - name: save output
