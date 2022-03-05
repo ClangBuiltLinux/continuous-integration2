@@ -266,7 +266,7 @@ sets:
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: riscv
@@ -445,8 +445,7 @@ sets:
     - kernel
     kernel_image: zImage.epapr
     make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -456,7 +455,6 @@ sets:
     - kernel
     kernel_image: zImage.epapr
     make_variables:
-      LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
