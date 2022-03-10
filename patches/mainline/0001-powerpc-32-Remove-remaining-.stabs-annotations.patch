@@ -1,0 +1,77 @@
+From 12318163737cd8808d13faa6e2393774191a6182 Mon Sep 17 00:00:00 2001
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+Date: Tue, 30 Nov 2021 13:04:49 +0100
+Subject: [PATCH] powerpc/32: Remove remaining .stabs annotations
+
+STABS debug format has been superseded long time ago by DWARF.
+
+Remove the few remaining .stabs annotations from old 32 bits code.
+
+Reported-by: kernel test robot <lkp@intel.com>
+Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+Signed-off-by: Michael Ellerman <mpe@ellerman.id.au>
+Link: https://lore.kernel.org/r/68932ec2ba6b868d35006b96e90f0890f3da3c05.1638273868.git.christophe.leroy@csgroup.eu
+---
+ arch/powerpc/include/asm/ppc_asm.h   | 1 -
+ arch/powerpc/kernel/head_book3s_32.S | 3 ---
+ arch/powerpc/lib/checksum_32.S       | 3 ---
+ arch/powerpc/lib/copy_32.S           | 3 ---
+ 4 files changed, 10 deletions(-)
+
+diff --git a/arch/powerpc/include/asm/ppc_asm.h b/arch/powerpc/include/asm/ppc_asm.h
+index f21e6bde17a1..c4b074263bf9 100644
+--- a/arch/powerpc/include/asm/ppc_asm.h
++++ b/arch/powerpc/include/asm/ppc_asm.h
+@@ -208,7 +208,6 @@ GLUE(.,name):
+ n:
+ 
+ #define _GLOBAL(n)	\
+-	.stabs __stringify(n:F-1),N_FUN,0,0,n;\
+ 	.globl n;	\
+ n:
+ 
+diff --git a/arch/powerpc/kernel/head_book3s_32.S b/arch/powerpc/kernel/head_book3s_32.S
+index d489b965f9a6..94f88dc8269d 100644
+--- a/arch/powerpc/kernel/head_book3s_32.S
++++ b/arch/powerpc/kernel/head_book3s_32.S
+@@ -50,9 +50,6 @@
+ 	mtspr	SPRN_DBAT##n##L,RB
+ 
+ 	__HEAD
+-	.stabs	"arch/powerpc/kernel/",N_SO,0,0,0f
+-	.stabs	"head_book3s_32.S",N_SO,0,0,0f
+-0:
+ _ENTRY(_stext);
+ 
+ /*
+diff --git a/arch/powerpc/lib/checksum_32.S b/arch/powerpc/lib/checksum_32.S
+index 27d9070617df..4541e8e29467 100644
+--- a/arch/powerpc/lib/checksum_32.S
++++ b/arch/powerpc/lib/checksum_32.S
+@@ -116,9 +116,6 @@ EXPORT_SYMBOL(__csum_partial)
+ 	EX_TABLE(8 ## n ## 7b, fault);
+ 
+ 	.text
+-	.stabs	"arch/powerpc/lib/",N_SO,0,0,0f
+-	.stabs	"checksum_32.S",N_SO,0,0,0f
+-0:
+ 
+ CACHELINE_BYTES = L1_CACHE_BYTES
+ LG_CACHELINE_BYTES = L1_CACHE_SHIFT
+diff --git a/arch/powerpc/lib/copy_32.S b/arch/powerpc/lib/copy_32.S
+index a3bcf4786e4a..3e9c27c46331 100644
+--- a/arch/powerpc/lib/copy_32.S
++++ b/arch/powerpc/lib/copy_32.S
+@@ -57,9 +57,6 @@
+ 	EX_TABLE(8 ## n ## 7b,9 ## n ## 1b)
+ 
+ 	.text
+-	.stabs	"arch/powerpc/lib/",N_SO,0,0,0f
+-	.stabs	"copy_32.S",N_SO,0,0,0f
+-0:
+ 
+ CACHELINE_BYTES = L1_CACHE_BYTES
+ LG_CACHELINE_BYTES = L1_CACHE_SHIFT
+-- 
+2.35.1
+
