@@ -223,7 +223,7 @@ def run_boot(build):
            "CONFIG_KCSAN_KUNIT_TEST=y" in build["kconfig"]:
             print_yellow(
                 "Disabling Oops problem matcher under Sanitizer KUnit build")
-            print("::remove-matcher owner=linux-kernel-oopses")
+            print("::remove-matcher owner=linux-kernel-oopses::")
 
     # Before spawning a process with potentially different IO buffering,
     # flush the existing buffers so output is ordered correctly.
