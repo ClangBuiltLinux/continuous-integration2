@@ -40,6 +40,7 @@ schedules:
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
+  - &stable           {git_repo: *stable-url,   git_ref: linux-5.17.y,        name: stable}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
   - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
@@ -69,6 +70,11 @@ tree_schedules:
   - &next_llvm_12                  {<< : *llvm_12,      << : *next,             << : *weekdays}
   - &next_llvm_11                  {<< : *llvm_11,      << : *next,             << : *weekdays}
   - &next_llvm_android             {<< : *llvm_android, << : *next,             << : *weekdays}
+  - &stable_llvm_tot               {<< : *llvm_tot,     << : *stable,           << : *daily_noon}
+  - &stable_llvm_latest            {<< : *llvm_latest,  << : *stable,           << : *daily_noon}
+  - &stable_llvm_13                {<< : *llvm_13,      << : *stable,           << : *wednesdays}
+  - &stable_llvm_12                {<< : *llvm_12,      << : *stable,           << : *wednesdays}
+  - &stable_llvm_11                {<< : *llvm_11,      << : *stable,           << : *wednesdays}
   - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *daily_noon}
   - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *daily_noon}
   - &stable-5_15_llvm_13           {<< : *llvm_13,      << : *stable-5_15,      << : *wednesdays}
