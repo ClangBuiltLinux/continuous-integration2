@@ -33,6 +33,7 @@ def get_image_name():
         "mips": "vmlinux",
         "riscv": "Image",
         "s390": "bzImage",
+        "um": "linux",
         "x86_64": "bzImage",
     }[arch]
 
