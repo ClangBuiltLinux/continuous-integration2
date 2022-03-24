@@ -206,19 +206,21 @@ def cwd():
 def run_boot(build):
     cbl_arch = get_cbl_name()
     kernel_image = cwd() + "/" + get_image_name()
-    boot_qemu = [
-        "./boot-utils/boot-qemu.sh", "-a", cbl_arch, "-k", kernel_image
-    ]
+    if cbl_arch == "um":
+        boot_cmd = ["./boot-utils/boot-uml.sh"]
+    else:
+        boot_cmd = ["./boot-utils/boot-qemu.sh", "-a", cbl_arch]
+    boot_cmd += ["-k", kernel_image]
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower
     if "CONFIG_KASAN=y" in build["kconfig"] or \
        "CONFIG_KCSAN=y" in build["kconfig"] or \
        "CONFIG_UBSAN=y" in build["kconfig"]:
-        boot_qemu += ["-s", "4"]
+        boot_cmd += ["-s", "4"]
         if "CONFIG_KASAN=y" in build["kconfig"]:
-            boot_qemu += ["-t", "20m"]
+            boot_cmd += ["-t", "20m"]
         else:
-            boot_qemu += ["-t", "10m"]
+            boot_cmd += ["-t", "10m"]
         if "CONFIG_KASAN_KUNIT_TEST=y" in build["kconfig"] or \
            "CONFIG_KCSAN_KUNIT_TEST=y" in build["kconfig"]:
             print_yellow(
@@ -231,7 +233,7 @@ def run_boot(build):
     sys.stderr.flush()
 
     try:
-        subprocess.run(boot_qemu, check=True)
+        subprocess.run(boot_cmd, check=True)
     except subprocess.CalledProcessError as e:
         if e.returncode == 124:
             print_red("Image failed to boot")
