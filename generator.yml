@@ -326,7 +326,8 @@ builds:
   - {<< : *s390_kasan,        << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -388,7 +389,8 @@ builds:
   - {<< : *s390_kasan,        << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -691,7 +693,8 @@ builds:
   - {<< : *s390_kasan,        << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_fedora,       << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_suse,         << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -753,7 +756,8 @@ builds:
   - {<< : *s390_kasan,        << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_fedora,       << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_suse,         << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1055,7 +1059,8 @@ builds:
   - {<< : *s390_kasan,        << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_fedora,       << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_suse,         << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1117,7 +1122,8 @@ builds:
   - {<< : *s390_kasan,        << : *next,             << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_fedora,       << : *next,             << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_suse,         << : *next,             << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1416,7 +1422,8 @@ builds:
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
   # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
   # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  << : *llvm_12}
-  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1475,7 +1482,8 @@ builds:
   - {<< : *riscv_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_12}
   # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
   # - {<< : *s390,              << : *next,             << : *clang,           boot: true,  << : *llvm_12}
-  - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1727,7 +1735,8 @@ builds:
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_11}
   # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
   # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  << : *llvm_11}
-  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -1784,7 +1793,8 @@ builds:
   - {<< : *riscv_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_11}
   # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
   # - {<< : *s390,              << : *next,             << : *clang,           boot: true,  << : *llvm_11}
-  - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
+  # um disabled: https://gitlab.com/Linaro/tuxsuite/-/issues/157
+  # - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
