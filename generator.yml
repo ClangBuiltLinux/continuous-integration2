@@ -1965,10 +1965,9 @@ builds:
   #  Next  #
   ##########
   - {<< : *arm32_v5,          << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
-  # Certain ARM builds disabled until next Android LLVM release: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1983048
-  # - {<< : *arm32_v6,          << : *next,             << : *llvm,            boot: true,  << : *llvm_android}
-  # - {<< : *arm32_v7,          << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
-  # - {<< : *arm32_v7_t,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
+  - {<< : *arm32_v6,          << : *next,             << : *llvm,            boot: true,  << : *llvm_android}
+  - {<< : *arm32_v7,          << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
+  - {<< : *arm32_v7_t,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_android}
   - {<< : *arm32_allno,       << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, << : *llvm_android}
@@ -1993,8 +1992,7 @@ builds:
   #  Android  #
   #############
   - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, << : *llvm_android}
-  # Certain ARM builds disabled until next Android LLVM release: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1983048
-  # - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
+  - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm32_allmod,      << : *android13-5_15,   << : *llvm_full,       boot: false, << : *llvm_android}
