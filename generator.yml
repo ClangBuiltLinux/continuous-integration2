@@ -1449,7 +1449,8 @@ builds:
   - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *arm32_allno,       << : *next,             << : *llvm,            boot: false, << : *llvm_12}
-  - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, << : *llvm_12}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *arm32_fedora,      << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm32_suse,        << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1762,7 +1763,8 @@ builds:
   - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_allno,       << : *next,             << : *llvm,            boot: false, << : *llvm_11}
-  - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, << : *llvm_11}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_fedora,      << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_suse,        << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -1980,7 +1982,8 @@ builds:
   - {<< : *arm32_v7_t,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm32_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_android}
   - {<< : *arm32_allno,       << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
-  - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, << : *llvm_android}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *next,             << : *llvm,            boot: false, << : *llvm_android}
   - {<< : *arm64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm64be,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm64_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
