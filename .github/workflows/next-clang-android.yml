@@ -51,6 +51,63 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _a82d5da76edb25de07265b1189803b21:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=android aspeed_g5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      BOOT: 1
+      CONFIG: aspeed_g5_defconfig
+    container: ghcr.io/clangbuiltlinux/qemu
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _87ceb80e8738ca51446e7e1857d39b9c:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v7_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      BOOT: 1
+      CONFIG: multi_v7_defconfig
+    container: ghcr.io/clangbuiltlinux/qemu
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _351114799740fe3119a3b2ce6956a6bb:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    container: ghcr.io/clangbuiltlinux/qemu
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _300e2471179b5487f89662afe7517d23:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
@@ -371,44 +428,6 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _191bb4a446201921f3ea6bfa0e9b122f:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig+CONFIG_WERROR=n
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: android
-      BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
-  _bf13eb4d6ca658a087deadacb13963ec:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_WERROR=n+CONFIG_LTO_CLANG_THIN=y
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: android
-      BOOT: 0
-      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_WERROR=n+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _00318ac7d697c430359de1e4e903d7eb:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
@@ -418,25 +437,6 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_allconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
-  _40dc138ef3ff6bc3203c6d3c9a524e48:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allyesconfig+CONFIG_WERROR=n
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: android
-      BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
     container: ghcr.io/clangbuiltlinux/qemu
     steps:
     - uses: actions/checkout@v2
