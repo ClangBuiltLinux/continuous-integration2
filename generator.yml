@@ -1389,7 +1389,8 @@ builds:
   - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *arm32_allno,       << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
-  - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *arm32_fedora,      << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm32_suse,        << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1705,7 +1706,8 @@ builds:
   - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_allno,       << : *mainline,         << : *llvm,            boot: false, << : *llvm_11}
-  - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_11}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_fedora,      << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_suse,        << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
