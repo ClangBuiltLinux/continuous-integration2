@@ -18,7 +18,6 @@ urls:
   - &arm32-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
   - &arm64-fedora-config-url   https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
   - &arm64-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
-  - &i686-fedora-config-url    https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
   - &i386-suse-config-url      https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
   - &ppc64le-fedora-config-url https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
   - &ppc64le-suse-config-url   https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
@@ -217,9 +216,6 @@ configs:
   - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *default}
   - &hexagon_allmod    {config: allmodconfig,                                                                                              << : *hexagon-triple,       << : *default}
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel}
-  # CONFIG_ATOMIC64_SELFTEST disabled: https://github.com/ClangBuiltLinux/linux/issues/1437
-  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &i686_fedora       {config: [*i686-fedora-config-url, CONFIG_ATOMIC64_SELFTEST=n, CONFIG_BPF_PRELOAD=n],                               << : *i386-triple,          << : *kernel}
   - &i386_suse         {config: *i386-suse-config-url,                                                                                     << : *i386-triple,          << : *default}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      << : *mips-triple,          << : *kernel}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      << : *mipsel-triple,        << : *kernel}
@@ -310,8 +306,6 @@ builds:
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -373,8 +367,6 @@ builds:
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -437,8 +429,6 @@ builds:
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -497,8 +487,6 @@ builds:
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -677,8 +665,6 @@ builds:
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -740,8 +726,6 @@ builds:
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -804,8 +788,6 @@ builds:
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -864,8 +846,6 @@ builds:
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1043,8 +1023,6 @@ builds:
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1106,8 +1084,6 @@ builds:
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1170,8 +1146,6 @@ builds:
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *mips,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1230,8 +1204,6 @@ builds:
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *mips,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *mipsel,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1408,8 +1380,6 @@ builds:
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1469,8 +1439,6 @@ builds:
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *next,             << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1529,8 +1497,6 @@ builds:
   - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *stable,           << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1587,8 +1553,6 @@ builds:
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
-  # Fedora i686 build disabled: https://github.com/ClangBuiltLinux/linux/issues/1442
-  # - {<< : *i686_fedora,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *stable-5_15,      << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1724,7 +1688,6 @@ builds:
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *i686_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm,       boot: true,  << : *llvm_11}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
@@ -1783,7 +1746,6 @@ builds:
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *i686_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *mips,              << : *next,             << : *mips_llvm,       boot: true,  << : *llvm_11}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
@@ -1841,7 +1803,6 @@ builds:
   - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *i686_fedora,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *mips,              << : *stable,           << : *mips_llvm,       boot: true,  << : *llvm_11}
   - {<< : *mipsel,            << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
@@ -1897,7 +1858,6 @@ builds:
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *i686_fedora,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *mips,              << : *stable-5_15,      << : *mips_llvm,       boot: true,  << : *llvm_11}
   - {<< : *mipsel,            << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}

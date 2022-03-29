@@ -599,25 +599,6 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _09238b29fc27aba9cd6fbf0fc8ae74fa:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: i386
-      LLVM_VERSION: 11
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
-    container: ghcr.io/clangbuiltlinux/qemu
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_distribution_configs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _e354fa32480781c0b26f27b46a1cf7cd:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
