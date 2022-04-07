@@ -41,7 +41,9 @@ jobs:
       LLVM_VERSION: 14
       BOOT: 1
       CONFIG: gki_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -60,7 +62,9 @@ jobs:
       LLVM_VERSION: 14
       BOOT: 1
       CONFIG: gki_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
