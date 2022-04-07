@@ -209,7 +209,7 @@ def run_boot(build):
     if cbl_arch == "um":
         boot_cmd = ["./boot-utils/boot-uml.sh"]
         # The execute bit needs to be set to avoid "Permission denied" errors
-        os.chmod(kernel_img, 0o755)
+        os.chmod(kernel_image, 0o755)
     else:
         boot_cmd = ["./boot-utils/boot-qemu.sh", "-a", cbl_arch]
     boot_cmd += ["-k", kernel_image]
