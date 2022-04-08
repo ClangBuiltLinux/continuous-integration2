@@ -41,7 +41,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -60,7 +62,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -95,7 +99,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -114,7 +120,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -133,7 +141,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:

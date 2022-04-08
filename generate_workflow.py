@@ -134,7 +134,10 @@ def get_steps(build, build_set):
                 "BOOT": int(build["boot"]),
                 "CONFIG": print_config(build),
             },
-            "container": "ghcr.io/clangbuiltlinux/qemu",
+            "container": {
+                "image": "ghcr.io/clangbuiltlinux/qemu",
+                "options": "--ipc=host",
+            },
             "steps": [
                 {
                     "uses": "actions/checkout@v2",

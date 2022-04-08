@@ -41,7 +41,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: multi_v5_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -60,7 +62,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: aspeed_g5_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -79,7 +83,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: multi_v7_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -98,7 +104,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -117,7 +125,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: imx_v4_v5_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -136,7 +146,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: omap2plus_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -155,7 +167,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -174,7 +188,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -193,7 +209,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -212,7 +230,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -231,7 +251,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -250,7 +272,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -269,7 +293,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_UBSAN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -288,7 +314,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -307,7 +335,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -326,7 +356,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -345,7 +377,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -364,7 +398,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: powernv_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -383,7 +419,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -402,7 +440,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -421,7 +461,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -440,7 +482,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -459,7 +503,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -478,7 +524,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -497,7 +545,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: defconfig+CONFIG_UBSAN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -532,7 +582,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -551,7 +603,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -570,7 +624,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -589,7 +645,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -608,7 +666,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -627,7 +687,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -646,7 +708,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -665,7 +729,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -684,7 +750,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -703,7 +771,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -738,7 +808,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -757,7 +829,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -776,7 +850,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -795,7 +871,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -814,7 +892,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_WERROR=n+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -833,7 +913,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -852,7 +934,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -871,7 +955,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -890,7 +976,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -909,7 +997,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_WERROR=n+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -928,7 +1018,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -947,7 +1039,9 @@ jobs:
       LLVM_VERSION: 11
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:

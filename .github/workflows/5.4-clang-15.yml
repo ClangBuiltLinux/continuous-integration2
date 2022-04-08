@@ -41,7 +41,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: multi_v7_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -60,7 +62,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -79,7 +83,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: defconfig+CONFIG_COMPAT_VDSO=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -98,7 +104,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -117,7 +125,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -136,7 +146,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -155,7 +167,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: ppc44x_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -174,7 +188,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -193,7 +209,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: powernv_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -212,7 +230,9 @@ jobs:
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:

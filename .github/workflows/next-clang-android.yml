@@ -41,7 +41,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: multi_v5_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -60,7 +62,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: aspeed_g5_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -79,7 +83,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: multi_v7_defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -98,7 +104,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -117,7 +125,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -136,7 +146,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -155,7 +167,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -174,7 +188,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -193,7 +209,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -212,7 +230,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -231,7 +251,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -250,7 +272,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -269,7 +293,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -304,7 +330,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -323,7 +351,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -342,7 +372,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -361,7 +393,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_WERROR=n+CONFIG_LTO_CLANG_THIN=y
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -380,7 +414,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -399,7 +435,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
@@ -418,7 +456,9 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
-    container: ghcr.io/clangbuiltlinux/qemu
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
     steps:
     - uses: actions/checkout@v2
       with:
