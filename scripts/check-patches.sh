@@ -11,7 +11,7 @@ function update_series_commands() {
     echo "$ ls -1 ${folder}/*.patch | sed \"s;${folder}/;;\" > ${folder}/series"
 }
 
-for folder in "${repo}"/patches/*; do
+[[ -d ${repo}/patches ]] && for folder in "${repo}"/patches/*; do
     series=${folder}/series
 
     # First, make sure series file is not missing
