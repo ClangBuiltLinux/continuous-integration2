@@ -593,6 +593,16 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.15.y
+    target_arch: hexagon
+    toolchain: clang-nightly
+    kconfig: allmodconfig
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.15.y
     target_arch: riscv
     toolchain: clang-nightly
     kconfig:
