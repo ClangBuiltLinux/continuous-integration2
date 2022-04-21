@@ -1068,7 +1068,6 @@ builds:
   - {<< : *arm64be,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_cfi,         << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_kasan,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_kasan_sw,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_ubsan,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1423,7 +1422,6 @@ builds:
   - {<< : *arm64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *arm64_cfi,         << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_kasan,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_kasan_sw,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *arm64_ubsan,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
