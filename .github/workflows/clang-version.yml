@@ -11,4 +11,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: parse-debian-clang.sh --check
-      run: bash parse-debian-clang.sh --check
+      run: bash scripts/parse-debian-clang.sh --check
