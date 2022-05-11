@@ -73,6 +73,13 @@ def get_cbl_name():
         if "archlinux" in base_config:
             return "x86_64"
 
+    # ChromeOS configurations have the architecture as the second to last
+    # folder of the second config fragment path:
+    # chromeos/config/chromeos/arm64/common.config
+    # chromeos/config/chromeos/x86_64/common.config
+    if "chromeos" in base_config:
+        return full_config.split("+")[1].split("/")[-2]
+
     unique_defconfigs = {
         "multi_v5_defconfig": "arm32_v5",
         "aspeed_g5_defconfig": "arm32_v6",
