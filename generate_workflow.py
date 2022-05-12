@@ -183,9 +183,10 @@ def print_builds(config, tree_name, llvm_version):
         if build["git_repo"] == repo and \
            build["git_ref"] == ref and \
            build["llvm_version"] == llvm_version:
-            if "defconfig" in str(build["config"]):
+            cfg_str = str(build["config"])
+            if "defconfig" in cfg_str or "chromeos" in cfg_str:
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
-            elif "https://" in str(build["config"]):
+            elif "https://" in cfg_str:
                 check_logs_distribution_configs.update(
                     get_steps(build, "distribution_configs"))
             else:

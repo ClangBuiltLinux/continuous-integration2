@@ -5,8 +5,6 @@
 # $ tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/chromeos-5.15-clang-14.tux.yml
 sets:
 - name: defconfigs
-  builds: []
-- name: allconfigs
   builds:
   - git_repo: https://chromium.googlesource.com/chromiumos/third_party/kernel.git
     git_ref: chromeos-5.15
