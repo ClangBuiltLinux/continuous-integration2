@@ -11,7 +11,6 @@ urls:
   - &next-url     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
   - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
   - &android-url  https://android.googlesource.com/kernel/common.git
-  - &chromeos-url https://chromium.googlesource.com/chromiumos/third_party/kernel.git
   - &tip-url      https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
   - &arm64-url    https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
   # Configuration URLs
@@ -55,8 +54,6 @@ trees:
   - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19}
   - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14}
   - &android-4_9      {git_repo: *android-url,  git_ref: android-4.9-q,       name: android-4.9}
-  - &chromeos-5_15    {git_repo: *chromeos-url, git_ref: chromeos-5.15,       name: chromeos-5.15}
-  - &chromeos-5_10    {git_repo: *chromeos-url, git_ref: chromeos-5.10,       name: chromeos-5.10}
   - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
   - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64}
   - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes}
@@ -139,14 +136,6 @@ tree_schedules:
   - &android-4_9_llvm_13           {<< : *llvm_13,      << : *android-4_9,      << : *sundays}
   - &android-4_9_llvm_12           {<< : *llvm_12,      << : *android-4_9,      << : *sundays}
   - &android-4_9_llvm_android      {<< : *llvm_android, << : *android-4_9,      << : *daily_six}
-  - &chromeos-5_15_llvm_tot        {<< : *llvm_tot,     << : *chromeos-5_15,    << : *daily_six}
-  - &chromeos-5_15_llvm_latest     {<< : *llvm_latest,  << : *chromeos-5_15,    << : *daily_six}
-  - &chromeos-5_15_llvm_13         {<< : *llvm_13,      << : *chromeos-5_15,    << : *sundays}
-  - &chromeos-5_15_llvm_12         {<< : *llvm_12,      << : *chromeos-5_15,    << : *sundays}
-  - &chromeos-5_10_llvm_tot        {<< : *llvm_tot,     << : *chromeos-5_10,    << : *daily_six}
-  - &chromeos-5_10_llvm_latest     {<< : *llvm_latest,  << : *chromeos-5_10,    << : *daily_six}
-  - &chromeos-5_10_llvm_13         {<< : *llvm_13,      << : *chromeos-5_10,    << : *sundays}
-  - &chromeos-5_10_llvm_12         {<< : *llvm_12,      << : *chromeos-5_10,    << : *sundays}
   - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *daily_midnight}
   - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *daily_midnight}
   - &tip_llvm_13                   {<< : *llvm_13,      << : *tip,              << : *daily_eighteen}
@@ -189,9 +178,6 @@ targets:
   - &default     {targets: [default]}
   - &kernel      {targets: [kernel]}
   - &kernel_dtbs {targets: [kernel,dtbs]}
-chromeos_configs:
-  - &arm64-cros-configs  {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/arm64/common.config, chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config]}
-  - &x86_64-cros-configs {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/x86_64/common.config, chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config]}
 configs:
   #                     config:                                                                                image target (optional)     [triples:] (Optional: x86)  targets to build
   - &arm32_v5          {config: multi_v5_defconfig,                                                                                        << : *arm-triple,           << : *kernel_dtbs}
@@ -211,7 +197,6 @@ configs:
   #                                         https://github.com/ClangBuiltLinux/linux/issues/595
   - &arm64_no_vdso32   {config: [defconfig, CONFIG_COMPAT_VDSO=n],                                                                         << : *arm64-triple,         << : *kernel}
   - &arm64be           {config: [defconfig, CONFIG_CPU_BIG_ENDIAN=y],                                                                      << : *arm64-triple,         << : *kernel}
-  - &arm64_cros        {<< : *arm64-cros-configs,                                                                                          << : *arm64-triple,         << : *kernel}
   - &arm64_lto_full    {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                      << : *arm64-triple,         << : *kernel}
   - &arm64_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                      << : *arm64-triple,         << : *kernel}
   - &arm64_cfi         {config: [defconfig, CONFIG_LTO_CLANG_THIN=y, CONFIG_CFI_CLANG=y],                                                  << : *arm64-triple,         << : *kernel}
@@ -255,7 +240,6 @@ configs:
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                                  << : *kernel}
   - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                                  << : *kernel}
   - &x86_64_cfi        {config: [defconfig, CONFIG_LTO_CLANG_THIN=y, CONFIG_CFI_CLANG=y],                                                                              << : *kernel}
-  - &x86_64_cros       {<< : *x86_64-cros-configs,                                                                                                                     << : *kernel}
   - &x86_64_gki        {config: gki_defconfig,                                                                                                                         << : *kernel}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                           << : *kernel}
   - &x86_64_allmod     {config: [allmodconfig, CONFIG_WERROR=n],                                                                                                       << : *default}
@@ -623,13 +607,6 @@ builds:
   - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_tot}
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_tot}
-  ##############
-  #  ChromeOS  #
-  ##############
-  - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *x86_64_cros,      << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_tot}
   #########
   #  TIP  #
   #########
@@ -988,13 +965,6 @@ builds:
   - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_latest}
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_latest}
-  ##############
-  #  ChromeOS  #
-  ##############
-  - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *x86_64_cros,      << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_latest}
   #########
   #  TIP  #
   #########
@@ -1351,13 +1321,6 @@ builds:
   - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_13}
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_13}
-  ##############
-  #  ChromeOS  #
-  ##############
-  - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *x86_64_cros,      << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_13}
   #########
   #  TIP  #
   #########
@@ -1666,13 +1629,6 @@ builds:
   - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_12}
   - {<< : *arm64_cut,         << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *x86_64_cut,        << : *android-4_9,      << : *clang,           boot: true,  << : *llvm_12}
-  ##############
-  #  ChromeOS  #
-  ##############
-  - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *x86_64_cros,      << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_12}
   #########
   #  TIP  #
   #########
