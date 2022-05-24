@@ -286,7 +286,7 @@ sets:
     targets:
     - kernel
     make_variables:
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: s390
@@ -300,7 +300,7 @@ sets:
     targets:
     - kernel
     make_variables:
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: um
@@ -491,7 +491,7 @@ sets:
     targets:
     - kernel
     make_variables:
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: s390
@@ -500,7 +500,7 @@ sets:
     targets:
     - kernel
     make_variables:
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
     git_ref: master
     target_arch: x86_64
