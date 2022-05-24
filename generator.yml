@@ -259,6 +259,7 @@ tiers:
   - &llvm               {llvm: true,  llvm_ias: false, make_variables: {LLVM: 1, LLVM_IAS: 0}}
   - &lld                {llvm: false, llvm_ias: false, make_variables: {LD: ld.lld, LLVM_IAS: 0}}
   - &clang              {llvm: false, llvm_ias: false, make_variables: {LLVM_IAS: 0}}
+  - &clang_ias          {llvm: false, llvm_ias: true,  make_variables: {LLVM_IAS: 1}}
   # Architecture specific tiers
   # ARM32 aspeed_g5_defconfig                                           https://github.com/ClangBuiltLinux/linux/issues/732
   - &arm32_v6_llvm      {llvm: true,  llvm_ias: false, make_variables: {LD: arm-linux-gnueabihf-ld, LLVM: 1, LLVM_IAS: 0}}
@@ -316,10 +317,10 @@ builds:
   - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *s390_kasan,        << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *s390_fedora,       << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *s390_suse,         << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *s390,              << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
+  - {<< : *s390_kasan,        << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
+  - {<< : *s390_fedora,       << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
+  - {<< : *s390_suse,         << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -376,10 +377,10 @@ builds:
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *s390,              << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *s390_kasan,        << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *s390_fedora,       << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *s390_suse,         << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *s390,              << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
+  - {<< : *s390_kasan,        << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
+  - {<< : *s390_fedora,       << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
+  - {<< : *s390_suse,         << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -674,10 +675,10 @@ builds:
   - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
-  - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *s390_kasan,        << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *s390_fedora,       << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *s390_suse,         << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
+  - {<< : *s390,              << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_kasan,        << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_fedora,       << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_suse,         << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_latest}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -734,10 +735,10 @@ builds:
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
-  - {<< : *s390,              << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *s390_kasan,        << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *s390_fedora,       << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *s390_suse,         << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
+  - {<< : *s390,              << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_kasan,        << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_fedora,       << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_suse,         << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
