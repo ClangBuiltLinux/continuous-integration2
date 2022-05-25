@@ -39,7 +39,7 @@ schedules:
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
-  - &stable           {git_repo: *stable-url,   git_ref: linux-5.17.y,        name: stable}
+  - &stable           {git_repo: *stable-url,   git_ref: linux-5.18.y,        name: stable}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
   - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
@@ -433,15 +433,16 @@ builds:
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64,             << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le,           << : *stable,           << : *llvm,            boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le_fedora,    << : *stable,           << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le_suse,      << : *stable,           << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *s390,              << : *stable,           << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *stable,           << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *stable,           << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *stable,           << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -791,15 +792,16 @@ builds:
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_latest}
   - {<< : *ppc64,             << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_latest}
-  - {<< : *ppc64le,           << : *stable,           << : *llvm,            boot: true,  << : *llvm_latest}
-  - {<< : *ppc64le_fedora,    << : *stable,           << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *ppc64le_suse,      << : *stable,           << : *clang,           boot: true,  << : *llvm_latest}
+  - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *s390,              << : *stable,           << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_kasan,        << : *stable,           << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_fedora,       << : *stable,           << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_suse,         << : *stable,           << : *clang,           boot: true,  << : *llvm_latest}
+  - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1148,6 +1150,7 @@ builds:
   - {<< : *s390_kasan,        << : *stable,           << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_fedora,       << : *stable,           << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_suse,         << : *stable,           << : *clang,           boot: true,  << : *llvm_13}
+  - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -1465,7 +1468,8 @@ builds:
   - {<< : *arm32_lpae_fp,     << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm32_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *arm32_allno,       << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
-  - {<< : *arm32_allyes,      << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *arm32_fedora,      << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm32_suse,        << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1496,6 +1500,7 @@ builds:
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
   # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
   # - {<< : *s390,              << : *stable,           << : *clang,           boot: true,  << : *llvm_12}
+  - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1770,7 +1775,8 @@ builds:
   - {<< : *arm32_lpae_fp,     << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_allno,       << : *stable,           << : *llvm,            boot: false, << : *llvm_11}
-  - {<< : *arm32_allyes,      << : *stable,           << : *llvm,            boot: false, << : *llvm_11}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *stable,           << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_fedora,      << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_suse,        << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -1800,6 +1806,7 @@ builds:
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_11}
   # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
   # - {<< : *s390,              << : *stable,           << : *clang,           boot: true,  << : *llvm_11}
+  - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}

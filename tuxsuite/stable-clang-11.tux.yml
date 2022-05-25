@@ -7,7 +7,7 @@ sets:
 - name: defconfigs
   builds:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig: multi_v5_defconfig
@@ -18,7 +18,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig: aspeed_g5_defconfig
@@ -29,7 +29,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig: multi_v7_defconfig
@@ -39,7 +39,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig:
@@ -51,7 +51,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig: imx_v4_v5_defconfig
@@ -61,7 +61,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig: omap2plus_defconfig
@@ -71,7 +71,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig:
@@ -84,7 +84,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig: defconfig
@@ -94,7 +94,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -106,7 +106,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -118,7 +118,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -133,7 +133,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -148,7 +148,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -160,7 +160,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: hexagon
     toolchain: clang-11
     kconfig: defconfig
@@ -170,7 +170,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: i386
     toolchain: clang-11
     kconfig: defconfig
@@ -180,7 +180,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: mips
     toolchain: clang-11
     kconfig:
@@ -195,7 +195,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: mips
     toolchain: clang-11
     kconfig:
@@ -208,7 +208,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: powerpc
     toolchain: clang-11
     kconfig: powernv_defconfig
@@ -220,7 +220,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: riscv
     toolchain: clang-11
     kconfig: defconfig
@@ -231,7 +231,17 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
+    target_arch: um
+    toolchain: clang-11
+    kconfig: defconfig
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig: defconfig
@@ -241,7 +251,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
@@ -253,7 +263,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
@@ -265,7 +275,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
@@ -280,7 +290,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
@@ -294,7 +304,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
@@ -308,7 +318,7 @@ sets:
 - name: distribution_configs
   builds:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig:
@@ -320,7 +330,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
@@ -330,7 +340,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -342,7 +352,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -354,7 +364,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: i386
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
@@ -364,7 +374,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: powerpc
     toolchain: clang-11
     kconfig:
@@ -376,7 +386,7 @@ sets:
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: powerpc
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
@@ -386,7 +396,7 @@ sets:
     make_variables:
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
@@ -396,7 +406,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
@@ -406,7 +416,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
@@ -418,7 +428,7 @@ sets:
 - name: allconfigs
   builds:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig:
@@ -430,7 +440,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm
     toolchain: clang-11
     kconfig: allnoconfig
@@ -440,19 +450,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
-    target_arch: arm
-    toolchain: clang-11
-    kconfig:
-    - allyesconfig
-    - CONFIG_WERROR=n
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 0
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -464,7 +462,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -479,7 +477,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig: allnoconfig
@@ -489,7 +487,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: arm64
     toolchain: clang-11
     kconfig:
@@ -501,7 +499,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: riscv
     toolchain: clang-11
     kconfig:
@@ -514,7 +512,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
@@ -526,7 +524,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
@@ -541,7 +539,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig: allnoconfig
@@ -551,7 +549,7 @@ sets:
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-    git_ref: linux-5.17.y
+    git_ref: linux-5.18.y
     target_arch: x86_64
     toolchain: clang-11
     kconfig:
