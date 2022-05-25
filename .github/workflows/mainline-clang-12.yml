@@ -242,27 +242,6 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _8c5abf2855f7fef8f5d67ba30dcc77b2:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 12
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact_defconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _327acfd14f0ecf18c6c0081651c20370:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs

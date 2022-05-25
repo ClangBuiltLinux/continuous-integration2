@@ -123,19 +123,6 @@ sets:
     toolchain: clang-12
     kconfig:
     - defconfig
-    - CONFIG_LTO_CLANG_THIN=y
-    - CONFIG_CFI_CLANG=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: arm64
-    toolchain: clang-12
-    kconfig:
-    - defconfig
     - CONFIG_KASAN=y
     - CONFIG_KASAN_KUNIT_TEST=y
     - CONFIG_KASAN_VMALLOC=y
