@@ -62,33 +62,31 @@ Cc: <stable@vger.kernel.org>
 Link: https://lkml.kernel.org/r/YoPCTEYjoPqE4ZxB@hirez.programming.kicks-ass.net
 Link: https://git.kernel.org/linus/ead165fa1042247b033afad7be4be9b815d04ade
 ---
- tools/objtool/elf.c | 198 +++++++++++++++++++++++++++++---------------
- 1 file changed, 129 insertions(+), 69 deletions(-)
+ tools/objtool/elf.c | 196 +++++++++++++++++++++++++++++---------------
+ 1 file changed, 128 insertions(+), 68 deletions(-)
 
 diff --git a/tools/objtool/elf.c b/tools/objtool/elf.c
-index 583a3ec987b5..7fb6720e510b 100644
+index a3395467c316..3ea0fc8e345f 100644
 --- a/tools/objtool/elf.c
 +++ b/tools/objtool/elf.c
-@@ -374,6 +374,9 @@ static void elf_add_symbol(struct elf *elf, struct symbol *sym)
+@@ -314,6 +314,8 @@ static void elf_add_symbol(struct elf *elf, struct symbol *sym)
  	struct list_head *entry;
  	struct rb_node *pnode;
  
-+	INIT_LIST_HEAD(&sym->pv_target);
 +	sym->alias = sym;
 +
  	sym->type = GELF_ST_TYPE(sym->sym.st_info);
  	sym->bind = GELF_ST_BIND(sym->sym.st_info);
  
-@@ -438,8 +441,6 @@ static int read_symbols(struct elf *elf)
+@@ -375,7 +377,6 @@ static int read_symbols(struct elf *elf)
  			return -1;
  		}
  		memset(sym, 0, sizeof(*sym));
--		INIT_LIST_HEAD(&sym->pv_target);
 -		sym->alias = sym;
  
  		sym->idx = i;
  
-@@ -603,24 +604,21 @@ static void elf_dirty_reloc_sym(struct elf *elf, struct symbol *sym)
+@@ -539,24 +540,21 @@ static void elf_dirty_reloc_sym(struct elf *elf, struct symbol *sym)
  }
  
  /*
@@ -126,7 +124,7 @@ index 583a3ec987b5..7fb6720e510b 100644
  
  	s = elf_getscn(elf->elf, symtab->idx);
  	if (!s) {
-@@ -628,79 +626,124 @@ static int elf_move_global_symbol(struct elf *elf, struct section *symtab,
+@@ -564,79 +562,124 @@ static int elf_move_global_symbol(struct elf *elf, struct section *symtab,
  		return -1;
  	}
  
@@ -291,7 +289,7 @@ index 583a3ec987b5..7fb6720e510b 100644
  
  	sym->name = sec->name;
  	sym->sec = sec;
-@@ -710,24 +753,41 @@ elf_create_section_symbol(struct elf *elf, struct section *sec)
+@@ -646,24 +689,41 @@ elf_create_section_symbol(struct elf *elf, struct section *sec)
  	// st_other 0
  	// st_value 0
  	// st_size 0
