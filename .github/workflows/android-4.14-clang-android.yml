@@ -27,7 +27,7 @@ jobs:
     - name: tuxsuite
       run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/android-4.14-clang-android.tux.yml || true
     - name: save output
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_defconfigs
@@ -45,10 +45,10 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: true
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
@@ -66,10 +66,10 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: true
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
