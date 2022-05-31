@@ -109,7 +109,7 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
                 },
                 {
                     "name": "save output",
-                    "uses": "actions/upload-artifact@v2",
+                    "uses": "actions/upload-artifact@v3",
                     "with": {
                         "path": "builds.json",
                         "name": "output_artifact_{}".format(build_set),
@@ -140,13 +140,13 @@ def get_steps(build, build_set):
             },
             "steps": [
                 {
-                    "uses": "actions/checkout@v2",
+                    "uses": "actions/checkout@v3",
                     "with": {
                         "submodules": True
                     },
                 },
                 {
-                    "uses": "actions/download-artifact@v2",
+                    "uses": "actions/download-artifact@v3",
                     "with": {
                         "name": "output_artifact_{}".format(build_set)
                     },
