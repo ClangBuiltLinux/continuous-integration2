@@ -630,9 +630,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
+    kconfig: allmodconfig
     targets:
     - default
     make_variables:
@@ -646,7 +644,6 @@ sets:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
-    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - default
@@ -667,9 +664,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-nightly
-    kconfig:
-    - allyesconfig
-    - CONFIG_WERROR=n
+    kconfig: allyesconfig
     targets:
     - default
     make_variables:

@@ -1093,15 +1093,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _3d883b6dd7ce3b5941eac52b8e5d255a:
+  _ff86d54e6acbce65590f71efbb2f826b:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
+      CONFIG: allmodconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1114,15 +1114,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _b76c6c40ae03e6a8764f2546e04a6020:
+  _51db4df26ea58b68c19901411e605b2e:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_WERROR=n+CONFIG_LTO_CLANG_THIN=y
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_WERROR=n+CONFIG_LTO_CLANG_THIN=y
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1156,15 +1156,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _24a02828373c02a9d349a03fab7edbb8:
+  _02922017f2cb19d45aba8492132c7804:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig+CONFIG_WERROR=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
+      CONFIG: allyesconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

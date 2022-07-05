@@ -90,15 +90,15 @@ jobs:
         path: builds.json
         name: output_artifact_allconfigs
         if-no-files-found: error
-  _0d027f6d4a4d947cffb7496e1c16a135:
+  _315a83fa22517db93a5781d3052eb372:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig+CONFIG_WERROR=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 11
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
+      CONFIG: allmodconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -132,15 +132,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _7325bb746df1b067e4e5f94ea088cb6d:
+  _f93dc26c868cb14278bd57d172f7b70e:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig+CONFIG_WERROR=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 11
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
+      CONFIG: allyesconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

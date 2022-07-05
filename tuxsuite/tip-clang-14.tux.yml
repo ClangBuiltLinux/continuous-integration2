@@ -32,9 +32,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-14
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
+    kconfig: allmodconfig
     targets:
     - default
     make_variables:
@@ -54,9 +52,7 @@ sets:
     git_ref: master
     target_arch: x86_64
     toolchain: clang-14
-    kconfig:
-    - allyesconfig
-    - CONFIG_WERROR=n
+    kconfig: allyesconfig
     targets:
     - default
     make_variables:
