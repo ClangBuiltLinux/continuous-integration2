@@ -216,9 +216,7 @@ sets:
     git_ref: linux-5.10.y
     target_arch: x86_64
     toolchain: clang-11
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
+    kconfig: allmodconfig
     targets:
     - default
     make_variables:
@@ -238,9 +236,7 @@ sets:
     git_ref: linux-5.10.y
     target_arch: x86_64
     toolchain: clang-11
-    kconfig:
-    - allyesconfig
-    - CONFIG_WERROR=n
+    kconfig: allyesconfig
     targets:
     - default
     make_variables:
