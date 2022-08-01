@@ -46,6 +46,7 @@ sets:
     toolchain: clang-13
     kconfig:
     - allmodconfig
+    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default

@@ -150,6 +150,7 @@ sets:
     toolchain: clang-11
     kconfig:
     - allmodconfig
+    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default
@@ -172,6 +173,7 @@ sets:
     toolchain: clang-11
     kconfig:
     - allyesconfig
+    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default

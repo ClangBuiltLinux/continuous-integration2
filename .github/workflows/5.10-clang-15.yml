@@ -363,15 +363,15 @@ jobs:
         path: builds.json
         name: output_artifact_allconfigs
         if-no-files-found: error
-  _89051d3c5ecc875fceed0120161e60ba:
+  _e7a467dbea4670b144b99068c39dcd10:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=15 allmodconfig+CONFIG_WERROR=n
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=15 allmodconfig+CONFIG_FPE_NWFPE=n+CONFIG_WERROR=n
     env:
       ARCH: arm
       LLVM_VERSION: 15
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
+      CONFIG: allmodconfig+CONFIG_FPE_NWFPE=n+CONFIG_WERROR=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -405,15 +405,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _b60653a6655790e7286714ed9e126317:
+  _84048f3c8552420d4faf1cd5214207d0:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=15 allyesconfig+CONFIG_WERROR=n
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=15 allyesconfig+CONFIG_FPE_NWFPE=n+CONFIG_WERROR=n
     env:
       ARCH: arm
       LLVM_VERSION: 15
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
+      CONFIG: allyesconfig+CONFIG_FPE_NWFPE=n+CONFIG_WERROR=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

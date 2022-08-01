@@ -46,6 +46,7 @@ sets:
     toolchain: clang-nightly
     kconfig:
     - allmodconfig
+    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default
