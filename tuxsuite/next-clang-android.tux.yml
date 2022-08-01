@@ -161,6 +161,7 @@ sets:
     toolchain: clang-android
     kconfig:
     - allmodconfig
+    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default
