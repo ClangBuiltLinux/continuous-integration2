@@ -1,5 +1,5 @@
 llvm_versions:
-  - &llvm_tot     {llvm_version: 15}
+  - &llvm_tot     {llvm_version: 16}
   - &llvm_latest  {llvm_version: 14}
   - &llvm_13      {llvm_version: 13}
   - &llvm_12      {llvm_version: 12}
