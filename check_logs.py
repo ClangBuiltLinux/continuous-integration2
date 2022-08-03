@@ -207,11 +207,11 @@ def run_boot(build):
     cbl_arch = get_cbl_name()
     kernel_image = cwd() + "/" + get_image_name()
     if cbl_arch == "um":
-        boot_cmd = ["./boot-utils/boot-uml.sh"]
+        boot_cmd = ["./boot-utils/boot-uml.py"]
         # The execute bit needs to be set to avoid "Permission denied" errors
         os.chmod(kernel_image, 0o755)
     else:
-        boot_cmd = ["./boot-utils/boot-qemu.sh", "-a", cbl_arch]
+        boot_cmd = ["./boot-utils/boot-qemu.py", "-a", cbl_arch]
     boot_cmd += ["-k", kernel_image]
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower
