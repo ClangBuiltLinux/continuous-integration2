@@ -326,7 +326,8 @@ builds:
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_tot}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  << : *llvm_tot}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -386,7 +387,8 @@ builds:
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_tot}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  << : *llvm_tot}
   - {<< : *ppc64le,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -692,7 +694,8 @@ builds:
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_latest}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_latest}
   - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  << : *llvm_latest}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -752,7 +755,8 @@ builds:
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_latest}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_latest}
   - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  << : *llvm_latest}
   - {<< : *ppc64le,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1056,7 +1060,8 @@ builds:
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
@@ -1111,7 +1116,8 @@ builds:
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le_fedora,    << : *next,             << : *clang,           boot: true,  << : *llvm_13}
@@ -1410,8 +1416,9 @@ builds:
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *mainline,         << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
-  - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
+  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_12}
@@ -1467,8 +1474,9 @@ builds:
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *next,             << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
-  - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, << : *llvm_12}
+  # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *next,             << : *clang,           boot: true,  << : *llvm_12}
