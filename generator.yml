@@ -163,15 +163,15 @@ tree_schedules:
   - &arm64-fixes_llvm_12           {<< : *llvm_12,      << : *arm64-fixes,      << : *daily_eighteen}
   - &arm64-fixes_llvm_11           {<< : *llvm_11,      << : *arm64-fixes,      << : *daily_eighteen}
 architectures:
- - &arm-arch     arm
- - &arm64-arch   arm64
- - &hexagon-arch hexagon
- - &i386-arch    i386
- - &mips-arch    mips
- - &powerpc-arch powerpc
- - &riscv-arch   riscv
- - &s390-arch    s390
- - &um-arch      um
+  - &arm-arch     arm
+  - &arm64-arch   arm64
+  - &hexagon-arch hexagon
+  - &i386-arch    i386
+  - &mips-arch    mips
+  - &powerpc-arch powerpc
+  - &riscv-arch   riscv
+  - &s390-arch    s390
+  - &um-arch      um
 triples:
   - &arm-triple         {CROSS_COMPILE: arm-linux-gnueabi-,    ARCH: *arm-arch}
   - &arm64-triple       {CROSS_COMPILE: aarch64-linux-gnu-,    ARCH: *arm64-arch}
