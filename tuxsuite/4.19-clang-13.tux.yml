@@ -54,7 +54,9 @@ sets:
     git_ref: linux-4.19.y
     target_arch: powerpc
     toolchain: clang-13
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - kernel
     kernel_image: zImage.epapr

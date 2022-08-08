@@ -102,7 +102,9 @@ sets:
     git_ref: linux-5.10.y
     target_arch: powerpc
     toolchain: clang-11
-    kconfig: powernv_defconfig
+    kconfig:
+    - powernv_defconfig
+    - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - kernel
     kernel_image: zImage.epapr
