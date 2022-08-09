@@ -111,7 +111,7 @@ def _read_builds():
     except FileNotFoundError as e:
         print_red("Unable to find %s. Artifact not saved?" % (builds))
         raise e
-    return builds
+    return builds["builds"].values()
 
 
 def get_requested_llvm_version():
