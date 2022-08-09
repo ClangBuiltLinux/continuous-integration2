@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/android-4.19-clang-12.tux.yml || true
+      run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android-4.19-stable --job-name defconfigs --json-out builds.json tuxsuite/android-4.19-clang-12.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:

@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/4.19-clang-13.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-4.19.y --job-name defconfigs --json-out builds.json tuxsuite/4.19-clang-13.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:

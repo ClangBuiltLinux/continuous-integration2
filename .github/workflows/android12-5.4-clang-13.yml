@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/android12-5.4-clang-13.tux.yml || true
+      run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android12-5.4 --job-name defconfigs --json-out builds.json tuxsuite/android12-5.4-clang-13.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -104,7 +104,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/android12-5.4-clang-13.tux.yml || true
+      run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android12-5.4 --job-name allconfigs --json-out builds.json tuxsuite/android12-5.4-clang-13.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:

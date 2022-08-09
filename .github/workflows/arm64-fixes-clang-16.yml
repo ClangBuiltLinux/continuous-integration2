@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config tuxsuite/arm64-fixes-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/fixes --job-name defconfigs --json-out builds.json tuxsuite/arm64-fixes-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -83,7 +83,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite build-set --set-name allconfigs --json-out builds.json --tux-config tuxsuite/arm64-fixes-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/fixes --job-name allconfigs --json-out builds.json tuxsuite/arm64-fixes-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
