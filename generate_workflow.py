@@ -87,12 +87,12 @@ def sanitize_job_name(name):
     return "_" + h.hexdigest()
 
 
-def tuxsuite_setups(build_set, tuxsuite_yml):
+def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
     patch_series = patch_series_flag(
         tuxsuite_yml.split("/")[1].split("-clang-")[0])
     return {
-        "kick_tuxsuite_{}".format(build_set): {
-            "name": "TuxSuite ({})".format(build_set),
+        "kick_tuxsuite_{}".format(job_name): {
+            "name": "TuxSuite ({})".format(job_name),
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
             "runs-on": "ubuntu-latest",
             "container": "tuxsuite/tuxsuite",
@@ -105,14 +105,14 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
                 },
                 {
                     "name": "tuxsuite",
-                    "run": "tuxsuite build-set --set-name {} --json-out builds.json --tux-config {}{} || true".format(build_set, tuxsuite_yml, patch_series)
+                    "run": "tuxsuite plan --git-repo {} --git-ref {} --job-name {} --json-out builds.json {}{} || true".format(repo, ref, job_name, tuxsuite_yml, patch_series)
                 },
                 {
                     "name": "save output",
                     "uses": "actions/upload-artifact@v3",
                     "with": {
                         "path": "builds.json",
-                        "name": "output_artifact_{}".format(build_set),
+                        "name": "output_artifact_{}".format(job_name),
                         "if-no-files-found": "error"
                     },
                 }
@@ -197,16 +197,18 @@ def print_builds(config, tree_name, llvm_version):
                                       llvm_version)
     workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
-    workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))
+    workflow["jobs"].update(
+        tuxsuite_setups("defconfigs", tuxsuite_yml, repo, ref))
     workflow["jobs"].update(check_logs_defconfigs)
 
     if check_logs_distribution_configs:
         workflow["jobs"].update(
-            tuxsuite_setups("distribution_configs", tuxsuite_yml))
+            tuxsuite_setups("distribution_configs", tuxsuite_yml, repo, ref))
         workflow["jobs"].update(check_logs_distribution_configs)
 
     if check_logs_allconfigs:
-        workflow["jobs"].update(tuxsuite_setups("allconfigs", tuxsuite_yml))
+        workflow["jobs"].update(
+            tuxsuite_setups("allconfigs", tuxsuite_yml, repo, ref))
         workflow["jobs"].update(check_logs_allconfigs)
 
     with open(github_yml, "w") as f:

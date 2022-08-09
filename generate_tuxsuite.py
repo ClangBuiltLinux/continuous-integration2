@@ -26,6 +26,7 @@ def parse_args(trees):
 def emit_tuxsuite_yml(config, tree, llvm_version):
     toolchain = "clang-{}".format(llvm_version)
     tuxsuite_yml = "tuxsuite/{}-{}.tux.yml".format(tree, toolchain)
+    repo, ref = get_repo_ref(config, tree)
 
     with open(tuxsuite_yml, "w") as f:
         orig_stdout = sys.stdout
@@ -36,18 +37,20 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
         print("# $ ./generate_tuxsuite.py {}".format(tree))
         print("# Invoke tuxsuite via:")
         print(
-            "# $ tuxsuite build-set --set-name defconfigs --json-out builds.json --tux-config {}{}"
-            .format(tuxsuite_yml, patch_series_flag(tree)))
+            "# $ tuxsuite plan --git-repo {} --git-ref {} --job-name defconfigs --json-out builds.json {}{}"
+            .format(repo, ref, patch_series_flag(tree), tuxsuite_yml))
 
-        tuxsuite_buildset = {
-            'sets': [
+        tuxsuite_plan = {
+            'version': 1,
+            'name': "{} at {}".format(repo, ref),
+            'description': "{} at {}".format(repo, ref),
+            'jobs': [
                 {
                     'name': 'defconfigs',
                     'builds': [],
                 }
             ]
         } # yapf: disable
-        repo, ref = get_repo_ref(config, tree)
         ci_folder = pathlib.Path(__file__).resolve().parent
         with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
             max_version = int(f.read())
@@ -63,8 +66,6 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                     toolchain = "clang-nightly"
 
                 current_build = {
-                    "git_repo": build["git_repo"],
-                    "git_ref": build["git_ref"],
                     "target_arch": arch,
                     "toolchain": toolchain,
                     "kconfig": build["config"],
@@ -85,19 +86,19 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                 else:
                     allconfigs.append(current_build)
 
-        tuxsuite_buildset["sets"][0]["builds"] = defconfigs
+        tuxsuite_plan["jobs"][0]["builds"] = defconfigs
         if distribution_configs:
-            tuxsuite_buildset["sets"] += [{
+            tuxsuite_plan["jobs"] += [{
                 "name": "distribution_configs",
                 "builds": distribution_configs
             }]
         if allconfigs:
-            tuxsuite_buildset["sets"] += [{
+            tuxsuite_plan["jobs"] += [{
                 "name": "allconfigs",
                 "builds": allconfigs
             }]
         print(
-            yaml.dump(tuxsuite_buildset,
+            yaml.dump(tuxsuite_plan,
                       Dumper=NoAliasDumper,
                       width=1000,
                       sort_keys=False))
