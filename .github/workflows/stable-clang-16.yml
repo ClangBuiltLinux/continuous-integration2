@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.18.y --job-name defconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.19.y --job-name defconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -515,10 +515,10 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _0690d2bc07192a92bd2e35ccb985df7a:
+  _0fce5375f2c705729f1ed1ddd4b65cff:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=16 defconfig
+    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=16 defconfig
     env:
       ARCH: s390
       LLVM_VERSION: 16
@@ -536,10 +536,10 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _53c8afdb190f478e6896762cd5338035:
+  _9fb52609b540c72335a750d5b89439a7:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=16 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=16 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
     env:
       ARCH: s390
       LLVM_VERSION: 16
@@ -713,7 +713,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.18.y --job-name distribution_configs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.19.y --job-name distribution_configs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -867,10 +867,10 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _cd06153de2d2056766fd0eba70412424:
+  _b60f5757e7e826013d16b8977eea5f2d:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=16 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=16 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
     env:
       ARCH: s390
       LLVM_VERSION: 16
@@ -888,10 +888,10 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _eecd953feb35b2d88c7b71f96e2f8a2a:
+  _e779f33c1d8552f12a3d251183fb1f14:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=16 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=16 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     env:
       ARCH: s390
       LLVM_VERSION: 16
@@ -981,7 +981,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.18.y --job-name allconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.19.y --job-name allconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
