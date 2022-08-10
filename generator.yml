@@ -1983,11 +1983,10 @@ builds:
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
-  # x86_64 all{mod,yes}config disabled: https://github.com/ClangBuiltLinux/linux/issues/1606
-  # - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
-  # - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
+  - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
+  - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
-  # - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
+  - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   #############
   #  Android  #
