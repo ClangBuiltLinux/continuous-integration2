@@ -194,7 +194,35 @@ jobs:
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: clang-android
+    kconfig: allmodconfig
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: x86_64
+    toolchain: clang-android
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: x86_64
+    toolchain: clang-android
     kconfig: allnoconfig
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: x86_64
+    toolchain: clang-android
+    kconfig: allyesconfig
     targets:
     - default
     make_variables:

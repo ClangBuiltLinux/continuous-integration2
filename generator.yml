@@ -1412,16 +1412,13 @@ builds:
   - {<< : *mips,              << : *mainline,         << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
-  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
-  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
+  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64,             << : *mainline,         << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *riscv,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1470,16 +1467,13 @@ builds:
   - {<< : *mips,              << : *next,             << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
-  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
-  # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, << : *llvm_12}
+  # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64,             << : *next,             << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *next,             << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *next,             << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *riscv,             << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_12}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *next,             << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1527,16 +1521,13 @@ builds:
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *stable,           << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
-  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
-  - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
+  - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64,             << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *stable,           << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *riscv,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *stable,           << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1584,16 +1575,13 @@ builds:
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *mips,              << : *stable-5_15,      << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
-  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1345)
-  - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_12}
+  - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_12}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_thin,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1734,8 +1722,6 @@ builds:
   - {<< : *ppc64le_suse,      << : *mainline,         << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *riscv,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_11}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *mainline,         << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -1791,8 +1777,6 @@ builds:
   - {<< : *ppc64le_suse,      << : *next,             << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *riscv,             << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_11}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *next,             << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -1848,8 +1832,6 @@ builds:
   - {<< : *ppc64le_suse,      << : *stable,           << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *riscv,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_11}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *stable,           << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -1904,8 +1886,6 @@ builds:
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}
-  # s390: Build disabled (https://lore.kernel.org/r/YMtib5hKVyNknZt3@osiris/)
-  # - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_thin,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -1993,11 +1973,10 @@ builds:
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
-  # x86_64 all{mod,yes}config disabled: https://github.com/ClangBuiltLinux/linux/issues/1606
-  # - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
-  # - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
+  - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
+  - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
-  # - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
+  - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_android}
   #############
   #  Android  #
