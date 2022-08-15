@@ -117,9 +117,7 @@ jobs:
       LLVM_IAS: 0
   - target_arch: powerpc
     toolchain: clang-nightly
-    kconfig:
-    - powernv_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: powernv_defconfig
     targets:
     - kernel
     kernel_image: zImage.epapr
