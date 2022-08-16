@@ -263,15 +263,15 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _2736eb7d845c26849f2e1e671de1c4c6:
+  _848b558acb7e2487ba2d59cd1a85aa7a:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
       BOOT: 1
-      CONFIG: powernv_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: powernv_defconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
