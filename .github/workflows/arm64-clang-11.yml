@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name defconfigs --json-out builds.json tuxsuite/arm64-clang-11.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name defconfigs --json-out builds.json tuxsuite/arm64-clang-11.tux.yml --patch-series patches/arm64 || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -62,22 +62,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name allconfigs --json-out builds.json tuxsuite/arm64-clang-11.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name allconfigs --json-out builds.json tuxsuite/arm64-clang-11.tux.yml --patch-series patches/arm64 || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_allconfigs
         if-no-files-found: error
-  _61405b5bc7dd59acad465db347d382a3:
+  _51e2eff457ec186a91964ee9c06f04f3:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig+CONFIG_WERROR=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allmodconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 11
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
+      CONFIG: allmodconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -111,15 +111,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _de31c0d55408a0065c789754fe70d907:
+  _8c8559e2e509a14a717cee01ec90bd39:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig+CONFIG_WERROR=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 allyesconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 11
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
+      CONFIG: allyesconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

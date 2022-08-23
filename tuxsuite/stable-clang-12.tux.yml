@@ -399,9 +399,7 @@ jobs:
       LLVM_IAS: 0
   - target_arch: arm64
     toolchain: clang-12
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
+    kconfig: allmodconfig
     targets:
     - default
     make_variables:
@@ -413,7 +411,6 @@ jobs:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
-    - CONFIG_WERROR=n
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - default
@@ -430,9 +427,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: arm64
     toolchain: clang-12
-    kconfig:
-    - allyesconfig
-    - CONFIG_WERROR=n
+    kconfig: allyesconfig
     targets:
     - default
     make_variables:
