@@ -220,10 +220,10 @@ configs:
   - &arm64_ubsan       {config: [defconfig, CONFIG_UBSAN=y],                                                                               << : *arm64-triple,         << : *kernel}
   - &arm64_gki         {config: gki_defconfig,                                                                                             << : *arm64-triple,         << : *kernel}
   - &arm64_cut         {config: cuttlefish_defconfig,                                                                                      << : *arm64-triple,         << : *kernel}
-  - &arm64_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                                                           << : *arm64-triple,         << : *default}
-  - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_WERROR=n, CONFIG_LTO_CLANG_THIN=y],            << : *arm64-triple,         << : *default}
+  - &arm64_allmod      {config: allmodconfig,                                                                                              << : *arm64-triple,         << : *default}
+  - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y],                             << : *arm64-triple,         << : *default}
   - &arm64_allno       {config: allnoconfig,                                                                                               << : *arm64-triple,         << : *default}
-  - &arm64_allyes      {config: [allyesconfig, CONFIG_WERROR=n],                                                                           << : *arm64-triple,         << : *default}
+  - &arm64_allyes      {config: allyesconfig,                                                                                              << : *arm64-triple,         << : *default}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &arm64_fedora      {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          << : *arm64-triple,         << : *kernel}
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/

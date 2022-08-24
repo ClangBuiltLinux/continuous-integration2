@@ -426,15 +426,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _3b0dbbefa80e939e712f96093114744a:
+  _bc93ab0a758b33cf3167fdbdeb2b0705:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
+      CONFIG: allmodconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -468,15 +468,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _f0a7a9f1bf046cec44065ea240f66c98:
+  _a575b3a0efaafab3765963157dfe45f2:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig+CONFIG_WERROR=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
+      CONFIG: allyesconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
