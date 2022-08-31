@@ -252,7 +252,7 @@ configs:
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         << : *arm64-triple,         << : *kernel}
   - &hexagon           {config: defconfig,                                                                                                 << : *hexagon-triple,       << : *default}
-  - &hexagon_allmod    {config: allmodconfig,                                                                                              << : *hexagon-triple,       << : *default}
+  - &hexagon_allmod    {config: [allmodconfig, CONFIG_WERROR=n],                                                                           << : *hexagon-triple,       << : *default}
   - &i386              {config: defconfig,                                                                                                 << : *i386-triple,          << : *kernel}
   - &i386_suse         {config: *i386-suse-config-url,                                                                                     << : *i386-triple,          << : *default}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      << : *mips-triple,          << : *kernel}

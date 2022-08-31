@@ -494,7 +494,9 @@ jobs:
       LLVM_IAS: 1
   - target_arch: hexagon
     toolchain: clang-15
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
     targets:
     - default
     make_variables:
