@@ -1114,15 +1114,15 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _ac59a19d0d87514204c03df7f611c521:
+  _abb94a8782c38ea37cd11446174ed1d2:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
+    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
     env:
       ARCH: hexagon
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allmodconfig
+      CONFIG: allmodconfig+CONFIG_WERROR=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
