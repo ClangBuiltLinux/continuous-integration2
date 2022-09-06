@@ -804,15 +804,15 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _3604dd182915d18674b48e45803faa77:
+  _f3f481a9fcbd20e62982ee5a5e85f7c0:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n+CONFIG_PSERIES_PLPKS=n
     env:
       ARCH: powerpc
       LLVM_VERSION: 15
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n+CONFIG_PSERIES_PLPKS=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
