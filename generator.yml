@@ -269,7 +269,8 @@ configs:
   - &ppc64             {config: [pseries_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: vmlinux,      << : *powerpc64-triple,     << : *kernel}
   - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
+  # CONFIG_PSERIES_PLPKS disabled: https://lore.kernel.org/Yxe06fbq18Wv9y3W@dev-arch.thelio-3990X/
+  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n, CONFIG_PSERIES_PLPKS=n],    kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                      kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   - &riscv             {config: defconfig,                                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel}
   - &riscv_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                               kernel_image: Image,        << : *riscv-triple,         << : *default}
