@@ -366,7 +366,6 @@ jobs:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     - CONFIG_BPF_PRELOAD=n
-    - CONFIG_PSERIES_PLPKS=n
     targets:
     - kernel
     kernel_image: zImage.epapr
