@@ -105,7 +105,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 },
                 {
                     "name": "tuxsuite",
-                    "run": "tuxsuite plan --git-repo {} --git-ref {} --job-name {} --json-out builds.json {}{} || true".format(repo, ref, job_name, tuxsuite_yml, patch_series)
+                    "run": "tuxsuite plan --git-repo {} --git-ref {} --job-name {} --json-out builds.json {}{} || true".format(repo, ref, job_name, patch_series, tuxsuite_yml)
                 },
                 {
                     "name": "save output",

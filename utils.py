@@ -174,5 +174,5 @@ def patch_series_flag(tree):
     patches_folder = pathlib.Path("patches").joinpath(tree)
     patch_files = glob.glob(
         ci_folder.joinpath(patches_folder).as_posix() + "/*.patch")
-    return " --patch-series {}".format(
+    return "--patch-series {} ".format(
         patches_folder.as_posix()) if patch_files else ""
