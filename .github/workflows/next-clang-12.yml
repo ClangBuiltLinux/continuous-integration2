@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name defconfigs --json-out builds.json tuxsuite/next-clang-12.tux.yml --patch-series patches/next || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name defconfigs --json-out builds.json tuxsuite/next-clang-12.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -608,7 +608,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name distribution_configs --json-out builds.json tuxsuite/next-clang-12.tux.yml --patch-series patches/next || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name distribution_configs --json-out builds.json tuxsuite/next-clang-12.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -834,7 +834,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name allconfigs --json-out builds.json tuxsuite/next-clang-12.tux.yml --patch-series patches/next || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name allconfigs --json-out builds.json tuxsuite/next-clang-12.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
