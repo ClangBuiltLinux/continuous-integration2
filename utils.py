@@ -45,6 +45,16 @@ def get_cbl_name():
 
     # Distribution configurations have a URL
     if "https://" in base_config:
+        if "alpine" in base_config:
+            alpine_to_cbl = {
+                "aarch64": "arm64",
+                "armv7": "arm32_v7",
+                "riscv64": "riscv",
+                "x86_64": "x86_64"
+            }
+            # The URL is https://.../config-edge.<arch>
+            alpine_arch = base_config.split(".")[-1]
+            return alpine_to_cbl[alpine_arch]
         if "fedora" in base_config:
             fedora_to_cbl = {
                 "aarch64": "arm64",
