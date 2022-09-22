@@ -361,6 +361,15 @@ jobs:
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
+  - target_arch: riscv
+    toolchain: clang-13
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    targets:
+    - kernel
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: clang-13
     kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
