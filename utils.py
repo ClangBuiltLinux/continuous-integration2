@@ -63,6 +63,7 @@ def get_cbl_name():
                 "armv7hl": "arm32_v7",
                 "i386": "x86",
                 "ppc64le": "ppc64le",
+                "riscv64": "riscv",
                 "s390x": "s390",
                 "x86_64": "x86_64"
             }
