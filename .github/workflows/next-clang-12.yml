@@ -615,6 +615,27 @@ jobs:
         path: builds.json
         name: output_artifact_distribution_configs
         if-no-files-found: error
+  _385ff4c997d68d225943e46dd047c248:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      BOOT: 1
+      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_distribution_configs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _5956d62ae6edadd4596591a4267ef913:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
@@ -645,6 +666,27 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_distribution_configs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _643f1e186135b2ae28b4d44c35a884b5:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      BOOT: 1
+      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -762,6 +804,27 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _6a01647ada93ad6be921a6c12aff0c60:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=riscv LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 12
+      BOOT: 1
+      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_distribution_configs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _6bae59ef4c989f6e25ce342bf9dcf3e0:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
@@ -771,6 +834,27 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_distribution_configs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _ca7469095b0b6a043817e9b4281b32ef:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      BOOT: 1
+      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
