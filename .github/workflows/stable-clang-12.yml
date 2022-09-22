@@ -783,6 +783,27 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _6bae59ef4c989f6e25ce342bf9dcf3e0:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=riscv LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 12
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_distribution_configs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _6f25f53bece84b18b9d20700a1a6cba2:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
