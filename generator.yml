@@ -454,8 +454,7 @@ builds:
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_kasan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  # x86_64_kcsan: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1704)
-  # - {<< : *x86_64_kcsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_kcsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_ubsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
