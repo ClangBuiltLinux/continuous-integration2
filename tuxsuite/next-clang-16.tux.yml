@@ -319,6 +319,14 @@ jobs:
   builds:
   - target_arch: arm
     toolchain: clang-nightly
+    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: arm
+    toolchain: clang-nightly
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
     - CONFIG_BPF_PRELOAD=n
@@ -330,6 +338,14 @@ jobs:
   - target_arch: arm
     toolchain: clang-nightly
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: arm64
+    toolchain: clang-nightly
+    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
     targets:
     - kernel
     make_variables:
@@ -385,6 +401,15 @@ jobs:
       LLVM_IAS: 1
   - target_arch: riscv
     toolchain: clang-nightly
+    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+    targets:
+    - kernel
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: riscv
+    toolchain: clang-nightly
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
     targets:
     - kernel
@@ -407,6 +432,14 @@ jobs:
     targets:
     - kernel
     make_variables:
+      LLVM_IAS: 1
+  - target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: clang-nightly
