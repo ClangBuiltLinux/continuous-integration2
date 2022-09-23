@@ -25,8 +25,6 @@ def initial_workflow(name, cron, tuxsuite_yml, workflow_yml):
             # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths
             "push": {
                 "branches": [
-                    # Always run on the main branch
-                    "main",
                     # Allow testing on branches with a presubmit/ prefix
                     "presubmit/*"
                 ],
