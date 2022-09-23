@@ -5,7 +5,6 @@ name: android-mainline (clang-14)
 'on':
   push:
     branches:
-    - main
     - presubmit/*
     paths:
     - check_logs.py
