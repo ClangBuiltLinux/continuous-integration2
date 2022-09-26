@@ -1929,7 +1929,8 @@ builds:
   - {<< : *riscv,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *riscv_alpine,      << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *riscv_suse,        << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -1989,7 +1990,8 @@ builds:
   - {<< : *riscv,             << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *riscv_suse,        << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -2048,7 +2050,8 @@ builds:
   - {<< : *riscv,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *riscv_suse,        << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -2107,7 +2110,8 @@ builds:
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_12}
   - {<< : *riscv_alpine,      << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_lto_thin,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -2256,7 +2260,8 @@ builds:
   - {<< : *riscv,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *riscv_alpine,      << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
-  - {<< : *riscv_suse,        << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -2316,7 +2321,8 @@ builds:
   - {<< : *riscv,             << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
-  - {<< : *riscv_suse,        << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -2376,7 +2382,8 @@ builds:
   - {<< : *riscv,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
-  - {<< : *riscv_suse,        << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -2435,7 +2442,8 @@ builds:
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *riscv_alpine,      << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
-  - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
+  # OpenSUSE RISC-V config: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1719)
+  # - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_lto_thin,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
