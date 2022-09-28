@@ -14,6 +14,7 @@ name: next (clang-11)
   schedule:
   - cron: 0 12 * * 1,2,3,4,5
   workflow_dispatch: null
+permissions: read-all
 jobs:
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)

@@ -42,6 +42,7 @@ def initial_workflow(name, cron, tuxsuite_yml, workflow_yml):
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch
             "workflow_dispatch": None
         },
+        "permissions": "read-all",
         "jobs": {}
     } # yapf: disable
 
