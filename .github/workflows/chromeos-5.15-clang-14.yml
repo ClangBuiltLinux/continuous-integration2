@@ -14,6 +14,7 @@ name: chromeos-5.15 (clang-14)
   schedule:
   - cron: 0 0 * * 0
   workflow_dispatch: null
+permissions: read-all
 jobs:
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
