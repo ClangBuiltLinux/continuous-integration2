@@ -294,6 +294,8 @@ configs:
   - &x86_64            {config: defconfig,                                                                                                                             << : *kernel}
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                                  << : *kernel}
   - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                                  << : *kernel}
+  - &x86_64_cfi        {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                                                       << : *kernel}
+  - &x86_64_cfi_lto    {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                                              << : *kernel}
   - &x86_64_cros       {<< : *x86_64-cros-configs,                                                                                                                     << : *kernel}
   - &x86_64_gki        {config: gki_defconfig,                                                                                                                         << : *kernel}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                           << : *kernel}
@@ -454,6 +456,8 @@ builds:
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cfi,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cfi_lto,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_kasan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_kcsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_ubsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
