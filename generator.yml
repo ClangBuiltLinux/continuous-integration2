@@ -388,6 +388,8 @@ builds:
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cfi,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cfi_lto,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_kasan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   # x86_64_kcsan: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1704)
   # - {<< : *x86_64_kcsan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -751,7 +753,6 @@ builds:
   - {<< : *arm64be,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64_cfi_lto,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_kasan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_kasan_sw,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_ubsan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1142,7 +1143,6 @@ builds:
   - {<< : *arm64be,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_cfi_lto,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_kasan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_kasan_sw,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_ubsan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
