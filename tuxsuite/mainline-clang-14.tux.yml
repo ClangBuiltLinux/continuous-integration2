@@ -114,17 +114,6 @@ jobs:
     toolchain: clang-14
     kconfig:
     - defconfig
-    - CONFIG_CFI_CLANG=y
-    - CONFIG_LTO_CLANG_THIN=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: arm64
-    toolchain: clang-14
-    kconfig:
-    - defconfig
     - CONFIG_KASAN=y
     - CONFIG_KASAN_KUNIT_TEST=y
     - CONFIG_KASAN_VMALLOC=y
