@@ -514,7 +514,6 @@ jobs:
     toolchain: clang-nightly
     kconfig:
     - allmodconfig
-    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default
@@ -533,7 +532,6 @@ jobs:
     toolchain: clang-nightly
     kconfig:
     - allyesconfig
-    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default

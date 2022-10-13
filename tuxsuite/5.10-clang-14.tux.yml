@@ -155,7 +155,6 @@ jobs:
     toolchain: clang-14
     kconfig:
     - allmodconfig
-    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default
@@ -174,7 +173,6 @@ jobs:
     toolchain: clang-14
     kconfig:
     - allyesconfig
-    - CONFIG_FPE_NWFPE=n
     - CONFIG_WERROR=n
     targets:
     - default
