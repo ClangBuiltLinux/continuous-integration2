@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name defconfigs --json-out builds.json tuxsuite/mainline-clang-12.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name defconfigs --json-out builds.json --patch-series patches/mainline tuxsuite/mainline-clang-12.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -608,7 +608,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name distribution_configs --json-out builds.json tuxsuite/mainline-clang-12.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name distribution_configs --json-out builds.json --patch-series patches/mainline tuxsuite/mainline-clang-12.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -918,22 +918,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name allconfigs --json-out builds.json tuxsuite/mainline-clang-12.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name allconfigs --json-out builds.json --patch-series patches/mainline tuxsuite/mainline-clang-12.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_allconfigs
         if-no-files-found: error
-  _a9653b7f736b9d77c0e99a7f0587b2bd:
+  _3f7ecca7b1ed43660ac6389359fde646:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allmodconfig+CONFIG_FPE_NWFPE=n+CONFIG_WERROR=n
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allmodconfig+CONFIG_WERROR=n
     env:
       ARCH: arm
       LLVM_VERSION: 12
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_FPE_NWFPE=n+CONFIG_WERROR=n
+      CONFIG: allmodconfig+CONFIG_WERROR=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

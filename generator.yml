@@ -236,9 +236,9 @@ configs:
   - &arm32_imx         {config: imx_v4_v5_defconfig,                                                                                       << : *arm-triple,           << : *default}
   - &arm32_omap        {config: omap2plus_defconfig,                                                                                       << : *arm-triple,           << : *default}
   - &arm32_lpae_fp     {config: [multi_v7_defconfig, CONFIG_ARM_LPAE=y, CONFIG_UNWINDER_FRAME_POINTER=y],                                  << : *arm-triple,           << : *kernel}
-  - &arm32_allmod      {config: [allmodconfig, CONFIG_FPE_NWFPE=n, CONFIG_WERROR=n],                                                       << : *arm-triple,           << : *default}
+  - &arm32_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                                                           << : *arm-triple,           << : *default}
   - &arm32_allno       {config: allnoconfig,                                                                                               << : *arm-triple,           << : *default}
-  - &arm32_allyes      {config: [allyesconfig, CONFIG_FPE_NWFPE=n, CONFIG_WERROR=n],                                                       << : *arm-triple,           << : *default}
+  - &arm32_allyes      {config: [allyesconfig, CONFIG_WERROR=n],                                                                           << : *arm-triple,           << : *default}
   - &arm32_alpine      {config: *arm32-alpine-config-url,                                                                                  << : *arm-triple,           << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &arm32_fedora      {config: [*arm32-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          << : *arm-triple,           << : *kernel}
