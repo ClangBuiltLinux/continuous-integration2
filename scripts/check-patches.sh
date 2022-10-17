@@ -14,7 +14,17 @@ function update_series_commands() {
 [[ -d ${repo}/patches ]] && for folder in "${repo}"/patches/*; do
     series=${folder}/series
 
-    # First, make sure series file is not missing
+    # First, make sure that the patch folder is a valid tree (added patches
+    # with the wrong tree name).
+    tree_name=$(basename "$folder")
+    if [[ -z "$(ls "$repo"/.github/workflows/"$tree_name"-*.yml 2>/dev/null)" ]]; then
+        echo "$folder does not have any corresponding workflow files?"
+        echo
+        echo "The folder name should be the \"name\" field of the tree's definition in generator.yml."
+        exit 1
+    fi
+
+    # Next, make sure series file is not missing
     if [[ ! -f ${series} ]]; then
         echo "${folder} exists but ${series} doesn't?"
         echo
@@ -35,7 +45,7 @@ function update_series_commands() {
         fi
     done <"${series}"
 
-    # Lastly, make sure that all of the patches in the patches folder are in
+    # Finally, make sure that all of the patches in the patches folder are in
     # the series file (removed from series file, did not remove patch file)
     for patch in "${folder}"/*.patch; do
         patch=$(basename "${patch}")
@@ -47,7 +57,6 @@ function update_series_commands() {
             exit 1
         fi
     done
-
 done
 
 for workflow in "${repo}"/.github/workflows/*.yml; do
