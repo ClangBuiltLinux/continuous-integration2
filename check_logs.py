@@ -59,9 +59,9 @@ def verify_build():
 
     # If the build was neither fail nor pass, we need to fetch the status.json
     # of the particular build to try and get an updated result. We attempt this
-    # up to 7 times.
+    # up to 9 times.
     retries = 0
-    max_retries = 7
+    max_retries = 9
     while retries < max_retries:
         if build["result"] == "fail" or build["result"] == "pass":
             break
