@@ -125,6 +125,7 @@ jobs:
     toolchain: clang-14
     kconfig:
     - defconfig
+    - CONFIG_FTRACE=y
     - CONFIG_KASAN=y
     - CONFIG_KASAN_KUNIT_TEST=y
     - CONFIG_KASAN_VMALLOC=y
@@ -138,6 +139,7 @@ jobs:
     toolchain: clang-14
     kconfig:
     - defconfig
+    - CONFIG_FTRACE=y
     - CONFIG_KASAN=y
     - CONFIG_KASAN_KUNIT_TEST=y
     - CONFIG_KASAN_SW_TAGS=y
