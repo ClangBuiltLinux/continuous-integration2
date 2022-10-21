@@ -227,6 +227,9 @@ targets:
 chromeos_configs:
   - &arm64-cros-configs  {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/arm64/common.config, chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config]}
   - &x86_64-cros-configs {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/x86_64/common.config, chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config]}
+kasan_configs:
+  - &arm64-kasan-configs    {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y]}
+  - &arm64-kasan-sw-configs {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_SW_TAGS=y, CONFIG_KUNIT=y]}
 configs:
   #                     config:                                                                                image target (optional)     [triples:] (Optional: x86)  targets to build
   - &arm32_v5          {config: multi_v5_defconfig,                                                                                        << : *arm-triple,           << : *kernel_dtbs}
@@ -252,8 +255,8 @@ configs:
   - &arm64_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                      << : *arm64-triple,         << : *kernel}
   - &arm64_cfi         {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                           << : *arm64-triple,         << : *kernel}
   - &arm64_cfi_lto     {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                  << : *arm64-triple,         << : *kernel}
-  - &arm64_kasan       {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            << : *arm64-triple,         << : *kernel}
-  - &arm64_kasan_sw    {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_SW_TAGS=y, CONFIG_KUNIT=y],            << : *arm64-triple,         << : *kernel}
+  - &arm64_kasan       {<< : *arm64-kasan-configs,                                                                                         << : *arm64-triple,         << : *kernel}
+  - &arm64_kasan_sw    {<< : *arm64-kasan-sw-configs,                                                                                      << : *arm64-triple,         << : *kernel}
   - &arm64_ubsan       {config: [defconfig, CONFIG_UBSAN=y],                                                                               << : *arm64-triple,         << : *kernel}
   - &arm64_gki         {config: gki_defconfig,                                                                                             << : *arm64-triple,         << : *kernel}
   - &arm64_cut         {config: cuttlefish_defconfig,                                                                                      << : *arm64-triple,         << : *kernel}
