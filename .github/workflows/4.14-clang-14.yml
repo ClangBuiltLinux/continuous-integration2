@@ -26,6 +26,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-4.14.y --job-name defconfigs --json-out builds.json tuxsuite/4.14-clang-14.tux.yml || true
+      timeout-minutes: 480
     - name: save output
       uses: actions/upload-artifact@v3
       with:
