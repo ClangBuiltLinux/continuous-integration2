@@ -351,6 +351,15 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
+  - target_arch: riscv
+    toolchain: clang-11
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    targets:
+    - kernel
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
   - target_arch: x86_64
     toolchain: clang-11
     kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
