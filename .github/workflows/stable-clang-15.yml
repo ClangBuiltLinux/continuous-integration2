@@ -432,27 +432,6 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _73089fb85e10cf8cd08daf2f08ef949c:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=15 ppc44x_defconfig
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 15
-      BOOT: 1
-      CONFIG: ppc44x_defconfig
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v3
-      with:
-        name: output_artifact_defconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _7b977da0b866baaa39c0fe5c0379b628:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs

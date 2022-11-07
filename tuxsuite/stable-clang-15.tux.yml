@@ -200,15 +200,6 @@ jobs:
       LLVM_IAS: 1
   - target_arch: powerpc
     toolchain: clang-15
-    kconfig: ppc44x_defconfig
-    targets:
-    - kernel
-    kernel_image: uImage
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 0
-  - target_arch: powerpc
-    toolchain: clang-15
     kconfig:
     - pseries_defconfig
     - CONFIG_PPC_DISABLE_WERROR=y
