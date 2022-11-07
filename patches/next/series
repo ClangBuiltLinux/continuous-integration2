@@ -1,2 +1,2 @@
 0001-ARM-NWFPE-avoid-compiler-generated-__aeabi_uldivmod.patch
-20221031_nathan_bpf_mark_bpf_arch_init_dispatcher_early_as___init_or_module.patch
+20221107_nathan_bpf_add_explicit_cast_to_void_for___bpf_dispatcher_update.patch
