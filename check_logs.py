@@ -63,7 +63,7 @@ def verify_build():
     retries = 0
     max_retries = 9
     while retries < max_retries:
-        if build["result"] == "fail" or build["result"] == "pass":
+        if build["tuxbuild_status"] == "complete":
             break
 
         if retries:
@@ -78,7 +78,7 @@ def verify_build():
     print(json.dumps(build, indent=4))
 
     if retries == max_retries:
-        print_red("status.json did not give a pass/fail result!")
+        print_red("Build is not finished on TuxSuite's side!")
         sys.exit(1)
 
     if build["status_message"] == "Unable to apply kernel patch":
