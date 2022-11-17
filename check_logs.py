@@ -81,6 +81,10 @@ def verify_build():
         print_red("Build is not finished on TuxSuite's side!")
         sys.exit(1)
 
+    if "Build Timed Out" in build["status_message"]:
+        print_red(build["status_message"])
+        sys.exit(1)
+
     if build["status_message"] == "Unable to apply kernel patch":
         print_red(
             "Patch failed to apply to current kernel tree, does it need to be removed or updated?"
