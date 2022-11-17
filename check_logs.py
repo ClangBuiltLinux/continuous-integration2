@@ -247,6 +247,9 @@ def run_boot(build):
 
 
 def boot_test(build):
+    if build["result"] == "unknown":
+        print_red("unknown build result, skipping boot")
+        sys.exit(1)
     if build["result"] == "fail":
         print_red("fatal build errors encountered during build, skipping boot")
         sys.exit(1)
