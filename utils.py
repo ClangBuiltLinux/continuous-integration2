@@ -120,7 +120,7 @@ def _read_builds():
         with open(builds) as f:
             builds = json.load(f)
     except FileNotFoundError as e:
-        print_red("Unable to find %s. Artifact not saved?" % (builds))
+        print_red(f"Unable to find {builds}. Artifact not saved?")
         raise e
     return builds["builds"].values()
 
@@ -171,12 +171,12 @@ def get_llvm_versions(config, tree_name):
 
 
 def print_red(msg):
-    print("\033[91m%s\033[0m" % msg, file=sys.stderr)
+    print(f"\033[91m{msg}\033[0m", file=sys.stderr)
     sys.stderr.flush()
 
 
 def print_yellow(msg):
-    print("\033[93m%s\033[0m" % msg, file=sys.stdout)
+    print(f"\033[93m{msg}\033[0m", file=sys.stdout)
     sys.stdout.flush()
 
 
@@ -185,5 +185,4 @@ def patch_series_flag(tree):
     patches_folder = pathlib.Path("patches").joinpath(tree)
     patch_files = glob.glob(
         ci_folder.joinpath(patches_folder).as_posix() + "/*.patch")
-    return "--patch-series {} ".format(
-        patches_folder.as_posix()) if patch_files else ""
+    return f"--patch-series {patches_folder.as_posix()} " if patch_files else ""
