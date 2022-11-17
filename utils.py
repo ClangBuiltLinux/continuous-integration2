@@ -183,6 +183,5 @@ def print_yellow(msg):
 def patch_series_flag(tree):
     ci_folder = pathlib.Path(__file__).resolve().parent
     patches_folder = pathlib.Path("patches").joinpath(tree)
-    patch_files = glob.glob(
-        ci_folder.joinpath(patches_folder).as_posix() + "/*.patch")
-    return f"--patch-series {patches_folder.as_posix()} " if patch_files else ""
+    patch_files = glob.glob(f"{ci_folder.joinpath(patches_folder)}/*.patch")
+    return f"--patch-series {patches_folder} " if patch_files else ""
