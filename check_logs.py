@@ -60,7 +60,7 @@ def verify_build():
     retries = 0
     max_retries = 9
     while retries < max_retries:
-        if build["result"] == "fail" or build["result"] == "pass":
+        if build["tuxbuild_status"] == "complete":
             break
 
         if retries:
@@ -75,7 +75,11 @@ def verify_build():
     print(json.dumps(build, indent=4))
 
     if retries == max_retries:
-        print_red("status.json did not give a pass/fail result!")
+        print_red("Build is not finished on TuxSuite's side!")
+        sys.exit(1)
+
+    if "Build Timed Out" in build["status_message"]:
+        print_red(build["status_message"])
         sys.exit(1)
 
     if build["status_message"] == "Unable to apply kernel patch":
@@ -240,6 +244,9 @@ def run_boot(build):
 
 
 def boot_test(build):
+    if build["result"] == "unknown":
+        print_red("unknown build result, skipping boot")
+        sys.exit(1)
     if build["result"] == "fail":
         print_red("fatal build errors encountered during build, skipping boot")
         sys.exit(1)

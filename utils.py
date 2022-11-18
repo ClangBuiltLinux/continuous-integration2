@@ -117,6 +117,8 @@ def _read_builds():
     if os.environ.get("MOCK"):
         builds = "mock.builds.json"
     try:
+        if pathlib.Path(builds).stat().st_size == 0:
+            raise Exception(f"{builds} is zero sized?")
         with open(builds) as f:
             builds = json.load(f)
     except FileNotFoundError as e:
