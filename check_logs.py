@@ -13,7 +13,7 @@ from utils import get_build, get_image_name, get_requested_llvm_version, print_r
 
 def _fetch(title, url, dest):
     current_time = time.strftime("%H:%M:%S", time.localtime())
-    print_yellow("%s: fetching %s from: %s" % (current_time, title, url))
+    print_yellow(f"{current_time}: fetching {title} from: {url}")
     # TODO: use something more robust like python wget library.
     retries = 0
     max_retries = 7
@@ -26,31 +26,28 @@ def _fetch(title, url, dest):
             urllib.request.urlretrieve(url, dest)
             break
         except ConnectionResetError as err:
-            print_yellow('%s download error ("%s"), retrying...' %
-                         (title, str(err)))
+            print_yellow(f"{title} download error ('{str(err)}'), retrying...")
             pass
         except urllib.error.HTTPError as err:
             if err.code in retry_codes:
-                print_yellow("%s download error (%d), retrying..." %
-                             (title, err.code))
+                print_yellow(
+                    f"{title} download error ({err.code}), retrying...")
                 pass
             else:
-                print_red("%d error trying to download %s" % (err.code, title))
+                print_red(f"{err.code} error trying to download {title}")
                 sys.exit(1)
         except urllib.error.URLError as err:
-            print_yellow('%s download error ("%s"), retrying...' %
-                         (title, str(err)))
+            print_yellow(f"{title} download error ('{str(err)}'), retrying...")
             pass
 
     if retries == max_retries:
-        print_red("Unable to download %s after %d tries" %
-                  (title, max_retries))
+        print_red(f"Unable to download {title} after {max_retries} tries")
         sys.exit(1)
 
     if os.path.exists(dest):
-        print_yellow("Filesize: %d" % os.path.getsize(dest))
+        print_yellow(f"Filesize: {os.path.getsize(dest)}")
     else:
-        print_red("Unable to download %s" % (title))
+        print_red(f"Unable to download {title}")
         sys.exit(1)
 
 
@@ -102,7 +99,7 @@ def check_log(build):
     warnings_count = build["warnings_count"]
     errors_count = build["errors_count"]
     if warnings_count + errors_count > 0:
-        print_yellow("%d warnings, %d errors" % (warnings_count, errors_count))
+        print_yellow(f"{warnings_count} warnings, {errors_count} errors")
         fetch_logs(build)
 
 
@@ -160,7 +157,7 @@ def check_built_config(build):
                              (name, line))
             state = 'n'
         elif not line.startswith("#"):
-            print_yellow("Could not parse .config line '%s'!?" % (line))
+            print_yellow(f"Could not parse .config line '{line}'!?")
         configs[name] = state
 
     # Compare requested configs against the loaded dictionary.
@@ -171,10 +168,10 @@ def check_built_config(build):
         name, state = config.split('=')
         # If a config is missing from the dictionary, it is considered 'n'.
         if state != configs.get(name, 'n'):
-            print_red("FAIL: %s not found in .config!" % (config))
+            print_red(f"FAIL: {config} not found in .config!")
             fail = True
         else:
-            print("ok: %s=%s" % (name, state))
+            print(f"ok: {name}={state}")
     if fail:
         sys.exit(1)
 
@@ -261,13 +258,13 @@ if __name__ == "__main__":
             missing.append(var)
     if len(missing):
         for var in missing:
-            print_red("$%s must be specified" % var)
+            print_red(f"${var} must be specified")
         show_builds()
         sys.exit(1)
     build = verify_build()
     print_yellow("Register clang error/warning problem matchers")
     for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
-        print("::add-matcher::%s" % (problem_matcher))
+        print(f"::add-matcher::{problem_matcher}")
     print_clang_info(build)
     check_log(build)
     check_built_config(build)
