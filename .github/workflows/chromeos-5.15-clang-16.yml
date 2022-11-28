@@ -22,11 +22,11 @@ jobs:
     container: tuxsuite/tuxsuite
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+    timeout-minutes: 480
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://chromium.googlesource.com/chromiumos/third_party/kernel.git --git-ref chromeos-5.15 --job-name defconfigs --json-out builds.json tuxsuite/chromeos-5.15-clang-16.tux.yml || true
-      timeout-minutes: 480
     - name: save output
       uses: actions/upload-artifact@v3
       with:

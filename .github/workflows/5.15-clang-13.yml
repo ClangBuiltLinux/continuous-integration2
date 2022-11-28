@@ -22,11 +22,11 @@ jobs:
     container: tuxsuite/tuxsuite
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+    timeout-minutes: 480
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name defconfigs --json-out builds.json --patch-series patches/5.15 tuxsuite/5.15-clang-13.tux.yml || true
-      timeout-minutes: 480
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -690,11 +690,11 @@ jobs:
     container: tuxsuite/tuxsuite
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+    timeout-minutes: 480
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name distribution_configs --json-out builds.json --patch-series patches/5.15 tuxsuite/5.15-clang-13.tux.yml || true
-      timeout-minutes: 480
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -1064,11 +1064,11 @@ jobs:
     container: tuxsuite/tuxsuite
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+    timeout-minutes: 480
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name allconfigs --json-out builds.json --patch-series patches/5.15 tuxsuite/5.15-clang-13.tux.yml || true
-      timeout-minutes: 480
     - name: save output
       uses: actions/upload-artifact@v3
       with:
