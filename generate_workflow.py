@@ -98,6 +98,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
             "env": {
                 "TUXSUITE_TOKEN": "${{ secrets.TUXSUITE_TOKEN }}"
             },
+            "timeout-minutes": 480,
             "steps": [
                 {
                     "uses": "actions/checkout@v3"
@@ -105,7 +106,6 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     "name": "tuxsuite",
                     "run": f"tuxsuite plan --git-repo {repo} --git-ref {ref} --job-name {job_name} --json-out builds.json {patch_series}{tuxsuite_yml} || true",
-                    "timeout-minutes": 480
                 },
                 {
                     "name": "save output",
