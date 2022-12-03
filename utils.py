@@ -6,7 +6,7 @@ import sys
 import yaml
 
 
-def get_config():
+def get_config_from_generator():
     # Trusted input.
     # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
     try:

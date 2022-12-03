@@ -4,7 +4,7 @@ import pathlib
 import sys
 import yaml
 
-from utils import get_config, get_repo_ref, get_llvm_versions, patch_series_flag
+from utils import get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
 
 
 # Aliases makes this YAML unreadable
@@ -108,7 +108,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
 if __name__ == "__main__":
     # The list of valid trees come from the input, so we parse the input, then
     # check command line flags.
-    config = get_config()
+    config = get_config_from_generator()
     args = parse_args(config["trees"])
     for llvm_version in get_llvm_versions(config, args.tree):
         emit_tuxsuite_yml(config, args.tree, llvm_version)

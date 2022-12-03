@@ -5,7 +5,7 @@ import hashlib
 import sys
 import yaml
 
-from utils import get_config, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
+from utils import get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
 
 
 def parse_args(trees):
@@ -224,7 +224,7 @@ def print_builds(config, tree_name, llvm_version):
 
 
 if __name__ == "__main__":
-    config = get_config()
+    config = get_config_from_generator()
     args = parse_args(config["trees"])
     for llvm_version in get_llvm_versions(config, args.tree):
         print_builds(config, args.tree, llvm_version)
