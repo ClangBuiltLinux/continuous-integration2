@@ -237,10 +237,10 @@ def run_boot(build):
 
     try:
         subprocess.run(boot_cmd, check=True)
-    except subprocess.CalledProcessError as e:
-        if e.returncode == 124:
+    except subprocess.CalledProcessError as err:
+        if err.returncode == 124:
             print_red("Image failed to boot")
-        raise e
+        raise err
 
 
 def boot_test(build):

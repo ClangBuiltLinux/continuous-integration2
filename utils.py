@@ -10,11 +10,11 @@ def get_config_from_generator():
     # Trusted input.
     # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
     try:
-        with open("generator.yml", encoding='utf-8') as f:
-            return yaml.load(f, Loader=yaml.FullLoader)
-    except FileNotFoundError as e:
+        with open("generator.yml", encoding='utf-8') as file:
+            return yaml.load(file, Loader=yaml.FullLoader)
+    except FileNotFoundError as err:
         print_red("generator.yml not found?")
-        raise e
+        raise err
 
 
 def get_image_name():
@@ -119,19 +119,20 @@ def _read_builds():
     try:
         if pathlib.Path(builds).stat().st_size == 0:
             raise Exception(f"{builds} is zero sized?")
-        with open(builds, encoding='utf-8') as f:
-            builds = json.load(f)
-    except FileNotFoundError as e:
+        with open(builds, encoding='utf-8') as file:
+            builds = json.load(file)
+    except FileNotFoundError as err:
         print_red(f"Unable to find {builds}. Artifact not saved?")
-        raise e
+        raise err
     return builds["builds"].values()
 
 
 def get_requested_llvm_version():
     ver = os.environ["LLVM_VERSION"]
     ci_folder = pathlib.Path(__file__).resolve().parent
-    with open(ci_folder.joinpath("LLVM_TOT_VERSION"), encoding='utf-8') as f:
-        llvm_tot_version = str(int(f.read())).strip()
+    with open(ci_folder.joinpath("LLVM_TOT_VERSION"),
+              encoding='utf-8') as file:
+        llvm_tot_version = str(int(file.read())).strip()
     return "clang-" + ("nightly" if ver == llvm_tot_version else ver)
 
 
