@@ -84,3 +84,9 @@ for tree in rows:
     row = tree.replace('-', '&#8209;')
     print(f"| {row} | " + " | ".join(
         [svg(trees[tree].get(compiler, None)) for compiler in columns]) + " |")
+
+# Output a button for the "Check clang version" workflow, which ensures that
+# tip of tree LLVM is being updating. This does not need to be a part of the
+# table above.
+workflow_url = 'https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml'
+print(f"\n[![Check clang version]({workflow_url}/badge.svg)]({workflow_url})")
