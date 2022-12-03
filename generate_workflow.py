@@ -48,7 +48,7 @@ def initial_workflow(name, cron, tuxsuite_yml, workflow_yml):
 
 def print_config(build):
     config = build["config"]
-    if type(config) is list:
+    if isinstance(config, list):
         config_name = config[0]
         i = 1
         while i < len(config):
