@@ -43,7 +43,7 @@ def initial_workflow(name, cron, tuxsuite_yml, workflow_yml):
         },
         "permissions": "read-all",
         "jobs": {}
-    } # yapf: disable
+    }  # yapf: disable
 
 
 def print_config(build):
@@ -117,7 +117,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 }
             ]
         }
-    } # yapf: disable
+    }  # yapf: disable
 
 
 def get_steps(build, build_set):
@@ -156,7 +156,7 @@ def get_steps(build, build_set):
                 },
             ],
         }
-    } # yapf: disable
+    }  # yapf: disable
 
 
 def get_cron_schedule(schedules, tree_name, llvm_version):

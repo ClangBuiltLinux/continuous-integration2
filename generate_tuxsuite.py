@@ -50,7 +50,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                     'builds': [],
                 }
             ]
-        } # yapf: disable
+        }  # yapf: disable
         ci_folder = pathlib.Path(__file__).resolve().parent
         with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
             max_version = int(f.read())
