@@ -25,7 +25,7 @@ name_re = re.compile(r'^name: (.*) \(([^\)]+)\)$')
 base_re = re.compile(r'^.*/([^/]+)\.yml$')
 
 # Find all the tuxsuite workflows.
-trees = dict()
+trees = {}
 for yml in glob.glob(f"{ci_root}/.github/workflows/*.yml"):
     tuxsuite = False
     tree = None
@@ -48,7 +48,7 @@ for yml in glob.glob(f"{ci_root}/.github/workflows/*.yml"):
 
     m = base_re.search(yml)
     base = m.group(1)
-    trees.setdefault(tree, dict())
+    trees.setdefault(tree, {})
     trees[tree][compiler] = base
 
 # Construct the list of all compilers seen by any tree.
