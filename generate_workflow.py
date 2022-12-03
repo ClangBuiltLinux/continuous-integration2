@@ -164,7 +164,7 @@ def get_cron_schedule(schedules, tree_name, llvm_version):
            item["llvm_version"] == llvm_version:
             return item["schedule"]
     print_red(f"Could not find schedule for {tree_name} clang-{llvm_version}?")
-    exit(1)
+    sys.exit(1)
 
 
 def print_builds(config, tree_name, llvm_version):
