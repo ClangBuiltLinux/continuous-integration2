@@ -28,7 +28,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
     tuxsuite_yml = f"tuxsuite/{tree}-{toolchain}.tux.yml"
     repo, ref = get_repo_ref(config, tree)
 
-    with open(tuxsuite_yml, "w") as f:
+    with open(tuxsuite_yml, "w", encoding='utf-8') as f:
         orig_stdout = sys.stdout
         sys.stdout = f
 
@@ -52,7 +52,8 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
             ]
         }  # yapf: disable
         ci_folder = pathlib.Path(__file__).resolve().parent
-        with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
+        with open(ci_folder.joinpath("LLVM_TOT_VERSION"),
+                  encoding='utf-8') as f:
             max_version = int(f.read())
         defconfigs = []
         distribution_configs = []

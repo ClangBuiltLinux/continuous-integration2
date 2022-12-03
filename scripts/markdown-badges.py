@@ -29,7 +29,7 @@ for yml in glob.glob(f"{ci_root}/.github/workflows/*.yml"):
     tuxsuite = False
     tree = None
     compiler = None
-    for line in open(yml):
+    for line in open(yml, encoding='utf-8'):
         m = name_re.search(line)
         if m:
             tree = m.group(1)

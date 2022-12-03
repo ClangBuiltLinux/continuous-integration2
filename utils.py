@@ -10,7 +10,7 @@ def get_config_from_generator():
     # Trusted input.
     # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
     try:
-        with open("generator.yml") as f:
+        with open("generator.yml", encoding='utf-8') as f:
             return yaml.load(f, Loader=yaml.FullLoader)
     except FileNotFoundError as e:
         print_red("generator.yml not found?")
@@ -119,7 +119,7 @@ def _read_builds():
     try:
         if pathlib.Path(builds).stat().st_size == 0:
             raise Exception(f"{builds} is zero sized?")
-        with open(builds) as f:
+        with open(builds, encoding='utf-8') as f:
             builds = json.load(f)
     except FileNotFoundError as e:
         print_red(f"Unable to find {builds}. Artifact not saved?")
@@ -130,7 +130,7 @@ def _read_builds():
 def get_requested_llvm_version():
     ver = os.environ["LLVM_VERSION"]
     ci_folder = pathlib.Path(__file__).resolve().parent
-    with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
+    with open(ci_folder.joinpath("LLVM_TOT_VERSION"), encoding='utf-8') as f:
         llvm_tot_version = str(int(f.read())).strip()
     return "clang-" + ("nightly" if ver == llvm_tot_version else ver)
 

@@ -209,7 +209,7 @@ def print_builds(config, tree_name, llvm_version):
             tuxsuite_setups("allconfigs", tuxsuite_yml, repo, ref))
         workflow["jobs"].update(check_logs_allconfigs)
 
-    with open(github_yml, "w") as f:
+    with open(github_yml, "w", encoding='utf-8') as f:
         orig_stdout = sys.stdout
         sys.stdout = f
         print("# DO NOT MODIFY MANUALLY!")

@@ -70,7 +70,7 @@ def verify_build():
         status_json = "status.json"
         url = build["download_url"] + status_json
         _fetch("status.json", url, status_json)
-        build = json.load(open(status_json))
+        build = json.load(open(status_json, encoding='utf-8'))
 
     print(json.dumps(build, indent=4))
 
@@ -96,7 +96,7 @@ def fetch_logs(build):
     log = "build.log"
     url = build["download_url"] + log
     _fetch("logs", url, log)
-    print(open(log).read())
+    print(open(log, encoding='utf-8').read())
 
 
 def check_log(build):
@@ -145,7 +145,7 @@ def check_built_config(build):
     fetch_built_config(build)
     # Build dictionary of CONFIG_NAME: y/m/n ("is not set" translates to 'n').
     configs = dict()
-    for line in open(".config"):
+    for line in open(".config", encoding='utf-8'):
         line = line.strip()
         if len(line) == 0:
             continue
@@ -191,7 +191,7 @@ def print_clang_info(build):
     metadata_file = "metadata.json"
     url = build["download_url"] + metadata_file
     _fetch(metadata_file, url, metadata_file)
-    metadata_json = json.loads(open(metadata_file).read())
+    metadata_json = json.loads(open(metadata_file, encoding='utf-8').read())
     print_yellow("Printing clang-nightly checkout date and hash")
     subprocess.run([
         "./scripts/parse-debian-clang.sh", "--print-info", "--version-string",
