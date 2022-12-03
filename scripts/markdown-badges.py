@@ -10,7 +10,7 @@ ci_root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 # Construct the markdown for a specific workflow badge.
 def svg(workflow):
-    if workflow == None:
+    if workflow is None:
         return "   "
     workflow_url = f"https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/{workflow}.yml"
     return f"[![{workflow} build status]({workflow_url}/badge.svg)]({workflow_url})"
@@ -41,7 +41,7 @@ for yml in glob.glob(f"{ci_root}/.github/workflows/*.yml"):
     if not tuxsuite:
         continue
     # Found a tuxsuite workflow with no "name:" field?!
-    if tree == None or compiler == None:
+    if tree is None or compiler is None:
         raise ValueError(f"{yml}: missing 'name:'")
 
     m = base_re.search(yml)
