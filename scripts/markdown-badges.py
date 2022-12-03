@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-import os, glob, re
+import glob
+import os
+import re
 from pkg_resources import parse_version
 
 # Figure out where we to find the workflow definitions.
