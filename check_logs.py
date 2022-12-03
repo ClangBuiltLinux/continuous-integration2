@@ -167,7 +167,7 @@ def check_built_config(build):
     # Compare requested configs against the loaded dictionary.
     fail = False
     for config in build["kconfig"]:
-        if not 'CONFIG' in config:
+        if 'CONFIG' not in config:
             continue
         name, state = config.split('=')
         # If a config is missing from the dictionary, it is considered 'n'.
@@ -261,7 +261,7 @@ def boot_test(build):
 if __name__ == "__main__":
     missing = []
     for var in ["ARCH", "CONFIG", "LLVM_VERSION"]:
-        if not var in os.environ:
+        if var not in os.environ:
             missing.append(var)
     if len(missing):
         for var in missing:
