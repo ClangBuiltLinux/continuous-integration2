@@ -30,15 +30,16 @@ for yml in glob.glob(f"{ci_root}/.github/workflows/*.yml"):
     tuxsuite = False
     tree = None
     compiler = None
-    for line in open(yml, encoding='utf-8'):
-        m = name_re.search(line)
-        if m:
-            tree = m.group(1)
-            compiler = m.group(2)
-            continue
-        if 'tuxsuite' in line:
-            tuxsuite = True
-            break
+    with open(yml, encoding='utf-8') as file:
+        for line in file:
+            m = name_re.search(line)
+            if m:
+                tree = m.group(1)
+                compiler = m.group(2)
+                continue
+            if 'tuxsuite' in line:
+                tuxsuite = True
+                break
     if not tuxsuite:
         continue
     # Found a tuxsuite workflow with no "name:" field?!
