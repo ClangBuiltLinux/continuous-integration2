@@ -224,7 +224,7 @@ def print_builds(config, tree_name, llvm_version):
 
 
 if __name__ == "__main__":
-    config = get_config_from_generator()
-    args = parse_args(config["trees"])
-    for llvm_version in get_llvm_versions(config, args.tree):
-        print_builds(config, args.tree, llvm_version)
+    generated_config = get_config_from_generator()
+    args = parse_args(generated_config["trees"])
+    for llvm_version in get_llvm_versions(generated_config, args.tree):
+        print_builds(generated_config, args.tree, llvm_version)

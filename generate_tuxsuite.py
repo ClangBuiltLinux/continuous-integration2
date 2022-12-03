@@ -108,7 +108,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
 if __name__ == "__main__":
     # The list of valid trees come from the input, so we parse the input, then
     # check command line flags.
-    config = get_config_from_generator()
-    args = parse_args(config["trees"])
-    for llvm_version in get_llvm_versions(config, args.tree):
-        emit_tuxsuite_yml(config, args.tree, llvm_version)
+    generated_config = get_config_from_generator()
+    args = parse_args(generated_config["trees"])
+    for llvm_version in get_llvm_versions(generated_config, args.tree):
+        emit_tuxsuite_yml(generated_config, args.tree, llvm_version)
