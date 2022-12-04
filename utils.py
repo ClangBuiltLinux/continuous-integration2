@@ -139,9 +139,12 @@ def get_requested_llvm_version():
 def show_builds():
     print_yellow("Available builds:")
     for build in _read_builds():
-        print_yellow("\tARCH=%s LLVM_VERSION=%s CONFIG=%s" %
-                     (build["target_arch"], build["toolchain"].split(
-                         '-', 1)[1], "+".join(build["kconfig"])))
+        arch_val = build['target_arch']
+        llvm_version_val = build['toolchain'].split('-', 1)[1]
+        config_val = "+".join(build["kconfig"])
+        print_yellow(
+            f"\tARCH={arch_val} LLVM_VERSION={llvm_version_val} CONFIG={config_val}"
+        )
 
 
 def get_build():

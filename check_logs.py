@@ -161,8 +161,8 @@ def check_built_config(build):
                 name, state = line.split(" ", 2)[1:]
                 if state != "is not set":
                     print_yellow(
-                        "Could not parse '%s' from .config line '%s'!?" %
-                        (name, line))
+                        f"Could not parse '{name}' from .config line '{line}'!?"
+                    )
                 state = 'n'
             elif not line.startswith("#"):
                 print_yellow(f"Could not parse .config line '{line}'!?")
