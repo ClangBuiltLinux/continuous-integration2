@@ -14,7 +14,6 @@ from utils import get_build, get_image_name, get_requested_llvm_version, print_r
 def _fetch(title, url, dest):
     current_time = time.strftime("%H:%M:%S", time.localtime())
     print_yellow(f"{current_time}: fetching {title} from: {url}")
-    # TODO: use something more robust like python wget library.
     retries = 0
     max_retries = 7
     retry_codes = [404, 500, 504]
