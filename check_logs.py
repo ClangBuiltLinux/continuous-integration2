@@ -266,7 +266,7 @@ if __name__ == "__main__":
     for var in ["ARCH", "CONFIG", "LLVM_VERSION"]:
         if var not in os.environ:
             missing.append(var)
-    if len(missing):
+    if missing:
         for var in missing:
             print_red(f"${var} must be specified")
         show_builds()
