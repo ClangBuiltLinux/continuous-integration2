@@ -195,10 +195,11 @@ def print_clang_info(build):
     with open(metadata_file, encoding='utf-8') as file:
         metadata_json = json.load(file)
     print_yellow("Printing clang-nightly checkout date and hash")
-    subprocess.run([
+    parse_cmd = [
         "./scripts/parse-debian-clang.sh", "--print-info", "--version-string",
         metadata_json["compiler"]["version_full"]
-    ])
+    ]
+    subprocess.run(parse_cmd, check=True)
 
 
 def cwd():
