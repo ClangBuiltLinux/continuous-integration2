@@ -11,7 +11,7 @@ from utils import get_config_from_generator, get_repo_ref, get_llvm_versions, pa
 # https://ttl255.com/yaml-anchors-and-aliases-and-how-to-disable-them/
 class NoAliasDumper(yaml.SafeDumper):
 
-    def ignore_aliases(self, data):
+    def ignore_aliases(self, _data):
         return True
 
 
