@@ -108,7 +108,7 @@ def check_log(build):
 
 def fetch_dtb(build):
     config = os.environ["CONFIG"]
-    if config != "multi_v5_defconfig" and config != "aspeed_g5_defconfig":
+    if config not in ("multi_v5_defconfig", "aspeed_g5_defconfig"):
         return
     dtb = {
         "multi_v5_defconfig": "aspeed-bmc-opp-palmetto.dtb",
