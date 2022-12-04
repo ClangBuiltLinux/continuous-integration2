@@ -53,8 +53,8 @@ for yml in glob.glob(f"{ci_root}/.github/workflows/*.yml"):
 
 # Construct the list of all compilers seen by any tree.
 compilers = set()
-for tree in trees:
-    compilers.update(trees[tree].keys())
+for _, tree in trees.items():
+    compilers.update(tree.keys())
 # Sort the columns with latest Clang on the left.
 columns = sorted(compilers, key=parse_version, reverse=True)
 
