@@ -27,18 +27,15 @@ def _fetch(title, url, dest):
             break
         except ConnectionResetError as err:
             print_yellow(f"{title} download error ('{str(err)}'), retrying...")
-            pass
         except urllib.error.HTTPError as err:
             if err.code in retry_codes:
                 print_yellow(
                     f"{title} download error ({err.code}), retrying...")
-                pass
             else:
                 print_red(f"{err.code} error trying to download {title}")
                 sys.exit(1)
         except urllib.error.URLError as err:
             print_yellow(f"{title} download error ('{str(err)}'), retrying...")
-            pass
 
     if retries == max_retries:
         print_red(f"Unable to download {title} after {max_retries} tries")
