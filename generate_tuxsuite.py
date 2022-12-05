@@ -110,5 +110,5 @@ if __name__ == "__main__":
     # check command line flags.
     generated_config = get_config_from_generator()
     args = parse_args(generated_config["trees"])
-    for llvm_version in get_llvm_versions(generated_config, args.tree):
-        emit_tuxsuite_yml(generated_config, args.tree, llvm_version)
+    for llvm_ver in get_llvm_versions(generated_config, args.tree):
+        emit_tuxsuite_yml(generated_config, args.tree, llvm_ver)
