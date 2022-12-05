@@ -1,1 +1,2 @@
 0001-ARM-NWFPE-avoid-compiler-generated-__aeabi_uldivmod.patch
+pahole-1.24.patch
