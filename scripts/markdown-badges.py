@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-import os, glob, re
+# pylint: disable=invalid-name
+import glob
+import os
+import re
 from pkg_resources import parse_version
 
 # Figure out where we to find the workflow definitions.
@@ -8,7 +11,7 @@ ci_root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 # Construct the markdown for a specific workflow badge.
 def svg(workflow):
-    if workflow == None:
+    if workflow is None:
         return "   "
     workflow_url = f"https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/{workflow}.yml"
     return f"[![{workflow} build status]({workflow_url}/badge.svg)]({workflow_url})"
@@ -22,35 +25,36 @@ name_re = re.compile(r'^name: (.*) \(([^\)]+)\)$')
 base_re = re.compile(r'^.*/([^/]+)\.yml$')
 
 # Find all the tuxsuite workflows.
-trees = dict()
+trees = {}
 for yml in glob.glob(f"{ci_root}/.github/workflows/*.yml"):
     tuxsuite = False
     tree = None
     compiler = None
-    for line in open(yml):
-        m = name_re.search(line)
-        if m:
-            tree = m.group(1)
-            compiler = m.group(2)
-            continue
-        if 'tuxsuite' in line:
-            tuxsuite = True
-            break
+    with open(yml, encoding='utf-8') as file:
+        for line in file:
+            m = name_re.search(line)
+            if m:
+                tree = m.group(1)
+                compiler = m.group(2)
+                continue
+            if 'tuxsuite' in line:
+                tuxsuite = True
+                break
     if not tuxsuite:
         continue
     # Found a tuxsuite workflow with no "name:" field?!
-    if tree == None or compiler == None:
+    if tree is None or compiler is None:
         raise ValueError(f"{yml}: missing 'name:'")
 
     m = base_re.search(yml)
     base = m.group(1)
-    trees.setdefault(tree, dict())
+    trees.setdefault(tree, {})
     trees[tree][compiler] = base
 
 # Construct the list of all compilers seen by any tree.
 compilers = set()
-for tree in trees:
-    compilers.update(trees[tree].keys())
+for _, tree in trees.items():
+    compilers.update(tree.keys())
 # Sort the columns with latest Clang on the left.
 columns = sorted(compilers, key=parse_version, reverse=True)
 
@@ -88,5 +92,7 @@ for tree in rows:
 # Output a button for the "Check clang version" workflow, which ensures that
 # tip of tree LLVM is being updating. This does not need to be a part of the
 # table above.
-workflow_url = 'https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml'
-print(f"\n[![Check clang version]({workflow_url}/badge.svg)]({workflow_url})")
+cv_workflow_url = 'https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml'
+print(
+    f"\n[![Check clang version]({cv_workflow_url}/badge.svg)]({cv_workflow_url})"
+)

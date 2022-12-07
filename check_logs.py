@@ -14,7 +14,6 @@ from utils import get_build, get_image_name, get_requested_llvm_version, print_r
 def _fetch(title, url, dest):
     current_time = time.strftime("%H:%M:%S", time.localtime())
     print_yellow(f"{current_time}: fetching {title} from: {url}")
-    # TODO: use something more robust like python wget library.
     retries = 0
     max_retries = 7
     retry_codes = [404, 500, 504]
@@ -27,18 +26,15 @@ def _fetch(title, url, dest):
             break
         except ConnectionResetError as err:
             print_yellow(f"{title} download error ('{str(err)}'), retrying...")
-            pass
         except urllib.error.HTTPError as err:
             if err.code in retry_codes:
                 print_yellow(
                     f"{title} download error ({err.code}), retrying...")
-                pass
             else:
                 print_red(f"{err.code} error trying to download {title}")
                 sys.exit(1)
         except urllib.error.URLError as err:
             print_yellow(f"{title} download error ('{str(err)}'), retrying...")
-            pass
 
     if retries == max_retries:
         print_red(f"Unable to download {title} after {max_retries} tries")
@@ -70,7 +66,8 @@ def verify_build():
         status_json = "status.json"
         url = build["download_url"] + status_json
         _fetch("status.json", url, status_json)
-        build = json.load(open(status_json))
+        with open(status_json, encoding='utf-8') as file:
+            build = json.load(file)
 
     print(json.dumps(build, indent=4))
 
@@ -96,7 +93,8 @@ def fetch_logs(build):
     log = "build.log"
     url = build["download_url"] + log
     _fetch("logs", url, log)
-    print(open(log).read())
+    with open(log, encoding='utf-8') as file:
+        print(file.read())
 
 
 def check_log(build):
@@ -109,7 +107,7 @@ def check_log(build):
 
 def fetch_dtb(build):
     config = os.environ["CONFIG"]
-    if config != "multi_v5_defconfig" and config != "aspeed_g5_defconfig":
+    if config not in ("multi_v5_defconfig", "aspeed_g5_defconfig"):
         return
     dtb = {
         "multi_v5_defconfig": "aspeed-bmc-opp-palmetto.dtb",
@@ -144,30 +142,32 @@ def check_built_config(build):
 
     fetch_built_config(build)
     # Build dictionary of CONFIG_NAME: y/m/n ("is not set" translates to 'n').
-    configs = dict()
-    for line in open(".config"):
-        line = line.strip()
-        if len(line) == 0:
-            continue
+    configs = {}
+    with open(".config", encoding='utf-8') as file:
+        for line in file:
+            line = line.strip()
+            if len(line) == 0:
+                continue
 
-        name = None
-        state = None
-        if '=' in line:
-            name, state = line.split('=', 1)
-        elif line.startswith("# CONFIG_"):
-            name, state = line.split(" ", 2)[1:]
-            if state != "is not set":
-                print_yellow("Could not parse '%s' from .config line '%s'!?" %
-                             (name, line))
-            state = 'n'
-        elif not line.startswith("#"):
-            print_yellow(f"Could not parse .config line '{line}'!?")
-        configs[name] = state
+            name = None
+            state = None
+            if '=' in line:
+                name, state = line.split('=', 1)
+            elif line.startswith("# CONFIG_"):
+                name, state = line.split(" ", 2)[1:]
+                if state != "is not set":
+                    print_yellow(
+                        f"Could not parse '{name}' from .config line '{line}'!?"
+                    )
+                state = 'n'
+            elif not line.startswith("#"):
+                print_yellow(f"Could not parse .config line '{line}'!?")
+            configs[name] = state
 
     # Compare requested configs against the loaded dictionary.
     fail = False
     for config in build["kconfig"]:
-        if not 'CONFIG' in config:
+        if 'CONFIG' not in config:
             continue
         name, state = config.split('=')
         # If a config is missing from the dictionary, it is considered 'n'.
@@ -191,12 +191,14 @@ def print_clang_info(build):
     metadata_file = "metadata.json"
     url = build["download_url"] + metadata_file
     _fetch(metadata_file, url, metadata_file)
-    metadata_json = json.loads(open(metadata_file).read())
+    with open(metadata_file, encoding='utf-8') as file:
+        metadata_json = json.load(file)
     print_yellow("Printing clang-nightly checkout date and hash")
-    subprocess.run([
+    parse_cmd = [
         "./scripts/parse-debian-clang.sh", "--print-info", "--version-string",
         metadata_json["compiler"]["version_full"]
-    ])
+    ]
+    subprocess.run(parse_cmd, check=True)
 
 
 def cwd():
@@ -237,10 +239,10 @@ def run_boot(build):
 
     try:
         subprocess.run(boot_cmd, check=True)
-    except subprocess.CalledProcessError as e:
-        if e.returncode == 124:
+    except subprocess.CalledProcessError as err:
+        if err.returncode == 124:
             print_red("Image failed to boot")
-        raise e
+        raise err
 
 
 def boot_test(build):
@@ -261,18 +263,18 @@ def boot_test(build):
 if __name__ == "__main__":
     missing = []
     for var in ["ARCH", "CONFIG", "LLVM_VERSION"]:
-        if not var in os.environ:
+        if var not in os.environ:
             missing.append(var)
-    if len(missing):
+    if missing:
         for var in missing:
             print_red(f"${var} must be specified")
         show_builds()
         sys.exit(1)
-    build = verify_build()
+    verified_build = verify_build()
     print_yellow("Register clang error/warning problem matchers")
     for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
         print(f"::add-matcher::{problem_matcher}")
-    print_clang_info(build)
-    check_log(build)
-    check_built_config(build)
-    boot_test(build)
+    print_clang_info(verified_build)
+    check_log(verified_build)
+    check_built_config(verified_build)
+    boot_test(verified_build)
