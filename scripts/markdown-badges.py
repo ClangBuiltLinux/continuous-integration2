@@ -92,5 +92,7 @@ for tree in rows:
 # Output a button for the "Check clang version" workflow, which ensures that
 # tip of tree LLVM is being updating. This does not need to be a part of the
 # table above.
-workflow_url = 'https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml'
-print(f"\n[![Check clang version]({workflow_url}/badge.svg)]({workflow_url})")
+cv_workflow_url = 'https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml'
+print(
+    f"\n[![Check clang version]({cv_workflow_url}/badge.svg)]({cv_workflow_url})"
+)
