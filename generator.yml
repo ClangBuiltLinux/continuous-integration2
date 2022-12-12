@@ -356,6 +356,7 @@ builds:
   - {<< : *arm64be,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_cfi,         << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_cfi_lto,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_kasan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_kasan_sw,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
