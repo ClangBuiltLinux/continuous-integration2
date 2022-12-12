@@ -46,7 +46,7 @@ schedules:
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
-  - &stable           {git_repo: *stable-url,   git_ref: linux-6.0.y,         name: stable}
+  - &stable           {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: stable}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
   - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
@@ -356,6 +356,7 @@ builds:
   - {<< : *arm64be,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_cfi,         << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_cfi_lto,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_kasan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_kasan_sw,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -494,6 +495,7 @@ builds:
   - {<< : *arm64be,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_cfi,         << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_cfi_lto,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_kasan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_kasan_sw,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -529,6 +531,8 @@ builds:
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cfi,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cfi_lto,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_kasan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   # x86_64_kcsan: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1704)
   # - {<< : *x86_64_kcsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -888,7 +892,6 @@ builds:
   - {<< : *arm64be,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64_cfi_lto,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_kasan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_kasan_sw,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_ubsan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1272,7 +1275,6 @@ builds:
   - {<< : *arm64be,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_cfi_lto,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_kasan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_kasan_sw,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_ubsan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
@@ -1299,10 +1301,6 @@ builds:
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *s390,              << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_14}
-  - {<< : *s390_kasan,        << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_14}
-  - {<< : *s390_fedora,       << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_14}
-  - {<< : *s390_suse,         << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_14}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}

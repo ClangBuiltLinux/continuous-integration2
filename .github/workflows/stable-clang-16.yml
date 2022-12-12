@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.0.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.1.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -252,6 +252,27 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _8e78126e8c0351a6b502ee1434a6c568:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 defconfig+CONFIG_CFI_CLANG=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 16
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_CFI_CLANG=y
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -621,6 +642,48 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _4905de907e729b69087ab43c1a24fc13:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 defconfig+CONFIG_CFI_CLANG=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 16
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_CFI_CLANG=y
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _0e35d288cd97cfcbfb5e7347f1627fb8:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 16
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _b0d75ff52f3023b806b0db378ed9bd6e:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
@@ -673,7 +736,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.0.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.1.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -1047,7 +1110,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.0.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.1.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
