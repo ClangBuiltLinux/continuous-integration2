@@ -400,7 +400,8 @@ builds:
   - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allmod_lto, << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allno,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
+  # x86_64 allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
+  # - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_alpine,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_arch,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_fedora,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -469,7 +470,8 @@ builds:
   - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
+  # x86_64 allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
+  # - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_alpine,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_arch,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -801,7 +803,8 @@ builds:
   - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allmod_lto, << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allno,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
-  - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
+  # x86_64 allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
+  # - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_alpine,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_arch,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_fedora,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -866,7 +869,8 @@ builds:
   - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
-  - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
+  # x86_64 allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
+  # - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_alpine,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_arch,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
