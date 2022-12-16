@@ -1496,8 +1496,7 @@ builds:
   - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_14}
-  # -tip allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
-  # - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_14}
+  - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_14}
   ###########
   #  ARM64  #
   ###########
@@ -1874,8 +1873,7 @@ builds:
   - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_13}
-  # -tip allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
-  # - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_13}
+  - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_13}
   ###########
   #  ARM64  #
   ###########
@@ -2205,8 +2203,7 @@ builds:
   - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_12}
-  # -tip allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
-  # - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_12}
+  - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_12}
   ###########
   #  ARM64  #
   ###########
@@ -2495,8 +2492,7 @@ builds:
   - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_11}
-  # -tip allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
-  # - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_11}
+  - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_11}
   ###########
   #  ARM64  #
   ###########
