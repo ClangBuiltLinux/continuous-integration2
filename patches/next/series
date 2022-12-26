@@ -1,2 +1,2 @@
-47897ed42d6e6dade252fd6edb6f79694485cc5e.patch
-lib-add-dhrystone-benchmark-test-fix.patch
+0001-Revert-btrfs-turn-on-Wmaybe-uninitialized.patch
+0002-Revert-udf-Couple-more-fixes-for-extent-and-director.patch
