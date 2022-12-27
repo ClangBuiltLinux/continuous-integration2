@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name defconfigs --json-out builds.json tuxsuite/mainline-clang-14.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name defconfigs --json-out builds.json --patch-series patches/mainline tuxsuite/mainline-clang-14.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -631,7 +631,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name distribution_configs --json-out builds.json tuxsuite/mainline-clang-14.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name distribution_configs --json-out builds.json --patch-series patches/mainline tuxsuite/mainline-clang-14.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -848,15 +848,15 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _55eb746cf8081308c93d2934fd455aac:
+  _b4792dcdef851d5ad0cf1cbc7d49a7e5:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default+CONFIG_IPMMU_VMSA=n
     env:
       ARCH: riscv
       LLVM_VERSION: 14
       BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default+CONFIG_IPMMU_VMSA=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -963,7 +963,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name allconfigs --json-out builds.json tuxsuite/mainline-clang-14.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --git-ref master --job-name allconfigs --json-out builds.json --patch-series patches/mainline tuxsuite/mainline-clang-14.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:

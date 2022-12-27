@@ -432,7 +432,9 @@ jobs:
       LLVM_IAS: 1
   - target_arch: riscv
     toolchain: clang-nightly
-    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    kconfig:
+    - https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    - CONFIG_IPMMU_VMSA=n
     targets:
     - kernel
     kernel_image: Image
