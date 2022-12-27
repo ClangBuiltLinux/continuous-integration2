@@ -1,0 +1,56 @@
+From git@z Thu Jan  1 00:00:00 1970
+Subject: [PATCH] fbdev: make offb driver tristate
+From: Randy Dunlap <rdunlap@infradead.org>
+Date: Fri, 25 Nov 2022 16:04:01 -0800
+Message-Id: <20221126000401.25302-1-rdunlap@infradead.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Make the offb (Open Firmware frame buffer) driver tristate,
+i.e., so that it can be built as a loadable module.
+
+However, it still depends on the setting of DRM_OFDRM
+so that both of these drivers cannot be builtin at the same time
+nor can one be builtin and the other one a loadable module.
+
+Build-tested successfully with all combination of DRM_OFDRM and FB_OF.
+
+This fixes a build issue that Michal reported when FB_OF=y and
+DRM_OFDRM=m:
+
+powerpc64-linux-ld: drivers/video/fbdev/offb.o:(.data.rel.ro+0x58): undefined reference to `cfb_fillrect'
+powerpc64-linux-ld: drivers/video/fbdev/offb.o:(.data.rel.ro+0x60): undefined reference to `cfb_copyarea'
+powerpc64-linux-ld: drivers/video/fbdev/offb.o:(.data.rel.ro+0x68): undefined reference to `cfb_imageblit'
+
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Suggested-by: Arnd Bergmann <arnd@arndb.de>
+Cc: Masahiro Yamada <masahiroy@kernel.org>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Michal Suchánek <msuchanek@suse.de>
+Cc: linuxppc-dev@lists.ozlabs.org
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Helge Deller <deller@gmx.de>
+Cc: linux-fbdev@vger.kernel.org
+Cc: dri-devel@lists.freedesktop.org
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+Link: https://lore.kernel.org/r/20221126000401.25302-1-rdunlap@infradead.org
+---
+ drivers/video/fbdev/Kconfig |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff -- a/drivers/video/fbdev/Kconfig b/drivers/video/fbdev/Kconfig
+--- a/drivers/video/fbdev/Kconfig
++++ b/drivers/video/fbdev/Kconfig
+@@ -456,8 +456,8 @@ config FB_ATARI
+ 	  chipset found in Ataris.
+ 
+ config FB_OF
+-	bool "Open Firmware frame buffer device support"
+-	depends on (FB = y) && PPC && (!PPC_PSERIES || PCI)
++	tristate "Open Firmware frame buffer device support"
++	depends on FB && PPC && (!PPC_PSERIES || PCI)
+ 	depends on !DRM_OFDRM
+ 	select APERTURE_HELPERS
+ 	select FB_CFB_FILLRECT
+

@@ -848,15 +848,15 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _910c059dd4b893c99fcc0c4c0f05a87a:
+  _7f359c7169994b66daa5c29bdcdd0dcc:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default+CONFIG_IPMMU_VMSA=n
     env:
       ARCH: riscv
       LLVM_VERSION: 13
       BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default+CONFIG_IPMMU_VMSA=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
