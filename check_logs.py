@@ -195,7 +195,7 @@ def print_clang_info(build):
         metadata_json = json.load(file)
     print_yellow("Printing clang-nightly checkout date and hash")
     parse_cmd = [
-        "./scripts/parse-debian-clang.sh", "--print-info", "--version-string",
+        "./scripts/parse-debian-clang.py", "--print-info", "--version-string",
         metadata_json["compiler"]["version_full"]
     ]
     subprocess.run(parse_cmd, check=True)

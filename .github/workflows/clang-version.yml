@@ -10,5 +10,5 @@ jobs:
     container: tuxmake/x86_64_clang-nightly
     steps:
     - uses: actions/checkout@v3
-    - name: parse-debian-clang.sh --check
-      run: bash scripts/parse-debian-clang.sh --check
+    - name: parse-debian-clang.py --check
+      run: python3 scripts/parse-debian-clang.py --check
