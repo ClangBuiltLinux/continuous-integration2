@@ -1,7 +1,7 @@
 # Runs several checks
 # * check-matrix.sh because GitHub limits a workflow matrix to 256 jobs
 #   https://docs.github.com/en/actions/reference/usage-limits-billing-and-administration#usage-limits
-# * check-patches.sh to make sure applying patches via TuxSuite works correctly
+# * check-patches.py to make sure applying patches via TuxSuite works correctly
 # * shellcheck for shell script correctness
 # * shfmt for shell script formatting consistency
 # * several linters for Python consistency and correctness
@@ -28,8 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: check-patches.sh
-      run: bash scripts/check-patches.sh
+    - name: check-patches.py
+      run: python3 scripts/check-patches.py
   python:
      strategy:
        fail-fast: false
