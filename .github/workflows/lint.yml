@@ -2,8 +2,6 @@
 # * check-matrix.py because GitHub limits a workflow matrix to 256 jobs
 #   https://docs.github.com/en/actions/reference/usage-limits-billing-and-administration#usage-limits
 # * check-patches.py to make sure applying patches via TuxSuite works correctly
-# * shellcheck for shell script correctness
-# * shfmt for shell script formatting consistency
 # * several linters for Python consistency and correctness
 
 name: Lint checks
@@ -38,7 +36,3 @@ jobs:
      uses: ClangBuiltLinux/actions-workflows/.github/workflows/python_lint.yml@main
      with:
        python_version: ${{ matrix.version }}
-  shellcheck:
-    uses: ClangBuiltLinux/actions-workflows/.github/workflows/shellcheck.yml@main
-  shfmt:
-    uses: ClangBuiltLinux/actions-workflows/.github/workflows/shfmt.yml@main
