@@ -73,7 +73,7 @@ for workflow in workflows.glob('*-clang-*.yml'):
             f"{patch_folder} does not exist but '--patch-series' found in {workflow}?\n"
         )
         print('Regenerate the TuxSuite and workflow files:\n')
-        print(f"\t$ scripts/generate.sh {tree}")
+        print(f"\t$ ./generate.py {tree}")
         sys.exit(1)
 
     if patch_folder.exists() and not wf_has_ps_opt:
@@ -81,7 +81,7 @@ for workflow in workflows.glob('*-clang-*.yml'):
             f"{patch_folder} exists but '--patch-series' not found in {workflow}?\n"
         )
         print('Regenerate the TuxSuite and workflow files:\n')
-        print(f"\t$ scripts/generate.sh {tree}\n")
+        print(f"\t$ ./generate.py {tree}\n")
         print('or remove the patches if they are no longer being used.')
         sys.exit(1)
 

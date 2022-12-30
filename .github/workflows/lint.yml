@@ -21,8 +21,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
-    - name: generate.sh
-      run: bash scripts/generate.sh --check all
+    - name: generate.py
+      run: python3 generate.py --check
   check_patch_series:
     name: Check patches series
     runs-on: ubuntu-latest
