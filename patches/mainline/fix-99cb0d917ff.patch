@@ -1,0 +1,26 @@
+From 702b1289fe729fa99f8bc2bb5f41abdab3f75502 Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Tue, 3 Jan 2023 11:29:44 -0700
+Subject: [PATCH] vmlinux.lds.h: Tentative fix for 99cb0d917ff
+
+Link: https://lore.kernel.org/CAMj1kXHqQoqoys83nEp=Q6oT68+-GpCuMjfnYK9pMy-X_+jjKw@mail.gmail.com/
+---
+ include/asm-generic/vmlinux.lds.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
+index 659bf3b31c91..e1e95725e0a3 100644
+--- a/include/asm-generic/vmlinux.lds.h
++++ b/include/asm-generic/vmlinux.lds.h
+@@ -896,7 +896,7 @@
+  * Otherwise, the type of .notes section would become PROGBITS instead of NOTES.
+  */
+ #define NOTES								\
+-	/DISCARD/ : { *(.note.GNU-stack) }				\
++	.note.GNU-stack : { *(.note.GNU-stack) }			\
+ 	.notes : AT(ADDR(.notes) - LOAD_OFFSET) {			\
+ 		BOUNDED_SECTION_BY(.note.*, _notes)			\
+ 	} NOTES_HEADERS							\
+-- 
+2.30.2
+
