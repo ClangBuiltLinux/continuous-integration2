@@ -52,7 +52,6 @@ trees:
   - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
   - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19"}
   - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14"}
-  - &stable-4_9       {git_repo: *stable-url,   git_ref: linux-4.9.y,         name: "4.9"}
   - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
   - &android14-6_1    {git_repo: *android-url,  git_ref: android14-6.1,       name: android14-6.1}
   - &android14-5_15   {git_repo: *android-url,  git_ref: android14-5.15,      name: android14-5.15}
@@ -112,10 +111,6 @@ tree_schedules:
   - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *daily_noon}
   - &stable-4_14_llvm_14           {<< : *llvm_14,      << : *stable-4_14,      << : *wednesdays}
   - &stable-4_14_llvm_13           {<< : *llvm_13,      << : *stable-4_14,      << : *wednesdays}
-  - &stable-4_9_llvm_tot           {<< : *llvm_tot,     << : *stable-4_9,       << : *daily_noon}
-  - &stable-4_9_llvm_latest        {<< : *llvm_latest,  << : *stable-4_9,       << : *daily_noon}
-  - &stable-4_9_llvm_14            {<< : *llvm_14,      << : *stable-4_9,       << : *wednesdays}
-  - &stable-4_9_llvm_13            {<< : *llvm_13,      << : *stable-4_9,       << : *wednesdays}
   - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *daily_six}
   - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *daily_six}
   - &android-mainline_llvm_14      {<< : *llvm_14,      << : *android-mainline, << : *sundays}
@@ -677,13 +672,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_tot}
   - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_tot}
-  ###########
-  #  4.9.y  #
-  ###########
-  - {<< : *arm32_v7,          << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *arm64,             << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *arm64be,           << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *x86_64,            << : *stable-4_9,       << : *lld,             boot: true,  << : *llvm_tot}
   #############
   #  Android  #
   #############
@@ -1074,13 +1062,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_latest}
   - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_latest}
-  ###########
-  #  4.9.y  #
-  ###########
-  - {<< : *arm32_v7,          << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *arm64,             << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *arm64be,           << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *x86_64,            << : *stable-4_9,       << : *lld,             boot: true,  << : *llvm_latest}
   #############
   #  Android  #
   #############
@@ -1457,13 +1438,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_14}
   - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_14}
   - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_14}
-  ###########
-  #  4.9.y  #
-  ###########
-  - {<< : *arm32_v7,          << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_14}
-  - {<< : *arm64,             << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_14}
-  - {<< : *arm64be,           << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_14}
-  - {<< : *x86_64,            << : *stable-4_9,       << : *lld,             boot: true,  << : *llvm_14}
   #############
   #  Android  #
   #############
@@ -1838,13 +1812,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_13}
-  ###########
-  #  4.9.y  #
-  ###########
-  - {<< : *arm32_v7,          << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *arm64,             << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *arm64be,           << : *stable-4_9,       << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *x86_64,            << : *stable-4_9,       << : *lld,             boot: true,  << : *llvm_13}
   #############
   #  Android  #
   #############
