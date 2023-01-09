@@ -27,6 +27,9 @@ if overlimit_workflows:
     print(
         f"The following workflows have more than {GH_LIMIT} jobs, please reduce the number of jobs or split the matrix up:\n"
     )
+    # sys.exit() is called after printing all workflows so that all problematic
+    # workflows are reported so they can be fixed all at once, rather than
+    # piecemeal.
     for k, v in overlimit_workflows.items():
         print(f"{k} ({v})")
     sys.exit(1)
