@@ -43,15 +43,15 @@ $ ./generate_tuxsuite.py $BRANCH
 $ ./generate_workflow.py $BRANCH
 ```
 
-The `generate.sh` script will run this for you based on the trees that are fed
+The `generate.py` script will run this for you based on the trees that are fed
 to it. Ex.
 
 ```
 # Generate just next and mainline TuxSuite and GitHub Action workflows
-$ scripts/generate.sh next mainline
+$ ./generate.py next mainline
 
 # Regenerate all of the current TuxSuite and GitHub Action workflows
-$ scripts/generate.sh all
+$ ./generate.py
 ```
 
 The CI the child workflows run can be rerun locally via:
