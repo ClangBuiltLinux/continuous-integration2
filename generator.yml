@@ -2126,7 +2126,6 @@ builds:
   # https://github.com/ClangBuiltLinux/linux/issues/1023
   # https://github.com/ClangBuiltLinux/linux/issues/1143
   - {<< : *riscv_no_efi,      << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  << : *llvm_12}
-  - {<< : *s390,              << : *stable-5_10,      << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *x86_64,            << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_allmod,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *x86_64_allno,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_12}
@@ -2457,7 +2456,6 @@ builds:
   # https://github.com/ClangBuiltLinux/linux/issues/1023
   # https://github.com/ClangBuiltLinux/linux/issues/1143
   - {<< : *riscv_no_efi,      << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  << : *llvm_11}
-  - {<< : *s390,              << : *stable-5_10,      << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *x86_64,            << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *x86_64_allmod,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *x86_64_allno,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_11}
