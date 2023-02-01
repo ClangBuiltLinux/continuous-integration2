@@ -285,27 +285,6 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _ff91e27f2eb0b39e3180ac5e04cf04a1:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=12 defconfig
-    env:
-      ARCH: s390
-      LLVM_VERSION: 12
-      BOOT: 1
-      CONFIG: defconfig
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v3
-      with:
-        name: output_artifact_defconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _d49633cca166398690b1f3ecad135a14:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs

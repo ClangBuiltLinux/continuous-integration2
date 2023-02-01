@@ -106,13 +106,6 @@ jobs:
       LD: riscv64-linux-gnu-ld
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: s390
-    toolchain: clang-11
-    kconfig: defconfig
-    targets:
-    - kernel
-    make_variables:
-      LLVM_IAS: 0
   - target_arch: x86_64
     toolchain: clang-11
     kconfig: defconfig
