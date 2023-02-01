@@ -43,9 +43,9 @@ def update_llvm_tot_version():
                                 text=True).stdout
 
     if not (match := re.search(r'set\(LLVM_VERSION_MAJOR (\d+)', cmakelists)):
-        raise Exception('Could not find LLVM_VERSION_MAJOR?')
+        raise RuntimeError('Could not find LLVM_VERSION_MAJOR?')
     if not (llvm_version_tot := Path('LLVM_TOT_VERSION')).exists():
-        raise Exception('Not in the right folder?')
+        raise RuntimeError('Not in the right folder?')
     llvm_version_tot.write_text(f"{match.group(1)}\n", encoding='utf-8')
 
 
