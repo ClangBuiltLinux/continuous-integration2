@@ -33,7 +33,7 @@ if not (version_string := args.version_string):
 # This will get us the checkout date and the hash
 clang_regex = r'\+\+([0-9]+)\+([a-z0-9]+)-'
 if not (match := re.search(clang_regex, version_string)):
-    raise Exception('date and hash could not be found?')
+    raise RuntimeError('date and hash could not be found?')
 clang_date, clang_hash = match.groups()
 
 # Convert clang date string into a datetime object for easy calculations
@@ -42,7 +42,7 @@ now_utc = datetime.datetime.now(datetime.timezone.utc)
 delta = now_utc - clang_utc
 
 if args.check and delta.days >= 5:
-    raise Exception(f"Clang has not been updated for {delta}!")
+    raise RuntimeError(f"Clang has not been updated for {delta}!")
 
 if args.print_info:
     print(

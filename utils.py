@@ -109,7 +109,7 @@ def get_cbl_name():
         return unique_defconfigs[base_config]
     if "defconfig" in base_config:
         return "x86" if arch == "i386" else arch
-    raise Exception("unknown CBL name")
+    raise RuntimeError("unknown CBL name")
 
 
 def _read_builds():
@@ -118,7 +118,7 @@ def _read_builds():
         builds = "mock.builds.json"
     try:
         if pathlib.Path(builds).stat().st_size == 0:
-            raise Exception(f"{builds} is zero sized?")
+            raise RuntimeError(f"{builds} is zero sized?")
         with open(builds, encoding='utf-8') as file:
             builds = json.load(file)
     except FileNotFoundError as err:
@@ -165,7 +165,7 @@ def get_repo_ref(config, tree_name):
     for tree in config["trees"]:
         if tree["name"] == tree_name:
             return tree["git_repo"], tree["git_ref"]
-    raise Exception(f"Could not find git repo and ref for {tree_name}?")
+    raise RuntimeError(f"Could not find git repo and ref for {tree_name}?")
 
 
 def get_llvm_versions(config, tree_name):
