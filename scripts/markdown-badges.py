@@ -3,7 +3,81 @@
 import glob
 import os
 import re
-from pkg_resources import parse_version
+
+from packaging.version import _BaseVersion
+
+
+# Converts an item's position in an iterable to a ranking, which allows earlier
+# items in an iterable to stay ahead of later items when compared.
+def order_to_rank(iterable, item):
+    return len(iterable) - iterable.index(item)
+
+
+class ClangVersion(_BaseVersion):
+
+    def __init__(self, version):
+        if 'clang-' not in version:
+            raise ValueError(f"Invalid clang version ('{version}') provided?")
+
+        version = version.split('-', 1)[1]
+
+        # Force 'clang-android' to be last
+        self._key = 0 if version == 'android' else int(version)
+
+
+class KernelVersion(_BaseVersion):
+
+    def __init__(self, version):
+        major = 0
+        minor = 0
+        patch = 0
+
+        # The general categories for builds, in the order they should appear in
+        # the matrix.
+        categories = ['upstream', 'lts', 'maintainers', 'android', 'chromeos']
+
+        # Named upstream trees, which do not have a version associated with them
+        upstream_trees = ('next', 'mainline', 'stable')
+        if version in upstream_trees:
+            category = 'upstream'
+            major = order_to_rank(upstream_trees, version)
+
+        # LTS releases
+        if (match := re.search(r'^([\d|\.]+)$', version)):
+            category = 'lts'
+            major, minor = map(int, match.groups()[0].split('.'))
+
+        # Named maintainer trees
+        maintainer_trees = ('arm64', 'tip', 'arm64-fixes')
+        if version in maintainer_trees:
+            category = 'maintainers'
+            major = order_to_rank(maintainer_trees, version)
+
+        # Android trees
+        if 'android' in version:
+            category = 'android'
+
+            version = version.replace(category, '').split('-')
+
+            # Ensure 'android-mainline' is at the top of the list
+            if version[1] == 'mainline':
+                major = 99
+            else:
+                major, minor = map(int, version[1].split('.'))
+                # Set the patch level to the Android version so that
+                # android14-5.15 is newer than android13-5.15.
+                if version[0]:
+                    patch = int(version[0])
+
+        # ChromeOS trees
+        if 'chromeos' in version:
+            category = 'chromeos'
+            major, minor = version.replace(f"{category}-", '').split('.')
+
+        rank = order_to_rank(categories, category)
+
+        self._key = (rank, major, minor, patch)
+
 
 # Figure out where we to find the workflow definitions.
 ci_root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -56,7 +130,7 @@ compilers = set()
 for _, tree in trees.items():
     compilers.update(tree.keys())
 # Sort the columns with latest Clang on the left.
-columns = sorted(compilers, key=parse_version, reverse=True)
+columns = sorted(compilers, key=ClangVersion, reverse=True)
 
 # To stabilize the size of the the SVGs to make the table as presentable
 # as possible, we must do our best to keep the table columns the same
@@ -75,7 +149,7 @@ print("|     | " + " | ".join([
 print("| ---: |" + " :---: |" * len(columns))
 
 # Sort so latest trees are at the top.
-rows = sorted(trees, key=parse_version, reverse=True)
+rows = sorted(trees, key=KernelVersion, reverse=True)
 # Manually override some trees to the top, since they're unversioned.
 rows.remove('next')
 rows.remove('mainline')
