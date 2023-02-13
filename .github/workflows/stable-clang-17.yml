@@ -705,6 +705,27 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _c7262a13ef30a0795dee277fa1409fed:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 17
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _1949b87b1748e3a21a7b1d27e116cff9:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs

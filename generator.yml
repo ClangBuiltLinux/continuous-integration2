@@ -531,8 +531,7 @@ builds:
   - {<< : *x86_64_cfi,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_cfi_lto,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_kasan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
-  # x86_64_kcsan: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1704)
-  # - {<< : *x86_64_kcsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_kcsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_ubsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_allmod,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allmod_lto, << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
@@ -596,8 +595,7 @@ builds:
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_thin,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_kasan,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
-  # x86_64_kcsan: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1704)
-  # - {<< : *x86_64_kcsan,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_kcsan,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_ubsan,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_allmod,     << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allmod_lto, << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
