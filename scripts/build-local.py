@@ -117,7 +117,7 @@ for name, builds in jobs.items():
 
         if build_dir.exists():
             shutil.rmtree(build_dir)
-        build_dir.mkdir(exist_ok=True, parents=True)
+        build_dir.mkdir(parents=True)
 
         # Replace the URL in the configuration string with a simple name, so
         # that it can be used in a path.
