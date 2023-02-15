@@ -3,6 +3,9 @@
 # $ ./generate_tuxsuite.py 5.10
 # Invoke tuxsuite via:
 # $ tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.10.y --job-name defconfigs --json-out builds.json tuxsuite/5.10-clang-11.tux.yml
+# Invoke locally via:
+# $ git clone -b linux-5.10.y --depth=1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git linux
+# $ scripts/build-local.py -C linux -f tuxsuite/5.10-clang-11.tux.yml -j defconfigs
 version: 1
 name: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git at linux-5.10.y
 description: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git at linux-5.10.y

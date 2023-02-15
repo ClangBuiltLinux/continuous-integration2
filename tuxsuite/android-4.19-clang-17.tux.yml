@@ -3,6 +3,9 @@
 # $ ./generate_tuxsuite.py android-4.19
 # Invoke tuxsuite via:
 # $ tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android-4.19-stable --job-name defconfigs --json-out builds.json tuxsuite/android-4.19-clang-17.tux.yml
+# Invoke locally via:
+# $ git clone -b android-4.19-stable --depth=1 https://android.googlesource.com/kernel/common.git linux
+# $ scripts/build-local.py -C linux -f tuxsuite/android-4.19-clang-17.tux.yml -j defconfigs
 version: 1
 name: https://android.googlesource.com/kernel/common.git at android-4.19-stable
 description: https://android.googlesource.com/kernel/common.git at android-4.19-stable
