@@ -149,11 +149,8 @@ for name, builds in jobs.items():
                                      runtime=runtime,
                                      tree=tree,
                                      **build)
-        passed = True
-        for info in result.status.values():
-            passed &= info.passed
 
-        if passed:
+        if all(info.passed for info in result.status.values()):
             print(f"{GREEN}PASS{NORMAL}")
         else:
             print(
