@@ -83,8 +83,6 @@ for file_str in args.files:
     with open(file_str, encoding='utf-8') as file:
         config = yaml.safe_load(file)
 
-    current_jobs = config['jobs']
-
     for job in config['jobs']:
         name = job['name']
         if args.jobs and name not in args.jobs:
