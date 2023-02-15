@@ -43,6 +43,8 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
         print("# Invoke locally via:")
         print(f"# $ git clone -b {ref} --depth=1 {repo} linux")
         if patches_flag:
+            # Input: '--patch-series ... '
+            # Output: '...'
             patches_folder = patches_flag.strip().rsplit(' ', 1)[-1]
             print(
                 f"# $ git -C linux quiltimport --patches ../{patches_folder}")
