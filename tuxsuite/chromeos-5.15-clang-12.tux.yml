@@ -3,6 +3,9 @@
 # $ ./generate_tuxsuite.py chromeos-5.15
 # Invoke tuxsuite via:
 # $ tuxsuite plan --git-repo https://chromium.googlesource.com/chromiumos/third_party/kernel.git --git-ref chromeos-5.15 --job-name defconfigs --json-out builds.json tuxsuite/chromeos-5.15-clang-12.tux.yml
+# Invoke locally via:
+# $ git clone -b chromeos-5.15 --depth=1 https://chromium.googlesource.com/chromiumos/third_party/kernel.git linux
+# $ scripts/build-local.py -C linux -f tuxsuite/chromeos-5.15-clang-12.tux.yml -j defconfigs
 version: 1
 name: https://chromium.googlesource.com/chromiumos/third_party/kernel.git at chromeos-5.15
 description: https://chromium.googlesource.com/chromiumos/third_party/kernel.git at chromeos-5.15

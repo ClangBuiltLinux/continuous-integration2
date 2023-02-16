@@ -3,6 +3,9 @@
 # $ ./generate_tuxsuite.py android14-5.15
 # Invoke tuxsuite via:
 # $ tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android14-5.15 --job-name defconfigs --json-out builds.json tuxsuite/android14-5.15-clang-12.tux.yml
+# Invoke locally via:
+# $ git clone -b android14-5.15 --depth=1 https://android.googlesource.com/kernel/common.git linux
+# $ scripts/build-local.py -C linux -f tuxsuite/android14-5.15-clang-12.tux.yml -j defconfigs
 version: 1
 name: https://android.googlesource.com/kernel/common.git at android14-5.15
 description: https://android.googlesource.com/kernel/common.git at android14-5.15
