@@ -45,7 +45,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
         if patches_flag:
             # Input: '--patch-series ... '
             # Output: '...'
-            patches_folder = patches_flag.strip().rsplit(' ', 1)[-1]
+            patches_folder = patches_flag.split(' ')[1]
             print(
                 f"# $ git -C linux quiltimport --patches ../{patches_folder}")
         print(
