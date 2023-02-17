@@ -22,7 +22,7 @@ def parse_args(trees):
                         help='Fail if generating yml files results in a diff')
     parser.add_argument(
         'trees',
-        choices=trees + ['all'],
+        choices=[*trees, 'all'],
         default='all',
         help='The trees to generate yml files for (default: all)',
         metavar='TREES',
