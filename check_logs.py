@@ -144,9 +144,8 @@ def check_built_config(build):
     # Build dictionary of CONFIG_NAME: y/m/n ("is not set" translates to 'n').
     configs = {}
     with open(".config", encoding='utf-8') as file:
-        for line in file:
-            line = line.strip()
-            if len(line) == 0:
+        for rawline in file:
+            if not (line := rawline.strip()):
                 continue
 
             name = None
