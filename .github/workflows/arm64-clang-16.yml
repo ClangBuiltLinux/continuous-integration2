@@ -16,8 +16,32 @@ name: arm64 (clang-16)
   workflow_dispatch: null
 permissions: read-all
 jobs:
+  cache_check_defconfigs:
+    name: cache check (defconfigs)
+    runs-on: ubuntu-latest
+    container: tuxmake/clang-16
+    outputs:
+      should_run: ${{ steps.should_run.outputs.should_run }}
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v3
+    - name: Should build run?
+      id: should_run
+      run: |
+        if python3 should_run.py || { ret=$?; ( exit $ret ) }; then
+          echo "should_run=true" >>$GITHUB_OUTPUT
+        else
+            case $ret in
+              2) echo "should_run=false" >>$GITHUB_OUTPUT ;;
+              *) exit 1 ;;
+            esac
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
+    needs: cache_check_defconfigs
+    if: ${{ needs.cache_check_defconfigs.outputs.should_run == 'true' }}
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
     env:
@@ -75,8 +99,32 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  cache_check_allconfigs:
+    name: cache check (allconfigs)
+    runs-on: ubuntu-latest
+    container: tuxmake/clang-16
+    outputs:
+      should_run: ${{ steps.should_run.outputs.should_run }}
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v3
+    - name: Should build run?
+      id: should_run
+      run: |
+        if python3 should_run.py || { ret=$?; ( exit $ret ) }; then
+          echo "should_run=true" >>$GITHUB_OUTPUT
+        else
+            case $ret in
+              2) echo "should_run=false" >>$GITHUB_OUTPUT ;;
+              *) exit 1 ;;
+            esac
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   kick_tuxsuite_allconfigs:
     name: TuxSuite (allconfigs)
+    needs: cache_check_allconfigs
+    if: ${{ needs.cache_check_allconfigs.outputs.should_run == 'true' }}
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
     env:
