@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import argparse
+import contextlib
 import hashlib
+from pathlib import Path
 import sys
 import yaml
 
@@ -85,11 +87,55 @@ def sanitize_job_name(name):
 
 
 def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
-    patch_series = patch_series_flag(
-        tuxsuite_yml.split("/")[1].split("-clang-")[0])
+    tuxsuite_yml_name = Path(tuxsuite_yml).name
+    # Input: '<tree>-clang-<num>.tux.yml'
+    # Output: [<tree_parts>, 'clang', <num>]
+    workflow_parts = tuxsuite_yml_name.replace('.tux.yml', '').split('-')
+
+    tree = '-'.join(workflow_parts[0:-2])
+    patch_series = patch_series_flag(tree)
+
+    ci_folder = Path(__file__).resolve().parent
+    with Path(ci_folder, 'LLVM_TOT_VERSION').open(encoding='utf-8') as file:
+        max_version = int(file.read())
+    llvm_version = workflow_parts[-1]
+    # if llvm_version is 'android', converting it to an integer will fail. We
+    # do not not care, just suppress the error and move on.
+    with contextlib.suppress(ValueError):
+        if int(llvm_version) == max_version:
+            llvm_version = 'nightly'
     return {
+        f"cache_check_{job_name}": {
+            "name": f"cache check ({job_name})",
+            "runs-on": "ubuntu-latest",
+            "container": f"tuxmake/clang-{llvm_version}",
+            "outputs": {
+                "should_run": "${{ steps.should_run.outputs.should_run }}",
+            },
+            "permissions": "write-all",
+            "steps": [
+                {
+                    "uses": "actions/checkout@v3",
+                },
+                {
+                    "name": "Should build run?",
+                    "id": "should_run",
+                    "run": ('if python3 should_run.py || { ret=$?; ( exit $ret ) }; then\n'
+                            '  echo "should_run=true" >>$GITHUB_OUTPUT\n'
+                            'else\n'
+                            '    case $ret in\n'
+                            '      2) echo "should_run=false" >>$GITHUB_OUTPUT ;;\n'
+                            '      *) exit 1 ;;\n'
+                            '    esac\n'
+                            'fi\n'),
+                    "env": {"GITHUB_TOKEN": '${{ secrets.GITHUB_TOKEN }}'},
+                },
+            ],
+        },
         f"kick_tuxsuite_{job_name}": {
             "name": f"TuxSuite ({job_name})",
+            "needs": f"cache_check_{job_name}",
+            "if": f"${{{{ needs.cache_check_{job_name}.outputs.should_run == 'true' }}}}",
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
             "runs-on": "ubuntu-latest",
             "container": "tuxsuite/tuxsuite",
@@ -221,6 +267,18 @@ def print_builds(config, tree_name, llvm_version):
                       sort_keys=False))
         sys.stdout = orig_stdout
 
+
+# https://github.com/yaml/pyyaml/issues/240
+# https://stackoverflow.com/questions/8640959/how-can-i-control-what-scalar-form-pyyaml-uses-for-my-data
+def str_presenter(dumper, data):
+    if data.count('\n') > 0:  # check for multiline string
+        return dumper.represent_scalar('tag:yaml.org,2002:str',
+                                       data,
+                                       style='|')
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+
+
+yaml.add_representer(str, str_presenter)
 
 if __name__ == "__main__":
     generated_config = get_config_from_generator()
