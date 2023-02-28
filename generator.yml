@@ -35,11 +35,11 @@ urls:
   - &x86_64-fedora-config-url  https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
   - &x86_64-suse-config-url    https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
 schedules:
-  - &twelve_hours   {schedule: "0 0,12 * * *"}
-  - &daily_midnight {schedule: "0 0 * * *"}
-  - &daily_six      {schedule: "0 6 * * *"}
-  - &daily_noon     {schedule: "0 12 * * *"}
-  - &daily_eighteen {schedule: "0 18 * * *"}
+  - &twelve_hours   {schedule: "0 0,12 * * 1,2,3,4,5"}
+  - &daily_midnight {schedule: "0 0 * * 1,2,3,4,5"}
+  - &daily_six      {schedule: "0 6 * * 1,2,3,4,5"}
+  - &daily_noon     {schedule: "0 12 * * 1,2,3,4,5"}
+  - &daily_eighteen {schedule: "0 18 * * 1,2,3,4,5"}
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
   - &weekdays       {schedule: "0 12 * * 1,2,3,4,5"}
   - &monday_friday  {schedule: "0 0 * * 1,5"}
