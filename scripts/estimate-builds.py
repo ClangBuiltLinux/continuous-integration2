@@ -40,12 +40,9 @@ print(
 )
 
 # Sort the list of builds by total number of builds descending
-for item in sorted(builds_per_tree.items(),
-                   key=lambda x: x[1]['total'],
-                   reverse=True):
-    tree = item[0]
-    builds = item[1]
-
+for tree, builds in sorted(builds_per_tree.items(),
+                           key=lambda x: x[1]['total'],
+                           reverse=True):
     print(f"\n  - tree: {tree}")
     print(f"    total: {builds['total']}")
     print('    breakdown:')
