@@ -39,6 +39,7 @@ print(
     f"Total builds per week: {sum(item['total'] for item in builds_per_tree.values())}"
 )
 
+# Sort the list of builds by total number of builds descending
 for item in sorted(builds_per_tree.items(),
                    key=lambda x: x[1]['total'],
                    reverse=True):
