@@ -15,6 +15,9 @@ from utils import get_config_from_generator  # noqa: E402
 
 config = get_config_from_generator()
 
+now = datetime.datetime.now(tz=datetime.timezone.utc)
+week_from_now = now + datetime.timedelta(weeks=1)
+
 builds_per_tree = {}
 for tree in config['tree_schedules']:
     tree_name = tree['name']
@@ -22,8 +25,6 @@ for tree in config['tree_schedules']:
 
     # Calculate the number of times that a workflow runs in a week based on its
     # schedule
-    now = datetime.datetime.now(tz=datetime.timezone.utc)
-    week_from_now = now + datetime.timedelta(weeks=1)
     num_runs = len(
         list(croniter.croniter_range(now, week_from_now, tree['schedule'])))
 
