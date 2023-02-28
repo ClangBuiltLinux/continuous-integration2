@@ -46,6 +46,6 @@ for tree, builds in sorted(builds_per_tree.items(),
     print(f"\n  - tree: {tree}")
     print(f"    total: {builds['total']}")
     print('    breakdown:')
-    del builds['total']
     for clang_version, num_builds in builds.items():
-        print(f"    - clang-{clang_version}: {num_builds}")
+        if clang_version != 'total':
+            print(f"    - clang-{clang_version}: {num_builds}")
