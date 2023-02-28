@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # pylint: disable=invalid-name
 
+from collections import defaultdict
 import datetime
 from pathlib import Path
 import sys
@@ -18,14 +19,10 @@ config = get_config_from_generator()
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 week_from_now = now + datetime.timedelta(weeks=1)
 
-builds_per_tree = {}
+builds_per_tree = defaultdict(lambda: defaultdict(lambda: 0))
 for tree in config['tree_schedules']:
     tree_name = tree['name']
     tree_llvm_ver = tree['llvm_version']
-    if tree_name not in builds_per_tree:
-        builds_per_tree[tree_name] = {'total': 0}
-    if tree_llvm_ver not in builds_per_tree[tree_name]:
-        builds_per_tree[tree_name][tree_llvm_ver] = 0
 
     # Calculate the number of times that a workflow runs in a week based on its
     # schedule
