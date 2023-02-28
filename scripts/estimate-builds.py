@@ -36,7 +36,7 @@ for tree in config['tree_schedules']:
             builds_per_tree[tree_name][tree_llvm_ver] += num_runs
 
 print(
-    f"Total builds per week: {sum(item['total'] for item in builds_per_tree.values())}",
+    f"Total builds per week: {sum(item['total'] for item in builds_per_tree.values())}"
 )
 
 for item in sorted(builds_per_tree.items(),
