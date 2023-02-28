@@ -22,17 +22,15 @@ builds_per_tree = {}
 for tree in config['tree_schedules']:
     tree_name = tree['name']
     tree_llvm_ver = tree['llvm_version']
-
-    # Calculate the number of times that a workflow runs in a week based on its
-    # schedule
-    num_runs = len(
-        list(croniter.croniter_range(now, week_from_now, tree['schedule'])))
-
     if tree_name not in builds_per_tree:
         builds_per_tree[tree_name] = {'total': 0}
     if tree_llvm_ver not in builds_per_tree[tree_name]:
         builds_per_tree[tree_name][tree_llvm_ver] = 0
 
+    # Calculate the number of times that a workflow runs in a week based on its
+    # schedule
+    num_runs = len(
+        list(croniter.croniter_range(now, week_from_now, tree['schedule'])))
     for build in config['builds']:
         if tree['git_repo'] == build['git_repo'] and \
            tree['git_ref'] == build['git_ref'] and \
