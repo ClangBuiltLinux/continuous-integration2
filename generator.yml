@@ -42,6 +42,7 @@ schedules:
   - &daily_eighteen {schedule: "0 18 * * *"}
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
   - &weekdays       {schedule: "0 12 * * 1,2,3,4,5"}
+  - &monday_friday  {schedule: "0 0 * * 1,5"}
   - &sundays        {schedule: "0 0 * * 0"}
   - &wednesdays     {schedule: "0 0 * * 3"}
 trees:
@@ -83,39 +84,39 @@ tree_schedules:
   - &next_llvm_12                  {<< : *llvm_12,      << : *next,             << : *weekdays}
   - &next_llvm_11                  {<< : *llvm_11,      << : *next,             << : *weekdays}
   - &next_llvm_android             {<< : *llvm_android, << : *next,             << : *weekdays}
-  - &stable_llvm_tot               {<< : *llvm_tot,     << : *stable,           << : *daily_noon}
-  - &stable_llvm_latest            {<< : *llvm_latest,  << : *stable,           << : *daily_noon}
+  - &stable_llvm_tot               {<< : *llvm_tot,     << : *stable,           << : *monday_friday}
+  - &stable_llvm_latest            {<< : *llvm_latest,  << : *stable,           << : *monday_friday}
   - &stable_llvm_15                {<< : *llvm_15,      << : *stable,           << : *wednesdays}
   - &stable_llvm_14                {<< : *llvm_14,      << : *stable,           << : *wednesdays}
   - &stable_llvm_13                {<< : *llvm_13,      << : *stable,           << : *wednesdays}
   - &stable_llvm_12                {<< : *llvm_12,      << : *stable,           << : *wednesdays}
   - &stable_llvm_11                {<< : *llvm_11,      << : *stable,           << : *wednesdays}
-  - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *daily_noon}
-  - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *daily_noon}
+  - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *monday_friday}
+  - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *monday_friday}
   - &stable-5_15_llvm_15           {<< : *llvm_15,      << : *stable-5_15,      << : *wednesdays}
   - &stable-5_15_llvm_14           {<< : *llvm_14,      << : *stable-5_15,      << : *wednesdays}
   - &stable-5_15_llvm_13           {<< : *llvm_13,      << : *stable-5_15,      << : *wednesdays}
   - &stable-5_15_llvm_12           {<< : *llvm_12,      << : *stable-5_15,      << : *wednesdays}
   - &stable-5_15_llvm_11           {<< : *llvm_11,      << : *stable-5_15,      << : *wednesdays}
-  - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *daily_noon}
-  - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *daily_noon}
+  - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *monday_friday}
+  - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *monday_friday}
   - &stable-5_10_llvm_15           {<< : *llvm_15,      << : *stable-5_10,      << : *wednesdays}
   - &stable-5_10_llvm_14           {<< : *llvm_14,      << : *stable-5_10,      << : *wednesdays}
   - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *wednesdays}
   - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *wednesdays}
   - &stable-5_10_llvm_11           {<< : *llvm_11,      << : *stable-5_10,      << : *wednesdays}
-  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *daily_noon}
-  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *daily_noon}
+  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *monday_friday}
+  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *monday_friday}
   - &stable-5_4_llvm_15            {<< : *llvm_15,      << : *stable-5_4,       << : *wednesdays}
   - &stable-5_4_llvm_14            {<< : *llvm_14,      << : *stable-5_4,       << : *wednesdays}
   - &stable-5_4_llvm_13            {<< : *llvm_13,      << : *stable-5_4,       << : *wednesdays}
-  - &stable-4_19_llvm_tot          {<< : *llvm_tot,     << : *stable-4_19,      << : *daily_noon}
-  - &stable-4_19_llvm_latest       {<< : *llvm_latest,  << : *stable-4_19,      << : *daily_noon}
+  - &stable-4_19_llvm_tot          {<< : *llvm_tot,     << : *stable-4_19,      << : *monday_friday}
+  - &stable-4_19_llvm_latest       {<< : *llvm_latest,  << : *stable-4_19,      << : *monday_friday}
   - &stable-4_19_llvm_15           {<< : *llvm_15,      << : *stable-4_19,      << : *wednesdays}
   - &stable-4_19_llvm_14           {<< : *llvm_14,      << : *stable-4_19,      << : *wednesdays}
   - &stable-4_19_llvm_13           {<< : *llvm_13,      << : *stable-4_19,      << : *wednesdays}
-  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *daily_noon}
-  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *daily_noon}
+  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *monday_friday}
+  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *monday_friday}
   - &stable-4_14_llvm_15           {<< : *llvm_15,      << : *stable-4_14,      << : *wednesdays}
   - &stable-4_14_llvm_14           {<< : *llvm_14,      << : *stable-4_14,      << : *wednesdays}
   - &stable-4_14_llvm_13           {<< : *llvm_13,      << : *stable-4_14,      << : *wednesdays}
