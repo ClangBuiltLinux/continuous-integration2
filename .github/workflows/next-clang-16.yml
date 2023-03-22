@@ -1327,6 +1327,27 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _746c6cc9d865631749721e0b69fa26e8:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 allmodconfig+CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y+CONFIG_WERROR=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 16
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y+CONFIG_WERROR=n
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _fbc0af0db8490a9977f5e99915bf441a:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
