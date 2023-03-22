@@ -309,6 +309,7 @@ configs:
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                      kernel_image: zImage.epapr, << : *powerpc64le-triple,   << : *kernel}
+  - &ppc64_allmod      {config: [allmodconfig, CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y, CONFIG_WERROR=n],                                     << : *powerpc64-triple,     << : *default}
   - &riscv             {config: defconfig,                                                                     kernel_image: Image,        << : *riscv-triple,         << : *kernel}
   - &riscv_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                               kernel_image: Image,        << : *riscv-triple,         << : *default}
   #                                         https://github.com/ClangBuiltLinux/linux/issues/1143
@@ -477,6 +478,7 @@ builds:
   - {<< : *ppc64le,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -946,6 +948,7 @@ builds:
   - {<< : *ppc64le,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *ppc64_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1409,6 +1412,7 @@ builds:
   - {<< : *ppc64le,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
