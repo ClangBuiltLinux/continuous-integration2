@@ -100,7 +100,7 @@ def fetch_logs(build):
 def check_log(build):
     warnings_count = build["warnings_count"]
     errors_count = build["errors_count"]
-    if warnings_count + errors_count > 0:
+    if warnings_count + errors_count > 0 or build["result"] != "pass":
         print_yellow(f"{warnings_count} warnings, {errors_count} errors")
         fetch_logs(build)
 
