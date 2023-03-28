@@ -1432,4 +1432,25 @@ jobs:
         name: output_artifact_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _73a72aae81b42c7ef0b0bd18add14c1f:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 allyesconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 17
+      BOOT: 0
+      CONFIG: allyesconfig
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
 
