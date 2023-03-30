@@ -1,25 +1,25 @@
-From b9930311641cf2ed905a84aabe27e8f3868aee4a Mon Sep 17 00:00:00 2001
+From 7d31677bb7b1944ac89e9155110dc1b9acbb3895 Mon Sep 17 00:00:00 2001
 From: Arnd Bergmann <arnd@arndb.de>
 Date: Fri, 27 Jan 2023 23:14:00 +0100
-Subject: [PATCH] gpu: host1x: Fix uninitialized variable use
+Subject: gpu: host1x: fix uninitialized variable use
 
 The error handling for platform_get_irq() failing no longer works after
 a recent change, clang now points this out with a warning:
 
-drivers/gpu/host1x/dev.c:520:6: error: variable 'syncpt_irq' is uninitialized when used here [-Werror,-Wuninitialized]
-        if (syncpt_irq < 0)
-            ^~~~~~~~~~
+  drivers/gpu/host1x/dev.c:520:6: error: variable 'syncpt_irq' is uninitialized when used here [-Werror,-Wuninitialized]
+          if (syncpt_irq < 0)
+              ^~~~~~~~~~
 
 Fix this by removing the variable and checking the correct error status.
 
 Fixes: 625d4ffb438c ("gpu: host1x: Rewrite syncpoint interrupt handling")
 Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-Reviewed-by: Nathan Chancellor <nathan@kernel.org>
-Reviewed-by: Mikko Perttunen <mperttunen@nvidia.com>
-Reported-by: "kernelci.org bot" <bot@kernelci.org>
+Reviewed-by: Jon Hunter <jonathanh@nvidia.com>
 Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
-Signed-off-by: Thierry Reding <treding@nvidia.com>
-Link: https://gitlab.freedesktop.org/drm/tegra/-/commit/b9930311641cf2ed905a84aabe27e8f3868aee4a
+Reviewed-by: Mikko Perttunen <mperttunen@nvidia.com>
+Reviewed-by: Nathan Chancellor <nathan@kernel.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+Link: https://git.kernel.org/linus/7d31677bb7b1944ac89e9155110dc1b9acbb3895
 ---
  drivers/gpu/host1x/dev.c | 5 ++---
  1 file changed, 2 insertions(+), 3 deletions(-)
@@ -48,5 +48,5 @@ index 4872d183d8604..aae2efeef5032 100644
  	mutex_init(&host->devices_lock);
  	INIT_LIST_HEAD(&host->devices);
 -- 
-GitLab
+cgit 
 
