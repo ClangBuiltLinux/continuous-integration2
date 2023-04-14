@@ -290,8 +290,8 @@ configs:
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &ppc32             {config: ppc44x_defconfig,                                                              kernel_image: uImage,       ARCH: *powerpc-arch,    << : *kernel}
-  # Disable -Werror for pseries_defconfig for now: https://github.com/ClangBuiltLinux/linux/issues/1445
-  - &ppc64             {config: [pseries_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                              kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
+  # Disable -Werror for ppc64_guest_defconfig for now: https://github.com/ClangBuiltLinux/linux/issues/1445
+  - &ppc64             {config: [ppc64_guest_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                          kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}

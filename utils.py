@@ -97,7 +97,7 @@ def get_cbl_name():
         "multi_v7_defconfig": "arm32_v7",
         "malta_defconfig": "mipsel",
         "ppc44x_defconfig": "ppc32",
-        "pseries_defconfig": "ppc64",
+        "ppc64_guest_defconfig": "ppc64",
         "powernv_defconfig": "ppc64le",
     }
     if "CONFIG_CPU_BIG_ENDIAN=y" in full_config:
