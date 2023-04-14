@@ -213,7 +213,7 @@ jobs:
   - target_arch: powerpc
     toolchain: clang-15
     kconfig:
-    - pseries_defconfig
+    - ppc64_guest_defconfig
     - CONFIG_PPC_DISABLE_WERROR=y
     targets:
     - kernel
