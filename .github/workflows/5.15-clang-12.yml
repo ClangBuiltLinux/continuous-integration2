@@ -432,15 +432,15 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _38b22cfae74996dcecea1459e2f4a5d1:
+  _b93c483101f871a5ff674333fdf22ffd:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=12 pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=12 ppc64_guest_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       BOOT: 1
-      CONFIG: pseries_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: ppc64_guest_defconfig+CONFIG_PPC_DISABLE_WERROR=y
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
