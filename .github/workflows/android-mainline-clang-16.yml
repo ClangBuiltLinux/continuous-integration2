@@ -75,6 +75,27 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _7acbf28a24aa730a781229f80e4e38a3:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 gki_defconfig+64-bit.config+gki.config
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 16
+      BOOT: 1
+      CONFIG: gki_defconfig+64-bit.config+gki.config
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _b9c33721b8a30cf8511e236bfd80c819:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
