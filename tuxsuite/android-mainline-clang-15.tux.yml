@@ -39,6 +39,18 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - target_arch: riscv
+    toolchain: clang-15
+    kconfig:
+    - gki_defconfig
+    - 64-bit.config
+    - gki.config
+    targets:
+    - kernel
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
 - name: allconfigs
   builds:
   - target_arch: arm
