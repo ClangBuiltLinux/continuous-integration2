@@ -75,27 +75,6 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _a84110171ba256e7841d0a1808611e52:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=android gki_defconfig+64-bit.config+gki.config
-    env:
-      ARCH: riscv
-      LLVM_VERSION: android
-      BOOT: 1
-      CONFIG: gki_defconfig+64-bit.config+gki.config
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v3
-      with:
-        name: output_artifact_defconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _e8eaa6c4609c31891f40230b3aa2339f:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
