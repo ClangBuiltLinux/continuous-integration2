@@ -33,15 +33,15 @@ jobs:
         path: builds.json
         name: output_artifact_defconfigs
         if-no-files-found: error
-  _b88c465de0b7765732bdd57d507ff833:
+  _20c17b15ee9b3076b6a29bf6811b0633:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
     env:
       ARCH: arm64
       LLVM_VERSION: 17
       BOOT: 1
-      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config
+      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -54,15 +54,15 @@ jobs:
         name: output_artifact_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _1cdac7b0607b643a6a8c8f9ce22bb8d4:
+  _7b2465900a113fc27ea8e9c2d030af14:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
     env:
       ARCH: x86_64
       LLVM_VERSION: 17
       BOOT: 1
-      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config
+      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
