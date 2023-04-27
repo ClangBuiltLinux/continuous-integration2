@@ -48,7 +48,7 @@ schedules:
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
-  - &stable           {git_repo: *stable-url,   git_ref: linux-6.2.y,         name: stable}
+  - &stable           {git_repo: *stable-url,   git_ref: linux-6.3.y,         name: stable}
   - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
@@ -556,8 +556,7 @@ builds:
   - {<< : *x86_64_allmod,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allmod_lto, << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_allno,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
-  # x86_64 allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
-  # - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *x86_64_alpine,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_arch,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -1025,8 +1024,7 @@ builds:
   - {<< : *x86_64_allmod,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allmod_lto, << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allno,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
-  # x86_64 allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
-  # - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_alpine,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_arch,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1482,8 +1480,7 @@ builds:
   - {<< : *x86_64_allmod,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *x86_64_allmod_lto, << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *x86_64_allno,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
-  # x86_64 allyesconfig disabled: https://github.com/ClangBuiltLinux/linux/issues/1768
-  # - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *x86_64_alpine,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64_arch,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
