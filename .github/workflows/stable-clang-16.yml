@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.2.y --job-name defconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.3.y --job-name defconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -757,7 +757,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.2.y --job-name distribution_configs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.3.y --job-name distribution_configs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -1131,7 +1131,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.2.y --job-name allconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.3.y --job-name allconfigs --json-out builds.json tuxsuite/stable-clang-16.tux.yml || true
     - name: save output
       uses: actions/upload-artifact@v3
       with:
@@ -1378,6 +1378,27 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 0
       CONFIG: allnoconfig
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _cc92db58f57103904b162bb3cb351329:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 allyesconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 16
+      BOOT: 0
+      CONFIG: allyesconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
