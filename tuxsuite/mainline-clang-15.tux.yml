@@ -536,6 +536,17 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - target_arch: powerpc
+    toolchain: clang-15
+    kconfig:
+    - allmodconfig
+    - CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y
+    - CONFIG_WERROR=n
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
   - target_arch: riscv
     toolchain: clang-15
     kconfig:
