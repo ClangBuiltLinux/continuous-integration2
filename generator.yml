@@ -396,6 +396,7 @@ builds:
   - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -864,6 +865,7 @@ builds:
   - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *ppc64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1330,6 +1332,7 @@ builds:
   - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
