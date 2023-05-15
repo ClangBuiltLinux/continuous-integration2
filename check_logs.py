@@ -25,7 +25,7 @@ def _fetch(title, url, dest):
             urllib.request.urlretrieve(url, dest)
             break
         except ConnectionResetError as err:
-            print_yellow(f"{title} download error ('{str(err)}'), retrying...")
+            print_yellow(f"{title} download error ('{err!s}'), retrying...")
         except urllib.error.HTTPError as err:
             if err.code in retry_codes:
                 print_yellow(
@@ -34,7 +34,7 @@ def _fetch(title, url, dest):
                 print_red(f"{err.code} error trying to download {title}")
                 sys.exit(1)
         except urllib.error.URLError as err:
-            print_yellow(f"{title} download error ('{str(err)}'), retrying...")
+            print_yellow(f"{title} download error ('{err!s}'), retrying...")
 
     if retries == max_retries:
         print_red(f"Unable to download {title} after {max_retries} tries")
