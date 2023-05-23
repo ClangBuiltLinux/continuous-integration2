@@ -3383,8 +3383,7 @@ builds:
   - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
-  # riscv_gki disabled until tuxsuite properly supports it: https://github.com/ClangBuiltLinux/continuous-integration2/issues/556
-  # - {<< : *riscv_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
+  - {<< : *riscv_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm32_allmod,      << : *android14-5_15,   << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *arm32_v7_t,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_android}
