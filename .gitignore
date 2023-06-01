@@ -1,3 +1,4 @@
+boot-utils/
 dtbs/
 __pycache__/
 builds.json

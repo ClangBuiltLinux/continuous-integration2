@@ -1,3 +1,0 @@
-[submodule "boot-utils"]
-	path = boot-utils
-	url = https://github.com/ClangBuiltLinux/boot-utils.git
