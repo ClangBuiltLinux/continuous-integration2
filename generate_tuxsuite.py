@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import argparse
-import pathlib
+from pathlib import Path
 import sys
 import yaml
 
-from utils import get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
+from utils import CI_ROOT, get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
 
 
 # Aliases makes this YAML unreadable
@@ -28,7 +28,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
     tuxsuite_yml = f"tuxsuite/{tree}-{toolchain}.tux.yml"
     repo, ref = get_repo_ref(config, tree)
 
-    with open(tuxsuite_yml, "w", encoding='utf-8') as file:
+    with Path(CI_ROOT, tuxsuite_yml).open("w", encoding='utf-8') as file:
         orig_stdout = sys.stdout
         sys.stdout = file
 
@@ -63,9 +63,8 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                 }
             ]
         }  # yapf: disable
-        ci_folder = pathlib.Path(__file__).resolve().parent
         max_version = int(
-            ci_folder.joinpath("LLVM_TOT_VERSION").read_text(encoding='utf-8'))
+            Path(CI_ROOT, "LLVM_TOT_VERSION").read_text(encoding='utf-8'))
         defconfigs = []
         distribution_configs = []
         allconfigs = []

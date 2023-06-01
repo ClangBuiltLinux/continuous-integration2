@@ -3,12 +3,13 @@
 import glob
 import json
 import os
+from pathlib import Path
 import subprocess
 import sys
 import time
 import urllib.request
 
-from utils import get_build, get_image_name, get_requested_llvm_version, print_red, print_yellow, get_cbl_name, show_builds
+from utils import CI_ROOT, get_build, get_image_name, get_requested_llvm_version, print_red, print_yellow, get_cbl_name, show_builds
 
 
 def _fetch(title, url, dest):
@@ -40,8 +41,8 @@ def _fetch(title, url, dest):
         print_red(f"Unable to download {title} after {max_retries} tries")
         sys.exit(1)
 
-    if os.path.exists(dest):
-        print_yellow(f"Filesize: {os.path.getsize(dest)}")
+    if dest.exists():
+        print_yellow(f"Filesize: {dest.stat().st_size}")
     else:
         print_red(f"Unable to download {title}")
         sys.exit(1)
@@ -63,11 +64,10 @@ def verify_build():
             time.sleep(2**retries)
         retries += 1
 
-        status_json = "status.json"
-        url = build["download_url"] + status_json
+        status_json = Path(CI_ROOT, "status.json")
+        url = build["download_url"] + status_json.name
         _fetch("status.json", url, status_json)
-        with open(status_json, encoding='utf-8') as file:
-            build = json.load(file)
+        build = json.loads(status_json.read_text(encoding='utf-8'))
 
     print(json.dumps(build, indent=4))
 
@@ -90,11 +90,10 @@ def verify_build():
 
 
 def fetch_logs(build):
-    log = "build.log"
-    url = build["download_url"] + log
+    log = Path(CI_ROOT, "build.log")
+    url = build["download_url"] + log.name
     _fetch("logs", url, log)
-    with open(log, encoding='utf-8') as file:
-        print(file.read())
+    print(log.read_text(encoding='utf-8'))
 
 
 def check_log(build):
@@ -113,22 +112,20 @@ def fetch_dtb(build):
         "multi_v5_defconfig": "aspeed-bmc-opp-palmetto.dtb",
         "aspeed_g5_defconfig": "aspeed-bmc-opp-romulus.dtb",
     }[config]
-    dtb_path = "dtbs/" + dtb
-    url = build["download_url"] + dtb_path
-    # mkdir -p
-    os.makedirs(dtb_path.split("/")[0], exist_ok=True)
+    (dtb_path := Path(CI_ROOT, 'dtbs', dtb)).parent.mkdir(exist_ok=True)
+    url = build["download_url"] + dtb_path.name
     _fetch("DTB", url, dtb_path)
 
 
 def fetch_kernel_image(build):
-    image_name = get_image_name()
-    url = build["download_url"] + image_name
+    image_name = Path(CI_ROOT, get_image_name())
+    url = build["download_url"] + image_name.name
     _fetch("kernel image", url, image_name)
 
 
 def fetch_built_config(build):
     url = build["download_url"] + "config"
-    _fetch("built .config", url, ".config")
+    _fetch("built .config", url, Path(CI_ROOT, ".config"))
 
 
 def check_built_config(build):
@@ -143,7 +140,7 @@ def check_built_config(build):
     fetch_built_config(build)
     # Build dictionary of CONFIG_NAME: y/m/n ("is not set" translates to 'n').
     configs = {}
-    with open(".config", encoding='utf-8') as file:
+    with Path(CI_ROOT, '.config').open(encoding='utf-8') as file:
         for rawline in file:
             if not (line := rawline.strip()):
                 continue
@@ -187,33 +184,27 @@ def print_clang_info(build):
     if get_requested_llvm_version() != "clang-nightly":
         return
 
-    metadata_file = "metadata.json"
-    url = build["download_url"] + metadata_file
+    metadata_file = Path(CI_ROOT, "metadata.json")
+    url = build["download_url"] + metadata_file.name
     _fetch(metadata_file, url, metadata_file)
-    with open(metadata_file, encoding='utf-8') as file:
-        metadata_json = json.load(file)
+    metadata_json = json.loads(metadata_file.read_text(encoding='utf-8'))
     print_yellow("Printing clang-nightly checkout date and hash")
     parse_cmd = [
-        "./scripts/parse-debian-clang.py", "--print-info", "--version-string",
-        metadata_json["compiler"]["version_full"]
+        Path(CI_ROOT, "scripts/parse-debian-clang.py"), "--print-info",
+        "--version-string", metadata_json["compiler"]["version_full"]
     ]
     subprocess.run(parse_cmd, check=True)
 
 
-def cwd():
-    os.chdir(os.path.dirname(__file__))
-    return os.getcwd()
-
-
 def run_boot(build):
     cbl_arch = get_cbl_name()
-    kernel_image = cwd() + "/" + get_image_name()
+    kernel_image = Path(CI_ROOT, get_image_name())
     if cbl_arch == "um":
-        boot_cmd = ["./boot-utils/boot-uml.py"]
+        boot_cmd = [Path(CI_ROOT, 'boot-utils/boot-uml.py')]
         # The execute bit needs to be set to avoid "Permission denied" errors
-        os.chmod(kernel_image, 0o755)
+        kernel_image.chmod(0o755)
     else:
-        boot_cmd = ["./boot-utils/boot-qemu.py", "-a", cbl_arch]
+        boot_cmd = [Path(CI_ROOT, 'boot-utils/boot-qemu.py'), "-a", cbl_arch]
     boot_cmd += ["-k", kernel_image]
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower

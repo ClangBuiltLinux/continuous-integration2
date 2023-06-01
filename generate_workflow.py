@@ -2,10 +2,11 @@
 
 import argparse
 import hashlib
+from pathlib import Path
 import sys
 import yaml
 
-from utils import get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
+from utils import CI_ROOT, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
 
 
 def parse_args(trees):
@@ -208,7 +209,7 @@ def print_builds(config, tree_name, llvm_version):
             tuxsuite_setups("allconfigs", tuxsuite_yml, repo, ref))
         workflow["jobs"].update(check_logs_allconfigs)
 
-    with open(github_yml, "w", encoding='utf-8') as file:
+    with Path(CI_ROOT, github_yml).open("w", encoding='utf-8') as file:
         orig_stdout = sys.stdout
         sys.stdout = file
         print("# DO NOT MODIFY MANUALLY!")
