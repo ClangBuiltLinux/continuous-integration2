@@ -213,7 +213,12 @@ def run_boot(build):
         kernel_image.chmod(0o755)
     else:
         boot_cmd = [Path(CI_ROOT, 'boot-utils/boot-qemu.py'), "-a", cbl_arch]
-    boot_cmd += ["-k", kernel_image]
+    boot_cmd += [
+        '--gh-json-file',
+        Path(CI_ROOT, 'boot-utils.json'),
+        "-k",
+        kernel_image,
+    ]
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower
     if "CONFIG_KASAN=y" in build["kconfig"] or \
