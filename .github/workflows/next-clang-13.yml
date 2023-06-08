@@ -911,15 +911,15 @@ jobs:
         name: output_artifact_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _cd3a9116f9c669b21bb4476766660a71:
+  _417a2a32449d514b66acb4f23450f5a8:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
       BOOT: 1
-      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+      CONFIG: https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
