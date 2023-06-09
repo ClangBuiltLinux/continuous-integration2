@@ -27,11 +27,19 @@ jobs:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name defconfigs --json-out builds.json tuxsuite/arm64-clang-13.tux.yml || true
-    - name: save output
+    - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_defconfigs
+        if-no-files-found: error
+    - name: generate boot-utils.json
+      run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
+    - name: save boot-utils.json
+      uses: actions/upload-artifact@v3
+      with:
+        path: boot-utils.json
+        name: boot_utils_json_defconfigs
         if-no-files-found: error
   _210faf86b075b31ec48b4fa5276daa01:
     runs-on: ubuntu-latest
@@ -52,6 +60,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _63a33d081dc4000b2eaf65e367d99441:
@@ -73,6 +84,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   kick_tuxsuite_allconfigs:
@@ -86,11 +100,19 @@ jobs:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name allconfigs --json-out builds.json tuxsuite/arm64-clang-13.tux.yml || true
-    - name: save output
+    - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_allconfigs
+        if-no-files-found: error
+    - name: generate boot-utils.json
+      run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
+    - name: save boot-utils.json
+      uses: actions/upload-artifact@v3
+      with:
+        path: boot-utils.json
+        name: boot_utils_json_allconfigs
         if-no-files-found: error
   _bc93ab0a758b33cf3167fdbdeb2b0705:
     runs-on: ubuntu-latest
@@ -111,6 +133,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _c8ae7dd017d7273dcec747aadd9288fe:
@@ -132,6 +157,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _a575b3a0efaafab3765963157dfe45f2:
@@ -153,6 +181,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
 

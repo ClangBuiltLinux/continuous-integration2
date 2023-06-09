@@ -27,11 +27,19 @@ jobs:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android-4.14-stable --job-name defconfigs --json-out builds.json tuxsuite/android-4.14-clang-android.tux.yml || true
-    - name: save output
+    - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_defconfigs
+        if-no-files-found: error
+    - name: generate boot-utils.json
+      run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
+    - name: save boot-utils.json
+      uses: actions/upload-artifact@v3
+      with:
+        path: boot-utils.json
+        name: boot_utils_json_defconfigs
         if-no-files-found: error
   _f41a40b9ca513a23053de3c8ddbc5909:
     runs-on: ubuntu-latest
@@ -52,6 +60,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _3c9cc1628795dbafc5b9170f79d448ce:
@@ -73,6 +84,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
 

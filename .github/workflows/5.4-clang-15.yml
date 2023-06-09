@@ -27,11 +27,19 @@ jobs:
     - uses: actions/checkout@v3
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.4.y --job-name defconfigs --json-out builds.json tuxsuite/5.4-clang-15.tux.yml || true
-    - name: save output
+    - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_defconfigs
+        if-no-files-found: error
+    - name: generate boot-utils.json
+      run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
+    - name: save boot-utils.json
+      uses: actions/upload-artifact@v3
+      with:
+        path: boot-utils.json
+        name: boot_utils_json_defconfigs
         if-no-files-found: error
   _05f17d11482533ebf3467c477fb42626:
     runs-on: ubuntu-latest
@@ -52,6 +60,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _666c000194bc3cdd0e08876443332315:
@@ -73,6 +84,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _18c0542ef2701b962599f5d36e9718ba:
@@ -94,6 +108,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _e1084951b99347c2cf3f483a2bc53b61:
@@ -115,6 +132,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _fbcd0f7c0945b3672fd4bf8fb18cd9f5:
@@ -136,6 +156,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _ab37ef32e41b6e740043c4ede25ff780:
@@ -157,6 +180,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _73089fb85e10cf8cd08daf2f08ef949c:
@@ -178,6 +204,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _b918f74f05e3928e6817ff663df31204:
@@ -199,6 +228,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _b83e803d7dd6c3201bea198a418a70ce:
@@ -220,6 +252,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
   _6a10973686962e1686b87d8f19b7ec54:
@@ -241,6 +276,9 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
 

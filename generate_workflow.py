@@ -2,10 +2,11 @@
 
 import argparse
 import hashlib
+from pathlib import Path
 import sys
 import yaml
 
-from utils import get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
+from utils import CI_ROOT, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
 
 
 def parse_args(trees):
@@ -106,14 +107,27 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                     "run": f"tuxsuite plan --git-repo {repo} --git-ref {ref} --job-name {job_name} --json-out builds.json {patch_series}{tuxsuite_yml} || true",
                 },
                 {
-                    "name": "save output",
+                    "name": "save builds.json",
                     "uses": "actions/upload-artifact@v3",
                     "with": {
                         "path": "builds.json",
                         "name": f"output_artifact_{job_name}",
                         "if-no-files-found": "error"
                     },
-                }
+                },
+                {
+                    'name': 'generate boot-utils.json',
+                    'run': 'python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}',
+                },
+                {
+                    'name': 'save boot-utils.json',
+                    'uses': 'actions/upload-artifact@v3',
+                    'with': {
+                        'path': 'boot-utils.json',
+                        'name': f"boot_utils_json_{job_name}",
+                        'if-no-files-found': 'error',
+                    },
+                },
             ]
         }
     }  # yapf: disable
@@ -147,6 +161,12 @@ def get_steps(build, build_set):
                     "uses": "actions/download-artifact@v3",
                     "with": {
                         "name": f"output_artifact_{build_set}"
+                    },
+                },
+                {
+                    "uses": "actions/download-artifact@v3",
+                    "with": {
+                        "name": f"boot_utils_json_{build_set}"
                     },
                 },
                 {
@@ -208,7 +228,7 @@ def print_builds(config, tree_name, llvm_version):
             tuxsuite_setups("allconfigs", tuxsuite_yml, repo, ref))
         workflow["jobs"].update(check_logs_allconfigs)
 
-    with open(github_yml, "w", encoding='utf-8') as file:
+    with Path(CI_ROOT, github_yml).open("w", encoding='utf-8') as file:
         orig_stdout = sys.stdout
         sys.stdout = file
         print("# DO NOT MODIFY MANUALLY!")

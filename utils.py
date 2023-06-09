@@ -1,16 +1,17 @@
-import glob
 import json
 import os
-import pathlib
+from pathlib import Path
 import sys
 import yaml
+
+CI_ROOT = Path(__file__).resolve().parent
 
 
 def get_config_from_generator():
     # Trusted input.
     # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
     try:
-        with open("generator.yml", encoding='utf-8') as file:
+        with Path(CI_ROOT, "generator.yml").open(encoding='utf-8') as file:
             return yaml.load(file, Loader=yaml.FullLoader)
     except FileNotFoundError as err:
         print_red("generator.yml not found?")
@@ -113,25 +114,20 @@ def get_cbl_name():
 
 
 def _read_builds():
-    builds = "builds.json"
-    if os.environ.get("MOCK"):
-        builds = "mock.builds.json"
+    file = "mock.builds.json" if os.environ.get("MOCK") else "builds.json"
     try:
-        if pathlib.Path(builds).stat().st_size == 0:
-            raise RuntimeError(f"{builds} is zero sized?")
-        with open(builds, encoding='utf-8') as file:
-            builds = json.load(file)
+        if (builds := Path(CI_ROOT, file)).stat().st_size == 0:
+            raise RuntimeError(f"{file} is zero sized?")
+        builds_json = json.loads(builds.read_text(encoding='utf-8'))
     except FileNotFoundError as err:
-        print_red(f"Unable to find {builds}. Artifact not saved?")
+        print_red(f"Unable to find {file}. Artifact not saved?")
         raise err
-    return builds["builds"].values()
+    return builds_json["builds"].values()
 
 
 def get_requested_llvm_version():
     ver = os.environ["LLVM_VERSION"]
-    ci_folder = pathlib.Path(__file__).resolve().parent
-    with open(ci_folder.joinpath("LLVM_TOT_VERSION"),
-              encoding='utf-8') as file:
+    with Path(CI_ROOT, "LLVM_TOT_VERSION").open(encoding='utf-8') as file:
         llvm_tot_version = str(int(file.read())).strip()
     return "clang-" + ("nightly" if ver == llvm_tot_version else ver)
 
@@ -188,7 +184,6 @@ def print_yellow(msg):
 
 
 def patch_series_flag(tree):
-    ci_folder = pathlib.Path(__file__).resolve().parent
-    patches_folder = pathlib.Path("patches").joinpath(tree)
-    patch_files = glob.glob(f"{ci_folder.joinpath(patches_folder)}/*.patch")
+    patches_folder = Path('patches', tree)
+    patch_files = list(Path(CI_ROOT, patches_folder).glob('*.patch'))
     return f"--patch-series {patches_folder} " if patch_files else ""
