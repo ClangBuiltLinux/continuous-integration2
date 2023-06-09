@@ -112,8 +112,9 @@ def fetch_dtb(build):
         "multi_v5_defconfig": "aspeed-bmc-opp-palmetto.dtb",
         "aspeed_g5_defconfig": "aspeed-bmc-opp-romulus.dtb",
     }[config]
-    (dtb_path := Path(CI_ROOT, 'dtbs', dtb)).parent.mkdir(exist_ok=True)
-    url = build["download_url"] + dtb_path.name
+    remote_dtb_path = f"dtbs/{dtb}"
+    (dtb_path := Path(CI_ROOT, remote_dtb_path)).parent.mkdir(exist_ok=True)
+    url = build["download_url"] + remote_dtb_path
     _fetch("DTB", url, dtb_path)
 
 
