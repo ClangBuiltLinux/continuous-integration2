@@ -196,6 +196,12 @@ def print_clang_info(build):
     subprocess.run(parse_cmd, check=True)
 
 
+def fetch_boot_utils_file(file_path):
+    url = f"https://github.com/ClangBuiltLinux/boot-utils/raw/main/{file_path.name}"
+    _fetch(file_path.name, url, file_path)
+    file_path.chmod(0o755)
+
+
 def run_boot(build):
     cbl_arch = get_cbl_name()
     kernel_image = Path(CI_ROOT, get_image_name())
@@ -208,6 +214,10 @@ def run_boot(build):
         kernel_image.chmod(0o755)
     else:
         boot_cmd = [Path(boot_utils, 'boot-qemu.py'), "-a", cbl_arch]
+
+    fetch_boot_utils_file(boot_cmd[0])
+    fetch_boot_utils_file(Path(boot_utils, 'utils.py'))
+
     boot_cmd += [
         '--gh-json-file',
         Path(CI_ROOT, 'boot-utils.json'),
@@ -229,11 +239,6 @@ def run_boot(build):
             print_yellow(
                 "Disabling Oops problem matcher under Sanitizer KUnit build")
             print("::remove-matcher owner=linux-kernel-oopses::")
-
-    for dest in [boot_cmd[0], Path(boot_utils, 'utils.py')]:
-        url = f"https://github.com/ClangBuiltLinux/boot-utils/raw/main/{dest.name}"
-        _fetch(dest.name, url, dest)
-        dest.chmod(0o755)
 
     # Before spawning a process with potentially different IO buffering,
     # flush the existing buffers so output is ordered correctly.
