@@ -404,7 +404,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: clang-12
-    kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    kconfig: https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
     targets:
     - kernel
     make_variables:
