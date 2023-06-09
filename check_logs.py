@@ -201,18 +201,13 @@ def run_boot(build):
     kernel_image = Path(CI_ROOT, get_image_name())
 
     (boot_utils := Path(CI_ROOT, 'boot-utils')).mkdir(exist_ok=True)
-    for file in ['boot-qemu.py', 'boot-uml.py', 'utils.py']:
-        url = f"https://github.com/ClangBuiltLinux/boot-utils/raw/main/{file}"
-        dest = Path(boot_utils, file)
-        _fetch(file, url, dest)
-        dest.chmod(0o755)
 
     if cbl_arch == "um":
-        boot_cmd = [Path(CI_ROOT, 'boot-utils/boot-uml.py')]
+        boot_cmd = [Path(boot_utils, 'boot-uml.py')]
         # The execute bit needs to be set to avoid "Permission denied" errors
         kernel_image.chmod(0o755)
     else:
-        boot_cmd = [Path(CI_ROOT, 'boot-utils/boot-qemu.py'), "-a", cbl_arch]
+        boot_cmd = [Path(boot_utils, 'boot-qemu.py'), "-a", cbl_arch]
     boot_cmd += [
         '--gh-json-file',
         Path(CI_ROOT, 'boot-utils.json'),
@@ -234,6 +229,11 @@ def run_boot(build):
             print_yellow(
                 "Disabling Oops problem matcher under Sanitizer KUnit build")
             print("::remove-matcher owner=linux-kernel-oopses::")
+
+    for dest in [boot_cmd[0], Path(boot_utils, 'utils.py')]:
+        url = f"https://github.com/ClangBuiltLinux/boot-utils/raw/main/{dest.name}"
+        _fetch(dest.name, url, dest)
+        dest.chmod(0o755)
 
     # Before spawning a process with potentially different IO buffering,
     # flush the existing buffers so output is ordered correctly.
