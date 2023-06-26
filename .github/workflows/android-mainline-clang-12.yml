@@ -89,15 +89,15 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _6ad60675c9981595d86d7e7fbd31c255:
+  _93eebbb3d39e4138918480a96661bfb5:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 gki_defconfig+64-bit.config+gki.config
+    name: ARCH=riscv LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 gki_defconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 12
       BOOT: 1
-      CONFIG: gki_defconfig+64-bit.config+gki.config
+      CONFIG: gki_defconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
