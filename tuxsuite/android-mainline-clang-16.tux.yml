@@ -32,10 +32,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: riscv
     toolchain: clang-16
-    kconfig:
-    - gki_defconfig
-    - 64-bit.config
-    - gki.config
+    kconfig: gki_defconfig
     targets:
     - kernel
     kernel_image: Image
