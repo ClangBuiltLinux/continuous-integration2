@@ -14,6 +14,7 @@ import yaml
 NORMAL = '\033[0m'
 RED = '\033[01;31m'
 GREEN = '\033[01;32m'
+YELLOW = '\033[01;33m'
 
 
 def interrupt_handler(_signum, _frame):
@@ -46,6 +47,10 @@ parser.add_argument('-b',
                     '--build-dir',
                     default=default_build_dir,
                     help=f"Build folder (default: {default_build_dir})")
+parser.add_argument('-c',
+                    '--ccache',
+                    action='store_true',
+                    help='Use ccache if it is available')
 parser.add_argument('-C',
                     '--directory',
                     help='Path to kernel source',
@@ -85,6 +90,15 @@ elif shutil.which('docker'):
     runtime = 'docker'
 else:
     runtime = None
+
+wrapper = None
+if args.ccache:
+    if shutil.which('ccache'):
+        wrapper = 'ccache'
+    else:
+        print(
+            f"{YELLOW}ccache was requested but it is not installed, ignoring...{NORMAL}"
+        )
 
 # Combine all jobs into one object for easy iteration
 jobs = {}
@@ -162,6 +176,7 @@ for name, builds in jobs.items():
                                      quiet=(not args.verbose),
                                      runtime=runtime,
                                      tree=tree,
+                                     wrapper=wrapper,
                                      **build)
 
         if all(info.passed for info in result.status.values()):
