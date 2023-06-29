@@ -73,9 +73,7 @@ if shutil.which('podman'):
 elif shutil.which('docker'):
     runtime = 'docker'
 else:
-    raise RuntimeError(
-        "tuxmake requires either podman or docker for versioned toolchains but neither could be found on your system!"
-    )
+    runtime = None
 
 # Combine all jobs into one object for easy iteration
 jobs = {}
@@ -109,6 +107,11 @@ for name, builds in jobs.items():
         kconfig = build['kconfig']
         target_arch = build['target_arch']
         toolchain = build['toolchain']
+
+        if '-' in toolchain and not runtime:
+            raise RuntimeError(
+                f"tuxmake requires either podman or docker to use versioned toolchains ('{toolchain}') but neither could be found on your system!"
+            )
 
         cfg_str = '+'.join(kconfig) if isinstance(kconfig, list) else kconfig
         print(f"I: Building {target_arch} {cfg_str} ({toolchain})... ",
