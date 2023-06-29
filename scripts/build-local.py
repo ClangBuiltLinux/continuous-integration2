@@ -5,6 +5,7 @@ from argparse import ArgumentParser
 import copy
 from pathlib import Path
 import re
+import signal
 import shutil
 import sys
 
@@ -13,6 +14,16 @@ import yaml
 NORMAL = '\033[0m'
 RED = '\033[01;31m'
 GREEN = '\033[01;32m'
+
+
+def interrupt_handler(_signum, _frame):
+    """
+    Allows script to exit immediately when Ctrl-C is pressed
+    """
+    sys.exit(130)
+
+
+signal.signal(signal.SIGINT, interrupt_handler)
 
 try:
     import tuxmake.build
