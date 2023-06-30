@@ -537,6 +537,7 @@ builds:
   - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -1006,6 +1007,7 @@ builds:
   - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1465,6 +1467,7 @@ builds:
   - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
