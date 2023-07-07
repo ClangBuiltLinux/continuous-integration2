@@ -48,7 +48,7 @@ schedules:
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
-  - &stable           {git_repo: *stable-url,   git_ref: linux-6.3.y,         name: stable}
+  - &stable           {git_repo: *stable-url,   git_ref: linux-6.4.y,         name: stable}
   - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
@@ -537,6 +537,7 @@ builds:
   - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -1006,6 +1007,7 @@ builds:
   - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1465,6 +1467,7 @@ builds:
   - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
