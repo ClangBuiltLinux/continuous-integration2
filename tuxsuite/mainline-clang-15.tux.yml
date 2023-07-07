@@ -200,9 +200,8 @@ jobs:
     - kernel
     kernel_image: vmlinux
     make_variables:
-      LD: powerpc64le-linux-gnu-ld
       LLVM: 1
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - target_arch: powerpc
     toolchain: clang-15
     kconfig: powernv_defconfig
