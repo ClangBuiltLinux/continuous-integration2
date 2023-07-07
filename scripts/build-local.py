@@ -133,6 +133,11 @@ for name, builds in jobs.items():
         target_arch = build['target_arch']
         toolchain = build['toolchain']
 
+        # If there is a dash in the toolchain, it means it is a versioned
+        # toolchain in tuxmake terms, which requires a container runtime. If no
+        # runtime was found in the user's current environment, let them know
+        # immediately so that it can be corrected, versus tuxmake erroring out
+        # and causing all the builds to appear to fail.
         if '-' in toolchain and not runtime:
             raise RuntimeError(
                 f"tuxmake requires either podman or docker to use versioned toolchains ('{toolchain}') but neither could be found on your system!"
