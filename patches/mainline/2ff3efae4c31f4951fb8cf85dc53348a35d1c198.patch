@@ -1,15 +1,12 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH 1/2] media: verisilicon: fix excessive stack usage
+From 2ff3efae4c31f4951fb8cf85dc53348a35d1c198 Mon Sep 17 00:00:00 2001
 From: Arnd Bergmann <arnd@arndb.de>
 Date: Fri, 16 Jun 2023 16:48:47 +0200
-Message-Id: <20230616144854.3818934-1-arnd@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: media: verisilicon: fix excessive stack usage
 
-In some configurations, gcc decides not to inline the register accessor functions,
-which in turn leads to lots of temporary hantro_reg structures on the stack that
-cannot be eliminated because they escape into an uninlined function:
+In some configurations, gcc decides not to inline the register accessor
+functions, which in turn leads to lots of temporary hantro_reg structures
+on the stack that cannot be eliminated because they escape into an
+uninlined function:
 
 drivers/media/platform/verisilicon/rockchip_vpu981_hw_av1_dec.c:1022:1: warning: the frame size of 1112 bytes is larger than 1024 bytes [-Wframe-larger-than=]
 
@@ -17,19 +14,23 @@ Mark all of these as __always_inline so the compiler is able to completely
 eliminate the temporary structures instead, which brings the stack usage
 back down to just the normal local variables.
 
-Reported-by: kernel test robot <lkp@intel.com>
 Closes: https://lore.kernel.org/oe-kbuild-all/202306151506.goHEegOd-lkp@intel.com/
-Fixes: 727a400686a2c ("media: verisilicon: Add Rockchip AV1 decoder")
+[hverkuil: fix function prototype alignment, wrap commit log]
+
+Reported-by: kernel test robot <lkp@intel.com>
+Fixes: 727a400686a2 ("media: verisilicon: Add Rockchip AV1 decoder")
 Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-Tested-by: Nathan Chancellor <nathan@kernel.org>
 Reviewed-by: Nicolas Dufresne <nicolas.dufresne@collabora.com>
-Link: https://lore.kernel.org/r/20230616144854.3818934-1-arnd@kernel.org
+Tested-by: Nathan Chancellor <nathan@kernel.org>
+Signed-off-by: Hans Verkuil <hverkuil-cisco@xs4all.nl>
+Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+Link: https://git.linuxtv.org/media_tree.git/commit/?id=2ff3efae4c31f4951fb8cf85dc53348a35d1c198
 ---
- drivers/media/platform/verisilicon/hantro.h | 22 ++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
+ drivers/media/platform/verisilicon/hantro.h | 42 ++++++++++++++---------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
 
 diff --git a/drivers/media/platform/verisilicon/hantro.h b/drivers/media/platform/verisilicon/hantro.h
-index 6523ffb748812..6c5e56ce5b351 100644
+index 6523ffb74881..1afec3df8c73 100644
 --- a/drivers/media/platform/verisilicon/hantro.h
 +++ b/drivers/media/platform/verisilicon/hantro.h
 @@ -370,26 +370,26 @@ extern int hantro_debug;
@@ -44,8 +45,9 @@ index 6523ffb748812..6c5e56ce5b351 100644
  
  /* Register accessors. */
 -static inline void vepu_write_relaxed(struct hantro_dev *vpu,
+-				      u32 val, u32 reg)
 +static __always_inline void vepu_write_relaxed(struct hantro_dev *vpu,
- 				      u32 val, u32 reg)
++					       u32 val, u32 reg)
  {
  	vpu_debug(6, "0x%04x = 0x%08x\n", reg / 4, val);
  	writel_relaxed(val, vpu->enc_base + reg);
@@ -68,8 +70,9 @@ index 6523ffb748812..6c5e56ce5b351 100644
  }
  
 -static inline void vdpu_write_relaxed(struct hantro_dev *vpu,
+-				      u32 val, u32 reg)
 +static __always_inline void vdpu_write_relaxed(struct hantro_dev *vpu,
- 				      u32 val, u32 reg)
++					       u32 val, u32 reg)
  {
  	vpu_debug(6, "0x%04x = 0x%08x\n", reg / 4, val);
  	writel_relaxed(val, vpu->dec_base + reg);
@@ -83,9 +86,11 @@ index 6523ffb748812..6c5e56ce5b351 100644
  }
  
 -static inline void hantro_write_addr(struct hantro_dev *vpu,
+-				     unsigned long offset,
+-				     dma_addr_t addr)
 +static __always_inline void hantro_write_addr(struct hantro_dev *vpu,
- 				     unsigned long offset,
- 				     dma_addr_t addr)
++					      unsigned long offset,
++					      dma_addr_t addr)
  {
  	vdpu_write(vpu, addr & 0xffffffff, offset);
  }
@@ -95,32 +100,42 @@ index 6523ffb748812..6c5e56ce5b351 100644
  {
  	u32 val = readl(vpu->dec_base + reg);
  
-@@ -425,7 +425,7 @@ static inline u32 vdpu_read(struct hantro_dev *vpu, u32 reg)
+@@ -425,9 +425,9 @@ static inline u32 vdpu_read(struct hantro_dev *vpu, u32 reg)
  	return val;
  }
  
 -static inline u32 vdpu_read_mask(struct hantro_dev *vpu,
+-				 const struct hantro_reg *reg,
+-				 u32 val)
 +static __always_inline u32 vdpu_read_mask(struct hantro_dev *vpu,
- 				 const struct hantro_reg *reg,
- 				 u32 val)
++					  const struct hantro_reg *reg,
++					  u32 val)
  {
-@@ -437,14 +437,14 @@ static inline u32 vdpu_read_mask(struct hantro_dev *vpu,
+ 	u32 v;
+ 
+@@ -437,16 +437,16 @@ static inline u32 vdpu_read_mask(struct hantro_dev *vpu,
  	return v;
  }
  
 -static inline void hantro_reg_write(struct hantro_dev *vpu,
+-				    const struct hantro_reg *reg,
+-				    u32 val)
 +static __always_inline void hantro_reg_write(struct hantro_dev *vpu,
- 				    const struct hantro_reg *reg,
- 				    u32 val)
++					     const struct hantro_reg *reg,
++					     u32 val)
  {
  	vdpu_write_relaxed(vpu, vdpu_read_mask(vpu, reg, val), reg->base);
  }
  
 -static inline void hantro_reg_write_s(struct hantro_dev *vpu,
+-				      const struct hantro_reg *reg,
+-				      u32 val)
 +static __always_inline void hantro_reg_write_s(struct hantro_dev *vpu,
- 				      const struct hantro_reg *reg,
- 				      u32 val)
++					       const struct hantro_reg *reg,
++					       u32 val)
  {
+ 	vdpu_write(vpu, vdpu_read_mask(vpu, reg, val), reg->base);
+ }
 -- 
-2.39.2
+cgit v1.2.1
 
