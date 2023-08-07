@@ -1555,6 +1555,30 @@ jobs:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _27e447b00bf85e16a0bb41e8fbddca4b:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 virtconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 18
+      BOOT: 1
+      CONFIG: virtconfig
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _2f001c8d473d4be192660a1707d44ed0:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_allconfigs
