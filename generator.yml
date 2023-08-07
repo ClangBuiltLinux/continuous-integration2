@@ -307,6 +307,7 @@ configs:
   - &arm64_fedora      {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          ARCH: *arm64-arch,      << : *kernel}
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_virt        {config: virtconfig,                                                                                                ARCH: *arm64-arch,      << : *kernel}
   - &hexagon           {config: defconfig,                                                                                                 ARCH: *hexagon-arch,    << : *default}
   - &hexagon_allmod    {config: [allmodconfig, CONFIG_WERROR=n],                                                                           ARCH: *hexagon-arch,    << : *default}
   - &i386              {config: defconfig,                                                                                                 ARCH: *i386-arch,       << : *kernel}
@@ -408,6 +409,7 @@ builds:
   - {<< : *arm64_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_virt,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -478,6 +480,7 @@ builds:
   - {<< : *arm64_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_fedora,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_virt,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -878,6 +881,7 @@ builds:
   - {<< : *arm64_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_virt,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -948,6 +952,7 @@ builds:
   - {<< : *arm64_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_fedora,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_virt,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1348,6 +1353,7 @@ builds:
   - {<< : *arm64_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
+  - {<< : *arm64_virt,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
@@ -1418,6 +1424,7 @@ builds:
   - {<< : *arm64_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_fedora,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_16}
+  - {<< : *arm64_virt,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_16}
