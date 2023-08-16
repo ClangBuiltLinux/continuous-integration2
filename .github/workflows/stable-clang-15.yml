@@ -810,30 +810,6 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _3043016e5ad70f22927f065ac8cb8a1b:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    env:
-      ARCH: arm
-      LLVM_VERSION: 15
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v3
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _0796c5af6dafa12890c543fadd812bd5:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
