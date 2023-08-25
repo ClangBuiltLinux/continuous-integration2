@@ -111,4 +111,14 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+- name: allconfigs
+  builds:
+  - target_arch: x86_64
+    toolchain: clang-16
+    kconfig: allmodconfig
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
 
