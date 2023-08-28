@@ -192,9 +192,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: powerpc
     toolchain: clang-14
-    kconfig:
-    - ppc64_guest_defconfig
-    - CONFIG_PPC_DISABLE_WERROR=y
+    kconfig: ppc64_guest_defconfig
     targets:
     - kernel
     kernel_image: vmlinux
