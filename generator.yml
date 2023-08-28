@@ -248,15 +248,16 @@ tree_schedules:
   - &arm64-fixes_llvm_12           {<< : *llvm_12,      << : *arm64-fixes,      << : *daily_eighteen}
   - &arm64-fixes_llvm_11           {<< : *llvm_11,      << : *arm64-fixes,      << : *daily_eighteen}
 architectures:
-  - &arm-arch     arm
-  - &arm64-arch   arm64
-  - &hexagon-arch hexagon
-  - &i386-arch    i386
-  - &mips-arch    mips
-  - &powerpc-arch powerpc
-  - &riscv-arch   riscv
-  - &s390-arch    s390
-  - &um-arch      um
+  - &arm-arch       arm
+  - &arm64-arch     arm64
+  - &hexagon-arch   hexagon
+  - &i386-arch      i386
+  - &loongarch-arch loongarch
+  - &mips-arch      mips
+  - &powerpc-arch   powerpc
+  - &riscv-arch     riscv
+  - &s390-arch      s390
+  - &um-arch        um
 targets:
   - &default     {targets: [default]}
   - &kernel      {targets: [kernel]}
@@ -267,6 +268,14 @@ chromeos_configs:
 kasan_configs:
   - &arm64-kasan-configs    {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y]}
   - &arm64-kasan-sw-configs {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_SW_TAGS=y, CONFIG_KUNIT=y]}
+loongarch_configs:
+  # CONFIG_CRASH_DUMP / CONFIG_RELOCATABLE: https://github.com/ClangBuiltLinux/linux/issues/1883
+  # CONFIG_KCOV: https://github.com/ClangBuiltLinux/linux/issues/1895
+  # CONFIG_MODULES: https://github.com/ClangBuiltLinux/linux/issues/1884
+  - &loongarch-defconfigs             {config: [defconfig, CONFIG_CRASH_DUMP=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n]}
+  - &loongarch-defconfigs-lto-thin    {config: [defconfig, CONFIG_CRASH_DUMP=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n, CONFIG_LTO_CLANG_THIN=y]}
+  - &loongarch-allyesconfigs          {config: [allyesconfig, CONFIG_CRASH_DUMP=n, CONFIG_KCOV=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n]}
+  - &loongarch-allyesconfigs-lto-thin {config: [allyesconfig, CONFIG_CRASH_DUMP=n, CONFIG_KCOV=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y]}
 configs:
   #                     config:                                                                                image target (optional)    [ARCH:] (Optional: x86)  targets to build
   - &arm32_v5          {config: multi_v5_defconfig,                                                                                        ARCH: *arm-arch,        << : *kernel_dtbs}
@@ -308,6 +317,10 @@ configs:
   - &hexagon_allmod    {config: [allmodconfig, CONFIG_WERROR=n],                                                                           ARCH: *hexagon-arch,    << : *default}
   - &i386              {config: defconfig,                                                                                                 ARCH: *i386-arch,       << : *kernel}
   - &i386_suse         {config: *i386-suse-config-url,                                                                                     ARCH: *i386-arch,       << : *default}
+  - &loong             {<< : *loongarch-defconfigs,                                                                                        ARCH: *loongarch-arch,  << : *kernel}
+  - &loong_lto_thin    {<< : *loongarch-defconfigs-lto-thin,                                                                               ARCH: *loongarch-arch,  << : *kernel}
+  - &loong_allyes      {<< : *loongarch-allyesconfigs,                                                                                     ARCH: *loongarch-arch,  << : *default}
+  - &loong_allyes_lto  {<< : *loongarch-allyesconfigs-lto-thin,                                                                            ARCH: *loongarch-arch,  << : *default}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &ppc32             {config: ppc44x_defconfig,                                                              kernel_image: uImage,       ARCH: *powerpc-arch,    << : *kernel}
@@ -409,6 +422,10 @@ builds:
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *loong,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *loong_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *loong_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *loong_allyes_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
@@ -478,6 +495,10 @@ builds:
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *loong,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *loong_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *loong_allyes,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *loong_allyes_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
@@ -548,6 +569,10 @@ builds:
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *loong,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *loong_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *loong_allyes,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *loong_allyes_lto,  << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
