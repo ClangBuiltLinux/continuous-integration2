@@ -311,8 +311,9 @@ configs:
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &ppc32             {config: ppc44x_defconfig,                                                              kernel_image: uImage,       ARCH: *powerpc-arch,    << : *kernel}
-  # Disable -Werror for ppc64_guest_defconfig for now: https://github.com/ClangBuiltLinux/linux/issues/1445
-  - &ppc64             {config: [ppc64_guest_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                          kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
+  - &ppc64             {config: ppc64_guest_defconfig,                                                         kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
+  # Disable -Werror for ppc64_guest_defconfig for clang-13 and older: https://github.com/ClangBuiltLinux/linux/issues/1445
+  - &ppc64_no_werror   {config: [ppc64_guest_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                          kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
@@ -2683,7 +2684,7 @@ builds:
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
+  - {<< : *ppc64_no_werror,   << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
@@ -2743,7 +2744,7 @@ builds:
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64,             << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
+  - {<< : *ppc64_no_werror,   << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le_fedora,    << : *next,             << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *ppc64le_suse,      << : *next,             << : *clang,           boot: true,  << : *llvm_13}
@@ -2804,7 +2805,7 @@ builds:
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64,             << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_13}
+  - {<< : *ppc64_no_werror,   << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *stable,           << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *ppc64le_suse,      << : *stable,           << : *clang,           boot: true,  << : *llvm_13}
@@ -2864,7 +2865,7 @@ builds:
   - {<< : *mipsel,            << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_13}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64,             << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_13}
+  - {<< : *ppc64_no_werror,   << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le_fedora,    << : *stable-6_1,       << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *ppc64le_suse,      << : *stable-6_1,       << : *clang,           boot: true,  << : *llvm_13}
@@ -3111,7 +3112,7 @@ builds:
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *ppc64,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
+  - {<< : *ppc64_no_werror,   << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *clang,           boot: true,  << : *llvm_12}
@@ -3170,7 +3171,7 @@ builds:
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *ppc64,             << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
+  - {<< : *ppc64_no_werror,   << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *next,             << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *next,             << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *next,             << : *clang,           boot: true,  << : *llvm_12}
@@ -3229,7 +3230,7 @@ builds:
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *ppc64,             << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_12}
+  - {<< : *ppc64_no_werror,   << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *stable,           << : *clang,           boot: true,  << : *llvm_12}
@@ -3288,7 +3289,7 @@ builds:
   - {<< : *mipsel,            << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *ppc64,             << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_12}
+  - {<< : *ppc64_no_werror,   << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64le_fedora,    << : *stable-6_1,       << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *stable-6_1,       << : *clang,           boot: true,  << : *llvm_12}
@@ -3496,7 +3497,7 @@ builds:
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
-  # - {<< : *ppc64,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
+  # - {<< : *ppc64_no_werror,   << : *mainline,         << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *ppc64le,           << : *mainline,         << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *clang,           boot: true,  << : *llvm_11}
@@ -3555,7 +3556,7 @@ builds:
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
-  # - {<< : *ppc64,             << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
+  # - {<< : *ppc64_no_werror,   << : *next,             << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *ppc64le,           << : *next,             << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le_fedora,    << : *next,             << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *ppc64le_suse,      << : *next,             << : *clang,           boot: true,  << : *llvm_11}
@@ -3614,7 +3615,7 @@ builds:
   - {<< : *mipsel,            << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_11}
-  # - {<< : *ppc64,             << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_11}
+  # - {<< : *ppc64_no_werror,   << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le,           << : *stable,           << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le_fedora,    << : *stable,           << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *ppc64le_suse,      << : *stable,           << : *clang,           boot: true,  << : *llvm_11}
@@ -3673,7 +3674,7 @@ builds:
   - {<< : *mipsel,            << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_11}
   # ppc32 and ppc64: Build disabled (https://gitlab.com/Linaro/tuxmake/-/issues/108)
   # - {<< : *ppc32,             << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_11}
-  # - {<< : *ppc64,             << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_11}
+  # - {<< : *ppc64_no_werror,   << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le,           << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le_fedora,    << : *stable-6_1,       << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *ppc64le_suse,      << : *stable-6_1,       << : *clang,           boot: true,  << : *llvm_11}
