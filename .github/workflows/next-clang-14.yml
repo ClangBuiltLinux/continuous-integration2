@@ -473,15 +473,15 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _1e5541ce7961d05a1e3bde22d9f4c015:
+  _9c7f800a9125039c676aaf7380fa47eb:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 ppc64_guest_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 ppc64_guest_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 14
       BOOT: 1
-      CONFIG: ppc64_guest_defconfig+CONFIG_PPC_DISABLE_WERROR=y
+      CONFIG: ppc64_guest_defconfig
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
