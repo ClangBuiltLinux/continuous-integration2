@@ -188,6 +188,31 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - target_arch: loongarch
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_CRASH_DUMP=n
+    - CONFIG_MODULES=n
+    - CONFIG_RELOCATABLE=n
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: loongarch
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_CRASH_DUMP=n
+    - CONFIG_MODULES=n
+    - CONFIG_RELOCATABLE=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
   - target_arch: mips
     toolchain: clang-nightly
     kconfig:
@@ -580,6 +605,34 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: loongarch
+    toolchain: clang-nightly
+    kconfig:
+    - allyesconfig
+    - CONFIG_CRASH_DUMP=n
+    - CONFIG_KCOV=n
+    - CONFIG_MODULES=n
+    - CONFIG_RELOCATABLE=n
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: loongarch
+    toolchain: clang-nightly
+    kconfig:
+    - allyesconfig
+    - CONFIG_CRASH_DUMP=n
+    - CONFIG_KCOV=n
+    - CONFIG_MODULES=n
+    - CONFIG_RELOCATABLE=n
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_LTO_CLANG_THIN=y
     targets:
     - default
     make_variables:

@@ -31,6 +31,7 @@ def get_image_name():
         "arm": "zImage",
         "arm64": "Image.gz",
         "i386": "bzImage",
+        "loongarch": "vmlinuz.efi",
         "mips": "vmlinux",
         "riscv": "Image",
         "s390": "bzImage",

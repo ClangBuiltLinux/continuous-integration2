@@ -473,6 +473,54 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _c14d023a315cad36e5d5d6ea80436cc5:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+    env:
+      ARCH: loongarch
+      LLVM_VERSION: 18
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _075efb0c529fa75ac5def59ccf273284:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: loongarch
+      LLVM_VERSION: 18
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_LTO_CLANG_THIN=y
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _e2197bd314d0333e2c1212c11868e3eb:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
@@ -1492,6 +1540,54 @@ jobs:
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _815f1cb999e7b905e3f7afa1d8c552ec:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+    env:
+      ARCH: loongarch
+      LLVM_VERSION: 18
+      BOOT: 0
+      CONFIG: allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_allconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _546e6efa66be3ef5a4bdd296a5df4abb:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: loongarch
+      LLVM_VERSION: 18
+      BOOT: 0
+      CONFIG: allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
