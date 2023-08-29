@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.4.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-14.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.5.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-14.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -473,10 +473,10 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _2fe146ce78067661706ce3c941ab2c04:
+  _9c7f800a9125039c676aaf7380fa47eb:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=14 ppc64_guest_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 ppc64_guest_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 14
@@ -723,7 +723,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.4.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-14.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.5.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-14.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -1084,7 +1084,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.4.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-14.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.5.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-14.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
