@@ -24,7 +24,7 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android14-5.15 --job-name defconfigs --json-out builds.json tuxsuite/android14-5.15-clang-16.tux.yml || true
     - name: save builds.json
@@ -54,7 +54,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -78,7 +78,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -102,7 +102,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -121,7 +121,7 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android14-5.15 --job-name allconfigs --json-out builds.json tuxsuite/android14-5.15-clang-16.tux.yml || true
     - name: save builds.json
@@ -151,7 +151,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3

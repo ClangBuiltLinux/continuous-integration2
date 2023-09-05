@@ -24,7 +24,7 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://chromium.googlesource.com/chromiumos/third_party/kernel.git --git-ref chromeos-5.10 --job-name defconfigs --json-out builds.json tuxsuite/chromeos-5.10-clang-13.tux.yml || true
     - name: save builds.json
@@ -54,7 +54,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -78,7 +78,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
