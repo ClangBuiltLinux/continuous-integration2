@@ -100,7 +100,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
             "timeout-minutes": 480,
             "steps": [
                 {
-                    "uses": "actions/checkout@v3"
+                    "uses": "actions/checkout@v4"
                 },
                 {
                     "name": "tuxsuite",
@@ -152,7 +152,7 @@ def get_steps(build, build_set):
             },
             "steps": [
                 {
-                    "uses": "actions/checkout@v3",
+                    "uses": "actions/checkout@v4",
                     "with": {
                         "submodules": True
                     },
