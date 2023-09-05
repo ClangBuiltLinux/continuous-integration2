@@ -24,7 +24,7 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/fixes --job-name defconfigs --json-out builds.json --patch-series patches/arm64-fixes tuxsuite/arm64-fixes-clang-13.tux.yml || true
     - name: save builds.json
@@ -54,7 +54,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -78,7 +78,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -97,7 +97,7 @@ jobs:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: tuxsuite
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/fixes --job-name allconfigs --json-out builds.json --patch-series patches/arm64-fixes tuxsuite/arm64-fixes-clang-13.tux.yml || true
     - name: save builds.json
@@ -127,7 +127,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -151,7 +151,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3
@@ -175,7 +175,7 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - uses: actions/download-artifact@v3

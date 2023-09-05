@@ -6,9 +6,9 @@ name: Check clang version
 jobs:
   check_check_version:
     name: Check clang version
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container: tuxmake/x86_64_clang-nightly
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: parse-debian-clang.py --check
       run: python3 scripts/parse-debian-clang.py --check
