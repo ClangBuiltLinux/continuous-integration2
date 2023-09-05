@@ -16,7 +16,7 @@ jobs:
       run: python3 scripts/check-matrix.py
   check_generated_files:
     name: Check generated files
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: generate.py
