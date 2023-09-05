@@ -11,21 +11,21 @@ jobs:
     name: Check workflow matrices
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: check-matrix.py
       run: python3 scripts/check-matrix.py
   check_generated_files:
     name: Check generated files
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: generate.py
       run: python3 generate.py --check
   check_patch_series:
     name: Check patches series
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: check-patches.py
       run: python3 scripts/check-patches.py
   python:
