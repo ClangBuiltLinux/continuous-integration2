@@ -1,4 +1,4 @@
-From 2ff3efae4c31f4951fb8cf85dc53348a35d1c198 Mon Sep 17 00:00:00 2001
+From 7ee8acd1b803502878992acd6f99e61f1e8c7a25 Mon Sep 17 00:00:00 2001
 From: Arnd Bergmann <arnd@arndb.de>
 Date: Fri, 16 Jun 2023 16:48:47 +0200
 Subject: media: verisilicon: fix excessive stack usage
@@ -24,13 +24,12 @@ Reviewed-by: Nicolas Dufresne <nicolas.dufresne@collabora.com>
 Tested-by: Nathan Chancellor <nathan@kernel.org>
 Signed-off-by: Hans Verkuil <hverkuil-cisco@xs4all.nl>
 Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
-Link: https://git.linuxtv.org/media_tree.git/commit/?id=2ff3efae4c31f4951fb8cf85dc53348a35d1c198
 ---
  drivers/media/platform/verisilicon/hantro.h | 42 ++++++++++++++---------------
  1 file changed, 21 insertions(+), 21 deletions(-)
 
 diff --git a/drivers/media/platform/verisilicon/hantro.h b/drivers/media/platform/verisilicon/hantro.h
-index 6523ffb74881..1afec3df8c73 100644
+index 6523ffb748812..1afec3df8c73b 100644
 --- a/drivers/media/platform/verisilicon/hantro.h
 +++ b/drivers/media/platform/verisilicon/hantro.h
 @@ -370,26 +370,26 @@ extern int hantro_debug;
@@ -137,5 +136,5 @@ index 6523ffb74881..1afec3df8c73 100644
  	vdpu_write(vpu, vdpu_read_mask(vpu, reg, val), reg->base);
  }
 -- 
-cgit v1.2.1
+cgit 
 
