@@ -3883,6 +3883,10 @@ builds:
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *riscv_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_android}
+  - {<< : *arm32_allmod,      << : *android14-6_1,    << : *llvm_full,       boot: false, << : *llvm_android}
+  - {<< : *arm32_v7_t,        << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_android}
+  - {<< : *arm64_gki,         << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_android}
+  - {<< : *x86_64_gki,        << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm32_allmod,      << : *android14-5_15,   << : *llvm_full,       boot: false, << : *llvm_android}
   - {<< : *arm32_v7_t,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm64_gki,         << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_android}
