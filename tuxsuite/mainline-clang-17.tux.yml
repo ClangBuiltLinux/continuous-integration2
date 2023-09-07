@@ -617,6 +617,7 @@ jobs:
     kconfig:
     - allyesconfig
     - CONFIG_CRASH_DUMP=n
+    - CONFIG_FTRACE=n
     - CONFIG_KCOV=n
     - CONFIG_MODULES=n
     - CONFIG_RELOCATABLE=n
