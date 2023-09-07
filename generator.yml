@@ -275,7 +275,7 @@ loongarch_configs:
   - &loongarch-defconfigs             {config: [defconfig, CONFIG_CRASH_DUMP=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n]}
   - &loongarch-defconfigs-lto-thin    {config: [defconfig, CONFIG_CRASH_DUMP=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n, CONFIG_LTO_CLANG_THIN=y]}
   - &loongarch-allyesconfigs          {config: [allyesconfig, CONFIG_CRASH_DUMP=n, CONFIG_KCOV=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n]}
-  - &loongarch-allyesconfigs-lto-thin {config: [allyesconfig, CONFIG_CRASH_DUMP=n, CONFIG_KCOV=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y]}
+  - &loongarch-allyesconfigs-lto-thin {config: [allyesconfig, CONFIG_CRASH_DUMP=n, CONFIG_FTRACE=n, CONFIG_KCOV=n, CONFIG_MODULES=n, CONFIG_RELOCATABLE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y]}
 configs:
   #                     config:                                                                                image target (optional)    [ARCH:] (Optional: x86)  targets to build
   - &arm32_v5          {config: multi_v5_defconfig,                                                                                        ARCH: *arm-arch,        << : *kernel_dtbs}
