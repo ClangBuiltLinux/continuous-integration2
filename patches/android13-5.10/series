@@ -1,0 +1,2 @@
+0001-x86-srso-Fix-build-breakage-with-the-LLVM-linker.patch
+0002-BACKPORT-x86-retpoline-kprobes-Fix-position-of-thunk.patch
