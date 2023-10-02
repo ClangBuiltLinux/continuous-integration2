@@ -1,0 +1,42 @@
+From 509ac9ae49796cdf94ecc565c66216d8200dea8b Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Fri, 22 Sep 2023 08:51:17 -0700
+Subject: [PATCH] drm/mediatek: Fix backport issue in mtk_drm_gem_prime_vmap()
+
+When building with clang:
+
+  drivers/gpu/drm/mediatek/mtk_drm_gem.c:255:10: error: incompatible integer to pointer conversion returning 'int' from a function with result type 'void *' [-Wint-conversion]
+    255 |                 return -ENOMEM;
+        |                        ^~~~~~~
+  1 error generated.
+
+GCC reports the same issue as a warning, rather than an error.
+
+Prior to commit 7e542ff8b463 ("drm/mediatek: Use struct dma_buf_map in
+GEM vmap ops"), this function returned a pointer rather than an integer.
+This function is indirectly called in drm_gem_vmap(), which treats NULL
+as -ENOMEM through an error pointer. Return NULL in this block to
+resolve the warning but keep the same end result.
+
+Fixes: 43f561e809aa ("drm/mediatek: Fix potential memory leak if vmap() fail")
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ drivers/gpu/drm/mediatek/mtk_drm_gem.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_gem.c b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
+index fe64bf2176f3..b20ea58907c2 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_gem.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
+@@ -252,7 +252,7 @@ void *mtk_drm_gem_prime_vmap(struct drm_gem_object *obj)
+ 	if (!mtk_gem->kvaddr) {
+ 		kfree(sgt);
+ 		kfree(mtk_gem->pages);
+-		return -ENOMEM;
++		return NULL;
+ 	}
+ out:
+ 	kfree(sgt);
+-- 
+2.42.0.582.g8ccd20d70d-goog
+
