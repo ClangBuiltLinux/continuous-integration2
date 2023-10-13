@@ -397,9 +397,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: arm64
     toolchain: clang-16
-    kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
-    - CONFIG_BPF_PRELOAD=n
+    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     targets:
     - kernel
     make_variables:
@@ -425,9 +423,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: powerpc
     toolchain: clang-16
-    kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
-    - CONFIG_BPF_PRELOAD=n
+    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     targets:
     - kernel
     kernel_image: zImage.epapr
@@ -463,9 +459,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: s390
     toolchain: clang-16
-    kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
-    - CONFIG_BPF_PRELOAD=n
+    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     targets:
     - kernel
     make_variables:
