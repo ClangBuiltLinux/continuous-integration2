@@ -810,15 +810,15 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _621b2a474cb5c9a9224adf1ab39c6263:
+  _bdee864000c31e35648189daed14c9f4:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     env:
       ARCH: arm64
       LLVM_VERSION: 14
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -882,15 +882,15 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _31aa346e99e6c1ab180670976fa2f7c4:
+  _45dacf10349373096ed44899cd870b2d:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     env:
       ARCH: powerpc
       LLVM_VERSION: 14
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

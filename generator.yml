@@ -318,8 +318,9 @@ configs:
   - &arm64_allno       {config: allnoconfig,                                                                                               ARCH: *arm64-arch,      << : *default}
   - &arm64_allyes      {config: allyesconfig,                                                                                              ARCH: *arm64-arch,      << : *default}
   - &arm64_alpine      {config: *arm64-alpine-config-url,                                                                                  ARCH: *arm64-arch,      << : *kernel}
-  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &arm64_fedora      {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_fedora      {config: *arm64-fedora-config-url,                                                                                  ARCH: *arm64-arch,      << : *kernel}
+  # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
+  - &arm64_fedora_bpf  {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          ARCH: *arm64-arch,      << : *kernel}
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         ARCH: *arm64-arch,      << : *kernel}
   - &hexagon           {config: defconfig,                                                                                                 ARCH: *hexagon-arch,    << : *default}
@@ -337,8 +338,9 @@ configs:
   # Disable -Werror for ppc64_guest_defconfig for clang-13 and older: https://github.com/ClangBuiltLinux/linux/issues/1445
   - &ppc64_no_werror   {config: [ppc64_guest_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                          kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
-  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
+  - &ppc64le_fedora    {config: *ppc64le-fedora-config-url,                                                    kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
+  # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
+  - &ppc64le_fedora_bpf {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                           kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                      kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64_allmod      {config: [allmodconfig, CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y, CONFIG_WERROR=n],                                     ARCH: *powerpc-arch,    << : *default}
   - &riscv             {config: defconfig,                                                                     kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
@@ -350,8 +352,9 @@ configs:
   - &riscv_gki         {config: gki_defconfig,                                                                 kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
   - &s390              {config: defconfig,                                                                                                 ARCH: *s390-arch,       << : *kernel}
   - &s390_kasan        {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            ARCH: *s390-arch,       << : *kernel}
-  # CONFIG_BPF_PRELOAD disabled for all cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           ARCH: *s390-arch,       << : *kernel}
+  - &s390_fedora       {config: *s390-fedora-config-url,                                                                                   ARCH: *s390-arch,       << : *kernel}
+  # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
+  - &s390_fedora_bpf   {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           ARCH: *s390-arch,       << : *kernel}
   - &s390_suse         {config: *s390-suse-config-url,                                                                                     ARCH: *s390-arch,       << : *kernel}
   - &um                {config: defconfig,                                                                                                 ARCH: *um-arch,         << : *kernel}
   - &x86_64            {config: defconfig,                                                                                                                         << : *kernel}
@@ -712,7 +715,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
@@ -723,7 +726,7 @@ builds:
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_tot}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
@@ -731,7 +734,7 @@ builds:
   - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *s390_fedora,       << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -1194,7 +1197,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_latest}
@@ -1205,7 +1208,7 @@ builds:
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_latest}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_latest}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_latest}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_latest}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_latest}
@@ -1213,7 +1216,7 @@ builds:
   - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *s390_fedora,       << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_latest}
+  - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *s390_suse,         << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -1664,7 +1667,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_16}
@@ -1675,7 +1678,7 @@ builds:
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_16}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_16}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_16}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_16}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_16}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_16}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_16}
@@ -1683,7 +1686,7 @@ builds:
   - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_16}
   - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_16}
-  - {<< : *s390_fedora,       << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_16}
+  - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_16}
   - {<< : *s390_suse,         << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_16}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_16}
@@ -2118,7 +2121,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
@@ -2129,7 +2132,7 @@ builds:
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_15}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_15}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_15}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_15}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
@@ -2137,7 +2140,7 @@ builds:
   - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
   - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
-  - {<< : *s390_fedora,       << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
   - {<< : *s390_suse,         << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
@@ -2553,7 +2556,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_14}
@@ -2564,7 +2567,7 @@ builds:
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_14}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_14}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_14}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_14}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_14}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_14}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_14}
@@ -2572,7 +2575,7 @@ builds:
   - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_14}
   - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_14}
-  - {<< : *s390_fedora,       << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_14}
+  - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_14}
   - {<< : *s390_suse,         << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_14}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_14}
@@ -2987,7 +2990,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_13}
@@ -2998,7 +3001,7 @@ builds:
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_13}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_13}
@@ -3006,7 +3009,7 @@ builds:
   - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *s390_fedora,       << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_13}
+  - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *s390_suse,         << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -3415,7 +3418,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
@@ -3425,7 +3428,7 @@ builds:
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_12}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_12}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_12}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_12}
@@ -3803,7 +3806,7 @@ builds:
   - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *arm64_fedora,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
@@ -3814,7 +3817,7 @@ builds:
   # - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   # - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_11}
-  - {<< : *ppc64le_fedora,    << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_11}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}

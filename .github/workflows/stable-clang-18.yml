@@ -1026,15 +1026,15 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _4e04a55a40c145fa1ba31db70eceaa54:
+  _e9de4b86696912774ff219d923542185:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1098,15 +1098,15 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _ed68cd47a2c5f0474f0f9750111c0425:
+  _5e87558f48368d658d68c8e6a9c32b66:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     env:
       ARCH: powerpc
       LLVM_VERSION: 18
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1194,15 +1194,15 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _f1b6f70cd95fa5d709ad0b52e61b0234:
+  _85c021aa7070a43cffc70e8eb749333d:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_distribution_configs
-    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     env:
       ARCH: s390
       LLVM_VERSION: 18
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
