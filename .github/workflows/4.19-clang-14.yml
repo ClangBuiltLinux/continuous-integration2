@@ -113,30 +113,6 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _e0c42d25c62400f3397e3a4da15fed2d:
-    runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=14 defconfig+CONFIG_CPU_BIG_ENDIAN=y
-    env:
-      ARCH: arm64
-      LLVM_VERSION: 14
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v3
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: ./check_logs.py
   _93adcc31e3e500dcde3470940f30d9f4:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs

@@ -38,16 +38,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 0
-  - target_arch: arm64
-    toolchain: clang-14
-    kconfig:
-    - defconfig
-    - CONFIG_CPU_BIG_ENDIAN=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 0
   - target_arch: powerpc
     toolchain: clang-14
     kconfig: powernv_defconfig
