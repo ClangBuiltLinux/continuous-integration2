@@ -1,2 +1,4 @@
+0001-x86-mm-Simplify-RESERVE_BRK.patch
 0001-x86-srso-Fix-build-breakage-with-the-LLVM-linker.patch
 0002-BACKPORT-x86-retpoline-kprobes-Fix-position-of-thunk.patch
+0002-x86-mm-Fix-RESERVE_BRK-for-older-binutils.patch
