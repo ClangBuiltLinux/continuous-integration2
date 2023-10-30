@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.5.y --job-name defconfigs --json-out builds.json tuxsuite/stable-clang-18.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.6.y --job-name defconfigs --json-out builds.json tuxsuite/stable-clang-18.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -939,7 +939,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.5.y --job-name distribution_configs --json-out builds.json tuxsuite/stable-clang-18.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.6.y --job-name distribution_configs --json-out builds.json tuxsuite/stable-clang-18.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -1348,7 +1348,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.5.y --job-name allconfigs --json-out builds.json tuxsuite/stable-clang-18.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.6.y --job-name allconfigs --json-out builds.json tuxsuite/stable-clang-18.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
