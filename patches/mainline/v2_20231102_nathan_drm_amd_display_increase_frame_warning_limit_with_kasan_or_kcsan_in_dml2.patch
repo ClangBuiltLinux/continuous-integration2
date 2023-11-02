@@ -1,15 +1,15 @@
 From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] drm/amd/display: Increase frame warning limit for clang in
- dml2
+Subject: [PATCH v2] drm/amd/display: Increase frame warning limit with
+ KASAN or KCSAN in dml2
 From: Nathan Chancellor <nathan@kernel.org>
-Date: Thu, 02 Nov 2023 09:24:53 -0700
-Message-Id: <20231102-amdgpu-dml2-increase-frame-size-warning-for-clang-v1-1-6eb157352931@kernel.org>
+Date: Thu, 02 Nov 2023 10:40:52 -0700
+Message-Id: <20231102-amdgpu-dml2-increase-frame-size-warning-for-clang-v2-1-b088a718131a@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-When building ARCH=x86_64 allmodconfig with clang, which have sanitizers
-enabled, there is a warning about a large stack frame.
+When building ARCH=x86_64 allmodconfig with clang, which will typically
+have sanitizers enabled, there is a warning about a large stack frame.
 
   drivers/gpu/drm/amd/amdgpu/../display/dc/dml2/display_mode_core.c:6265:13: error: stack frame size (2520) exceeds limit (2048) in 'dml_prefetch_check' [-Werror,-Wframe-larger-than]
    6265 | static void dml_prefetch_check(struct display_mode_lib_st *mode_lib)
@@ -17,7 +17,8 @@ enabled, there is a warning about a large stack frame.
   1 error generated.
 
 Notably, GCC 13.2.0 does not do too much of a better job, as it is right
-at the current limit of 2048:
+at the current limit of 2048 (and others have reported being over with
+older GCC versions):
 
   drivers/gpu/drm/amd/amdgpu/../display/dc/dml2/display_mode_core.c: In function 'dml_prefetch_check':
   drivers/gpu/drm/amd/amdgpu/../display/dc/dml2/display_mode_core.c:6705:1: error: the frame size of 2048 bytes is larger than 1800 bytes [-Werror=frame-larger-than=]
@@ -32,39 +33,49 @@ and they are never carried forward to new generations of the code so
 that effort has to be expended every new hardware generation, which
 becomes harder to justify as time goes on.
 
-There is some effort to improve clang's code generation but that may
-take some time between code review, shifting priorities, and release
-cycles. To avoid having a noticeable or lengthy breakage in
-all{mod,yes}config, which are easy testing targets that have -Werror
-enabled, increase the limit for clang by 50% so that cases of extremely
-poor code generation can still be caught while not breaking the majority
-of builds. When clang's code generation improves, the limit increase can
-be restricted to older clang versions.
+To avoid having a noticeable or lengthy breakage in all{mod,yes}config,
+which are easy testing targets that have -Werror enabled, increase the
+limit for configurations that have KASAN or KCSAN enabled by 50% so that
+cases of extremely poor code generation can still be caught while not
+breaking the majority of builds. CONFIG_KMSAN also causes high stack
+usage but the frame limit is already set to zero when it is enabled,
+which is accounted for by the check for CONFIG_FRAME_WARN=0 in the dml2
+Makefile.
 
-Link: https://lore.kernel.org/r/20231102-amdgpu-dml2-increase-frame-size-warning-for-clang-v1-1-6eb157352931@kernel.org
+Link: https://lore.kernel.org/r/20231102-amdgpu-dml2-increase-frame-size-warning-for-clang-v2-1-b088a718131a@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
 ---
 If there is another DRM pull before 6.7-rc1, it would be much
 appreciated if this could make that so that other trees are not
 potentially broken by this. If not, no worries, as it was my fault for
 not sending this sooner.
+
+Changes in v2:
+- Adjust workaround to check for either CONFIG_KASAN=y or
+  CONFIG_KCSAN=y, as the same problem has been reported with older
+  versions of GCC (Hamza, Alex)
+- Link to v1: https://lore.kernel.org/r/20231102-amdgpu-dml2-increase-frame-size-warning-for-clang-v1-1-6eb157352931@kernel.org
 ---
- drivers/gpu/drm/amd/display/dc/dml2/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/amd/display/dc/dml2/Makefile | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/drivers/gpu/drm/amd/display/dc/dml2/Makefile b/drivers/gpu/drm/amd/display/dc/dml2/Makefile
-index 70ae5eba624e..dff8237c0999 100644
+index 70ae5eba624e..acff3449b8d7 100644
 --- a/drivers/gpu/drm/amd/display/dc/dml2/Makefile
 +++ b/drivers/gpu/drm/amd/display/dc/dml2/Makefile
-@@ -60,7 +60,7 @@ endif
+@@ -60,8 +60,12 @@ endif
  endif
  
  ifneq ($(CONFIG_FRAME_WARN),0)
--frame_warn_flag := -Wframe-larger-than=2048
-+frame_warn_flag := -Wframe-larger-than=$(if $(CONFIG_CC_IS_CLANG),3072,2048)
++ifeq ($(filter y,$(CONFIG_KASAN)$(CONFIG_KCSAN)),y)
++frame_warn_flag := -Wframe-larger-than=3072
++else
+ frame_warn_flag := -Wframe-larger-than=2048
  endif
++endif
  
  CFLAGS_$(AMDDALPATH)/dc/dml2/display_mode_core.o := $(dml2_ccflags) $(frame_warn_flag)
+ CFLAGS_$(AMDDALPATH)/dc/dml2/display_mode_util.o := $(dml2_ccflags)
 
 ---
 base-commit: 21e80f3841c01aeaf32d7aee7bbc87b3db1aa0c6
