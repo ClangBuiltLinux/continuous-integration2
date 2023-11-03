@@ -1,0 +1,47 @@
+From cba4590036855f4e3110d43c14385d2401080dbb Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Fri, 27 Oct 2023 09:54:25 -0700
+Subject: ASoC: codecs: aw88399: Fix -Wuninitialized in aw_dev_set_vcalb()
+
+Clang warns (or errors with CONFIG_WERROR=y):
+
+  sound/soc/codecs/aw88399.c:441:18: error: variable 'vsense_select' is uninitialized when used here [-Werror,-Wuninitialized]
+    441 |         vsense_select = vsense_select & (~AW88399_VDSEL_MASK);
+        |                         ^~~~~~~~~~~~~
+  sound/soc/codecs/aw88399.c:431:28: note: initialize the variable 'vsense_select' to silence this warning
+    431 |         unsigned int vsense_select, vsense_value;
+        |                                   ^
+        |                                    = 0
+  1 error generated.
+
+This clearly should have been using the value received from
+regmap_read(). Use the correct variable to resolve the warning.
+
+Closes: https://github.com/ClangBuiltLinux/linux/issues/1952
+Fixes: 8ade6cc7e261 ("ASoC: codecs: Add aw88399 amplifier driver")
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Reviewed-by: Weidong Wang <wangweidong.a@awinic.com>
+Link: https://lore.kernel.org/r/20231027-asoc-aw88399-fix-wuninitialized-v1-1-b1044493e4cd@kernel.org
+Signed-off-by: Mark Brown <broonie@kernel.org>
+---
+Link: https://git.kernel.org/broonie/sound/c/cba4590036855f4e3110d43c14385d2401080dbb
+---
+ sound/soc/codecs/aw88399.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sound/soc/codecs/aw88399.c b/sound/soc/codecs/aw88399.c
+index ce30bc7cdea9f..47fe38d0def5d 100644
+--- a/sound/soc/codecs/aw88399.c
++++ b/sound/soc/codecs/aw88399.c
+@@ -438,7 +438,7 @@ static int aw_dev_set_vcalb(struct aw88399 *aw88399)
+ 	if (ret)
+ 		return ret;
+ 
+-	vsense_select = vsense_select & (~AW88399_VDSEL_MASK);
++	vsense_select = vsense_value & (~AW88399_VDSEL_MASK);
+ 
+ 	ret = aw88399_dev_get_icalk(aw88399, &icalk);
+ 	if (ret) {
+-- 
+cgit 
+
