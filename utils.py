@@ -109,7 +109,7 @@ def get_cbl_name():
             return "mips"
     if base_config in unique_defconfigs:
         return unique_defconfigs[base_config]
-    if "defconfig" in base_config:
+    if "defconfig" in base_config or "virtconfig" in base_config:
         return "x86" if arch == "i386" else arch
     raise RuntimeError("unknown CBL name")
 
