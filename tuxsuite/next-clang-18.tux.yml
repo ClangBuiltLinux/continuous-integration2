@@ -172,6 +172,16 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - hardening.config
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
   - target_arch: hexagon
     toolchain: clang-nightly
     kconfig: defconfig
@@ -378,6 +388,16 @@ jobs:
     kconfig:
     - defconfig
     - CONFIG_UBSAN=y
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - hardening.config
     targets:
     - kernel
     make_variables:

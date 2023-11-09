@@ -425,6 +425,30 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
+  _ec1d9cf8c283eb375da6d050fc464943:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+hardening.config
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 18
+      BOOT: 1
+      CONFIG: defconfig+hardening.config
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
   _8c248b9ff22ed1536a77e157e17ee3f6:
     runs-on: ubuntu-latest
     needs: kick_tuxsuite_defconfigs
@@ -914,6 +938,30 @@ jobs:
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_UBSAN=y
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v3
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v3
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: ./check_logs.py
+  _70e8357cc1bcaf6d95647d803d9c1e24:
+    runs-on: ubuntu-latest
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+hardening.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 18
+      BOOT: 1
+      CONFIG: defconfig+hardening.config
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
