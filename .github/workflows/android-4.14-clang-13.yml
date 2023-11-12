@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: tuxsuite
-      run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android-4.14-stable --job-name defconfigs --json-out builds.json --patch-series patches/android-4.14 tuxsuite/android-4.14-clang-13.tux.yml || true
+      run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android-4.14-stable --job-name defconfigs --json-out builds.json tuxsuite/android-4.14-clang-13.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
