@@ -12,7 +12,7 @@ name: next (clang-18)
     - tuxsuite/next-clang-18.tux.yml
     - .github/workflows/next-clang-18.yml
   schedule:
-  - cron: 0 12 * * 1,2,3,4,5
+  - cron: 0 0 * * 2
   workflow_dispatch: null
 permissions: read-all
 jobs:
