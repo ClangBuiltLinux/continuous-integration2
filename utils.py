@@ -2,7 +2,9 @@ import json
 import os
 from pathlib import Path
 import sys
+from typing import Optional
 import yaml
+import urllib.request
 
 CI_ROOT = Path(__file__).resolve().parent
 
@@ -172,6 +174,71 @@ def get_llvm_versions(config, tree_name):
         if build["git_repo"] == repo and build["git_ref"] == ref:
             llvm_versions.add(build["llvm_version"])
     return llvm_versions
+
+
+def get_workflow_name_to_var_name(workflow_name: str) -> str:
+    """
+    GitHub Repository Variables have special formatting rules:
+        * Alphanumeric characters ([a-z], [A-Z], [0-9]) or underscores (_) only.
+        * Spaces are not allowed.
+        * Cannot start with a number.
+        * Cannot start with GITHUB_ prefix.
+    """
+
+    workflow_name = workflow_name.replace(" ", "_")
+
+    return "_" + "".join([x for x in workflow_name if x.isalnum()]).upper()
+
+
+def update_repository_variable(
+    key: str,
+    http_headers: dict[str, str],
+    *,
+    sha: Optional[str] = None,
+    clang_version: Optional[str] = None,
+    build_status: Optional[str] = None,
+    other: Optional[dict[str, str]] = None,
+):
+    """
+    Update cache entries.
+
+    Only non-None fields are updated, the others remain as they are in the cache.
+
+    Use `other` to provide more values than what is supported as keyword args.
+    """
+    url = f"https://api.github.com/repos/ClangBuiltLinux/continuous-integration2/actions/variables/{key}"
+
+    # this REPO_SCOPED_PAT comes from GitHub Actions repository secrets
+    # if we aren't running in a workflow a KeyError is raised and caught by caller
+    # you may manually set this in your environment as well.
+    request = urllib.request.Request(url, headers=http_headers)
+
+    with urllib.request.urlopen(request) as response:
+        content = response.read().decode("utf-8")
+        data = json.loads(content)
+        cached_value = json.loads(data["value"])
+        if sha:
+            cached_value["linux_sha"] = sha
+        if clang_version:
+            cached_value["clang_version"] = clang_version
+        if build_status:
+            cached_value["build_status"] = build_status
+        if other and isinstance(other, dict):
+            for k, v in other.items():
+                cached_value[k] = v
+
+        cached_value = json.dumps(cached_value)
+
+    new_value = json.dumps({"name": key, "value": cached_value}).encode("utf-8")
+    update_request = urllib.request.Request(
+        url, data=new_value, method="PATCH", headers=http_headers
+    )
+    urllib.request.urlopen(update_request)
+
+    print(
+        f"Updated cache entry with key '{key}' to status '{build_status}' at sha '{sha}' and clang_version '{clang_version}'\n"
+        f"other fields: {other}"
+    )
 
 
 def print_red(msg):

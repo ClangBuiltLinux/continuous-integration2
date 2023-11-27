@@ -8,8 +8,20 @@ import subprocess
 import sys
 import time
 import urllib.request
+import urllib.error
 
-from utils import CI_ROOT, get_build, get_image_name, get_requested_llvm_version, print_red, print_yellow, get_cbl_name, show_builds
+from utils import (
+    CI_ROOT,
+    get_build,
+    get_image_name,
+    get_requested_llvm_version,
+    print_red,
+    print_yellow,
+    get_cbl_name,
+    show_builds,
+    get_workflow_name_to_var_name,
+    update_repository_variable,
+)
 
 
 def _fetch(title, url, dest):
@@ -47,6 +59,52 @@ def _fetch(title, url, dest):
         print_red(f"Unable to download {title}")
         sys.exit(1)
 
+def try_to_update_build_status_in_cache(new_status: str):
+    if "GITHUB_WORKFLOW" not in os.environ:
+        print_yellow(f"Cannot update cached build status as we're not in a workflow.")
+    else:
+        cache_entry_key = get_workflow_name_to_var_name(os.environ['GITHUB_WORKFLOW'])
+
+        # It's OK if this fails, GitHub is too finnicky and thus if we
+        # aren't able to update the cache its just unlucky and not a big
+        # deal, this will be rare enough to not affect our hit rates.
+        # We intentionally fall-through and keep going.
+        try:
+            update_build_status_in_cache(cache_entry_key, new_status)
+        except urllib.error.HTTPError as e:
+            print_yellow(f"Could not cache because GitHub denied one or more of our requests (rate-limit?)")
+            print_yellow(f"Here's the error:\n{e}")
+        except KeyError as e:
+            print_yellow(f"We must not be running in a Github workflow because os.environ had no entry for REPO_SCOPED_PAT")
+            print_yellow(f"Here's the error:\n{e}")
+
+
+def update_build_status_in_cache(key: str, status: str):
+    """
+    After a build is over, let's update its status so our caching system
+    can make better decisions.
+
+    Don't do any error handling because the graceful fallback is to just let
+    the error happen and be caught from caller. If this whole method fails
+    its not a big deal.
+
+    At this point in the pipeline the cache entry should:
+        1) exist
+        2) not be malformed
+        3) have a build_status of 'presuite'
+
+    After this method (barring random GitHub REST API errors) cache entry should:
+        1) still exist :fingers_crossed:
+        2) have a build_status of 'pass' or 'fail'
+
+    Any status other than 'pass' or 'fail' won't be cached as we probably want
+    to run the build again. As such, the cache entry will keep its 'presuite'
+    build_status; this is clear from check_cache.py.
+    """
+    headers = {"Authorization": f"Bearer {os.environ['REPO_SCOPED_PAT']}"}
+    update_repository_variable(key, http_headers=headers, build_status=status)
+
+
 
 def verify_build():
     build = get_build()
@@ -71,6 +129,9 @@ def verify_build():
 
     print(json.dumps(build, indent=4))
 
+    if (status := build['build_status']) in ("pass", "fail"):
+        try_to_update_build_status_in_cache(status)
+
     if retries == max_retries:
         print_red("Build is not finished on TuxSuite's side!")
         sys.exit(1)
@@ -80,6 +141,7 @@ def verify_build():
         sys.exit(1)
 
     if build["status_message"] == "Unable to apply kernel patch":
+        # TODO: automatically open a PR removing the patch(es) in question.
         print_red(
             "Patch failed to apply to current kernel tree, does it need to be removed or updated?"
         )
@@ -251,7 +313,10 @@ def run_boot(build):
     except subprocess.CalledProcessError as err:
         if err.returncode == 124:
             print_red("Image failed to boot")
+            try_to_update_build_status_in_cache("fail")
         raise err
+
+    try_to_update_build_status_in_cache("pass")
 
 
 def boot_test(build):

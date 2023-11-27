@@ -85,6 +85,41 @@ def sanitize_job_name(name):
     return "_" + hashlib.new("md5", name.encode("utf-8")).hexdigest()
 
 
+def check_cache_job_setup(repo, ref, toolchain):
+    llvm_tot_version = open("LLVM_TOT_VERSION", "r").read().strip()
+    last_part = toolchain.split("-")[-1]
+    if last_part == llvm_tot_version:
+        toolchain = "clang-nightly"
+
+    return {
+        "check_cache": {
+            "name": "Check Cache",
+            "runs-on": "ubuntu-latest",
+            "container": f"tuxmake/x86_64_{toolchain}",
+            "env": {"GIT_REPO": repo, "GIT_REF": ref},
+            "outputs": {"output": "${{ steps.step2.outputs.output }}", "status": "${{ steps.step2.outputs.status }}"},
+            "steps": [
+                {"uses": "actions/checkout@v4"},
+                {"name": "pip install requests", "run": "apt-get install -y python3-pip && pip install requests"},
+                {
+                    "name": "python check_cache.py",
+                    "id": "step1",
+                    "continue-on-error": True,
+                    "run": "python check_cache.py -w '${{github.workflow}}' "
+                    "-g ${{secrets.REPO_SCOPED_PAT}} "
+                    "-r ${{env.GIT_REF}} "
+                    "-o ${{env.GIT_REPO}}",
+                },
+                {
+                    "name": "Save exit code to GITHUB_OUTPUT",
+                    "id": "step2",
+                    "run": 'echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"',
+                },
+            ],
+        }
+    }
+
+
 def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
     patch_series = patch_series_flag(
         tuxsuite_yml.split("/")[1].split("-clang-")[0])
@@ -94,16 +129,28 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
             "runs-on": "ubuntu-latest",
             "container": "tuxsuite/tuxsuite",
+            "needs": "check_cache",
             "env": {
                 "TUXSUITE_TOKEN": "${{ secrets.TUXSUITE_TOKEN }}"
             },
             "timeout-minutes": 480,
             "steps": [
                 {
+                    "name": "Checking Cache Pass",
+                    "if": "${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}",
+                    "run": "echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0"
+                },
+                {
+                    "name": "Checking Cache Fail",
+                    "if": "${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}",
+                    "run": "echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1"
+                },
+                {
                     "uses": "actions/checkout@v4"
                 },
                 {
                     "name": "tuxsuite",
+                    "if": "${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}",
                     "run": f"tuxsuite plan --git-repo {repo} --git-ref {ref} --job-name {job_name} --json-out builds.json {patch_series}{tuxsuite_yml} || true",
                 },
                 {
@@ -138,13 +185,15 @@ def get_steps(build, build_set):
     return {
         sanitize_job_name(name): {
             "runs-on": "ubuntu-latest",
-            "needs": f"kick_tuxsuite_{build_set}",
+            "needs": [f"kick_tuxsuite_{build_set}", "check_cache"],
             "name": name,
+            "if": "${{needs.check_cache.outputs.status != 'pass'}}",
             "env": {
                 "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
                 "LLVM_VERSION": build["llvm_version"],
                 "BOOT": int(build["boot"]),
                 "CONFIG": print_config(build),
+                "REPO_SCOPED_PAT": "${{secrets.REPO_SCOPED_PAT}}"
             },
             "container": {
                 "image": "ghcr.io/clangbuiltlinux/qemu",
@@ -214,6 +263,8 @@ def print_builds(config, tree_name, llvm_version):
                                       llvm_version)
     workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
+
+    workflow['jobs'].update(check_cache_job_setup(repo, ref, toolchain))
     workflow["jobs"].update(
         tuxsuite_setups("defconfigs", tuxsuite_yml, repo, ref))
     workflow["jobs"].update(check_logs_defconfigs)
