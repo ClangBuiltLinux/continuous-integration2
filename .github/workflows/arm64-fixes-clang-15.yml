@@ -16,16 +16,45 @@ name: arm64-fixes (clang-15)
   workflow_dispatch: null
 permissions: read-all
 jobs:
+  check_cache:
+    name: Check Cache
+    runs-on: ubuntu-latest
+    container: tuxmake/x86_64_clang-15
+    env:
+      GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+      GIT_REF: for-next/fixes
+    outputs:
+      output: ${{ steps.step2.outputs.output }}
+      status: ${{ steps.step2.outputs.status }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: pip install requests
+      run: apt-get install -y python3-pip && pip install requests
+    - name: python check_cache.py
+      id: step1
+      continue-on-error: true
+      run: python check_cache.py -w '${{github.workflow}}' -g ${{secrets.REPO_SCOPED_PAT}} -r ${{env.GIT_REF}} -o ${{env.GIT_REPO}}
+    - name: Save exit code to GITHUB_OUTPUT
+      id: step2
+      run: echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/fixes --job-name defconfigs --json-out builds.json tuxsuite/arm64-fixes-clang-15.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
@@ -43,13 +72,17 @@ jobs:
         if-no-files-found: error
   _1e33ae1388a2f5f2c926824fe3621a4c:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -67,13 +100,17 @@ jobs:
       run: ./check_logs.py
   _e1084951b99347c2cf3f483a2bc53b61:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 15
       BOOT: 1
       CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -93,12 +130,20 @@ jobs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/fixes --job-name allconfigs --json-out builds.json tuxsuite/arm64-fixes-clang-15.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
@@ -116,13 +161,17 @@ jobs:
         if-no-files-found: error
   _f0f97d15e2cf2b4ada42bc0e891934cb:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 allmodconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 15
       BOOT: 0
       CONFIG: allmodconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -140,13 +189,17 @@ jobs:
       run: ./check_logs.py
   _32124682155c7d01a529ae4c4ee07932:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 allnoconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 15
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -164,13 +217,17 @@ jobs:
       run: ./check_logs.py
   _15109b179d9f17e615909f16c83e4f9f:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 allyesconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 15
       BOOT: 0
       CONFIG: allyesconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

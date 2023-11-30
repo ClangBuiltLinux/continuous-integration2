@@ -16,16 +16,45 @@ name: 5.15 (clang-18)
   workflow_dispatch: null
 permissions: read-all
 jobs:
+  check_cache:
+    name: Check Cache
+    runs-on: ubuntu-latest
+    container: tuxmake/x86_64_clang-nightly
+    env:
+      GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+      GIT_REF: linux-5.15.y
+    outputs:
+      output: ${{ steps.step2.outputs.output }}
+      status: ${{ steps.step2.outputs.status }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: pip install requests
+      run: apt-get install -y python3-pip && pip install requests
+    - name: python check_cache.py
+      id: step1
+      continue-on-error: true
+      run: python check_cache.py -w '${{github.workflow}}' -g ${{secrets.REPO_SCOPED_PAT}} -r ${{env.GIT_REF}} -o ${{env.GIT_REPO}}
+    - name: Save exit code to GITHUB_OUTPUT
+      id: step2
+      run: echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name defconfigs --json-out builds.json tuxsuite/5.15-clang-18.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
@@ -43,13 +72,17 @@ jobs:
         if-no-files-found: error
   _9407057c50af4d2464264f11abeda937:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 multi_v5_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: multi_v5_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -67,13 +100,17 @@ jobs:
       run: ./check_logs.py
   _27d7556ed5e9566802fc975c18b48ab6:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 aspeed_g5_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: aspeed_g5_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -91,13 +128,17 @@ jobs:
       run: ./check_logs.py
   _824c5aab852417655f9a29c375f51980:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 multi_v7_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: multi_v7_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -115,13 +156,17 @@ jobs:
       run: ./check_logs.py
   _79bcd0f2e13cae70e21a1de0dba4b7cf:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -139,13 +184,17 @@ jobs:
       run: ./check_logs.py
   _d7ad2c4a096dccb5b24d52248c8608ca:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 imx_v4_v5_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: imx_v4_v5_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -163,13 +212,17 @@ jobs:
       run: ./check_logs.py
   _1db81ba52b292133ee052e1fbbb11bc1:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 omap2plus_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: omap2plus_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -187,13 +240,17 @@ jobs:
       run: ./check_logs.py
   _956c3e5d1a1ec584b7099d0ca48d7652:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -211,13 +268,17 @@ jobs:
       run: ./check_logs.py
   _5b38d9121fd6f8ce367a874456cf203f:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -235,13 +296,17 @@ jobs:
       run: ./check_logs.py
   _7831b51d6765e6fe9bdb5ecdbd40bcd5:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -259,13 +324,17 @@ jobs:
       run: ./check_logs.py
   _905c6aff3f9ee4e116f5610a92043f9d:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_LTO_CLANG_FULL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -283,13 +352,17 @@ jobs:
       run: ./check_logs.py
   _2c9dcceb2ed768dccdbc275d4b715357:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -307,13 +380,17 @@ jobs:
       run: ./check_logs.py
   _4c6c61e448e8cf65c92cc332553eee8a:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -331,13 +408,17 @@ jobs:
       run: ./check_logs.py
   _c52e967e335be60905d4d274bec80d2f:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -355,13 +436,17 @@ jobs:
       run: ./check_logs.py
   _9820ff6499b5abb12ae5f1480fa85826:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -379,13 +464,17 @@ jobs:
       run: ./check_logs.py
   _92821c8523f8749170aecd5f713c4de9:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_UBSAN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_UBSAN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -403,13 +492,17 @@ jobs:
       run: ./check_logs.py
   _8c248b9ff22ed1536a77e157e17ee3f6:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: hexagon
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -427,13 +520,17 @@ jobs:
       run: ./check_logs.py
   _b525219c8de25336818c36a794cf2ae2:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: i386
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -451,13 +548,17 @@ jobs:
       run: ./check_logs.py
   _e2197bd314d0333e2c1212c11868e3eb:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: mips
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -475,13 +576,17 @@ jobs:
       run: ./check_logs.py
   _20872e7f0113fd05e30c88b5df6617df:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: mips
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -499,13 +604,17 @@ jobs:
       run: ./check_logs.py
   _bc2bba98bbef0fd32c21c24c5642289d:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=18 ppc44x_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: powerpc
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: ppc44x_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -523,13 +632,17 @@ jobs:
       run: ./check_logs.py
   _d6d581bf38ec6350fafef71559776702:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=18 ppc64_guest_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: powerpc
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: ppc64_guest_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -547,13 +660,17 @@ jobs:
       run: ./check_logs.py
   _0b6273852d0867169811d14c1a2370bf:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=18 powernv_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: powerpc
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: powernv_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -571,13 +688,17 @@ jobs:
       run: ./check_logs.py
   _1e1a3f2849c4d3fbbc51ded34d699c05:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: riscv
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -595,13 +716,17 @@ jobs:
       run: ./check_logs.py
   _51d650f1cd6ec405444459878d6a799d:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=18 defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: s390
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -619,13 +744,17 @@ jobs:
       run: ./check_logs.py
   _692ca5673e5e70371223df750057c3f4:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=18 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: s390
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -643,13 +772,17 @@ jobs:
       run: ./check_logs.py
   _58acb74ca4b392e656707f556dad3a47:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -667,13 +800,17 @@ jobs:
       run: ./check_logs.py
   _f8b1e99e0c108df5f5dfdcf9071205c9:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_LTO_CLANG_FULL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -691,13 +828,17 @@ jobs:
       run: ./check_logs.py
   _8eeedf7215b1291841ae3c1bf50bd024:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -715,13 +856,17 @@ jobs:
       run: ./check_logs.py
   _1fd94806fdd36956d89f2e5efe439cdd:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -739,13 +884,17 @@ jobs:
       run: ./check_logs.py
   _0782984b810583c767c2235ee6c0765c:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -763,13 +912,17 @@ jobs:
       run: ./check_logs.py
   _77eb88ec425f5b5560b86e6e7c603d31:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_UBSAN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: defconfig+CONFIG_UBSAN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -789,12 +942,20 @@ jobs:
     name: TuxSuite (distribution_configs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name distribution_configs --json-out builds.json tuxsuite/5.15-clang-18.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
@@ -812,13 +973,17 @@ jobs:
         if-no-files-found: error
   _59882d2cc24b2132bafc3694c9030d0e:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -836,13 +1001,17 @@ jobs:
       run: ./check_logs.py
   _52af769878102eaf2e33e3d466021cf9:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -860,13 +1029,17 @@ jobs:
       run: ./check_logs.py
   _0473120359a75a491d0922220a3f959e:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -884,13 +1057,17 @@ jobs:
       run: ./check_logs.py
   _4e04a55a40c145fa1ba31db70eceaa54:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -908,13 +1085,17 @@ jobs:
       run: ./check_logs.py
   _b32701be7ea8e1a2cb43d20b9cc22821:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -932,13 +1113,17 @@ jobs:
       run: ./check_logs.py
   _4f706afe6294926458d52845f959f74b:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: i386
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -956,13 +1141,17 @@ jobs:
       run: ./check_logs.py
   _425fafa5ccfcf7dd566478d2adc75026:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: powerpc
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -980,13 +1169,17 @@ jobs:
       run: ./check_logs.py
   _e217b6b06b4cccc3e1f6678f8bdb66df:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: powerpc
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1004,13 +1197,17 @@ jobs:
       run: ./check_logs.py
   _d9406a3c6f448622f5fa76e53bb6606d:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: riscv
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1028,13 +1225,17 @@ jobs:
       run: ./check_logs.py
   _5066a75903416da57f803abcbefabd98:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: riscv
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1052,13 +1253,17 @@ jobs:
       run: ./check_logs.py
   _500a58dd4d31caaf569de46c0f502e08:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: s390
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1076,13 +1281,17 @@ jobs:
       run: ./check_logs.py
   _a874cfbcb4eb7b466e887a53daa6fb02:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: s390
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1100,13 +1309,17 @@ jobs:
       run: ./check_logs.py
   _2ad03e27956b5fc055176bb0f9d809a6:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1124,13 +1337,17 @@ jobs:
       run: ./check_logs.py
   _5e00952ecf0ccef4a8977ed0d57254fe:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1148,13 +1365,17 @@ jobs:
       run: ./check_logs.py
   _6aae47ac6cd288065811fa886be7ee78:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1172,13 +1393,17 @@ jobs:
       run: ./check_logs.py
   _e2821141463ee9971649d8676be91c00:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_distribution_configs
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1198,12 +1423,20 @@ jobs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name allconfigs --json-out builds.json tuxsuite/5.15-clang-18.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
@@ -1221,13 +1454,17 @@ jobs:
         if-no-files-found: error
   _71b27c8a15256b7dc1e1110007d94e6e:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig+CONFIG_WERROR=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1245,13 +1482,17 @@ jobs:
       run: ./check_logs.py
   _c8c7f409a2eb5e8a1beeb8cda5c9a587:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allnoconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1269,13 +1510,17 @@ jobs:
       run: ./check_logs.py
   _430cd9464f56cb65231cd02467fd893e:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allyesconfig+CONFIG_WERROR=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1293,13 +1538,17 @@ jobs:
       run: ./check_logs.py
   _b62520231fea87d45d5a6568e8d48a50:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1317,13 +1566,17 @@ jobs:
       run: ./check_logs.py
   _c28eba826f9740931b514cc22d5c5029:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1341,13 +1594,17 @@ jobs:
       run: ./check_logs.py
   _72598ccc3e7b655fd21a4548dfc82617:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allnoconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1365,13 +1622,17 @@ jobs:
       run: ./check_logs.py
   _21e7be7dc6457e899b210c121d0dc692:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allyesconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allyesconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1389,13 +1650,17 @@ jobs:
       run: ./check_logs.py
   _2f001c8d473d4be192660a1707d44ed0:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig+CONFIG_WERROR=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: hexagon
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1413,13 +1678,17 @@ jobs:
       run: ./check_logs.py
   _10e55c278b8afdc90983597db4e37bed:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig+CONFIG_WERROR=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: riscv
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1437,13 +1706,17 @@ jobs:
       run: ./check_logs.py
   _023bdb66eac2efb5decd45b88317a7bd:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1461,13 +1734,17 @@ jobs:
       run: ./check_logs.py
   _6643a139e04864af66aa5570a7d2974f:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1485,13 +1762,17 @@ jobs:
       run: ./check_logs.py
   _113728eccbe51750dd790388d1ac2c48:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allnoconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1509,13 +1790,17 @@ jobs:
       run: ./check_logs.py
   _80e8f0881b2156d473ebb0c7abeafe8a:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allyesconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 18
       BOOT: 0
       CONFIG: allyesconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

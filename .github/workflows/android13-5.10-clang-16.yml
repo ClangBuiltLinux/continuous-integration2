@@ -16,16 +16,45 @@ name: android13-5.10 (clang-16)
   workflow_dispatch: null
 permissions: read-all
 jobs:
+  check_cache:
+    name: Check Cache
+    runs-on: ubuntu-latest
+    container: tuxmake/x86_64_clang-16
+    env:
+      GIT_REPO: https://android.googlesource.com/kernel/common.git
+      GIT_REF: android13-5.10
+    outputs:
+      output: ${{ steps.step2.outputs.output }}
+      status: ${{ steps.step2.outputs.status }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: pip install requests
+      run: apt-get install -y python3-pip && pip install requests
+    - name: python check_cache.py
+      id: step1
+      continue-on-error: true
+      run: python check_cache.py -w '${{github.workflow}}' -g ${{secrets.REPO_SCOPED_PAT}} -r ${{env.GIT_REF}} -o ${{env.GIT_REPO}}
+    - name: Save exit code to GITHUB_OUTPUT
+      id: step2
+      run: echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android13-5.10 --job-name defconfigs --json-out builds.json --patch-series patches/android13-5.10 tuxsuite/android13-5.10-clang-16.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
@@ -43,13 +72,17 @@ jobs:
         if-no-files-found: error
   _3dbd3d0b63e5cbed5564dc8b075461bb:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -67,13 +100,17 @@ jobs:
       run: ./check_logs.py
   _8947f485cd634fe1980410d5fd49c0cd:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 gki_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: gki_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -91,13 +128,17 @@ jobs:
       run: ./check_logs.py
   _b9c33721b8a30cf8511e236bfd80c819:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 gki_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: gki_defconfig
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -117,12 +158,20 @@ jobs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android13-5.10 --job-name allconfigs --json-out builds.json --patch-series patches/android13-5.10 tuxsuite/android13-5.10-clang-16.tux.yml || true
     - name: save builds.json
       uses: actions/upload-artifact@v3
@@ -140,13 +189,17 @@ jobs:
         if-no-files-found: error
   _9cd9c06a8d911847e832e4a3c3487a23:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 allmodconfig+CONFIG_WERROR=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: 16
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
+      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
