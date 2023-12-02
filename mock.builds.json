@@ -1,56 +1,136 @@
-[
-    {
-        "build_key": "1nMNHMy4M2RQgJuvD8ZhsPVxNeX",
-        "build_name": "",
-        "build_status": "pass",
-        "client_token": "a0c3d25d-61a2-4a67-9b4d-12eea40d667b",
-        "download_url": "https://builds.tuxbuild.com/1nMNHMy4M2RQgJuvD8ZhsPVxNeX/",
-        "environment": {},
-        "errors_count": 0,
-        "git_describe": "v5.11-rc4-86-g9791581c049c",
-        "git_ref": "master",
-        "git_repo": "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git",
-        "git_sha": "9791581c049c10929e97098374dd1716a81fefcc",
-        "git_short_log": "9791581c049c (\"Merge tag 'for-5.11-rc4-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux\")",
-        "kconfig": [
-            "defconfig"
-        ],
-        "kernel_version": "5.11.0-rc4",
-        "make_variables": {
-            "LLVM": "1"
-        },
-        "status_message": "build completed",
-        "target_arch": "x86_64",
-        "targets": [],
-        "toolchain": "clang-nightly",
-        "tuxbuild_status": "complete",
-        "warnings_count": 0
+{
+    "builds": {
+        "2YlyQFeMIAc94Pn5vFMTT2hW7Kt": {
+            "auto_retry": true,
+            "build_name": "",
+            "build_status": "pass",
+            "callback": null,
+            "client_token": "23427fe5-0d8c-4df1-b2f5-33d349e29027",
+            "download_url": "https://storage.tuxsuite.com/public/clangbuiltlinux/continuous-integration2/builds/2YlyQFeMIAc94Pn5vFMTT2hW7Kt/",
+            "duration": 721,
+            "environment": {},
+            "errors_count": 0,
+            "finished_time": "2023-11-27T20:02:44.462728",
+            "git_describe": "arm64-fixes",
+            "git_ref": "for-next/fixes",
+            "git_repo": "https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git",
+            "git_sha": "c0a8574204054effad6ac83cc75c02576e2985fe",
+            "git_short_log": "c0a857420405 (\"arm64: add dependency between vmlinuz.efi and Image\")",
+            "image_sha": "",
+            "is_canceling": false,
+            "is_public": true,
+            "kconfig": [
+                "defconfig"
+            ],
+            "kernel_image": "",
+            "kernel_image_name": "Image.gz",
+            "kernel_patch_file": "",
+            "kernel_version": "6.7.0-rc1",
+            "make_variables": {
+                "LLVM": "1",
+                "LLVM_IAS": "1"
+            },
+            "modules": false,
+            "no_cache": false,
+            "plan": "2YlyQ862BVUHogmCByWcdjgtBrO",
+            "project": "clangbuiltlinux/continuous-integration2",
+            "provisioning_time": "2023-11-27T19:47:22.306758",
+            "result": "pass",
+            "retry": 0,
+            "retry_message": "",
+            "running_time": "2023-11-27T19:50:37.480898",
+            "sccache_hits": 8940,
+            "sccache_misses": 82,
+            "setup_duration": 76,
+            "state": "finished",
+            "status_message": "build completed",
+            "target_arch": "arm64",
+            "targets": [
+                "kernel"
+            ],
+            "token_name": "token2",
+            "toolchain": "clang-14",
+            "tuxbuild_status": "complete",
+            "tuxmake_metadata": {
+                "compiler": {
+                    "name": "clang",
+                    "version": "14.0.6",
+                    "version_full": "Debian clang version 14.0.6"
+                },
+                "results": {
+                    "artifacts": {
+                        "config": [
+                            "config"
+                        ],
+                        "default": [],
+                        "kernel": [
+                            "Image.gz"
+                        ],
+                        "log": [
+                            "build.log",
+                            "build-debug.log"
+                        ]
+                    },
+                    "duration": {
+                        "build": 663.390380859375,
+                        "cleanup": 2.459419012069702,
+                        "copy": 0.015820741653442383,
+                        "metadata": 0.8467991352081299,
+                        "prepare": 41.4894073009491,
+                        "validate": 0.000125885009765625
+                    },
+                    "errors": 0,
+                    "status": "PASS",
+                    "targets": {
+                        "config": {
+                            "duration": 5.4789719581604,
+                            "status": "PASS"
+                        },
+                        "default": {
+                            "duration": 648.600864648819,
+                            "status": "PASS"
+                        },
+                        "kernel": {
+                            "duration": 8.692617654800415,
+                            "status": "PASS"
+                        }
+                    },
+                    "warnings": 0
+                },
+                "runtime": {
+                    "image_digest": "855116176053.dkr.ecr.us-east-1.amazonaws.com/tuxmake/arm64_clang-14@sha256:8f6149dde4d8e26ef21da38724478590b4d1f6933f42c5c73521831fdd2deffe",
+                    "image_name": "855116176053.dkr.ecr.us-east-1.amazonaws.com/tuxmake/arm64_clang-14",
+                    "version": "podman version 4.6.2"
+                },
+                "tools": {
+                    "ar": "GNU ar (GNU Binutils for Debian) 2.35.2",
+                    "as": "GNU assembler (GNU Binutils for Debian) 2.35.2",
+                    "bc": "bc 1.07.1",
+                    "bison": "bison (GNU Bison) 3.7.5",
+                    "ccache": "ccache version 4.2",
+                    "clang": "Debian clang version 14.0.6",
+                    "depmod": "kmod version 28",
+                    "fdformat": "fdformat from util-linux 2.36.1",
+                    "flex": "flex 2.6.4",
+                    "gcc": "gcc (Debian 10.2.1-6) 10.2.1 20210110",
+                    "ld": "GNU ld (GNU Binutils for Debian) 2.35.2",
+                    "lld": "Debian LLD 14.0.6 (compatible with GNU linkers)",
+                    "make": "GNU Make 4.3",
+                    "openssl": "OpenSSL 1.1.1w  11 Sep 2023",
+                    "pahole": "v1.25",
+                    "ps": "ps from procps-ng 3.3.17",
+                    "sccache": "sccache 0.2.9"
+                },
+                "tuxmake": {
+                    "version": "1.20.0"
+                }
+            },
+            "uid": "2YlyQFeMIAc94Pn5vFMTT2hW7Kt",
+            "user": "ndesaulniers@google.com",
+            "user_agent": "tuxsuite/1.30.0",
+            "waited_by": [],
+            "warnings_count": 0
+        }
     },
-    {
-        "build_key": "1nMNHKZEB83AkyUnuUhz6LwuO1T",
-        "build_name": "",
-        "build_status": "pass",
-        "client_token": "63ffb28e-807d-4cf0-bfcd-e2c0d877ee0e",
-        "download_url": "https://builds.tuxbuild.com/1nMNHKZEB83AkyUnuUhz6LwuO1T/",
-        "environment": {},
-        "errors_count": 0,
-        "git_describe": "v5.11-rc4-86-g9791581c049c",
-        "git_ref": "master",
-        "git_repo": "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git",
-        "git_sha": "9791581c049c10929e97098374dd1716a81fefcc",
-        "git_short_log": "9791581c049c (\"Merge tag 'for-5.11-rc4-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux\")",
-        "kconfig": [
-            "defconfig"
-        ],
-        "kernel_version": "5.11.0-rc4",
-        "make_variables": {
-            "LLVM": "1"
-        },
-        "status_message": "build completed",
-        "target_arch": "x86_64",
-        "targets": [],
-        "toolchain": "clang-11",
-        "tuxbuild_status": "complete",
-        "warnings_count": 2
-    }
-]
+    "tests": {}
+}
