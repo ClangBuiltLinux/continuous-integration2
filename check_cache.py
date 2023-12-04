@@ -14,6 +14,8 @@ The workflow will _not_ run if the following condition is true:
        run (cache hit)
     2) The cached build_status is pass or fail
 
+An exit code of '0' means that no Tuxsuite jobs will run while an exit code of
+'1' means that Tuxsuite will proceed.
 
 In either case, a Repository Variable with a key matching this Workflow Name
 will be created/updated matching the current linux_sha and clang_version
