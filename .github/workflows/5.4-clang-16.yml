@@ -44,6 +44,7 @@ jobs:
     needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
@@ -54,8 +55,10 @@ jobs:
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
-      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.4.y --job-name defconfigs --json-out builds.json tuxsuite/5.4-clang-16.tux.yml || true
+    - name: Update Cache Build Status
+      run: python update_cache.py
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -82,7 +85,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: multi_v7_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -110,7 +113,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -138,7 +141,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: defconfig+CONFIG_COMPAT_VDSO=n
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -166,7 +169,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -194,7 +197,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -222,7 +225,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -250,7 +253,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: ppc44x_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -278,7 +281,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: ppc64_guest_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -306,7 +309,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: powernv_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -334,7 +337,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 1
       CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -357,6 +360,7 @@ jobs:
     needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
@@ -367,8 +371,10 @@ jobs:
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
-      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.4.y --job-name allconfigs --json-out builds.json tuxsuite/5.4-clang-16.tux.yml || true
+    - name: Update Cache Build Status
+      run: python update_cache.py
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -395,7 +401,7 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 0
       CONFIG: allmodconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host

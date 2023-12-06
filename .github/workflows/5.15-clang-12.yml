@@ -44,6 +44,7 @@ jobs:
     needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
@@ -54,8 +55,10 @@ jobs:
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
-      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name defconfigs --json-out builds.json tuxsuite/5.15-clang-12.tux.yml || true
+    - name: Update Cache Build Status
+      run: python update_cache.py
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -82,7 +85,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: multi_v5_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -110,7 +113,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: aspeed_g5_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -138,7 +141,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: multi_v7_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -166,7 +169,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -194,7 +197,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: imx_v4_v5_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -222,7 +225,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: omap2plus_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -250,7 +253,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -278,7 +281,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -306,7 +309,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -334,7 +337,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -362,7 +365,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -390,7 +393,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -418,7 +421,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -446,7 +449,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_UBSAN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -474,7 +477,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -502,7 +505,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -530,7 +533,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -558,7 +561,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -586,7 +589,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: ppc44x_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -614,7 +617,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: ppc64_guest_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -642,7 +645,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: powernv_defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -670,7 +673,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -698,7 +701,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -726,7 +729,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -754,7 +757,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -782,7 +785,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -810,7 +813,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -838,7 +841,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: defconfig+CONFIG_UBSAN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -861,6 +864,7 @@ jobs:
     needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
@@ -871,8 +875,10 @@ jobs:
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
-      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name distribution_configs --json-out builds.json tuxsuite/5.15-clang-12.tux.yml || true
+    - name: Update Cache Build Status
+      run: python update_cache.py
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -899,7 +905,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -927,7 +933,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -955,7 +961,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -983,7 +989,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1011,7 +1017,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1039,7 +1045,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1067,7 +1073,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1095,7 +1101,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1123,7 +1129,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1151,7 +1157,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1179,7 +1185,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1207,7 +1213,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1235,7 +1241,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1263,7 +1269,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1286,6 +1292,7 @@ jobs:
     needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
@@ -1296,8 +1303,10 @@ jobs:
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
-      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.15.y --job-name allconfigs --json-out builds.json tuxsuite/5.15-clang-12.tux.yml || true
+    - name: Update Cache Build Status
+      run: python update_cache.py
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -1324,7 +1333,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1352,7 +1361,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allnoconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1380,7 +1389,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allyesconfig+CONFIG_WERROR=n
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1408,7 +1417,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allmodconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1436,7 +1445,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1464,7 +1473,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allnoconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1492,7 +1501,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allyesconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1520,7 +1529,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1548,7 +1557,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allmodconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1576,7 +1585,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1604,7 +1613,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allnoconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -1632,7 +1641,7 @@ jobs:
       LLVM_VERSION: 12
       BOOT: 0
       CONFIG: allyesconfig
-      REPO_SCOPED_PAT: ${{secrets.REPO_SCOPED_PAT}}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
