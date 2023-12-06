@@ -2,7 +2,7 @@ import json
 import os
 from pathlib import Path
 import sys
-from typing import Optional
+from typing import Optional, Dict
 import yaml
 import urllib.request
 
@@ -192,12 +192,13 @@ def get_workflow_name_to_var_name(workflow_name: str) -> str:
 
 def update_repository_variable(
     key: str,
-    http_headers: dict[str, str],
+    http_headers: Dict[str, str],
     *,
     sha: Optional[str] = None,
     clang_version: Optional[str] = None,
     build_status: Optional[str] = None,
-    other: Optional[dict[str, str]] = None,
+    other: Optional[Dict[str, str]] = None,
+    allow_fail_to_pass = False # should a cache entry be allowed to go from 'fail' to 'pass'
 ):
     """
     Update cache entries.
@@ -217,12 +218,16 @@ def update_repository_variable(
         content = response.read().decode("utf-8")
         data = json.loads(content)
         cached_value = json.loads(data["value"])
+        print(f"{cached_value=}")
         if sha:
             cached_value["linux_sha"] = sha
         if clang_version:
             cached_value["clang_version"] = clang_version
         if build_status:
-            cached_value["build_status"] = build_status
+            if not allow_fail_to_pass and cached_value['build_status'] == 'fail' and build_status == 'pass':
+                ...
+            else:
+                cached_value["build_status"] = build_status
         if other and isinstance(other, dict):
             for k, v in other.items():
                 cached_value[k] = v

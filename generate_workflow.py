@@ -131,7 +131,8 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
             "container": "tuxsuite/tuxsuite",
             "needs": "check_cache",
             "env": {
-                "TUXSUITE_TOKEN": "${{ secrets.TUXSUITE_TOKEN }}"
+                "TUXSUITE_TOKEN": "${{ secrets.TUXSUITE_TOKEN }}",
+                "REPO_SCOPED_PAT": "${{ secrets.REPO_SCOPED_PAT }}"
             },
             "timeout-minutes": 480,
             "steps": [
@@ -150,8 +151,12 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 },
                 {
                     "name": "tuxsuite",
-                    "if": "${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}",
+                    "if": "${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}",
                     "run": f"tuxsuite plan --git-repo {repo} --git-ref {ref} --job-name {job_name} --json-out builds.json {patch_series}{tuxsuite_yml} || true",
+                },
+                {
+                    "name": "Update Cache Build Status",
+                    "run": "python update_cache.py"
                 },
                 {
                     "name": "save builds.json",
@@ -193,7 +198,7 @@ def get_steps(build, build_set):
                 "LLVM_VERSION": build["llvm_version"],
                 "BOOT": int(build["boot"]),
                 "CONFIG": print_config(build),
-                "REPO_SCOPED_PAT": "${{secrets.REPO_SCOPED_PAT}}"
+                "REPO_SCOPED_PAT": "${{ secrets.REPO_SCOPED_PAT }}"
             },
             "container": {
                 "image": "ghcr.io/clangbuiltlinux/qemu",
