@@ -88,7 +88,8 @@ def svg(workflow):
     if workflow is None:
         return "   "
     workflow_url = f"https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/{workflow}.yml"
-    return f"[![{workflow} build status]({workflow_url}/badge.svg)]({workflow_url})"
+    badge_url = f"https://kernel.outflux.net/cbl/badges/{workflow}.svg"
+    return f"[![{workflow} build status]({badge_url})]({workflow_url})"
 
 
 print("Copy and paste the output below into README.md:\n")
