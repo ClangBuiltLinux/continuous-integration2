@@ -1,3 +1,4 @@
 croniter
 packaging
 pyyaml
+requests
