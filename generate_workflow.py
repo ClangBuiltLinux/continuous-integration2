@@ -86,7 +86,9 @@ def sanitize_job_name(name):
 
 
 def check_cache_job_setup(repo, ref, toolchain):
-    llvm_tot_version = open("LLVM_TOT_VERSION", "r").read().strip()
+    with open("LLVM_TOT_VERSION") as fd:
+        llvm_tot_version = fd.read().strip()
+
     last_part = toolchain.split("-")[-1]
     if last_part == llvm_tot_version:
         toolchain = "clang-nightly"

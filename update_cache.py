@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     print(f"Tuxsuite {git_sha = } | {clang_version = }")
 
-    for build, info in builds.items():
+    for _, info in builds.items():
         if info["tuxbuild_status"] != "complete":
             update_cache("badtux", git_sha, clang_version)
             exit(0)

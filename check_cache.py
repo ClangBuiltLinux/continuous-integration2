@@ -35,6 +35,7 @@ import requests
 import subprocess
 import json
 import os
+import re
 from utils import get_workflow_name_to_var_name, update_repository_variable
 
 OWNER = "ClangBuiltLinux"
@@ -70,12 +71,20 @@ def get_sha_from_git_ref(git_repo: str, git_ref: str):
         ["git", "ls-remote", git_repo, "--git-ref", git_ref],
         capture_output=True,
         text=True,
+        check=True,
     )
+    pattern = r"^[0-9a-z]*"
 
-    sha = result.stdout.split()[0]
-    assert len(sha), "Could not get SHA"
+    if (match := re.search(r"^[0-9a-z]*", result.stdout)) is None:
+        print(
+            f"Could not get git sha from tree {git_repo} at ref {git_ref}.\n"
+            f"Subprocess returned: {result.stdout}\n"
+            f"Which doesn't have any matches with this pattern: {pattern}\n"
+            f"Expecting something like this: be59bee58790f9d137cfc11973e856e4f8ab3888	refs/tags/v6.7-rc5"
+        )
+        exit(1)
 
-    return sha
+    return match.group()
 
 
 def ___purge___cache___():
@@ -110,7 +119,13 @@ def get_clang_version():
     using the specific toolchain version that Tuxmake plans to use in its
     upcoming build(s).
     """
-    result = subprocess.run(["clang", "--version"], capture_output=True, text=True)
+    result = subprocess.run(
+        ["clang", "--version"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
     return result.stdout.splitlines()[0].strip()
 
 
