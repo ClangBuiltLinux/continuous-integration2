@@ -8,20 +8,8 @@ import subprocess
 import sys
 import time
 import urllib.request
-from urllib.error import HTTPError, URLError
 
-from utils import (
-    CI_ROOT,
-    get_build,
-    get_image_name,
-    get_requested_llvm_version,
-    print_red,
-    print_yellow,
-    get_cbl_name,
-    show_builds,
-    get_workflow_name_to_var_name,
-    update_repository_variable,
-)
+from utils import CI_ROOT, get_build, get_image_name, get_requested_llvm_version, print_red, print_yellow, get_cbl_name, show_builds
 
 
 def _fetch(title, url, dest):
@@ -39,14 +27,14 @@ def _fetch(title, url, dest):
             break
         except ConnectionResetError as err:
             print_yellow(f"{title} download error ('{err}'), retrying...")
-        except HTTPError as err:
+        except urllib.error.HTTPError as err:
             if err.code in retry_codes:
                 print_yellow(
                     f"{title} download error ({err.code}), retrying...")
             else:
                 print_red(f"{err.code} error trying to download {title}")
                 sys.exit(1)
-        except URLError as err:
+        except urllib.error.URLError as err:
             print_yellow(f"{title} download error ('{err}'), retrying...")
 
     if retries == max_retries:
@@ -58,29 +46,6 @@ def _fetch(title, url, dest):
     else:
         print_red(f"Unable to download {title}")
         sys.exit(1)
-
-
-def try_to_update_build_status_in_cache(new_status: str):
-    if "GITHUB_WORKFLOW" not in os.environ:
-        print_yellow(f"Cannot update cached build status as we're not in a workflow.")
-        return
-    else:
-        cache_entry_key = get_workflow_name_to_var_name(os.environ['GITHUB_WORKFLOW'])
-
-    if "REPO_SCOPED_PAT" not in os.environ:
-        print_yellow(f"Missing REPO_SCOPED_PAT in env. Are we in a workflow?")
-        return
-    else:
-        headers = {"Authorization": f"Bearer {os.environ['REPO_SCOPED_PAT']}"}
-
-    try:
-        update_repository_variable(cache_entry_key, http_headers=headers, build_status=new_status)
-    except HTTPError as e:
-        print_yellow(f"Could not cache because GitHub denied one or more of our requests (rate-limit?)")
-        print_yellow(f"Here's the error:\n{e}")
-    except KeyError as e:
-        print_yellow(f"We must not be running in a Github workflow because os.environ had no entry for REPO_SCOPED_PAT")
-        print_yellow(f"Here's the error:\n{e}")
 
 
 def verify_build():
@@ -115,7 +80,6 @@ def verify_build():
         sys.exit(1)
 
     if build["status_message"] == "Unable to apply kernel patch":
-        # TODO: automatically open a PR removing the patch(es) in question.
         print_red(
             "Patch failed to apply to current kernel tree, does it need to be removed or updated?"
         )
