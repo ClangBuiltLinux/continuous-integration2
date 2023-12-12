@@ -97,8 +97,7 @@ def ___purge___cache___():
     list_response = requests.get(list_url, headers=HEADERS, timeout=TIMEOUT)
     print(list_response.content)
     all_variables_keys = [
-        x["name"]
-        for x in json.loads(list_response.content)["variables"]
+        x["name"] for x in json.loads(list_response.content)["variables"]
         if x["name"].startswith("_")
     ]
 
@@ -106,7 +105,9 @@ def ___purge___cache___():
         delete_url = (
             f"https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{key}"
         )
-        delete_response = requests.delete(delete_url, headers=HEADERS, timeout=TIMEOUT)
+        delete_response = requests.delete(delete_url,
+                                          headers=HEADERS,
+                                          timeout=TIMEOUT)
         if delete_response.status_code != 204:
             print(f"ERROR: Couldn't delete cache entry with key {key}")
             sys.exit(1)
@@ -143,16 +144,15 @@ def get_repository_variable_or_none(name: str) -> Optional[dict]:
     return json.loads(as_dict["value"])
 
 
-def create_repository_variable(name: str, linux_sha: str, clang_version: str) -> None:
+def create_repository_variable(name: str, linux_sha: str,
+                               clang_version: str) -> None:
     _url = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/variables"
 
-    _value = json.dumps(
-        {
-            "linux_sha": linux_sha,
-            "clang_version": clang_version,
-            "build_status": "presuite",
-        }
-    )
+    _value = json.dumps({
+        "linux_sha": linux_sha,
+        "clang_version": clang_version,
+        "build_status": "presuite",
+    })
     data = {"name": name, "value": _value}
 
     resp = requests.post(_url, headers=HEADERS, json=data, timeout=TIMEOUT)
@@ -176,15 +176,15 @@ if __name__ == "__main__":
 
     curr_sha = get_sha_from_git_ref(args.git_repo, args.git_ref)
     curr_clang_version = get_clang_version()
-    print(f"Current sha: {curr_sha}\nCurrent Clang Version: {curr_clang_version}")
+    print(
+        f"Current sha: {curr_sha}\nCurrent Clang Version: {curr_clang_version}"
+    )
 
     # pull down repo variable
     result = get_repository_variable_or_none(VAR_NAME)
     if result is None:
-        print(
-            f"CACHE MISS: Did not find repo variable {VAR_NAME} "
-            f"from workflow_name: {args.workflow_name}. Creating it now."
-        )
+        print(f"CACHE MISS: Did not find repo variable {VAR_NAME} "
+              f"from workflow_name: {args.workflow_name}. Creating it now.")
         create_repository_variable(
             VAR_NAME,
             linux_sha=curr_sha,
@@ -202,8 +202,7 @@ if __name__ == "__main__":
         raise MalformedCacheError(
             f"The cache with key {VAR_NAME} based on workflow '{args.workflow_name}' "
             f"is one or more fields. It's missing: {missing_fields}\n"
-            f"The current cache looks as follows:\n{result}."
-        )
+            f"The current cache looks as follows:\n{result}.")
 
     cached_sha = result["linux_sha"]
     cached_clang_version = result["clang_version"]
@@ -214,8 +213,7 @@ if __name__ == "__main__":
             f"CACHE MISS: current linux_sha is {curr_sha} and clang_version is {curr_clang_version} "
             f"while {args.workflow_name} has a cached linux_sha of {cached_sha} "
             f"and a cached clang_version of {cached_clang_version} under "
-            f"Repository Variable key: {VAR_NAME}\nUpdating cache now."
-        )
+            f"Repository Variable key: {VAR_NAME}\nUpdating cache now.")
         update_repository_variable(
             VAR_NAME,
             http_headers=HEADERS,
@@ -240,12 +238,12 @@ if __name__ == "__main__":
         f"CACHE HIT: Both the linux_sha and the clang_version match\n"
         f"CACHE:  {cached_sha} | {cached_clang_version}\nACTUAL: {curr_sha} | {curr_clang_version}\n"
         f"Not running this workflow as it would be redundant.\n"
-        f"CACHED STATUS: {cached_build_status}"
-    )
+        f"CACHED STATUS: {cached_build_status}")
 
     env_file = os.getenv("GITHUB_ENV", None)
     if env_file is not None:
         with open(env_file, "a", encoding="utf-8") as fd:
             fd.write(f"CACHE_PASS={cached_build_status.strip()}")
 
-    sys.exit(0)  # signifies to the workflow that no jobs should run ('success')
+    sys.exit(
+        0)  # signifies to the workflow that no jobs should run ('success')

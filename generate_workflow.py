@@ -95,27 +95,49 @@ def check_cache_job_setup(repo, ref, toolchain):
 
     return {
         "check_cache": {
-            "name": "Check Cache",
-            "runs-on": "ubuntu-latest",
-            "container": f"tuxmake/x86_64_{toolchain}",
-            "env": {"GIT_REPO": repo, "GIT_REF": ref},
-            "outputs": {"output": "${{ steps.step2.outputs.output }}", "status": "${{ steps.step2.outputs.status }}"},
+            "name":
+            "Check Cache",
+            "runs-on":
+            "ubuntu-latest",
+            "container":
+            f"tuxmake/x86_64_{toolchain}",
+            "env": {
+                "GIT_REPO": repo,
+                "GIT_REF": ref
+            },
+            "outputs": {
+                "output": "${{ steps.step2.outputs.output }}",
+                "status": "${{ steps.step2.outputs.status }}"
+            },
             "steps": [
-                {"uses": "actions/checkout@v4"},
-                {"name": "pip install requests", "run": "apt-get install -y python3-pip && pip install requests"},
                 {
-                    "name": "python check_cache.py",
-                    "id": "step1",
-                    "continue-on-error": True,
-                    "run": "python check_cache.py -w '${{github.workflow}}' "
+                    "uses": "actions/checkout@v4"
+                },
+                {
+                    "name": "pip install requests",
+                    "run":
+                    "apt-get install -y python3-pip && pip install requests"
+                },
+                {
+                    "name":
+                    "python check_cache.py",
+                    "id":
+                    "step1",
+                    "continue-on-error":
+                    True,
+                    "run":
+                    "python check_cache.py -w '${{github.workflow}}' "
                     "-g ${{secrets.REPO_SCOPED_PAT}} "
                     "-r ${{env.GIT_REF}} "
                     "-o ${{env.GIT_REPO}}",
                 },
                 {
-                    "name": "Save exit code to GITHUB_OUTPUT",
-                    "id": "step2",
-                    "run": 'echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"',
+                    "name":
+                    "Save exit code to GITHUB_OUTPUT",
+                    "id":
+                    "step2",
+                    "run":
+                    'echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"',
                 },
             ],
         }

@@ -199,7 +199,7 @@ def update_repository_variable(
     clang_version: Optional[str] = None,
     build_status: Optional[str] = None,
     other: Optional[Dict[str, str]] = None,
-    allow_fail_to_pass = False # should a cache entry be allowed to go from 'fail' to 'pass'
+    allow_fail_to_pass=False  # should a cache entry be allowed to go from 'fail' to 'pass'
 ):
     """
     Update cache entries.
@@ -225,7 +225,8 @@ def update_repository_variable(
         if clang_version:
             cached_value["clang_version"] = clang_version
         if build_status:
-            if not allow_fail_to_pass and cached_value['build_status'] == 'fail' and build_status == 'pass':
+            if not allow_fail_to_pass and cached_value[
+                    'build_status'] == 'fail' and build_status == 'pass':
                 ...
             else:
                 cached_value["build_status"] = build_status
@@ -235,16 +236,19 @@ def update_repository_variable(
 
         cached_value = json.dumps(cached_value)
 
-    new_value = json.dumps({"name": key, "value": cached_value}).encode("utf-8")
-    update_request = urllib.request.Request(
-        url, data=new_value, method="PATCH", headers=http_headers
-    )
-    urllib.request.urlopen(update_request) # pylint: disable=consider-using-with
+    new_value = json.dumps({
+        "name": key,
+        "value": cached_value
+    }).encode("utf-8")
+    update_request = urllib.request.Request(url,
+                                            data=new_value,
+                                            method="PATCH",
+                                            headers=http_headers)
+    urllib.request.urlopen(update_request)  # pylint: disable=consider-using-with
 
     print(
         f"Updated cache entry with key '{key}' to status '{build_status}' at sha '{sha}' and clang_version '{clang_version}'\n"
-        f"other fields: {other}"
-    )
+        f"other fields: {other}")
 
 
 def print_red(msg):

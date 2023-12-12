@@ -28,12 +28,15 @@ if "GITHUB_WORKFLOW" not in os.environ:
 
 MOCK = "MOCK" in os.environ
 
+
 def update_cache(status: str, git_sha: str, clang_version: str):
     print(f"Trying to update cache with status: {status}")
-    cache_entry_key = get_workflow_name_to_var_name(os.environ["GITHUB_WORKFLOW"])
+    cache_entry_key = get_workflow_name_to_var_name(
+        os.environ["GITHUB_WORKFLOW"])
 
     if 'REPO_SCOPED_PAT' not in os.environ:
-        print("Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
+        print(
+            "Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
         sys.exit(1)
 
     headers = {"Authorization": f"Bearer {os.environ['REPO_SCOPED_PAT']}"}
@@ -45,8 +48,7 @@ def update_cache(status: str, git_sha: str, clang_version: str):
         sha=git_sha,
         clang_version=clang_version,
         # prevent overriding a 'fail' to a 'pass'
-        allow_fail_to_pass=False
-    )
+        allow_fail_to_pass=False)
 
 
 def main():
