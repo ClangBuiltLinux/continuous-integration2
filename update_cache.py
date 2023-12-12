@@ -15,15 +15,16 @@ system to not cache. The idea being that we want to rerun these jobs and not hav
 a caching system stop us from doing so -- even if sha and version match.
 """
 
-import os
 import json
+import os
+import sys
 from pathlib import Path
+
 from utils import get_workflow_name_to_var_name, update_repository_variable
-from sys import exit
 
 if "GITHUB_WORKFLOW" not in os.environ:
     print("Couldn't find GITHUB_WORKFLOW in env. Not in a GitHub Workflow?")
-    exit(1)
+    sys.exit(1)
 
 MOCK = "MOCK" in os.environ
 
@@ -33,7 +34,7 @@ def update_cache(status: str, git_sha: str, clang_version: str):
 
     if 'REPO_SCOPED_PAT' not in os.environ:
         print("Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
-        exit(1)
+        sys.exit(1)
 
     headers = {"Authorization": f"Bearer {os.environ['REPO_SCOPED_PAT']}"}
 
@@ -48,17 +49,17 @@ def update_cache(status: str, git_sha: str, clang_version: str):
     )
 
 
-if __name__ == "__main__":
+def main():
     builds_json = Path(("mock." if MOCK else "") + "builds.json")
 
     print(f"Reading {builds_json}")
-    raw = builds_json.read_text()
+    raw = builds_json.read_text(encoding='utf-8')
 
     builds = json.loads(raw)["builds"]
 
-    if not len(builds):
+    if len(builds) == 0:
         print("No builds present. Did Tuxsuite run?")
-        exit(1)
+        sys.exit(1)
 
     # let's grab sha and version info as Tuxsuite has the most up-to-date info
     # we only need the first entry
@@ -71,11 +72,15 @@ if __name__ == "__main__":
     for _, info in builds.items():
         if info["tuxbuild_status"] != "complete":
             update_cache("badtux", git_sha, clang_version)
-            exit(0)
+            sys.exit(0)
         if (status := info["build_status"]) != "pass":
             update_cache(status, git_sha, clang_version)
-            exit(0)
+            sys.exit(0)
 
     # only if all builds completed and passed will we set this status
     update_cache("pass", git_sha, clang_version)
-    exit(0)
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()

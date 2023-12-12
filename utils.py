@@ -2,9 +2,10 @@ import json
 import os
 from pathlib import Path
 import sys
-from typing import Optional, Dict
-import yaml
+from typing import Dict, Optional
 import urllib.request
+
+import yaml
 
 CI_ROOT = Path(__file__).resolve().parent
 
@@ -238,7 +239,7 @@ def update_repository_variable(
     update_request = urllib.request.Request(
         url, data=new_value, method="PATCH", headers=http_headers
     )
-    urllib.request.urlopen(update_request)
+    urllib.request.urlopen(update_request) # pylint: disable=consider-using-with
 
     print(
         f"Updated cache entry with key '{key}' to status '{build_status}' at sha '{sha}' and clang_version '{clang_version}'\n"

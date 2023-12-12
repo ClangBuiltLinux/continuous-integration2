@@ -86,7 +86,7 @@ def sanitize_job_name(name):
 
 
 def check_cache_job_setup(repo, ref, toolchain):
-    with open("LLVM_TOT_VERSION") as fd:
+    with open("LLVM_TOT_VERSION", encoding='utf-8') as fd:
         llvm_tot_version = fd.read().strip()
 
     last_part = toolchain.split("-")[-1]
