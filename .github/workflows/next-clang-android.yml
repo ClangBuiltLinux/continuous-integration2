@@ -16,17 +16,49 @@ name: next (clang-android)
   workflow_dispatch: null
 permissions: read-all
 jobs:
+  check_cache:
+    name: Check Cache
+    runs-on: ubuntu-latest
+    container: tuxmake/x86_64_clang-android
+    env:
+      GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+      GIT_REF: master
+    outputs:
+      output: ${{ steps.step2.outputs.output }}
+      status: ${{ steps.step2.outputs.status }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: pip install requests
+      run: apt-get install -y python3-pip && pip install requests
+    - name: python check_cache.py
+      id: step1
+      continue-on-error: true
+      run: python check_cache.py -w '${{github.workflow}}' -g ${{secrets.REPO_SCOPED_PAT}} -r ${{env.GIT_REF}} -o ${{env.GIT_REPO}}
+    - name: Save exit code to GITHUB_OUTPUT
+      id: step2
+      run: echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name defconfigs --json-out builds.json tuxsuite/next-clang-android.tux.yml || true
+    - name: Update Cache Build Status
+      run: python update_cache.py
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -43,13 +75,17 @@ jobs:
         if-no-files-found: error
   _33f756a58e3f44713fbcc5d419f54896:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v5_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: multi_v5_defconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -67,13 +103,17 @@ jobs:
       run: ./check_logs.py
   _a82d5da76edb25de07265b1189803b21:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=android aspeed_g5_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: aspeed_g5_defconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -91,13 +131,17 @@ jobs:
       run: ./check_logs.py
   _87ceb80e8738ca51446e7e1857d39b9c:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v7_defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: multi_v7_defconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -115,13 +159,17 @@ jobs:
       run: ./check_logs.py
   _351114799740fe3119a3b2ce6956a6bb:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -139,13 +187,17 @@ jobs:
       run: ./check_logs.py
   _300e2471179b5487f89662afe7517d23:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -163,13 +215,17 @@ jobs:
       run: ./check_logs.py
   _66d5f7613f33d6225179b4f74b52c782:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -187,13 +243,17 @@ jobs:
       run: ./check_logs.py
   _012f9698c8641a28bfe42b1f88c3eeed:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_FULL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -211,13 +271,17 @@ jobs:
       run: ./check_logs.py
   _f3ec5ce2d1407ab879240659d45e691f:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -235,13 +299,17 @@ jobs:
       run: ./check_logs.py
   _d40fba30474edc6e71babdc5032a19a1:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: i386
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -259,13 +327,17 @@ jobs:
       run: ./check_logs.py
   _3ad4a25550173087651ae615332210cb:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -283,13 +355,17 @@ jobs:
       run: ./check_logs.py
   _3a8042d5be17096e2036e17595de3dc2:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_FULL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -307,13 +383,17 @@ jobs:
       run: ./check_logs.py
   _d405aef26ef8bf6ad44a5b678b109329:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -331,13 +411,17 @@ jobs:
       run: ./check_logs.py
   _b0ecbe2a369a0aaf6357ba0cbe25a175:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_defconfigs
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 1
       CONFIG: defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -357,13 +441,24 @@ jobs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
+    needs: check_cache
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     timeout-minutes: 480
     steps:
+    - name: Checking Cache Pass
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
+    - name: Checking Cache Fail
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
     - name: tuxsuite
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name allconfigs --json-out builds.json tuxsuite/next-clang-android.tux.yml || true
+    - name: Update Cache Build Status
+      run: python update_cache.py
     - name: save builds.json
       uses: actions/upload-artifact@v3
       with:
@@ -380,13 +475,17 @@ jobs:
         if-no-files-found: error
   _bcc4f57380794ab069ddb0e22c4e2db4:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=android allmodconfig+CONFIG_WERROR=n
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -404,13 +503,17 @@ jobs:
       run: ./check_logs.py
   _0bd45e7bf965a5baf08290e2f1592b0e:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allnoconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -428,13 +531,17 @@ jobs:
       run: ./check_logs.py
   _0a2662d69f899d9d4f0fecc38bed6d41:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -452,13 +559,17 @@ jobs:
       run: ./check_logs.py
   _509b45bccf9f9caab84def233b90d81b:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -476,13 +587,17 @@ jobs:
       run: ./check_logs.py
   _b0fbaba94853b2f26c458cd0c3b95f2f:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allnoconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -500,13 +615,17 @@ jobs:
       run: ./check_logs.py
   _e357ce8f7d2d716ba07663203d18eb52:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allyesconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: arm64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allyesconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -524,13 +643,17 @@ jobs:
       run: ./check_logs.py
   _e38e51bfe42f6ce103710889aa946c01:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -548,13 +671,17 @@ jobs:
       run: ./check_logs.py
   _f7ee75927f0273e4652c17902a6dc812:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -572,13 +699,17 @@ jobs:
       run: ./check_logs.py
   _00318ac7d697c430359de1e4e903d7eb:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allnoconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
@@ -596,13 +727,17 @@ jobs:
       run: ./check_logs.py
   _19dd04f50424074ba37661160bf0204c:
     runs-on: ubuntu-latest
-    needs: kick_tuxsuite_allconfigs
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allyesconfig
+    if: ${{needs.check_cache.outputs.status != 'pass'}}
     env:
       ARCH: x86_64
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allyesconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
