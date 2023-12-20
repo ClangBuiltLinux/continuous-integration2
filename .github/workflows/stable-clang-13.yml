@@ -28,15 +28,15 @@ jobs:
       status: ${{ steps.step2.outputs.status }}
     steps:
     - uses: actions/checkout@v4
-    - name: pip install requests
-      run: apt-get install -y python3-pip && pip install requests
+    - name: pip install -r requirements.txt
+      run: apt-get install -y python3-pip && pip install -r requirements.txt
     - name: python check_cache.py
       id: step1
       continue-on-error: true
-      run: python check_cache.py -w '${{github.workflow}}' -g ${{secrets.REPO_SCOPED_PAT}} -r ${{env.GIT_REF}} -o ${{env.GIT_REPO}}
+      run: python check_cache.py -w '${{ github.workflow }}' -g ${{ secrets.REPO_SCOPED_PAT }} -r ${{ env.GIT_REF }} -o ${{ env.GIT_REPO }}
     - name: Save exit code to GITHUB_OUTPUT
       id: step2
-      run: echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
+      run: echo "output=${{ steps.step1.outcome }}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-latest
@@ -48,31 +48,31 @@ jobs:
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
-      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass' }}
       run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
     - name: Checking Cache Fail
-      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.6.y --job-name defconfigs --json-out builds.json tuxsuite/stable-clang-13.tux.yml || true
     - name: Update Cache Build Status
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python update_cache.py
     - name: save builds.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_defconfigs
         if-no-files-found: error
     - name: generate boot-utils.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
       with:
         path: boot-utils.json
@@ -84,7 +84,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v5_defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -112,7 +112,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 aspeed_g5_defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -140,7 +140,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v7_defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -168,7 +168,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -196,7 +196,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 imx_v4_v5_defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -224,7 +224,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 omap2plus_defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -252,7 +252,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -280,7 +280,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -308,7 +308,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_FULL=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -336,7 +336,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -364,7 +364,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -392,7 +392,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -420,7 +420,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_UBSAN=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -448,7 +448,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: hexagon
       LLVM_VERSION: 13
@@ -476,7 +476,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: i386
       LLVM_VERSION: 13
@@ -504,7 +504,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
       LLVM_VERSION: 13
@@ -532,7 +532,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
       LLVM_VERSION: 13
@@ -560,7 +560,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 ppc64_guest_defconfig+CONFIG_PPC_DISABLE_WERROR=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -588,7 +588,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 powernv_defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -616,7 +616,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: riscv
       LLVM_VERSION: 13
@@ -644,7 +644,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=um LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: um
       LLVM_VERSION: 13
@@ -672,7 +672,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -700,7 +700,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_FULL=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -728,7 +728,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -756,7 +756,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -784,7 +784,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -812,7 +812,7 @@ jobs:
     - kick_tuxsuite_defconfigs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_UBSAN=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -845,31 +845,31 @@ jobs:
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
-      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass' }}
       run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
     - name: Checking Cache Fail
-      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.6.y --job-name distribution_configs --json-out builds.json tuxsuite/stable-clang-13.tux.yml || true
     - name: Update Cache Build Status
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python update_cache.py
     - name: save builds.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_distribution_configs
         if-no-files-found: error
     - name: generate boot-utils.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
       with:
         path: boot-utils.json
@@ -881,7 +881,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -909,7 +909,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -937,7 +937,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -965,7 +965,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -993,7 +993,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -1021,7 +1021,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: i386
       LLVM_VERSION: 13
@@ -1049,7 +1049,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -1077,7 +1077,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -1105,7 +1105,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: riscv
       LLVM_VERSION: 13
@@ -1133,7 +1133,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: riscv
       LLVM_VERSION: 13
@@ -1161,7 +1161,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -1189,7 +1189,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -1217,7 +1217,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -1245,7 +1245,7 @@ jobs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -1278,31 +1278,31 @@ jobs:
     timeout-minutes: 480
     steps:
     - name: Checking Cache Pass
-      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass' }}
       run: echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0
     - name: Checking Cache Fail
-      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
+      if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.6.y --job-name allconfigs --json-out builds.json tuxsuite/stable-clang-13.tux.yml || true
     - name: Update Cache Build Status
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python update_cache.py
     - name: save builds.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_allconfigs
         if-no-files-found: error
     - name: generate boot-utils.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
-      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
+      if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
       with:
         path: boot-utils.json
@@ -1314,7 +1314,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -1342,7 +1342,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -1370,7 +1370,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig+CONFIG_WERROR=n
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -1398,7 +1398,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -1426,7 +1426,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -1454,7 +1454,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -1482,7 +1482,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 13
@@ -1510,7 +1510,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: hexagon
       LLVM_VERSION: 13
@@ -1538,7 +1538,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: riscv
       LLVM_VERSION: 13
@@ -1566,7 +1566,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -1594,7 +1594,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -1622,7 +1622,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
@@ -1650,7 +1650,7 @@ jobs:
     - kick_tuxsuite_allconfigs
     - check_cache
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
-    if: ${{needs.check_cache.outputs.status != 'pass'}}
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 13
