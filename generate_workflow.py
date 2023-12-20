@@ -147,6 +147,7 @@ def check_cache_job_setup(repo, ref, toolchain):
 def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
     patch_series = patch_series_flag(
         tuxsuite_yml.split("/")[1].split("-clang-")[0])
+    cond = {"if": "${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}"}  # yapf: disable
     return {
         f"kick_tuxsuite_{job_name}": {
             "name": f"TuxSuite ({job_name})",
@@ -171,19 +172,22 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                     "run": "echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1"
                 },
                 {
-                    "uses": "actions/checkout@v4"
+                    "uses": "actions/checkout@v4",
+                    **cond,
                 },
                 {
                     "name": "tuxsuite",
-                    "if": "${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}",
+                    **cond,
                     "run": f"tuxsuite plan --git-repo {repo} --git-ref {ref} --job-name {job_name} --json-out builds.json {patch_series}{tuxsuite_yml} || true",
                 },
                 {
                     "name": "Update Cache Build Status",
+                    **cond,
                     "run": "python update_cache.py"
                 },
                 {
                     "name": "save builds.json",
+                    **cond,
                     "uses": "actions/upload-artifact@v3",
                     "with": {
                         "path": "builds.json",
@@ -193,10 +197,12 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 },
                 {
                     'name': 'generate boot-utils.json',
+                    **cond,
                     'run': 'python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}',
                 },
                 {
                     'name': 'save boot-utils.json',
+                    **cond,
                     'uses': 'actions/upload-artifact@v3',
                     'with': {
                         'path': 'boot-utils.json',

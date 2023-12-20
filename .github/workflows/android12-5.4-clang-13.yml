@@ -54,20 +54,25 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
     - name: tuxsuite
       if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android12-5.4 --job-name defconfigs --json-out builds.json --patch-series patches/android12-5.4 tuxsuite/android12-5.4-clang-13.tux.yml || true
     - name: Update Cache Build Status
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: python update_cache.py
     - name: save builds.json
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_defconfigs
         if-no-files-found: error
     - name: generate boot-utils.json
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       uses: actions/upload-artifact@v3
       with:
         path: boot-utils.json
@@ -174,20 +179,25 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v4
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
     - name: tuxsuite
       if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: tuxsuite plan --git-repo https://android.googlesource.com/kernel/common.git --git-ref android12-5.4 --job-name allconfigs --json-out builds.json --patch-series patches/android12-5.4 tuxsuite/android12-5.4-clang-13.tux.yml || true
     - name: Update Cache Build Status
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: python update_cache.py
     - name: save builds.json
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       uses: actions/upload-artifact@v3
       with:
         path: builds.json
         name: output_artifact_allconfigs
         if-no-files-found: error
     - name: generate boot-utils.json
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
+      if: ${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}
       uses: actions/upload-artifact@v3
       with:
         path: boot-utils.json
