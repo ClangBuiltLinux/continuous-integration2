@@ -95,12 +95,9 @@ def check_cache_job_setup(repo, ref, toolchain):
 
     return {
         "check_cache": {
-            "name":
-            "Check Cache",
-            "runs-on":
-            "ubuntu-latest",
-            "container":
-            f"tuxmake/x86_64_{toolchain}",
+            "name": "Check Cache",
+            "runs-on": "ubuntu-latest",
+            "container": f"tuxmake/x86_64_{toolchain}",
             "env": {
                 "GIT_REPO": repo,
                 "GIT_REF": ref
@@ -115,33 +112,25 @@ def check_cache_job_setup(repo, ref, toolchain):
                 },
                 {
                     "name": "pip install -r requirements.txt",
-                    "run":
-                    "apt-get install -y python3-pip && pip install -r requirements.txt"
+                    "run": "apt-get install -y python3-pip && pip install -r requirements.txt",
                 },
                 {
-                    "name":
-                    "python check_cache.py",
-                    "id":
-                    "step1",
-                    "continue-on-error":
-                    True,
-                    "run":
-                    "python check_cache.py -w '${{github.workflow}}' "
-                    "-g ${{secrets.REPO_SCOPED_PAT}} "
-                    "-r ${{env.GIT_REF}} "
-                    "-o ${{env.GIT_REPO}}",
+                    "name": "python check_cache.py",
+                    "id": "step1",
+                    "continue-on-error": True,
+                    "run": "python check_cache.py -w '${{github.workflow}}' "
+                           "-g ${{secrets.REPO_SCOPED_PAT}} "
+                           "-r ${{env.GIT_REF}} "
+                           "-o ${{env.GIT_REPO}}",
                 },
                 {
-                    "name":
-                    "Save exit code to GITHUB_OUTPUT",
-                    "id":
-                    "step2",
-                    "run":
-                    'echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"',
+                    "name": "Save exit code to GITHUB_OUTPUT",
+                    "id": "step2",
+                    "run": 'echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"',
                 },
             ],
         }
-    }
+    }  # yapf: disable
 
 
 def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
