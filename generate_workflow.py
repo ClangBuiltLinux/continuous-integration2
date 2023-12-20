@@ -95,12 +95,9 @@ def check_cache_job_setup(repo, ref, toolchain):
 
     return {
         "check_cache": {
-            "name":
-            "Check Cache",
-            "runs-on":
-            "ubuntu-latest",
-            "container":
-            f"tuxmake/x86_64_{toolchain}",
+            "name": "Check Cache",
+            "runs-on": "ubuntu-latest",
+            "container": f"tuxmake/x86_64_{toolchain}",
             "env": {
                 "GIT_REPO": repo,
                 "GIT_REF": ref
@@ -114,40 +111,32 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "uses": "actions/checkout@v4"
                 },
                 {
-                    "name": "pip install requests",
-                    "run":
-                    "apt-get install -y python3-pip && pip install requests"
+                    "name": "pip install -r requirements.txt",
+                    "run": "apt-get install -y python3-pip && pip install -r requirements.txt",
                 },
                 {
-                    "name":
-                    "python check_cache.py",
-                    "id":
-                    "step1",
-                    "continue-on-error":
-                    True,
-                    "run":
-                    "python check_cache.py -w '${{github.workflow}}' "
-                    "-g ${{secrets.REPO_SCOPED_PAT}} "
-                    "-r ${{env.GIT_REF}} "
-                    "-o ${{env.GIT_REPO}}",
+                    "name": "python check_cache.py",
+                    "id": "step1",
+                    "continue-on-error": True,
+                    "run": "python check_cache.py -w '${{ github.workflow }}' "
+                           "-g ${{ secrets.REPO_SCOPED_PAT }} "
+                           "-r ${{ env.GIT_REF }} "
+                           "-o ${{ env.GIT_REPO }}",
                 },
                 {
-                    "name":
-                    "Save exit code to GITHUB_OUTPUT",
-                    "id":
-                    "step2",
-                    "run":
-                    'echo "output=${{steps.step1.outcome}}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"',
+                    "name": "Save exit code to GITHUB_OUTPUT",
+                    "id": "step2",
+                    "run": 'echo "output=${{ steps.step1.outcome }}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"',
                 },
             ],
         }
-    }
+    }  # yapf: disable
 
 
 def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
     patch_series = patch_series_flag(
         tuxsuite_yml.split("/")[1].split("-clang-")[0])
-    cond = {"if": "${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}"}  # yapf: disable
+    cond = {"if": "${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}"}  # yapf: disable
     return {
         f"kick_tuxsuite_{job_name}": {
             "name": f"TuxSuite ({job_name})",
@@ -163,12 +152,12 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
             "steps": [
                 {
                     "name": "Checking Cache Pass",
-                    "if": "${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass'}}",
+                    "if": "${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'pass' }}",
                     "run": "echo 'Cache HIT on previously PASSED build. Passing this build to avoid redundant work.' && exit 0"
                 },
                 {
                     "name": "Checking Cache Fail",
-                    "if": "${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail'}}",
+                    "if": "${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}",
                     "run": "echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1"
                 },
                 {
@@ -222,7 +211,7 @@ def get_steps(build, build_set):
             "runs-on": "ubuntu-latest",
             "needs": [f"kick_tuxsuite_{build_set}", "check_cache"],
             "name": name,
-            "if": "${{needs.check_cache.outputs.status != 'pass'}}",
+            "if": "${{ needs.check_cache.outputs.status != 'pass' }}",
             "env": {
                 "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
                 "LLVM_VERSION": build["llvm_version"],
