@@ -114,9 +114,9 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "uses": "actions/checkout@v4"
                 },
                 {
-                    "name": "pip install requests",
+                    "name": "pip install -r requirements.txt",
                     "run":
-                    "apt-get install -y python3-pip && pip install requests"
+                    "apt-get install -y python3-pip && pip install -r requirements.txt"
                 },
                 {
                     "name":
