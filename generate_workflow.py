@@ -147,7 +147,7 @@ def check_cache_job_setup(repo, ref, toolchain):
 def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
     patch_series = patch_series_flag(
         tuxsuite_yml.split("/")[1].split("-clang-")[0])
-    cond = {"if": "${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}"}
+    cond = {"if": "${{needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch'}}"}  # yapf: disable
     return {
         f"kick_tuxsuite_{job_name}": {
             "name": f"TuxSuite ({job_name})",
