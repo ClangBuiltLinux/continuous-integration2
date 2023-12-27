@@ -12,7 +12,7 @@ name: android13-5.10 (clang-18)
     - tuxsuite/android13-5.10-clang-18.tux.yml
     - .github/workflows/android13-5.10-clang-18.yml
   schedule:
-  - cron: 0 0 * * 2
+  - cron: 0 6 * * 1,2,3,4,5
   workflow_dispatch: null
 permissions: read-all
 jobs:
