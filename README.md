@@ -71,3 +71,26 @@ need to do.
 Requires that a
 [TuxSuite secret token](https://gitlab.com/Linaro/tuxsuite#setup-config) is
 configured.
+
+## Caching
+> Introduced in https://github.com/ClangBuiltLinux/continuous-integration2/pull/664
+<details>
+  <summary>Info and Diagram</summary>
+  <br>
+  <section>
+    <p>
+      To help reduce Tuxsuite build minutes, the CI utilizes a <em>frontend cache</em>.
+      <br>
+      With this, redundant workflows can be stopped before spinning up any Tuxsuite jobs.
+    </p>
+  </section>
+
+
+  <b>Here's a diagram</b>:
+
+  <img src="https://github.com/ClangBuiltLinux/continuous-integration2/assets/24460581/fbdd2743-53ef-4dca-ae0f-46f62cf7f885" width=400 height=500></img>
+
+</details>
+
+> [!NOTE]
+> This frontend cache is different than the caching system that Tuxsuite/Tuxbuild is using; those systems involve caching build targets and other compiler information.
