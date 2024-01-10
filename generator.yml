@@ -55,7 +55,6 @@ trees:
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
   - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
   - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19"}
-  - &stable-4_14      {git_repo: *stable-url,   git_ref: linux-4.14.y,        name: "4.14"}
   - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
   - &android15-6_6    {git_repo: *android-url,  git_ref: android15-6.6,       name: android15-6.6}
   - &android15-6_1    {git_repo: *android-url,  git_ref: android15-6.1,       name: android15-6.1}
@@ -66,7 +65,6 @@ trees:
   - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10}
   - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4}
   - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19}
-  - &android-4_14     {git_repo: *android-url,  git_ref: android-4.14-stable, name: android-4.14}
   - &chromeos-5_15    {git_repo: *chromeos-url, git_ref: chromeos-5.15,       name: chromeos-5.15}
   - &chromeos-5_10    {git_repo: *chromeos-url, git_ref: chromeos-5.10,       name: chromeos-5.10}
   - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
@@ -142,12 +140,6 @@ tree_schedules:
   - &stable-4_19_llvm_15           {<< : *llvm_15,      << : *stable-4_19,      << : *wednesdays}
   - &stable-4_19_llvm_14           {<< : *llvm_14,      << : *stable-4_19,      << : *wednesdays}
   - &stable-4_19_llvm_13           {<< : *llvm_13,      << : *stable-4_19,      << : *wednesdays}
-  - &stable-4_14_llvm_tot          {<< : *llvm_tot,     << : *stable-4_14,      << : *monday_friday}
-  - &stable-4_14_llvm_latest       {<< : *llvm_latest,  << : *stable-4_14,      << : *monday_friday}
-  - &stable-4_14_llvm_16           {<< : *llvm_16,      << : *stable-4_14,      << : *wednesdays}
-  - &stable-4_14_llvm_15           {<< : *llvm_15,      << : *stable-4_14,      << : *wednesdays}
-  - &stable-4_14_llvm_14           {<< : *llvm_14,      << : *stable-4_14,      << : *wednesdays}
-  - &stable-4_14_llvm_13           {<< : *llvm_13,      << : *stable-4_14,      << : *wednesdays}
   - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *daily_six}
   - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *daily_six}
   - &android-mainline_llvm_16      {<< : *llvm_16,      << : *android-mainline, << : *sundays}
@@ -228,14 +220,6 @@ tree_schedules:
   - &android-4_19_llvm_13          {<< : *llvm_13,      << : *android-4_19,     << : *sundays}
   - &android-4_19_llvm_12          {<< : *llvm_12,      << : *android-4_19,     << : *sundays}
   - &android-4_19_llvm_android     {<< : *llvm_android, << : *android-4_19,     << : *daily_six}
-  - &android-4_14_llvm_tot         {<< : *llvm_tot,     << : *android-4_14,     << : *daily_six}
-  - &android-4_14_llvm_latest      {<< : *llvm_latest,  << : *android-4_14,     << : *daily_six}
-  - &android-4_14_llvm_16          {<< : *llvm_16,      << : *android-4_14,     << : *sundays}
-  - &android-4_14_llvm_15          {<< : *llvm_15,      << : *android-4_14,     << : *sundays}
-  - &android-4_14_llvm_14          {<< : *llvm_14,      << : *android-4_14,     << : *sundays}
-  - &android-4_14_llvm_13          {<< : *llvm_13,      << : *android-4_14,     << : *sundays}
-  - &android-4_14_llvm_12          {<< : *llvm_12,      << : *android-4_14,     << : *sundays}
-  - &android-4_14_llvm_android     {<< : *llvm_android, << : *android-4_14,     << : *daily_six}
   - &chromeos-5_15_llvm_tot        {<< : *llvm_tot,     << : *chromeos-5_15,    << : *daily_six}
   - &chromeos-5_15_llvm_latest     {<< : *llvm_latest,  << : *chromeos-5_15,    << : *daily_six}
   - &chromeos-5_15_llvm_16         {<< : *llvm_16,      << : *chromeos-5_15,    << : *sundays}
@@ -904,15 +888,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64le,           << : *stable-4_19,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_tot}
-  ############
-  #  4.14.y  #
-  ############
-  - {<< : *arm32_v7,          << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *arm32_v7_t,        << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *arm64,             << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_tot}
-  - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_tot}
-  - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_tot}
   #############
   #  Android  #
   #############
@@ -955,8 +930,6 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_tot}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_tot}
   ##############
   #  ChromeOS  #
   ##############
@@ -1467,15 +1440,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_latest}
   - {<< : *ppc64le,           << : *stable-4_19,      << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_latest}
-  ############
-  #  4.14.y  #
-  ############
-  - {<< : *arm32_v7,          << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *arm32_v7_t,        << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *arm64,             << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_latest}
-  - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_latest}
-  - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_latest}
-  - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_latest}
   #############
   #  Android  #
   #############
@@ -1518,8 +1482,6 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_latest}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_latest}
   ##############
   #  ChromeOS  #
   ##############
@@ -2014,15 +1976,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_16}
   - {<< : *ppc64le,           << : *stable-4_19,      << : *clang,           boot: true,  << : *llvm_16}
   - {<< : *x86_64,            << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_16}
-  ############
-  #  4.14.y  #
-  ############
-  - {<< : *arm32_v7,          << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_16}
-  - {<< : *arm32_v7_t,        << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_16}
-  - {<< : *arm64,             << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_16}
-  - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_16}
-  - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_16}
-  - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_16}
   #############
   #  Android  #
   #############
@@ -2065,8 +2018,6 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_16}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_16}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_16}
   ##############
   #  ChromeOS  #
   ##############
@@ -2537,15 +2488,6 @@ builds:
   - {<< : *arm64be,           << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_15}
   - {<< : *ppc64le,           << : *stable-4_19,      << : *clang,           boot: true,  << : *llvm_15}
   - {<< : *x86_64,            << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_15}
-  ############
-  #  4.14.y  #
-  ############
-  - {<< : *arm32_v7,          << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_15}
-  - {<< : *arm32_v7_t,        << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_15}
-  - {<< : *arm64,             << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_15}
-  - {<< : *arm64be,           << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_15}
-  - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_15}
-  - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_15}
   #############
   #  Android  #
   #############
@@ -2588,8 +2530,6 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_15}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_15}
   ##############
   #  ChromeOS  #
   ##############
@@ -3027,14 +2967,6 @@ builds:
   - {<< : *arm64,             << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_14}
   - {<< : *ppc64le,           << : *stable-4_19,      << : *clang,           boot: true,  << : *llvm_14}
   - {<< : *x86_64,            << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_14}
-  ############
-  #  4.14.y  #
-  ############
-  - {<< : *arm32_v7,          << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_14}
-  - {<< : *arm32_v7_t,        << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_14}
-  - {<< : *arm64,             << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_14}
-  - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_14}
-  - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_14}
   #############
   #  Android  #
   #############
@@ -3077,8 +3009,6 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_14}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_14}
   ##############
   #  ChromeOS  #
   ##############
@@ -3513,14 +3443,6 @@ builds:
   - {<< : *arm64,             << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64le,           << : *stable-4_19,      << : *clang,           boot: true,  << : *llvm_13}
   - {<< : *x86_64,            << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_13}
-  ############
-  #  4.14.y  #
-  ############
-  - {<< : *arm32_v7,          << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *arm32_v7_t,        << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *arm64,             << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_13}
-  - {<< : *ppc64le,           << : *stable-4_14,      << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *x86_64,            << : *stable-4_14,      << : *lld,             boot: true,  << : *llvm_13}
   #############
   #  Android  #
   #############
@@ -3563,8 +3485,6 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_13}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_13}
   ##############
   #  ChromeOS  #
   ##############
@@ -4015,8 +3935,6 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_12}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_12}
   ##############
   #  ChromeOS  #
   ##############
@@ -4518,5 +4436,3 @@ builds:
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_android}
   - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_android}
-  - {<< : *arm64_cut,         << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_android}
-  - {<< : *x86_64_cut,        << : *android-4_14,     << : *lld,             boot: true,  << : *llvm_android}
