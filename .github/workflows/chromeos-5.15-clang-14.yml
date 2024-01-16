@@ -78,18 +78,18 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_defconfigs
         if-no-files-found: error
-  _ba0405fc73f16ae6a9868701e4c950dc:
+  _30b158c8f6c703686e9d753bcdaaef03:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64-generic.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 14
       BOOT: 1
-      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
+      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/arm64/common.config+chromeos/config/chromeos/arm64/chromiumos-arm64-generic.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
