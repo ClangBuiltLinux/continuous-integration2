@@ -65,6 +65,8 @@ trees:
   - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10}
   - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4}
   - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19}
+  - &chromeos-6_6     {git_repo: *chromeos-url, git_ref: chromeos-6.6,        name: chromeos-6.6}
+  - &chromeos-6_1     {git_repo: *chromeos-url, git_ref: chromeos-6.1,        name: chromeos-6.1}
   - &chromeos-5_15    {git_repo: *chromeos-url, git_ref: chromeos-5.15,       name: chromeos-5.15}
   - &chromeos-5_10    {git_repo: *chromeos-url, git_ref: chromeos-5.10,       name: chromeos-5.10}
   - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
@@ -220,6 +222,20 @@ tree_schedules:
   - &android-4_19_llvm_13          {<< : *llvm_13,      << : *android-4_19,     << : *sundays}
   - &android-4_19_llvm_12          {<< : *llvm_12,      << : *android-4_19,     << : *sundays}
   - &android-4_19_llvm_android     {<< : *llvm_android, << : *android-4_19,     << : *daily_six}
+  - &chromeos-6_6_llvm_tot         {<< : *llvm_tot,     << : *chromeos-6_6,     << : *daily_six}
+  - &chromeos-6_6_llvm_latest      {<< : *llvm_latest,  << : *chromeos-6_6,     << : *daily_six}
+  - &chromeos-6_6_llvm_16          {<< : *llvm_16,      << : *chromeos-6_6,     << : *sundays}
+  - &chromeos-6_6_llvm_15          {<< : *llvm_15,      << : *chromeos-6_6,     << : *sundays}
+  - &chromeos-6_6_llvm_14          {<< : *llvm_14,      << : *chromeos-6_6,     << : *sundays}
+  - &chromeos-6_6_llvm_13          {<< : *llvm_13,      << : *chromeos-6_6,     << : *sundays}
+  - &chromeos-6_6_llvm_12          {<< : *llvm_12,      << : *chromeos-6_6,     << : *sundays}
+  - &chromeos-6_1_llvm_tot         {<< : *llvm_tot,     << : *chromeos-6_1,     << : *daily_six}
+  - &chromeos-6_1_llvm_latest      {<< : *llvm_latest,  << : *chromeos-6_1,     << : *daily_six}
+  - &chromeos-6_1_llvm_16          {<< : *llvm_16,      << : *chromeos-6_1,     << : *sundays}
+  - &chromeos-6_1_llvm_15          {<< : *llvm_15,      << : *chromeos-6_1,     << : *sundays}
+  - &chromeos-6_1_llvm_14          {<< : *llvm_14,      << : *chromeos-6_1,     << : *sundays}
+  - &chromeos-6_1_llvm_13          {<< : *llvm_13,      << : *chromeos-6_1,     << : *sundays}
+  - &chromeos-6_1_llvm_12          {<< : *llvm_12,      << : *chromeos-6_1,     << : *sundays}
   - &chromeos-5_15_llvm_tot        {<< : *llvm_tot,     << : *chromeos-5_15,    << : *daily_six}
   - &chromeos-5_15_llvm_latest     {<< : *llvm_latest,  << : *chromeos-5_15,    << : *daily_six}
   - &chromeos-5_15_llvm_16         {<< : *llvm_16,      << : *chromeos-5_15,    << : *sundays}
@@ -933,6 +949,10 @@ builds:
   ##############
   #  ChromeOS  #
   ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -1485,6 +1505,10 @@ builds:
   ##############
   #  ChromeOS  #
   ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -2021,6 +2045,10 @@ builds:
   ##############
   #  ChromeOS  #
   ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_16}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_16}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_16}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_16}
@@ -2533,6 +2561,10 @@ builds:
   ##############
   #  ChromeOS  #
   ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_15}
@@ -3012,6 +3044,10 @@ builds:
   ##############
   #  ChromeOS  #
   ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_14}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_14}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_14}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_14}
@@ -3488,6 +3524,10 @@ builds:
   ##############
   #  ChromeOS  #
   ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_13}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_13}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_13}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_13}
@@ -3938,6 +3978,10 @@ builds:
   ##############
   #  ChromeOS  #
   ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_12}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_12}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_12}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_12}
