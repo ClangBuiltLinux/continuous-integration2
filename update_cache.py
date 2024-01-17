@@ -64,10 +64,25 @@ def main():
         sys.exit(1)
 
     # let's grab sha and version info as Tuxsuite has the most up-to-date info
-    # we only need the first entry
-    first_entry = builds[next(iter(builds))]
-    git_sha = first_entry["git_sha"]
-    clang_version = first_entry["tuxmake_metadata"]["compiler"]["version_full"]
+    builds_that_are_missing_metadata = []
+    git_sha = None
+    clang_version = None
+    for entry, build in builds.items():
+        try:
+            git_sha = build["git_sha"]
+            clang_version = build["tuxmake_metadata"]["compiler"]["version_full"]
+        except KeyError:
+            builds_that_are_missing_metadata.append(entry)
+
+    if len(builds_that_are_missing_metadata):
+        print(
+            "Error: Some of the builds in builds.json are malformed and missing "
+            f"some metadata. Here's a list: {builds_that_are_missing_metadata}\n"
+            f"Here's the build.json in question:\n{raw}"
+        )
+        sys.exit(0)
+
+    assert git_sha and clang_version
 
     print(f"Tuxsuite {git_sha = } | {clang_version = }")
 
