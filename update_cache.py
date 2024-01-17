@@ -70,7 +70,8 @@ def main():
     for entry, build in builds.items():
         try:
             git_sha = build["git_sha"]
-            clang_version = build["tuxmake_metadata"]["compiler"]["version_full"]
+            clang_version = build["tuxmake_metadata"]["compiler"][
+                "version_full"]
         except KeyError:
             builds_that_are_missing_metadata.append(entry)
 
@@ -78,8 +79,7 @@ def main():
         print(
             "Error: Some of the builds in builds.json are malformed and missing "
             f"some metadata. Here's a list: {builds_that_are_missing_metadata}\n"
-            f"Here's the build.json in question:\n{raw}"
-        )
+            f"Here's the build.json in question:\n{raw}")
         sys.exit(0)
 
     assert git_sha and clang_version
