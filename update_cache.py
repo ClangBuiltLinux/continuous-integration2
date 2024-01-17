@@ -74,7 +74,7 @@ def main():
         except KeyError:
             builds_that_are_missing_metadata.append(entry)
 
-    if len(builds_that_are_missing_metadata):
+    if len(builds_that_are_missing_metadata) > 0:
         print(
             "Error: Some of the builds in builds.json are malformed and missing "
             f"some metadata. Here's a list: {builds_that_are_missing_metadata}\n"
