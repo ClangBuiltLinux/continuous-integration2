@@ -78,9 +78,11 @@ def main():
     if len(builds_that_are_missing_metadata) > 0:
         print(
             "Error: Some of the builds in builds.json are malformed and missing "
-            f"some metadata. Here's a list: {builds_that_are_missing_metadata}\n"
-            f"Here's the build.json in question:\n{raw}")
-        sys.exit(0)
+            "some metadata.\n"
+            f"Here's a list: {builds_that_are_missing_metadata}\n"
+            f"Here's the build.json in question:\n{raw}"
+        )
+        sys.exit(1)
 
     assert git_sha and clang_version
 
