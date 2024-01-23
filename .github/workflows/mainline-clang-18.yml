@@ -610,18 +610,18 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _c14d023a315cad36e5d5d6ea80436cc5:
+  _607f4ff88c5ce4336318ec876582deb2:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+    name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: loongarch
       LLVM_VERSION: 18
       BOOT: 1
-      CONFIG: defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+      CONFIG: defconfig
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -638,18 +638,18 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _075efb0c529fa75ac5def59ccf273284:
+  _c5f8d365b4a86ea82ea6f05e48c6158f:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_LTO_CLANG_THIN=y
+    name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: loongarch
       LLVM_VERSION: 18
       BOOT: 1
-      CONFIG: defconfig+CONFIG_CRASH_DUMP=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_LTO_CLANG_THIN=y
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1952,18 +1952,18 @@ jobs:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _815f1cb999e7b905e3f7afa1d8c552ec:
+  _03fb3a458a2932225d42f868649d6285:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
-    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: loongarch
       LLVM_VERSION: 18
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n
+      CONFIG: allmodconfig
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1980,18 +1980,18 @@ jobs:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _673d987b5a25dadd0583fed890ffd15d:
+  _c1cdf2678eeae9d3f6207b9c46a72d59:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
-    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_FTRACE=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y
+    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: loongarch
       LLVM_VERSION: 18
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_CRASH_DUMP=n+CONFIG_FTRACE=n+CONFIG_KCOV=n+CONFIG_MODULES=n+CONFIG_RELOCATABLE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y
+      CONFIG: allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
