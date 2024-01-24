@@ -1,2 +1,3 @@
+20240123_keescook_smb_work_around_clang___bdos_type_confusion.patch
 20240123_nathan_modpost_add_ltext_and_ltext_to_text_sections.patch
 20240123_nathan_um_fix_adding_no_pie_for_clang.patch
