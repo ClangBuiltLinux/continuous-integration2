@@ -31,12 +31,10 @@ MOCK = "MOCK" in os.environ
 
 def update_cache(status: str, git_sha: str, clang_version: str):
     print(f"Trying to update cache with status: {status}")
-    cache_entry_key = get_workflow_name_to_var_name(
-        os.environ["GITHUB_WORKFLOW"])
+    cache_entry_key = get_workflow_name_to_var_name(os.environ["GITHUB_WORKFLOW"])
 
-    if 'REPO_SCOPED_PAT' not in os.environ:
-        print(
-            "Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
+    if "REPO_SCOPED_PAT" not in os.environ:
+        print("Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
         sys.exit(1)
 
     headers = {"Authorization": f"Bearer {os.environ['REPO_SCOPED_PAT']}"}
@@ -48,14 +46,15 @@ def update_cache(status: str, git_sha: str, clang_version: str):
         sha=git_sha,
         clang_version=clang_version,
         # prevent overriding a 'fail' to a 'pass'
-        allow_fail_to_pass=False)
+        allow_fail_to_pass=False,
+    )
 
 
 def main():
     builds_json = Path(("mock." if MOCK else "") + "builds.json")
 
     print(f"Reading {builds_json}")
-    raw = builds_json.read_text(encoding='utf-8')
+    raw = builds_json.read_text(encoding="utf-8")
 
     builds = json.loads(raw)["builds"]
 
@@ -70,18 +69,24 @@ def main():
     for entry, build in builds.items():
         try:
             git_sha = build["git_sha"]
-            clang_version = build["tuxmake_metadata"]["compiler"][
-                "version_full"]
+            clang_version = build["tuxmake_metadata"]["compiler"]["version_full"]
         except KeyError:
             builds_that_are_missing_metadata.append(entry)
 
+    if len(builds_that_are_missing_metadata) == len(builds):
+        raise RuntimeError(
+            f"Could not find a suitable git sha or compiler version in any build\n"
+            f"Here's the build.json:\n{raw}"
+        )
+
     if len(builds_that_are_missing_metadata) > 0:
         print(
-            "Error: Some of the builds in builds.json are malformed and missing "
+            "Warning: Some of the builds in builds.json are malformed and missing "
             "some metadata.\n"
             f"Here's a list: {builds_that_are_missing_metadata}\n"
-            f"Here's the build.json in question:\n{raw}")
-        sys.exit(1)
+            f"Here's the build.json in question:\n{raw}"
+        )
+        sys.exit(0)
 
     assert git_sha and clang_version
 
