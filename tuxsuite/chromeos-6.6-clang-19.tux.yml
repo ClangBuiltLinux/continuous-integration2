@@ -29,7 +29,7 @@ jobs:
     kconfig:
     - chromeos/config/chromeos/base.config
     - chromeos/config/chromeos/x86_64/common.config
-    - chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config
+    - chromeos/config/chromeos/x86_64/chromiumos-x86_64-generic.flavour.config
     - CONFIG_SECURITY_CHROMIUMOS=n
     targets:
     - kernel
