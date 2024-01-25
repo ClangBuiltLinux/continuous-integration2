@@ -129,7 +129,10 @@
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *riscv_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *riscv_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *riscv_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
