@@ -57,7 +57,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name defconfigs --json-out builds.json tuxsuite/arm64-clang-19.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name defconfigs --json-out builds.json --patch-series patches/arm64 tuxsuite/arm64-clang-19.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python update_cache.py
@@ -154,7 +154,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name allconfigs --json-out builds.json tuxsuite/arm64-clang-19.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git --git-ref for-next/core --job-name allconfigs --json-out builds.json --patch-series patches/arm64 tuxsuite/arm64-clang-19.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python update_cache.py
