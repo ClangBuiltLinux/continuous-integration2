@@ -106,18 +106,18 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: ./check_logs.py
-  _f4b5735ed34b157b0bdaab7bb7be54d0:
+  _e6457d3f8d682c9d5c0b058734f0b0ba:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64-generic.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 16
       BOOT: 1
-      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
+      CONFIG: chromeos/config/chromeos/base.config+chromeos/config/chromeos/x86_64/common.config+chromeos/config/chromeos/x86_64/chromiumos-x86_64-generic.flavour.config+CONFIG_SECURITY_CHROMIUMOS=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
