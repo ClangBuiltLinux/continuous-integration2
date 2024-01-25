@@ -73,6 +73,7 @@ def main():
             git_sha = build["git_sha"]
             clang_version = build["tuxmake_metadata"]["compiler"][
                 "version_full"]
+            break
         except KeyError:
             builds_that_are_missing_metadata.append(entry)
 
@@ -87,7 +88,6 @@ def main():
             "some metadata.\n"
             f"Here's a list: {builds_that_are_missing_metadata}\n"
             f"Here's the build.json in question:\n{raw}")
-        sys.exit(0)
 
     assert git_sha and clang_version
 
