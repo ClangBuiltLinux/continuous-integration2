@@ -1,0 +1,11 @@
+architectures:
+  - &arm-arch       arm
+  - &arm64-arch     arm64
+  - &hexagon-arch   hexagon
+  - &i386-arch      i386
+  - &loongarch-arch loongarch
+  - &mips-arch      mips
+  - &powerpc-arch   powerpc
+  - &riscv-arch     riscv
+  - &s390-arch      s390
+  - &um-arch        um

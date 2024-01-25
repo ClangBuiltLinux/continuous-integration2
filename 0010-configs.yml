@@ -1,0 +1,95 @@
+configs:
+  #                     config:                                                                                image target (optional)    [ARCH:] (Optional: x86)  targets to build
+  - &arm32_v5          {config: multi_v5_defconfig,                                                                                        ARCH: *arm-arch,        << : *kernel_dtbs}
+  - &arm32_v6          {config: aspeed_g5_defconfig,                                                                                       ARCH: *arm-arch,        << : *kernel_dtbs}
+  - &arm32_v7          {config: multi_v7_defconfig,                                                                                        ARCH: *arm-arch,        << : *kernel}
+  - &arm32_v7_t        {config: [multi_v7_defconfig, CONFIG_THUMB2_KERNEL=y],                                                              ARCH: *arm-arch,        << : *kernel}
+  - &arm32_imx         {config: imx_v4_v5_defconfig,                                                                                       ARCH: *arm-arch,        << : *default}
+  - &arm32_omap        {config: omap2plus_defconfig,                                                                                       ARCH: *arm-arch,        << : *default}
+  - &arm32_lpae_fp     {config: [multi_v7_defconfig, CONFIG_ARM_LPAE=y, CONFIG_UNWINDER_FRAME_POINTER=y],                                  ARCH: *arm-arch,        << : *kernel}
+  - &arm32_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                                                           ARCH: *arm-arch,        << : *default}
+  - &arm32_allno       {config: allnoconfig,                                                                                               ARCH: *arm-arch,        << : *default}
+  - &arm32_allyes      {config: [allyesconfig, CONFIG_WERROR=n],                                                                           ARCH: *arm-arch,        << : *default}
+  - &arm32_alpine      {config: *arm32-alpine-config-url,                                                                                  ARCH: *arm-arch,        << : *kernel}
+  - &arm32_suse        {config: *arm32-suse-config-url,                                                                                    ARCH: *arm-arch,        << : *kernel}
+  - &arm64             {config: defconfig,                                                                                                 ARCH: *arm64-arch,      << : *kernel}
+  #                                         https://github.com/ClangBuiltLinux/linux/issues/595
+  - &arm64_no_vdso32   {config: [defconfig, CONFIG_COMPAT_VDSO=n],                                                                         ARCH: *arm64-arch,      << : *kernel}
+  - &arm64be           {config: [defconfig, CONFIG_CPU_BIG_ENDIAN=y],                                                                      ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cros        {<< : *arm64-cros-configs,                                                                                          ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_lto_full    {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                      ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                      ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cfi         {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                           ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cfi_lto     {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                  ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_kasan       {<< : *arm64-kasan-configs,                                                                                         ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_kasan_sw    {<< : *arm64-kasan-sw-configs,                                                                                      ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_ubsan       {config: [defconfig, CONFIG_UBSAN=y],                                                                               ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_gki         {config: gki_defconfig,                                                                                             ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cut         {config: cuttlefish_defconfig,                                                                                      ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_allmod      {config: allmodconfig,                                                                                              ARCH: *arm64-arch,      << : *default}
+  - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y],                             ARCH: *arm64-arch,      << : *default}
+  - &arm64_allno       {config: allnoconfig,                                                                                               ARCH: *arm64-arch,      << : *default}
+  - &arm64_allyes      {config: allyesconfig,                                                                                              ARCH: *arm64-arch,      << : *default}
+  - &arm64_alpine      {config: *arm64-alpine-config-url,                                                                                  ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_fedora      {config: *arm64-fedora-config-url,                                                                                  ARCH: *arm64-arch,      << : *kernel}
+  # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
+  - &arm64_fedora_bpf  {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                          ARCH: *arm64-arch,      << : *kernel}
+  # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
+  - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                         ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_virt        {config: virtconfig,                                                                                                ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_hardening   {config: [defconfig, hardening.config],                                                                             ARCH: *arm64-arch,      << : *kernel}
+  - &hexagon           {config: defconfig,                                                                                                 ARCH: *hexagon-arch,    << : *default}
+  - &hexagon_allmod    {config: [allmodconfig, CONFIG_WERROR=n],                                                                           ARCH: *hexagon-arch,    << : *default}
+  - &i386              {config: defconfig,                                                                                                 ARCH: *i386-arch,       << : *kernel}
+  - &i386_suse         {config: *i386-suse-config-url,                                                                                     ARCH: *i386-arch,       << : *default}
+  - &loong             {config: defconfig,                                                                                                 ARCH: *loongarch-arch,  << : *kernel}
+  - &loong_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                      ARCH: *loongarch-arch,  << : *kernel}
+  - &loong_allmod      {config: allmodconfig,                                                                                              ARCH: *loongarch-arch,  << : *default}
+  - &loong_allmod_lto  {config: [allmodconfig, CONFIG_FTRACE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y],                            ARCH: *loongarch-arch,  << : *default}
+  - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],           kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
+  - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                    kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
+  - &ppc32             {config: ppc44x_defconfig,                                                              kernel_image: uImage,       ARCH: *powerpc-arch,    << : *kernel}
+  - &ppc64             {config: ppc64_guest_defconfig,                                                         kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
+  # Disable -Werror for ppc64_guest_defconfig for clang-13 and older: https://github.com/ClangBuiltLinux/linux/issues/1445
+  - &ppc64_no_werror   {config: [ppc64_guest_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                          kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
+  - &ppc64le           {config: powernv_defconfig,                                                             kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
+  - &ppc64le_fedora    {config: *ppc64le-fedora-config-url,                                                    kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
+  # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
+  - &ppc64le_fedora_bpf {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                           kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
+  - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                      kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
+  - &ppc64_allmod      {config: [allmodconfig, CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y, CONFIG_WERROR=n],                                     ARCH: *powerpc-arch,    << : *default}
+  - &riscv             {config: defconfig,                                                                     kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
+  - &riscv_allmod      {config: [allmodconfig, CONFIG_WERROR=n],                                               kernel_image: Image,        ARCH: *riscv-arch,      << : *default}
+  #                                         https://github.com/ClangBuiltLinux/linux/issues/1143
+  - &riscv_no_efi      {config: [defconfig, CONFIG_EFI=n],                                                     kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
+  - &riscv_alpine      {config: *riscv-alpine-config-url,                                                      kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
+  - &riscv_suse        {config: *riscv-suse-config-url,                                                        kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
+  - &riscv_gki         {config: gki_defconfig,                                                                 kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
+  - &s390              {config: defconfig,                                                                                                 ARCH: *s390-arch,       << : *kernel}
+  - &s390_kasan        {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],            ARCH: *s390-arch,       << : *kernel}
+  - &s390_fedora       {config: *s390-fedora-config-url,                                                                                   ARCH: *s390-arch,       << : *kernel}
+  # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
+  - &s390_fedora_bpf   {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           ARCH: *s390-arch,       << : *kernel}
+  - &s390_suse         {config: *s390-suse-config-url,                                                                                     ARCH: *s390-arch,       << : *kernel}
+  - &um                {config: defconfig,                                                                                                 ARCH: *um-arch,         << : *kernel}
+  - &x86_64            {config: defconfig,                                                                                                                         << : *kernel}
+  - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                              << : *kernel}
+  - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                              << : *kernel}
+  - &x86_64_cfi        {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                                                   << : *kernel}
+  - &x86_64_cfi_lto    {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                                          << : *kernel}
+  - &x86_64_cros       {<< : *x86_64-cros-configs,                                                                                                                 << : *kernel}
+  - &x86_64_gki        {config: gki_defconfig,                                                                                                                     << : *kernel}
+  - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                       << : *kernel}
+  - &x86_64_allmod     {config: allmodconfig,                                                                                                                      << : *default}
+  - &x86_64_allmod_lto {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y],                                                     << : *default}
+  - &x86_64_allno      {config: allnoconfig,                                                                                                                       << : *default}
+  - &x86_64_allyes     {config: allyesconfig,                                                                                                                      << : *default}
+  - &x86_64_gcov       {config: [defconfig, CONFIG_GCOV_KERNEL=y, CONFIG_GCOV_PROFILE_ALL=y],                                                                      << : *kernel}
+  - &x86_64_kasan      {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],                                    << : *kernel}
+  - &x86_64_kcsan      {config: [defconfig, CONFIG_KCSAN=y, CONFIG_KCSAN_KUNIT_TEST=y, CONFIG_KUNIT=y],                                                            << : *kernel}
+  - &x86_64_ubsan      {config: [defconfig, CONFIG_UBSAN=y],                                                                                                       << : *kernel}
+  - &x86_64_hardening  {config: [defconfig, hardening.config],                                                                                                     << : *kernel}
+  - &x86_64_alpine     {config: *x86_64-alpine-config-url,                                                                                                         << : *kernel}
+  - &x86_64_arch       {config: *x86_64-arch-config-url,                                                                                                           << : *kernel}
+  - &x86_64_fedora     {config: *x86_64-fedora-config-url,                                                                                                         << : *kernel}
+  - &x86_64_suse       {config: *x86_64-suse-config-url,                                                                                                           << : *kernel}

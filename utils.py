@@ -11,14 +11,18 @@ CI_ROOT = Path(__file__).resolve().parent
 
 
 def get_config_from_generator():
+    if not (all_generator_files := sorted(CI_ROOT.glob('*.yml'))):
+        raise FileNotFoundError('No generator files could not be found?')
+
+    generator_pieces = []
+    for file in all_generator_files:
+        if '-llvm-' in file.name and 'builds:\n' not in generator_pieces:
+            generator_pieces.append('builds:\n')
+        generator_pieces.append(file.read_text(encoding='utf-8'))
+
     # Trusted input.
     # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
-    try:
-        with Path(CI_ROOT, "generator.yml").open(encoding='utf-8') as file:
-            return yaml.load(file, Loader=yaml.FullLoader)
-    except FileNotFoundError as err:
-        print_red("generator.yml not found?")
-        raise err
+    return yaml.load(''.join(generator_pieces), Loader=yaml.FullLoader)
 
 
 def get_image_name():

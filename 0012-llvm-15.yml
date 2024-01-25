@@ -1,0 +1,516 @@
+  #############
+  #  LLVM 15  #
+  #############
+  ##############
+  #  Mainline  #
+  ##############
+  #  configs:                 trees:                  make_variables:        BOOT=1       llvm_versions:
+  - {<< : *arm32_v5,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v6,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_imx,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_omap,        << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allno,       << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan_sw,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_ubsan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *s390,              << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_kasan,        << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_fedora,       << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_suse,         << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_thin,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kasan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kcsan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_ubsan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allmod_lto, << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_alpine,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_arch,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_fedora,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_suse,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  ##########
+  #  Next  #
+  ##########
+  - {<< : *arm32_v5,          << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v6,          << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7,          << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_imx,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_omap,        << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_lpae_fp,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allno,       << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allyes,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan_sw,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_ubsan,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_fedora,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *s390,              << : *next,             << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_kasan,        << : *next,             << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_fedora,       << : *next,             << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_suse,         << : *next,             << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_thin,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kasan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kcsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_ubsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_alpine,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_arch,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_fedora,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_suse,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  ###########################
+  #  Latest stable release  #
+  ###########################
+  - {<< : *arm32_v5,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v6,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_imx,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_omap,        << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_lpae_fp,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allno,       << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allyes,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan_sw,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_ubsan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allmod_lto,  << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_fedora,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *mips,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *s390,              << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_kasan,        << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_fedora,       << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_suse,         << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kasan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kcsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_ubsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allmod_lto, << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_alpine,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_arch,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_suse,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  ###########
+  #  6.6.y  #
+  ###########
+  - {<< : *arm32_v5,          << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v6,          << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7,          << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_imx,         << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_omap,        << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_lpae_fp,     << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allno,       << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allyes,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_alpine,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_suse,        << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64,             << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_full,    << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_thin,    << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan,       << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan_sw,    << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_ubsan,       << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allmod_lto,  << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_alpine,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_fedora,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_suse,        << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *hexagon,           << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *hexagon_allmod,    << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *i386,              << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *i386_suse,         << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *mips,              << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *stable-6_6,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_fedora,    << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_suse,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv,             << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv_alpine,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_suse,        << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *s390,              << : *stable-6_6,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_kasan,        << : *stable-6_6,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_fedora,       << : *stable-6_6,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_suse,         << : *stable-6_6,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *um,                << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_full,   << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_thin,   << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kasan,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kcsan,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_ubsan,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allmod_lto, << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_alpine,     << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_arch,       << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_fedora,     << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_suse,       << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  ###########
+  #  6.1.y  #
+  ###########
+  - {<< : *arm32_v5,          << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v6,          << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7,          << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_imx,         << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_omap,        << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_lpae_fp,     << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allno,       << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allyes,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_alpine,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_suse,        << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64,             << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_full,    << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_thin,    << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan,       << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan_sw,    << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_ubsan,       << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allmod_lto,  << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_alpine,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_fedora,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_suse,        << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *hexagon,           << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *hexagon_allmod,    << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *i386,              << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *i386_suse,         << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *mips,              << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
+  # - {<< : *ppc32,             << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *stable-6_1,       << : *ppc64_llvm,      boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_fedora,    << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_suse,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv,             << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_allmod,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv_alpine,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_suse,        << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *s390,              << : *stable-6_1,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_kasan,        << : *stable-6_1,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_fedora,       << : *stable-6_1,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *s390_suse,         << : *stable-6_1,       << : *clang_ias,       boot: true,  << : *llvm_15}
+  - {<< : *um,                << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_full,   << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_thin,   << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kasan,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kcsan,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_ubsan,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allmod_lto, << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_alpine,     << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_arch,       << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_fedora,     << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_suse,       << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  ############
+  #  5.15.y  #
+  ############
+  - {<< : *arm32_v5,          << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v6,          << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7,          << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_imx,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_omap,        << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_lpae_fp,     << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_full,    << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_lto_thin,    << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_cfi_lto,     << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_kasan_sw,    << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_ubsan,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allmod_lto,  << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *mips,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *riscv_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *s390_suse,         << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_full,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_lto_thin,   << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kasan,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_kcsan,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_ubsan,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allmod_lto, << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_alpine,     << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_arch,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_fedora,     << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_suse,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  ############
+  #  5.10.y  #
+  ############
+  - {<< : *arm32_v5,          << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm32_v6,          << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7,          << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *stable-5_10,      << : *llvm,            boot: false, << : *llvm_15}
+  - {<< : *arm32_allno,       << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_allyes,      << : *stable-5_10,      << : *llvm,            boot: false, << : *llvm_15}
+  - {<< : *arm64,             << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *i386,              << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mips,              << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc32,             << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *riscv,             << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  << : *llvm_15}
+  - {<< : *s390,              << : *stable-5_10,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_15}
+  ###########
+  #  5.4.y  #
+  ###########
+  - {<< : *arm32_v7,          << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm64_no_vdso32,   << : *stable-5_4,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *stable-5_4,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *mips,              << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *mipsel,            << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc32,             << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64,             << : *stable-5_4,       << : *ppc64_llvm,      boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *stable-5_4,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *stable-5_4,       << : *llvm_full,       boot: false, << : *llvm_15}
+  ############
+  #  4.19.y  #
+  ############
+  - {<< : *arm32_v7,          << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm64,             << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *ppc64le,           << : *stable-4_19,      << : *clang,           boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *stable-4_19,      << : *llvm,            boot: true,  << : *llvm_15}
+  #############
+  #  Android  #
+  #############
+  - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android15-6_6,    << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android15-6_1,    << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android15-6_1,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android15-6_1,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android15-6_1,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android14-6_1,    << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android14-5_15,   << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android13-5_15,   << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android13-5_15,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android13-5_15,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android13-5_15,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android13-5_10,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android12-5_10,   << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android12-5_10,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android12-5_10,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android12-5_10,   << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm32_allmod,      << : *android12-5_4,    << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm32_v7_t,        << : *android12-5_4,    << : *llvm,            boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_15}
+  ##############
+  #  ChromeOS  #
+  ##############
+  - {<< : *arm64_cros,       << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_cros,      << : *chromeos-6_6,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_cros,       << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_cros,      << : *chromeos-6_1,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_cros,       << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_cros,      << : *chromeos-5_15,     << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_cros,       << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_cros,      << : *chromeos-5_10,     << : *llvm_full,       boot: true,  << : *llvm_15}
+  #########
+  #  TIP  #
+  #########
+  - {<< : *i386,              << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_15}
+  ###########
+  #  ARM64  #
+  ###########
+  - {<< : *arm64,             << : *arm64-core,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *arm64-core,       << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *arm64-core,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *arm64-core,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *arm64-core,       << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64,             << : *arm64-fixes,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64be,           << : *arm64-fixes,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *arm64_allmod,      << : *arm64-fixes,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allno,       << : *arm64-fixes,      << : *llvm_full,       boot: false, << : *llvm_15}
+  - {<< : *arm64_allyes,      << : *arm64-fixes,      << : *llvm_full,       boot: false, << : *llvm_15}

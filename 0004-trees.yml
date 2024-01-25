@@ -1,0 +1,27 @@
+trees:
+  - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
+  - &next             {git_repo: *next-url,     git_ref: master,              name: next}
+  - &stable           {git_repo: *stable-url,   git_ref: linux-6.7.y,         name: stable}
+  - &stable-6_6       {git_repo: *stable-url,   git_ref: linux-6.6.y,         name: "6.6"}
+  - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}
+  - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
+  - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
+  - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
+  - &stable-4_19      {git_repo: *stable-url,   git_ref: linux-4.19.y,        name: "4.19"}
+  - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
+  - &android15-6_6    {git_repo: *android-url,  git_ref: android15-6.6,       name: android15-6.6}
+  - &android15-6_1    {git_repo: *android-url,  git_ref: android15-6.1,       name: android15-6.1}
+  - &android14-6_1    {git_repo: *android-url,  git_ref: android14-6.1,       name: android14-6.1}
+  - &android14-5_15   {git_repo: *android-url,  git_ref: android14-5.15,      name: android14-5.15}
+  - &android13-5_15   {git_repo: *android-url,  git_ref: android13-5.15,      name: android13-5.15}
+  - &android13-5_10   {git_repo: *android-url,  git_ref: android13-5.10,      name: android13-5.10}
+  - &android12-5_10   {git_repo: *android-url,  git_ref: android12-5.10,      name: android12-5.10}
+  - &android12-5_4    {git_repo: *android-url,  git_ref: android12-5.4,       name: android12-5.4}
+  - &android-4_19     {git_repo: *android-url,  git_ref: android-4.19-stable, name: android-4.19}
+  - &chromeos-6_6     {git_repo: *chromeos-url, git_ref: chromeos-6.6,        name: chromeos-6.6}
+  - &chromeos-6_1     {git_repo: *chromeos-url, git_ref: chromeos-6.1,        name: chromeos-6.1}
+  - &chromeos-5_15    {git_repo: *chromeos-url, git_ref: chromeos-5.15,       name: chromeos-5.15}
+  - &chromeos-5_10    {git_repo: *chromeos-url, git_ref: chromeos-5.10,       name: chromeos-5.10}
+  - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
+  - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64}
+  - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes}

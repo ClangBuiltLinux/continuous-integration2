@@ -1,0 +1,10 @@
+llvm_versions:
+  - &llvm_tot     {llvm_version: 19}
+  - &llvm_latest  {llvm_version: 17}
+  - &llvm_16      {llvm_version: 16}
+  - &llvm_15      {llvm_version: 15}
+  - &llvm_14      {llvm_version: 14}
+  - &llvm_13      {llvm_version: 13}
+  - &llvm_12      {llvm_version: 12}
+  - &llvm_11      {llvm_version: 11}
+  - &llvm_android {llvm_version: android}

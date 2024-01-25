@@ -1,0 +1,3 @@
+kasan_configs:
+  - &arm64-kasan-configs    {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y]}
+  - &arm64-kasan-sw-configs {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_SW_TAGS=y, CONFIG_KUNIT=y]}
