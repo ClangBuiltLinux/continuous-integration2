@@ -1,0 +1,3 @@
+chromeos_configs:
+  - &arm64-cros-configs  {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/arm64/common.config, chromeos/config/chromeos/arm64/chromiumos-arm64-generic.flavour.config, CONFIG_SECURITY_CHROMIUMOS=n]}
+  - &x86_64-cros-configs {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/x86_64/common.config, chromeos/config/chromeos/x86_64/chromiumos-x86_64-generic.flavour.config, CONFIG_SECURITY_CHROMIUMOS=n]}

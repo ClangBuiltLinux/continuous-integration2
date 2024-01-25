@@ -1,0 +1,4 @@
+targets:
+  - &default     {targets: [default]}
+  - &kernel      {targets: [kernel]}
+  - &kernel_dtbs {targets: [kernel,dtbs]}
