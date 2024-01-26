@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 import yaml
 
-from utils import CI_ROOT, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
+from utils import CI_ROOT, LLVM_TOT_VERSION, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
 
 
 def parse_args(trees):
@@ -86,7 +86,7 @@ def sanitize_job_name(name):
 
 
 def check_cache_job_setup(repo, ref, toolchain):
-    with open("LLVM_TOT_VERSION", encoding='utf-8') as fd:
+    with LLVM_TOT_VERSION.open(encoding='utf-8') as fd:
         llvm_tot_version = fd.read().strip()
 
     last_part = toolchain.split("-")[-1]

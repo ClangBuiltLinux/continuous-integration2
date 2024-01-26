@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 import yaml
 
-from utils import CI_ROOT, get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
+from utils import CI_ROOT, LLVM_TOT_VERSION, get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
 
 
 # Aliases makes this YAML unreadable
@@ -63,8 +63,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                 }
             ]
         }  # yapf: disable
-        max_version = int(
-            Path(CI_ROOT, "LLVM_TOT_VERSION").read_text(encoding='utf-8'))
+        max_version = int(LLVM_TOT_VERSION.read_text(encoding='utf-8'))
         defconfigs = []
         distribution_configs = []
         allconfigs = []

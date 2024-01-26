@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: generate.py
-      run: python3 generate.py --check
+      run: python3 generator/generate.py --check
   check_patch_series:
     name: Check patches series
     runs-on: ubuntu-latest
