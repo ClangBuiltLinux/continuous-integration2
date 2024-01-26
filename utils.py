@@ -11,7 +11,8 @@ CI_ROOT = Path(__file__).resolve().parent
 
 
 def get_config_from_generator():
-    if not (all_generator_files := sorted(CI_ROOT.glob('*.yml'))):
+    if not (all_generator_files := sorted(
+            Path(CI_ROOT, 'generator/yml').glob('*.yml'))):
         raise FileNotFoundError('No generator files could not be found?')
 
     generator_pieces = []
