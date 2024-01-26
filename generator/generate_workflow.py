@@ -244,7 +244,7 @@ def get_steps(build, build_set):
                 },
                 {
                     "name": "Check Build and Boot Logs",
-                    "run": "./check_logs.py",
+                    "run": "scripts/check-logs.py",
                 },
             ],
         }
