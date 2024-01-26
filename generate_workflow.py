@@ -71,7 +71,7 @@ def get_job_name(build):
     else:
         job += " CC=clang"
     # If LD was specified, show what it is
-    if "make_variables" in build and "LD" in build["make_variables"]:
+    if "LD" in build["make_variables"]:
         job += " LD=" + str(build["make_variables"]["LD"])
     job += " LLVM_IAS=" + str(build["make_variables"]["LLVM_IAS"])
     # Having "LLVM <VER>" is a little hard to parse, make it look like
