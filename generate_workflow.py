@@ -66,7 +66,7 @@ def get_job_name(build):
     if not build["boot"]:
         job += " BOOT=0"
     # LLVM=0 does not make much sense. Translate LLVM=0 into CC=clang
-    if build["llvm"]:
+    if "LLVM" in build["make_variables"]:
         job += " LLVM=1"
     else:
         job += " CC=clang"
