@@ -118,7 +118,7 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "name": "python check_cache.py",
                     "id": "step1",
                     "continue-on-error": True,
-                    "run": "python check_cache.py -w '${{ github.workflow }}' "
+                    "run": "python caching/check.py -w '${{ github.workflow }}' "
                            "-g ${{ secrets.REPO_SCOPED_PAT }} "
                            "-r ${{ env.GIT_REF }} "
                            "-o ${{ env.GIT_REPO }}",
@@ -172,7 +172,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     "name": "Update Cache Build Status",
                     **cond,
-                    "run": "python update_cache.py"
+                    "run": "python caching/update.py"
                 },
                 {
                     "name": "save builds.json",
