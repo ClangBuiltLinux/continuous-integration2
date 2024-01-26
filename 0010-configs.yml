@@ -1,3 +1,9 @@
+chromeos_configs:
+  - &arm64-cros-configs  {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/arm64/common.config, chromeos/config/chromeos/arm64/chromiumos-arm64-generic.flavour.config, CONFIG_SECURITY_CHROMIUMOS=n]}
+  - &x86_64-cros-configs {config: [chromeos/config/chromeos/base.config, chromeos/config/chromeos/x86_64/common.config, chromeos/config/chromeos/x86_64/chromiumos-x86_64-generic.flavour.config, CONFIG_SECURITY_CHROMIUMOS=n]}
+kasan_configs:
+  - &arm64-kasan-configs    {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y]}
+  - &arm64-kasan-sw-configs {config: [defconfig, CONFIG_FTRACE=y, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_SW_TAGS=y, CONFIG_KUNIT=y]}
 configs:
   #                     config:                                                                                 image target (optional)    [ARCH:] (Optional: x86)  targets to build
   - &arm32_v5          {config: multi_v5_defconfig,                                                                                         ARCH: *arm-arch,        << : *kernel_dtbs}
