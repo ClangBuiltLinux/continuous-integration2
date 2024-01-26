@@ -34,7 +34,7 @@ def update_cache(status: str, git_sha: str, clang_version: str):
     cache_entry_key = get_workflow_name_to_var_name(
         os.environ["GITHUB_WORKFLOW"])
 
-    if 'REPO_SCOPED_PAT' not in os.environ:
+    if "REPO_SCOPED_PAT" not in os.environ:
         print(
             "Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
         sys.exit(1)
@@ -48,14 +48,15 @@ def update_cache(status: str, git_sha: str, clang_version: str):
         sha=git_sha,
         clang_version=clang_version,
         # prevent overriding a 'fail' to a 'pass'
-        allow_fail_to_pass=False)
+        allow_fail_to_pass=False,
+    )
 
 
 def main():
     builds_json = Path(("mock." if MOCK else "") + "builds.json")
 
     print(f"Reading {builds_json}")
-    raw = builds_json.read_text(encoding='utf-8')
+    raw = builds_json.read_text(encoding="utf-8")
 
     builds = json.loads(raw)["builds"]
 
@@ -64,10 +65,31 @@ def main():
         sys.exit(1)
 
     # let's grab sha and version info as Tuxsuite has the most up-to-date info
-    # we only need the first entry
-    first_entry = builds[next(iter(builds))]
-    git_sha = first_entry["git_sha"]
-    clang_version = first_entry["tuxmake_metadata"]["compiler"]["version_full"]
+    builds_that_are_missing_metadata = []
+    git_sha = None
+    clang_version = None
+    for entry, build in builds.items():
+        try:
+            git_sha = build["git_sha"]
+            clang_version = build["tuxmake_metadata"]["compiler"][
+                "version_full"]
+            break
+        except KeyError:
+            builds_that_are_missing_metadata.append(entry)
+
+    if len(builds_that_are_missing_metadata) == len(builds):
+        raise RuntimeError(
+            f"Could not find a suitable git sha or compiler version in any build\n"
+            f"Here's the build.json:\n{raw}")
+
+    if len(builds_that_are_missing_metadata) > 0:
+        print(
+            "Warning: Some of the builds in builds.json are malformed and missing "
+            "some metadata.\n"
+            f"Here's a list: {builds_that_are_missing_metadata}\n"
+            f"Here's the build.json in question:\n{raw}")
+
+    assert git_sha and clang_version
 
     print(f"Tuxsuite {git_sha = } | {clang_version = }")
 
