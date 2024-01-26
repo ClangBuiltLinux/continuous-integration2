@@ -1,0 +1,56 @@
+From git@z Thu Jan  1 00:00:00 1970
+Subject: [PATCH] powerpc: Use always instead of always-y in for crtsavres.o
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Fri, 26 Jan 2024 10:37:02 -0700
+Message-Id: <20240126-5-4-fix-lib-powerpc-backport-v1-1-2c110ed18b1d@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+This commit is for linux-5.4.y only, it has no direct upstream
+equivalent.
+
+Prior to commit 5f2fb52fac15 ("kbuild: rename hostprogs-y/always to
+hostprogs/always-y"), always-y did not exist, making the backport of
+mainline commit 1b1e38002648 ("powerpc: add crtsavres.o to always-y
+instead of extra-y") to linux-5.4.y as commit 245da9eebba0 ("powerpc:
+add crtsavres.o to always-y instead of extra-y") incorrect, breaking the
+build with linkers that need crtsavres.o:
+
+  ld.lld: error: cannot open arch/powerpc/lib/crtsavres.o: No such file or directory
+
+Backporting the aforementioned kbuild commit is not suitable for stable
+due to its size and number of conflicts, so transform the always-y usage
+to an equivalent form using always, which resolves the build issues.
+
+Fixes: 245da9eebba0 ("powerpc: add crtsavres.o to always-y instead of extra-y")
+Link: https://lore.kernel.org/r/20240126-5-4-fix-lib-powerpc-backport-v1-1-2c110ed18b1d@kernel.org
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ arch/powerpc/lib/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/powerpc/lib/Makefile b/arch/powerpc/lib/Makefile
+index 7c603839fe28..841e6ed30f13 100644
+--- a/arch/powerpc/lib/Makefile
++++ b/arch/powerpc/lib/Makefile
+@@ -34,8 +34,8 @@ obj-$(CONFIG_FUNCTION_ERROR_INJECTION)	+= error-inject.o
+ # 64-bit linker creates .sfpr on demand for final link (vmlinux),
+ # so it is only needed for modules, and only for older linkers which
+ # do not support --save-restore-funcs
+-ifeq ($(call ld-ifversion, -lt, 225000000, y),y)
+-always-$(CONFIG_PPC64)	+= crtsavres.o
++ifeq ($(call ld-ifversion, -lt, 225000000, y)$(CONFIG_PPC64),yy)
++always	+= crtsavres.o
+ endif
+ 
+ obj-$(CONFIG_PPC_BOOK3S_64) += copyuser_power7.o copypage_power7.o \
+
+---
+base-commit: f0602893f43a54097fcf22bd8c2f7b8e75ca643e
+change-id: 20240126-5-4-fix-lib-powerpc-backport-9d577643dcfc
+
+Best regards,
+-- 
+Nathan Chancellor <nathan@kernel.org>
+
