@@ -102,7 +102,10 @@
   - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
+  - {<< : *riscv_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
+  - {<< : *riscv_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_14}
+  - {<< : *riscv_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_14}
