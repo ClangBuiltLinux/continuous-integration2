@@ -8,10 +8,13 @@ import urllib.request
 import yaml
 
 CI_ROOT = Path(__file__).resolve().parent
+GENERATOR_ROOT = Path(CI_ROOT, 'generator')
+LLVM_TOT_VERSION = Path(GENERATOR_ROOT, 'LLVM_TOT_VERSION')
 
 
 def get_config_from_generator():
-    if not (all_generator_files := sorted(CI_ROOT.glob('*.yml'))):
+    if not (all_generator_files := sorted(
+            Path(GENERATOR_ROOT, 'yml').glob('*.yml'))):
         raise FileNotFoundError('No generator files could not be found?')
 
     generator_pieces = []
@@ -135,7 +138,7 @@ def _read_builds():
 
 def get_requested_llvm_version():
     ver = os.environ["LLVM_VERSION"]
-    with Path(CI_ROOT, "LLVM_TOT_VERSION").open(encoding='utf-8') as file:
+    with LLVM_TOT_VERSION.open(encoding='utf-8') as file:
         llvm_tot_version = str(int(file.read())).strip()
     return "clang-" + ("nightly" if ver == llvm_tot_version else ver)
 

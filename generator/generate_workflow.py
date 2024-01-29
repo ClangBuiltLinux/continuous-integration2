@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 import yaml
 
-from utils import CI_ROOT, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
+from utils import CI_ROOT, LLVM_TOT_VERSION, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
 
 
 def parse_args(trees):
@@ -66,12 +66,12 @@ def get_job_name(build):
     if not build["boot"]:
         job += " BOOT=0"
     # LLVM=0 does not make much sense. Translate LLVM=0 into CC=clang
-    if build["llvm"]:
+    if "LLVM" in build["make_variables"]:
         job += " LLVM=1"
     else:
         job += " CC=clang"
     # If LD was specified, show what it is
-    if "make_variables" in build and "LD" in build["make_variables"]:
+    if "LD" in build["make_variables"]:
         job += " LD=" + str(build["make_variables"]["LD"])
     job += " LLVM_IAS=" + str(build["make_variables"]["LLVM_IAS"])
     # Having "LLVM <VER>" is a little hard to parse, make it look like
@@ -86,7 +86,7 @@ def sanitize_job_name(name):
 
 
 def check_cache_job_setup(repo, ref, toolchain):
-    with open("LLVM_TOT_VERSION", encoding='utf-8') as fd:
+    with LLVM_TOT_VERSION.open(encoding='utf-8') as fd:
         llvm_tot_version = fd.read().strip()
 
     last_part = toolchain.split("-")[-1]
@@ -118,7 +118,7 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "name": "python check_cache.py",
                     "id": "step1",
                     "continue-on-error": True,
-                    "run": "python check_cache.py -w '${{ github.workflow }}' "
+                    "run": "python caching/check.py -w '${{ github.workflow }}' "
                            "-g ${{ secrets.REPO_SCOPED_PAT }} "
                            "-r ${{ env.GIT_REF }} "
                            "-o ${{ env.GIT_REPO }}",
@@ -172,7 +172,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     "name": "Update Cache Build Status",
                     **cond,
-                    "run": "python update_cache.py"
+                    "run": "python caching/update.py"
                 },
                 {
                     "name": "save builds.json",
@@ -244,7 +244,7 @@ def get_steps(build, build_set):
                 },
                 {
                     "name": "Check Build and Boot Logs",
-                    "run": "./check_logs.py",
+                    "run": "scripts/check-logs.py",
                 },
             ],
         }

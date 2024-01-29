@@ -1,0 +1,17 @@
+tiers:
+  # Generic tiers       Make variables to pass to TuxSuite
+  - &llvm_full          {make_variables: {LLVM: 1, LLVM_IAS: 1}}
+  - &llvm               {make_variables: {LLVM: 1, LLVM_IAS: 0}}
+  - &lld                {make_variables: {LD: ld.lld, LLVM_IAS: 0}}
+  - &clang              {make_variables: {LLVM_IAS: 0}}
+  - &clang_ias          {make_variables: {LLVM_IAS: 1}}
+  # Architecture specific tiers
+  # ARM32 aspeed_g5_defconfig             https://github.com/ClangBuiltLinux/linux/issues/732
+  - &arm32_v6_llvm      {make_variables: {LD: arm-linux-gnueabihf-ld, LLVM: 1, LLVM_IAS: 0}}
+  # MIPS big endian                       https://github.com/ClangBuiltLinux/linux/issues/1025
+  - &mips_llvm          {make_variables: {LD: mips-linux-gnu-ld, LLVM: 1, LLVM_IAS: 0}}
+  - &mips_llvm_full     {make_variables: {LD: mips-linux-gnu-ld, LLVM: 1, LLVM_IAS: 1}}
+  # PowerPC 64-bit big endian             https://github.com/ClangBuiltLinux/linux/issues/602 and https://github.com/ClangBuiltLinux/linux/issues/1260
+  - &ppc64_llvm         {make_variables: {LD: powerpc64le-linux-gnu-ld, LLVM: 1, LLVM_IAS: 0}}
+  # RISC-V                                https://github.com/ClangBuiltLinux/linux/issues/1020 and https://github.com/ClangBuiltLinux/linux/issues/1409
+  - &riscv_llvm_full    {make_variables: {LD: riscv64-linux-gnu-ld, LLVM: 1, LLVM_IAS: 1}}

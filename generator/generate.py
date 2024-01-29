@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-import os
-from pathlib import Path
 import re
 import subprocess
 import sys
@@ -44,9 +42,11 @@ def update_llvm_tot_version():
 
     if not (match := re.search(r'set\(LLVM_VERSION_MAJOR (\d+)', cmakelists)):
         raise RuntimeError('Could not find LLVM_VERSION_MAJOR?')
-    if not (llvm_version_tot := Path('LLVM_TOT_VERSION')).exists():
-        raise RuntimeError('Not in the right folder?')
-    llvm_version_tot.write_text(f"{match.group(1)}\n", encoding='utf-8')
+    if not utils.LLVM_TOT_VERSION.exists():
+        raise RuntimeError(
+            f"LLVM_TOT_VERSION does not exist in {utils.LLVM_TOT_VERSION.parent}?"
+        )
+    utils.LLVM_TOT_VERSION.write_text(f"{match.group(1)}\n", encoding='utf-8')
 
 
 def generate(config, tree):
@@ -81,8 +81,6 @@ def check(trees_arg):
 
 
 if __name__ == '__main__':
-    os.chdir(Path(__file__).resolve().parent)
-
     # The list of valid trees come from the input, so we parse the input, then
     # check command line flags.
     generated_config = utils.get_config_from_generator()

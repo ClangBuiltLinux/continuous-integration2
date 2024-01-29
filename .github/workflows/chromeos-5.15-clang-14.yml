@@ -33,7 +33,7 @@ jobs:
     - name: python check_cache.py
       id: step1
       continue-on-error: true
-      run: python check_cache.py -w '${{ github.workflow }}' -g ${{ secrets.REPO_SCOPED_PAT }} -r ${{ env.GIT_REF }} -o ${{ env.GIT_REPO }}
+      run: python caching/check.py -w '${{ github.workflow }}' -g ${{ secrets.REPO_SCOPED_PAT }} -r ${{ env.GIT_REF }} -o ${{ env.GIT_REPO }}
     - name: Save exit code to GITHUB_OUTPUT
       id: step2
       run: echo "output=${{ steps.step1.outcome }}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
@@ -60,7 +60,7 @@ jobs:
       run: tuxsuite plan --git-repo https://chromium.googlesource.com/chromiumos/third_party/kernel.git --git-ref chromeos-5.15 --job-name defconfigs --json-out builds.json tuxsuite/chromeos-5.15-clang-14.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: python update_cache.py
+      run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
@@ -105,7 +105,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _ae5adf681ecc89bfa13b621c928ee048:
     runs-on: ubuntu-latest
     needs:
@@ -133,5 +133,5 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
 

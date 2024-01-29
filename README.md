@@ -30,69 +30,38 @@
 [![Check clang version](https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml/badge.svg)](https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml)
 
 
-Testing using [TuxSuite](https://gitlab.com/Linaro/tuxsuite) to build the Linux
-kernel with LLVM under CI.
+Testing using [TuxSuite](https://gitlab.com/Linaro/tuxsuite) to build the Linux kernel with LLVM under CI.
 
-All test parameters are encoded in `generator.yml`; new trees, architectures,
-configs, etc. should be added there.
+All test parameters are encoded in the files within `generator/yml`; new trees, architectures, configs, etc. should be added there. See [the maintainer documentation](docs/maintainer.md) for more information.
 
 ### Usage
 
-The tuxsuite and github actions workflow configs should be updated when
-`generator.yml` changes. Ex.
+The tuxsuite and github actions workflow configs should be updated when the files in `generator/yml` change. Ex.
+
 ```sh
-$ BRANCH=next
-$ ./generate_tuxsuite.py $BRANCH
-$ ./generate_workflow.py $BRANCH
+$ generator/generate.py next
 ```
 
-The `generate.py` script will run this for you based on the trees that are fed
-to it. Ex.
+The `generator/generate.py` script will run this for you based on the trees that are fed to it. Ex.
 
-```
+```sh
 # Generate just next and mainline TuxSuite and GitHub Action workflows
-$ ./generate.py next mainline
+$ generator/generate.py next mainline
 
 # Regenerate all of the current TuxSuite and GitHub Action workflows
-$ ./generate.py
+$ generator/generate.py
 ```
 
 The CI the child workflows run can be rerun locally via:
+
 ```sh
-$ ARCH=arm CONFIG=defconfig LLVM_VERSION=[12|11] [BOOT=0] [INSTALL_DEPS=1] \
-  ./check_logs.py
+$ ARCH=arm CONFIG=defconfig LLVM_VERSION=[12|11] [BOOT=0] scripts/check-logs.py
 ```
 
-Where `ARCH` and `CONFIG` are canonical names from the Linux kernel sources,
-but should be listed in `generator.yml`.  `LLVM_VERSION` is which version of
-LLVM to test.  `BOOT=0` can be specified to skip the boot test (for instance,
-when boot failure is expected). `INSTALL_DEPS=1` can be specified to install
-the child workflow dependcies (mostly QEMU) which the github actions workers
-need to do.
+where:
 
-Requires that a
-[TuxSuite secret token](https://gitlab.com/Linaro/tuxsuite#setup-config) is
-configured.
+  - `ARCH` and `CONFIG` are canonical names from the Linux kernel sources, but should be listed in `generator/yml`'s `architectures` and `configs` files.
+  - `LLVM_VERSION` is which version of LLVM to test.
+  - `BOOT=0` can be specified to skip the boot test (for instance, when boot failure is expected).
 
-## Caching
-> Introduced in https://github.com/ClangBuiltLinux/continuous-integration2/pull/664
-<details>
-  <summary>Info and Diagram</summary>
-  <br>
-  <section>
-    <p>
-      To help reduce Tuxsuite build minutes, the CI utilizes a <em>frontend cache</em>.
-      <br>
-      With this, redundant workflows can be stopped before spinning up any Tuxsuite jobs.
-    </p>
-  </section>
-
-
-  <b>Here's a diagram</b>:
-
-  <img src="https://github.com/ClangBuiltLinux/continuous-integration2/assets/24460581/fbdd2743-53ef-4dca-ae0f-46f62cf7f885" width=400 height=500></img>
-
-</details>
-
-> [!NOTE]
-> This frontend cache is different than the caching system that Tuxsuite/Tuxbuild is using; those systems involve caching build targets and other compiler information.
+Requires that a [TuxSuite secret token](https://gitlab.com/Linaro/tuxsuite#setup-config) is configured.

@@ -3,16 +3,10 @@
 
 from collections import defaultdict
 import datetime
-from pathlib import Path
-import sys
 
 import croniter
 
-# Add the root of the repo to PYTHONPATH for utils
-ci_root = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ci_root))
-# pylint: disable-next=wrong-import-position
-from utils import get_config_from_generator  # noqa: E402
+from utils import get_config_from_generator
 
 config = get_config_from_generator()
 

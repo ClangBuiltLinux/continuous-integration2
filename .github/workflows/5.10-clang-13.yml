@@ -33,7 +33,7 @@ jobs:
     - name: python check_cache.py
       id: step1
       continue-on-error: true
-      run: python check_cache.py -w '${{ github.workflow }}' -g ${{ secrets.REPO_SCOPED_PAT }} -r ${{ env.GIT_REF }} -o ${{ env.GIT_REPO }}
+      run: python caching/check.py -w '${{ github.workflow }}' -g ${{ secrets.REPO_SCOPED_PAT }} -r ${{ env.GIT_REF }} -o ${{ env.GIT_REPO }}
     - name: Save exit code to GITHUB_OUTPUT
       id: step2
       run: echo "output=${{ steps.step1.outcome }}" >> "$GITHUB_OUTPUT" && echo "status=$CACHE_PASS" >> "$GITHUB_OUTPUT"
@@ -60,7 +60,7 @@ jobs:
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.10.y --job-name defconfigs --json-out builds.json tuxsuite/5.10-clang-13.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: python update_cache.py
+      run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
@@ -105,7 +105,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _b9931b3c7aeb5ecaa92addf21de8f0a6:
     runs-on: ubuntu-latest
     needs:
@@ -133,7 +133,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _66217275b440ea529e2b7432462ab897:
     runs-on: ubuntu-latest
     needs:
@@ -161,7 +161,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _dccb2e73fc9decea9e1a7d4a932299a6:
     runs-on: ubuntu-latest
     needs:
@@ -189,7 +189,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _210faf86b075b31ec48b4fa5276daa01:
     runs-on: ubuntu-latest
     needs:
@@ -217,7 +217,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _7dde147b804e95998e110f5dfe487e8f:
     runs-on: ubuntu-latest
     needs:
@@ -245,7 +245,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _0eecb2df639bfc6c34cb18f6437e649b:
     runs-on: ubuntu-latest
     needs:
@@ -273,7 +273,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _69a1e3f1d846068b618f26c404160b14:
     runs-on: ubuntu-latest
     needs:
@@ -301,7 +301,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _48a57be25b36aba020e19ff27fcc54a4:
     runs-on: ubuntu-latest
     needs:
@@ -329,7 +329,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _a8d0c6b961f8ab9a368338791f62e0b6:
     runs-on: ubuntu-latest
     needs:
@@ -357,7 +357,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _848b558acb7e2487ba2d59cd1a85aa7a:
     runs-on: ubuntu-latest
     needs:
@@ -385,7 +385,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _e3cea7aec5ec17089d9d7eb98c7d0315:
     runs-on: ubuntu-latest
     needs:
@@ -413,7 +413,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _5efcbae1959e140c37060595422c0e64:
     runs-on: ubuntu-latest
     needs:
@@ -441,7 +441,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _5725232ce5f790d6db053c3d226eead6:
     runs-on: ubuntu-latest
     needs:
@@ -469,7 +469,7 @@ jobs:
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   kick_tuxsuite_allconfigs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
@@ -493,7 +493,7 @@ jobs:
       run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-5.10.y --job-name allconfigs --json-out builds.json tuxsuite/5.10-clang-13.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: python update_cache.py
+      run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       uses: actions/upload-artifact@v3
@@ -538,7 +538,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _e3671bdb6f10d3349593b86cc9b324f6:
     runs-on: ubuntu-latest
     needs:
@@ -566,7 +566,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _787230103202571eafef247f0ba0902e:
     runs-on: ubuntu-latest
     needs:
@@ -594,7 +594,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _bc93ab0a758b33cf3167fdbdeb2b0705:
     runs-on: ubuntu-latest
     needs:
@@ -622,7 +622,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _c8ae7dd017d7273dcec747aadd9288fe:
     runs-on: ubuntu-latest
     needs:
@@ -650,7 +650,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _a575b3a0efaafab3765963157dfe45f2:
     runs-on: ubuntu-latest
     needs:
@@ -678,7 +678,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _ff86d54e6acbce65590f71efbb2f826b:
     runs-on: ubuntu-latest
     needs:
@@ -706,7 +706,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _10bc1944d6f5f29611271ddc67d9e2bd:
     runs-on: ubuntu-latest
     needs:
@@ -734,7 +734,7 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
   _02922017f2cb19d45aba8492132c7804:
     runs-on: ubuntu-latest
     needs:
@@ -762,5 +762,5 @@ jobs:
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
-      run: ./check_logs.py
+      run: scripts/check-logs.py
 
