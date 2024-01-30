@@ -180,9 +180,11 @@ if __name__ == "__main__":
     curr_clang_version = get_clang_version()
     # pylint: disable-next=invalid-name
     curr_patches_hash = get_patches_hash(tree_name)
-    print(
-        f"Current sha: {curr_sha}\nCurrent Clang Version: {curr_clang_version}\nCurrent patches hash: {curr_patches_hash}"
-    )
+    print(f"""\
+        Current sha: {curr_sha}
+        Current Clang Version: {curr_clang_version}
+        Current patches hash: {curr_patches_hash}
+    """)
 
     # pull down repo variable
     result = get_repository_variable_or_none(VAR_NAME)
@@ -215,12 +217,15 @@ if __name__ == "__main__":
     cached_patches_hash = result.get("patches_hash", curr_patches_hash)
 
     if cached_sha != curr_sha or cached_clang_version != curr_clang_version or cached_patches_hash != curr_patches_hash:
-        print(
-            f"CACHE MISS: current linux_sha is {curr_sha}, clang_version is {curr_clang_version}, "
-            f"and current patches_hash is {curr_patches_hash} while {args.workflow_name} has"
-            f"a cached linux_sha of {cached_sha}, a cached clang_version of {cached_clang_version},"
-            f" and a cached patches_hash of {cached_patches_hash}."
-            f"Repository Variable key: {VAR_NAME}\nUpdating cache now.")
+        print(f"""\
+            CACHE MISS: current linux_sha is {curr_sha}, clang_version is {curr_clang_version},
+            and current patches_hash is {curr_patches_hash} while {args.workflow_name} has
+            a cached linux_sha of {cached_sha}, a cached clang_version of {cached_clang_version},
+            and a cached patches_hash of {cached_patches_hash}.
+
+            Repository Variable key: {VAR_NAME}
+            Updating cache now.
+        """)
         update_repository_variable(
             VAR_NAME,
             http_headers=HEADERS,
@@ -234,20 +239,22 @@ if __name__ == "__main__":
     # we cache hit, but we only want to allow certain states to be cacheable
     # other states are dodgy and we're better off rerunning the builds just in case
     if (stripped := cached_build_status.strip()) not in CACHE_HITABLE_STATES:
-        print(
-            f"CACHE HIT: Both the linux_sha and the clang_version match\n"
-            f"However, the previous build status ({stripped}) is not a status "
-            f"that check_cache.py is configured to support. The status should be "
-            f"one of {CACHE_HITABLE_STATES}.\nRunning the Tuxsuite builds now."
-        )
+        print(f"""\
+            CACHE HIT: Both the linux_sha and the clang_version match
+            However, the previous build status ({stripped}) is not a status
+            that check_cache.py is configured to support. The status should be
+            one of {CACHE_HITABLE_STATES}.
+            Running the Tuxsuite builds now.
+        """)
         sys.exit(1)
 
-    print(
-        f"CACHE HIT: The linux_sha, clang_version, and patches hash match\n"
-        f"CACHE:  {cached_sha} | {cached_clang_version} | {cached_patches_hash}\n"
-        f"ACTUAL: {curr_sha} | {curr_clang_version} | {curr_patches_hash}\n"
-        f"Not running this workflow as it would be redundant.\n"
-        f"CACHED STATUS: {cached_build_status}")
+    print(f"""\
+        CACHE HIT: The linux_sha, clang_version, and patches hash match
+        CACHE:  {cached_sha} | {cached_clang_version} | {cached_patches_hash}
+        ACTUAL: {curr_sha} | {curr_clang_version} | {curr_patches_hash}
+        Not running this workflow as it would be redundant.
+        CACHED STATUS: {cached_build_status}
+    """)
 
     env_file = os.getenv("GITHUB_ENV", None)
     if env_file is not None:
