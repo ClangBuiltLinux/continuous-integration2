@@ -26,8 +26,8 @@ trees:
   - &arm64-core       {git_repo: *arm64-url,    git_ref: for-next/core,       name: arm64}
   - &arm64-fixes      {git_repo: *arm64-url,    git_ref: for-next/fixes,      name: arm64-fixes}
 tree_schedules:
-  - &mainline_llvm_tot             {<< : *llvm_tot,     << : *mainline,         << : *twelve_hours}
-  - &mainline_llvm_latest          {<< : *llvm_latest,  << : *mainline,         << : *twelve_hours}
+  - &mainline_llvm_tot             {<< : *llvm_tot,     << : *mainline,         << : *weekdays_every_12}
+  - &mainline_llvm_latest          {<< : *llvm_latest,  << : *mainline,         << : *weekdays_every_12}
   - &mainline_llvm_16              {<< : *llvm_16,      << : *mainline,         << : *daily_eighteen}
   - &mainline_llvm_15              {<< : *llvm_15,      << : *mainline,         << : *daily_midnight}
   - &mainline_llvm_14              {<< : *llvm_14,      << : *mainline,         << : *daily_six}
