@@ -1,9 +1,9 @@
 schedules:
   - &weekdays_every_12    {schedule: "0 0,12 * * 1,2,3,4,5"}
-  - &daily_midnight       {schedule: "0 0 * * 1,2,3,4,5"}
-  - &daily_six            {schedule: "0 6 * * 1,2,3,4,5"}
-  - &daily_noon           {schedule: "0 12 * * 1,2,3,4,5"}
-  - &daily_eighteen       {schedule: "0 18 * * 1,2,3,4,5"}
+  - &weekdays_midnight    {schedule: "0 0 * * 1,2,3,4,5"}
+  - &weekdays_six         {schedule: "0 6 * * 1,2,3,4,5"}
+  - &weekdays_noon        {schedule: "0 12 * * 1,2,3,4,5"}
+  - &weekdays_eighteen    {schedule: "0 18 * * 1,2,3,4,5"}
   - &monday_friday        {schedule: "0 0 * * 1,5"}
   - &sundays              {schedule: "0 0 * * 0"}
   - &wednesdays           {schedule: "0 0 * * 3"}
