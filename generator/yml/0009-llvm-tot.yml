@@ -52,10 +52,10 @@
   - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
+  # - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
@@ -128,13 +128,13 @@
   - {<< : *ppc64le_fedora,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
+  # - {<< : *riscv_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_tot}
+  # - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
@@ -208,10 +208,10 @@
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_tot}
+  # - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_tot}
@@ -283,10 +283,10 @@
   - {<< : *ppc64le_fedora,    << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv,             << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv_alpine,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_suse,        << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv,             << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_tot}
+  # - {<< : *riscv_alpine,      << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_suse,        << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *stable-6_6,       << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *stable-6_6,       << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *stable-6_6,       << : *clang_ias,       boot: true,  << : *llvm_tot}
@@ -351,10 +351,10 @@
   - {<< : *ppc64le,           << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora,    << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv,             << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_allmod,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv_alpine,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_suse,        << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv,             << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_allmod,      << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_tot}
+  # - {<< : *riscv_alpine,      << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_suse,        << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *stable-6_1,       << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *stable-6_1,       << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *stable-6_1,       << : *clang_ias,       boot: true,  << : *llvm_tot}
@@ -417,10 +417,10 @@
   - {<< : *ppc64le,           << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *ppc64le_suse,      << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
-  - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *riscv_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
+  # - {<< : *riscv_alpine,      << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_kasan,        << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora_bpf,   << : *stable-5_15,      << : *clang,           boot: true,  << : *llvm_tot}
@@ -460,7 +460,7 @@
   - {<< : *ppc32,             << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_tot}
   - {<< : *ppc64,             << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  << : *llvm_tot}
   - {<< : *ppc64le,           << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_tot}
-  - {<< : *riscv,             << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  << : *llvm_tot}
+  # - {<< : *riscv,             << : *stable-5_10,      << : *riscv_llvm_full, boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *stable-5_10,      << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_allmod,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_tot}
@@ -495,7 +495,7 @@
   - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *riscv_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
+  # - {<< : *riscv_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm32_allmod,      << : *android15-6_6,    << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_tot}
