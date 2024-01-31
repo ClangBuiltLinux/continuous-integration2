@@ -267,9 +267,13 @@ def update_repository_variable(
                                             headers=http_headers)
     urllib.request.urlopen(update_request)  # pylint: disable=consider-using-with
 
-    print(
-        f"Updated cache entry with key '{key}' to status '{build_status}' at sha '{sha}' and clang_version '{clang_version}'\n"
-        f"other fields: {other}")
+    print(f"""\
+        Updated cache entry with fields:
+        {build_status=}
+        {sha=}
+        {clang_version=}
+        {patches_hash=}
+    """)
 
 
 def print_red(msg):
