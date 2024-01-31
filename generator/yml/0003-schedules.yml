@@ -1,11 +1,18 @@
 schedules:
-  - &twelve_hours   {schedule: "0 0,12 * * 1,2,3,4,5"}
-  - &daily_midnight {schedule: "0 0 * * 1,2,3,4,5"}
-  - &daily_six      {schedule: "0 6 * * 1,2,3,4,5"}
-  - &daily_noon     {schedule: "0 12 * * 1,2,3,4,5"}
-  - &daily_eighteen {schedule: "0 18 * * 1,2,3,4,5"}
-  # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
-  - &weekdays       {schedule: "0 12 * * 1,2,3,4,5"}
-  - &monday_friday  {schedule: "0 0 * * 1,5"}
-  - &sundays        {schedule: "0 0 * * 0"}
-  - &wednesdays     {schedule: "0 0 * * 3"}
+  - &weekdays_every_12    {schedule: "0 0,12 * * 1,2,3,4,5"}
+  - &weekdays_midnight    {schedule: "0 0 * * 1,2,3,4,5"}
+  - &weekdays_six         {schedule: "0 6 * * 1,2,3,4,5"}
+  - &weekdays_noon        {schedule: "0 12 * * 1,2,3,4,5"}
+  - &weekdays_eighteen    {schedule: "0 18 * * 1,2,3,4,5"}
+  - &mon_fri_midnight     {schedule: "0 0 * * 1,5"}
+  - &mon_fri_six          {schedule: "0 6 * * 1,5"}
+  - &mon_fri_noon         {schedule: "0 12 * * 1,5"}
+  - &mon_fri_eighteen     {schedule: "0 18 * * 1,5"}
+  - &sun_midnight         {schedule: "0 0 * * 0"}
+  - &sun_six              {schedule: "0 6 * * 0"}
+  - &sun_noon             {schedule: "0 12 * * 0"}
+  - &sun_eighteen         {schedule: "0 18 * * 0"}
+  - &wed_midnight         {schedule: "0 0 * * 3"}
+  - &wed_six              {schedule: "0 6 * * 3"}
+  - &wed_noon             {schedule: "0 12 * * 3"}
+  - &wed_eighteen         {schedule: "0 18 * * 3"}
