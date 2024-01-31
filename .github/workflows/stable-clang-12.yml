@@ -63,7 +63,7 @@ jobs:
       run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: builds.json
         name: output_artifact_defconfigs
@@ -73,7 +73,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: boot-utils.json
         name: boot_utils_json_defconfigs
@@ -98,10 +98,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -126,10 +126,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -154,10 +154,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -182,10 +182,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -210,10 +210,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -238,10 +238,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -266,10 +266,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -294,10 +294,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -322,10 +322,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -350,10 +350,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -378,10 +378,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -406,10 +406,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -434,10 +434,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -462,10 +462,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -490,10 +490,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -518,10 +518,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -546,10 +546,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -574,10 +574,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -602,10 +602,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -630,10 +630,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -658,10 +658,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -686,10 +686,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -714,10 +714,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -742,10 +742,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -770,10 +770,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -798,10 +798,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -826,10 +826,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -860,7 +860,7 @@ jobs:
       run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: builds.json
         name: output_artifact_distribution_configs
@@ -870,7 +870,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: boot-utils.json
         name: boot_utils_json_distribution_configs
@@ -895,10 +895,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -923,10 +923,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -951,10 +951,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -979,10 +979,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1007,10 +1007,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1035,10 +1035,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1063,10 +1063,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1091,10 +1091,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1119,10 +1119,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1147,10 +1147,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1175,10 +1175,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1203,10 +1203,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1231,10 +1231,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1259,10 +1259,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1293,7 +1293,7 @@ jobs:
       run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: builds.json
         name: output_artifact_allconfigs
@@ -1303,7 +1303,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: boot-utils.json
         name: boot_utils_json_allconfigs
@@ -1328,10 +1328,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1356,10 +1356,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1384,10 +1384,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1412,10 +1412,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1440,10 +1440,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1468,10 +1468,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1496,10 +1496,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1524,10 +1524,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1552,10 +1552,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1580,10 +1580,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1608,10 +1608,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
