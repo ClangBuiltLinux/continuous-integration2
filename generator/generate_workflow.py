@@ -177,7 +177,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     "name": "save builds.json",
                     **cond,
-                    "uses": "actions/upload-artifact@v3",
+                    "uses": "actions/upload-artifact@v4",
                     "with": {
                         "path": "builds.json",
                         "name": f"output_artifact_{job_name}",
@@ -192,7 +192,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     'name': 'save boot-utils.json',
                     **cond,
-                    'uses': 'actions/upload-artifact@v3',
+                    'uses': 'actions/upload-artifact@v4',
                     'with': {
                         'path': 'boot-utils.json',
                         'name': f"boot_utils_json_{job_name}",
@@ -231,13 +231,13 @@ def get_steps(build, build_set):
                     },
                 },
                 {
-                    "uses": "actions/download-artifact@v3",
+                    "uses": "actions/download-artifact@v4",
                     "with": {
                         "name": f"output_artifact_{build_set}"
                     },
                 },
                 {
-                    "uses": "actions/download-artifact@v3",
+                    "uses": "actions/download-artifact@v4",
                     "with": {
                         "name": f"boot_utils_json_{build_set}"
                     },
