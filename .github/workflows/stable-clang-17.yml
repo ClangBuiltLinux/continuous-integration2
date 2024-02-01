@@ -12,7 +12,7 @@ name: stable (clang-17)
     - tuxsuite/stable-clang-17.tux.yml
     - .github/workflows/stable-clang-17.yml
   schedule:
-  - cron: 0 12 * * 1,5
+  - cron: 0 18 * * 3
   workflow_dispatch: null
 permissions: read-all
 jobs:

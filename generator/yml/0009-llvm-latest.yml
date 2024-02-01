@@ -34,10 +34,15 @@
   - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_virt,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_hardening,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
@@ -64,6 +69,7 @@
   - {<< : *x86_64_kasan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_kcsan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_ubsan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *x86_64_hardening,  << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allmod_lto, << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allno,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
@@ -104,10 +110,15 @@
   - {<< : *arm64_fedora,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_virt,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_hardening,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
@@ -137,6 +148,7 @@
   - {<< : *x86_64_kasan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_kcsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_ubsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *x86_64_hardening,  << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
@@ -178,10 +190,15 @@
   - {<< : *arm64_fedora,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_virt,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_hardening,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong_allmod_lto,  << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
@@ -216,6 +233,7 @@
   - {<< : *x86_64_arch,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_suse,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *x86_64_hardening,  << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   ###########
   #  6.6.y  #
   ###########
@@ -252,6 +270,10 @@
   - {<< : *hexagon_allmod,    << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *i386,              << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *i386_suse,         << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong,             << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_lto_thin,    << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *loong_allmod,      << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_latest}
+  - {<< : *loong_allmod_lto,  << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *mips,              << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *mipsel,            << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
