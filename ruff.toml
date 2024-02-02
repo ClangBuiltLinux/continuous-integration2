@@ -1,4 +1,9 @@
-# https://beta.ruff.rs/docs/rules/
+target-version = 'py38'
+# Separate repo used as a submodule, ignore it
+extend-exclude = ['boot-utils']
+
+# https://docs.astral.sh/ruff/rules/
+[lint]
 select = [
     'A', # flake8-builtins
     'ARG', # flake8-unused-arguments
@@ -23,6 +28,3 @@ ignore = [
     'PLR0915', # too-many-statements
     'PLR2004', # magic-value-comparison
 ]
-target-version = 'py38'
-# Separate repo used as a submodule, ignore it
-extend-exclude = ['boot-utils']
