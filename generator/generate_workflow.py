@@ -61,7 +61,7 @@ def print_config(build):
 
 
 def get_job_name(build):
-    job = "ARCH=" + (build["ARCH"] if "ARCH" in build else "x86_64")
+    job = "ARCH=" + build.get("ARCH", "x86_64")
     # BOOT=1 is the default, only show if we have disabled it
     if not build["boot"]:
         job += " BOOT=0"
@@ -213,7 +213,7 @@ def get_steps(build, build_set):
             "name": name,
             "if": "${{ needs.check_cache.outputs.status != 'pass' }}",
             "env": {
-                "ARCH": build["ARCH"] if "ARCH" in build else "x86_64",
+                "ARCH": build.get("ARCH", "x86_64"),
                 "LLVM_VERSION": build["llvm_version"],
                 "BOOT": int(build["boot"]),
                 "CONFIG": print_config(build),

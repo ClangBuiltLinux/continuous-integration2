@@ -71,7 +71,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
             if build["git_repo"] == repo and \
                build["git_ref"] == ref and \
                build["llvm_version"] == llvm_version:
-                arch = build["ARCH"] if "ARCH" in build else "x86_64"
+                arch = build.get("ARCH", "x86_64")
                 if llvm_version == max_version:
                     toolchain = "clang-nightly"
 
