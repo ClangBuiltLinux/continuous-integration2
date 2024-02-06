@@ -20,7 +20,7 @@ import os
 import sys
 from pathlib import Path
 
-from utils import get_workflow_name_to_var_name, update_repository_variable
+from utils import get_patches_hash, get_workflow_name_to_var_name, update_repository_variable
 
 if "GITHUB_WORKFLOW" not in os.environ:
     print("Couldn't find GITHUB_WORKFLOW in env. Not in a GitHub Workflow?")
@@ -29,7 +29,8 @@ if "GITHUB_WORKFLOW" not in os.environ:
 MOCK = "MOCK" in os.environ
 
 
-def update_cache(status: str, git_sha: str, clang_version: str):
+def update_cache(status: str, git_sha: str, clang_version: str,
+                 patches_hash: str):
     print(f"Trying to update cache with status: {status}")
     cache_entry_key = get_workflow_name_to_var_name(
         os.environ["GITHUB_WORKFLOW"])
@@ -47,6 +48,7 @@ def update_cache(status: str, git_sha: str, clang_version: str):
         build_status=status,
         sha=git_sha,
         clang_version=clang_version,
+        patches_hash=patches_hash,
         # prevent overriding a 'fail' to a 'pass'
         allow_fail_to_pass=False,
     )
@@ -91,18 +93,21 @@ def main():
 
     assert git_sha and clang_version
 
-    print(f"Tuxsuite {git_sha = } | {clang_version = }")
+    tree_name = os.environ["GITHUB_WORKFLOW"].split(' ', 1)[0]
+    patches_hash = get_patches_hash(tree_name)
+
+    print(f"Tuxsuite {git_sha = } | {clang_version = } | {patches_hash = }")
 
     for _, info in builds.items():
         if info["tuxbuild_status"] != "complete":
-            update_cache("badtux", git_sha, clang_version)
+            update_cache("badtux", git_sha, clang_version, patches_hash)
             sys.exit(0)
         if (status := info["build_status"]) != "pass":
-            update_cache(status, git_sha, clang_version)
+            update_cache(status, git_sha, clang_version, patches_hash)
             sys.exit(0)
 
     # only if all builds completed and passed will we set this status
-    update_cache("pass", git_sha, clang_version)
+    update_cache("pass", git_sha, clang_version, patches_hash)
     sys.exit(0)
 
 

@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -184,6 +185,16 @@ def get_llvm_versions(config, tree_name):
     return llvm_versions
 
 
+def get_patches_hash(tree_name):
+    patches_folder = Path(CI_ROOT, 'patches', tree_name)
+    patches = sorted(
+        patches_folder.iterdir()) if patches_folder.exists() else []
+
+    text = ''.join(item.read_text(encoding='utf-8') for item in patches)
+
+    return hashlib.blake2b(text.encode()).hexdigest()
+
+
 def get_workflow_name_to_var_name(workflow_name: str) -> str:
     """
     GitHub Repository Variables have special formatting rules:
@@ -204,6 +215,7 @@ def update_repository_variable(
     *,
     sha: Optional[str] = None,
     clang_version: Optional[str] = None,
+    patches_hash: Optional[str] = None,
     build_status: Optional[str] = None,
     other: Optional[Dict[str, str]] = None,
     allow_fail_to_pass=False  # should a cache entry be allowed to go from 'fail' to 'pass'
@@ -231,6 +243,8 @@ def update_repository_variable(
             cached_value["linux_sha"] = sha
         if clang_version:
             cached_value["clang_version"] = clang_version
+        if patches_hash:
+            cached_value["patches_hash"] = patches_hash
         if build_status:
             if not allow_fail_to_pass and cached_value[
                     'build_status'] == 'fail' and build_status == 'pass':
@@ -253,9 +267,13 @@ def update_repository_variable(
                                             headers=http_headers)
     urllib.request.urlopen(update_request)  # pylint: disable=consider-using-with
 
-    print(
-        f"Updated cache entry with key '{key}' to status '{build_status}' at sha '{sha}' and clang_version '{clang_version}'\n"
-        f"other fields: {other}")
+    print(f"""\
+        Updated cache entry with fields:
+        {build_status=}
+        {sha=}
+        {clang_version=}
+        {patches_hash=}
+    """)
 
 
 def print_red(msg):
