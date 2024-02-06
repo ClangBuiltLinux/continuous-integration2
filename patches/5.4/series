@@ -1,1 +1,2 @@
 20240126_nathan_powerpc_use_always_instead_of_always_y_in_for_crtsavres_o.patch
+20240127_nathan_powerpc_xor_vmx_add_mhard_float_to_cflags.patch

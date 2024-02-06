@@ -1,1 +1,4 @@
+5b750b22530fe53bf7fd6a30baacd53ada26911b.patch
+20240127_nathan_powerpc_xor_vmx_add_mhard_float_to_cflags.patch
+20240205_nathan_drm_amd_display_increase_frame_larger_than_for_all_display_mode_vba_files.patch
 um-clang-18.patch

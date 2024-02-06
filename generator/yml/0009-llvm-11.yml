@@ -263,25 +263,6 @@
   - {<< : *x86_64_allmod,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *x86_64_allno,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_11}
   - {<< : *x86_64_allyes,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_11}
-  #########
-  #  TIP  #
-  #########
-  - {<< : *i386,              << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_11}
-  - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_11}
-  - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_11}
-  ###########
-  #  ARM64  #
-  ###########
-  - {<< : *arm64,             << : *arm64-core,       << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *arm64_allmod,      << : *arm64-core,       << : *llvm_full,       boot: false, << : *llvm_11}
-  - {<< : *arm64_allno,       << : *arm64-core,       << : *llvm_full,       boot: false, << : *llvm_11}
-  - {<< : *arm64_allyes,      << : *arm64-core,       << : *llvm_full,       boot: false, << : *llvm_11}
-  - {<< : *arm64,             << : *arm64-fixes,      << : *llvm_full,       boot: true,  << : *llvm_11}
-  - {<< : *arm64_allmod,      << : *arm64-fixes,      << : *llvm_full,       boot: false, << : *llvm_11}
-  - {<< : *arm64_allno,       << : *arm64-fixes,      << : *llvm_full,       boot: false, << : *llvm_11}
-  - {<< : *arm64_allyes,      << : *arm64-fixes,      << : *llvm_full,       boot: false, << : *llvm_11}
   ##################
   #  Android LLVM  #
   ##################
