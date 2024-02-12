@@ -1,0 +1,29 @@
+From b2e3c71da1894684e01ef13fc7955769f0d4e885 Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Mon, 5 Feb 2024 16:17:41 -0700
+Subject: [PATCH] WIP: xfrm: Check xfrm_nr against XFRM_MAX_DEPTH in
+ copy_to_user_tmpl()
+
+Link: https://github.com/ClangBuiltLinux/linux/issues/1985
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ net/xfrm/xfrm_user.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/net/xfrm/xfrm_user.c b/net/xfrm/xfrm_user.c
+index ad01997c3aa9..444e58bc3f44 100644
+--- a/net/xfrm/xfrm_user.c
++++ b/net/xfrm/xfrm_user.c
+@@ -2017,6 +2017,9 @@ static int copy_to_user_tmpl(struct xfrm_policy *xp, struct sk_buff *skb)
+ 	if (xp->xfrm_nr == 0)
+ 		return 0;
+ 
++	if (xp->xfrm_nr > XFRM_MAX_DEPTH)
++		return -ENOBUFS;
++
+ 	for (i = 0; i < xp->xfrm_nr; i++) {
+ 		struct xfrm_user_tmpl *up = &vec[i];
+ 		struct xfrm_tmpl *kp = &xp->xfrm_vec[i];
+-- 
+2.43.0
+
