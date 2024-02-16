@@ -13,5 +13,9 @@ tiers:
   - &mips_llvm_full     {make_variables: {LD: mips-linux-gnu-ld, LLVM: 1, LLVM_IAS: 1}}
   # PowerPC 64-bit big endian             https://github.com/ClangBuiltLinux/linux/issues/602 and https://github.com/ClangBuiltLinux/linux/issues/1260
   - &ppc64_llvm         {make_variables: {LD: powerpc64le-linux-gnu-ld, LLVM: 1, LLVM_IAS: 0}}
+  # s390                                  OBJCOPY: https://github.com/ClangBuiltLinux/linux/issues/1530
+  #                                                https://github.com/ClangBuiltLinux/linux/issues/1996
+  #                                       OBJDUMP: https://github.com/ClangBuiltLinux/linux/issues/859
+  - &s390_llvm_full     {make_variables: {OBJCOPY: s390x-linux-gnu-objcopy, OBJDUMP: s390x-linux-gnu-objdump, LLVM: 1, LLVM_IAS: 1}}
   # RISC-V                                https://github.com/ClangBuiltLinux/linux/issues/1020 and https://github.com/ClangBuiltLinux/linux/issues/1409
   - &riscv_llvm_full    {make_variables: {LD: riscv64-linux-gnu-ld, LLVM: 1, LLVM_IAS: 1}}
