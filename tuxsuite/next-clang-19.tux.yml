@@ -304,6 +304,9 @@ jobs:
     targets:
     - kernel
     make_variables:
+      OBJCOPY: s390x-linux-gnu-objcopy
+      OBJDUMP: s390x-linux-gnu-objdump
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: s390
     toolchain: clang-nightly
@@ -316,6 +319,9 @@ jobs:
     targets:
     - kernel
     make_variables:
+      OBJCOPY: s390x-linux-gnu-objcopy
+      OBJDUMP: s390x-linux-gnu-objdump
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: um
     toolchain: clang-nightly
@@ -524,6 +530,9 @@ jobs:
     targets:
     - kernel
     make_variables:
+      OBJCOPY: s390x-linux-gnu-objcopy
+      OBJDUMP: s390x-linux-gnu-objdump
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: s390
     toolchain: clang-nightly
@@ -531,6 +540,9 @@ jobs:
     targets:
     - kernel
     make_variables:
+      OBJCOPY: s390x-linux-gnu-objcopy
+      OBJDUMP: s390x-linux-gnu-objdump
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: clang-nightly
