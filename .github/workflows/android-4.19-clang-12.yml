@@ -78,18 +78,18 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_defconfigs
         if-no-files-found: error
-  _e2d7c97a744bb18b18038623898956f6:
+  _4cd429c60c49c411bafc8205cac4ff17:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig+CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 12
       BOOT: 1
-      CONFIG: gki_defconfig
+      CONFIG: gki_defconfig+CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -106,18 +106,18 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _4fb2521d605de5401fc145b2b8a80bc8:
+  _d24ad0cc4a0c9a09c6a8b5f717962455:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 gki_defconfig+CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 12
       BOOT: 1
-      CONFIG: gki_defconfig
+      CONFIG: gki_defconfig+CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
