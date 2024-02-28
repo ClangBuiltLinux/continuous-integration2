@@ -73,11 +73,15 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                build["llvm_version"] == llvm_version:
                 arch = build.get("ARCH", "x86_64")
                 if llvm_version == max_version:
-                    toolchain = "clang-nightly"
+                    tuxsuite_toolchain = "clang-nightly"
+                else:
+                    # We want to use the kernel.org LLVM builds for speed but
+                    # we don't want korg everywhere
+                    tuxsuite_toolchain = f"korg-{toolchain}"
 
                 current_build = {
                     "target_arch": arch,
-                    "toolchain": toolchain,
+                    "toolchain": tuxsuite_toolchain,
                     "kconfig": build["config"],
                     "targets": build["targets"]
                 }
