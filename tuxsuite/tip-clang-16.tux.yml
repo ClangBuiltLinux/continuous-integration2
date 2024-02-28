@@ -14,7 +14,7 @@ jobs:
 - name: defconfigs
   builds:
   - target_arch: i386
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: defconfig
     targets:
     - kernel
@@ -22,7 +22,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: defconfig
     targets:
     - kernel
@@ -32,7 +32,7 @@ jobs:
 - name: allconfigs
   builds:
   - target_arch: x86_64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: allmodconfig
     targets:
     - default
@@ -40,7 +40,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: allnoconfig
     targets:
     - default
@@ -48,7 +48,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: allyesconfig
     targets:
     - default

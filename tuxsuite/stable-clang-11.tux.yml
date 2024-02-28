@@ -14,7 +14,7 @@ jobs:
 - name: defconfigs
   builds:
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: multi_v5_defconfig
     targets:
     - kernel
@@ -23,7 +23,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: aspeed_g5_defconfig
     targets:
     - kernel
@@ -32,7 +32,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: multi_v7_defconfig
     targets:
     - kernel
@@ -40,7 +40,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
@@ -50,7 +50,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: imx_v4_v5_defconfig
     targets:
     - default
@@ -58,7 +58,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: omap2plus_defconfig
     targets:
     - default
@@ -66,7 +66,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - multi_v7_defconfig
     - CONFIG_ARM_LPAE=y
@@ -77,7 +77,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: defconfig
     targets:
     - kernel
@@ -85,7 +85,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
@@ -95,7 +95,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
@@ -105,7 +105,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_FTRACE=y
@@ -119,7 +119,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_FTRACE=y
@@ -133,7 +133,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_UBSAN=y
@@ -143,7 +143,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: hexagon
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: defconfig
     targets:
     - default
@@ -151,7 +151,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: i386
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: defconfig
     targets:
     - kernel
@@ -159,7 +159,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: mips
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
@@ -172,7 +172,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: mips
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
@@ -183,7 +183,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: powernv_defconfig
     targets:
     - kernel
@@ -193,7 +193,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: riscv
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: defconfig
     targets:
     - kernel
@@ -202,7 +202,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: um
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: defconfig
     targets:
     - kernel
@@ -210,7 +210,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: defconfig
     targets:
     - kernel
@@ -218,7 +218,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_FULL=y
@@ -228,7 +228,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
@@ -238,7 +238,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_KASAN=y
@@ -251,7 +251,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_KCSAN=y
@@ -263,7 +263,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - defconfig
     - CONFIG_UBSAN=y
@@ -275,7 +275,7 @@ jobs:
 - name: distribution_configs
   builds:
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
     targets:
     - kernel
@@ -283,7 +283,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     targets:
     - kernel
@@ -291,7 +291,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
     targets:
     - kernel
@@ -299,7 +299,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     targets:
     - kernel
@@ -307,7 +307,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
     - CONFIG_DEBUG_INFO_BTF=n
@@ -317,7 +317,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: i386
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     targets:
     - default
@@ -325,7 +325,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: powerpc
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
     targets:
     - kernel
@@ -333,7 +333,7 @@ jobs:
     make_variables:
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     targets:
     - kernel
@@ -341,7 +341,7 @@ jobs:
     make_variables:
       LLVM_IAS: 0
   - target_arch: riscv
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
     targets:
     - kernel
@@ -350,7 +350,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: riscv
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
     targets:
     - kernel
@@ -359,7 +359,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
     targets:
     - kernel
@@ -367,7 +367,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
     targets:
     - kernel
@@ -375,7 +375,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     targets:
     - kernel
@@ -383,7 +383,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
     targets:
     - kernel
@@ -393,7 +393,7 @@ jobs:
 - name: allconfigs
   builds:
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
@@ -403,7 +403,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: allnoconfig
     targets:
     - default
@@ -411,7 +411,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: allmodconfig
     targets:
     - default
@@ -419,7 +419,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
@@ -431,7 +431,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: allnoconfig
     targets:
     - default
@@ -439,7 +439,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: allyesconfig
     targets:
     - default
@@ -447,7 +447,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: riscv
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
@@ -458,7 +458,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: allmodconfig
     targets:
     - default
@@ -466,7 +466,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig:
     - allmodconfig
     - CONFIG_GCOV_KERNEL=n
@@ -478,7 +478,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: allnoconfig
     targets:
     - default
@@ -486,7 +486,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-11
+    toolchain: korg-clang-11
     kconfig: allyesconfig
     targets:
     - default

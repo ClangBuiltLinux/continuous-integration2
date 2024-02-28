@@ -14,7 +14,7 @@ jobs:
 - name: defconfigs
   builds:
   - target_arch: arm64
-    toolchain: clang-18
+    toolchain: korg-clang-18
     kconfig: defconfig
     targets:
     - kernel
@@ -22,7 +22,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-18
+    toolchain: korg-clang-18
     kconfig:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
@@ -34,7 +34,7 @@ jobs:
 - name: allconfigs
   builds:
   - target_arch: arm64
-    toolchain: clang-18
+    toolchain: korg-clang-18
     kconfig: allmodconfig
     targets:
     - default
@@ -42,7 +42,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-18
+    toolchain: korg-clang-18
     kconfig: allnoconfig
     targets:
     - default
@@ -50,7 +50,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-18
+    toolchain: korg-clang-18
     kconfig: allyesconfig
     targets:
     - default

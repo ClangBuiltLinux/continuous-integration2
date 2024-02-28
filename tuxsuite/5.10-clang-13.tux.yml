@@ -14,7 +14,7 @@ jobs:
 - name: defconfigs
   builds:
   - target_arch: arm
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: multi_v5_defconfig
     targets:
     - kernel
@@ -23,7 +23,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: aspeed_g5_defconfig
     targets:
     - kernel
@@ -32,7 +32,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: multi_v7_defconfig
     targets:
     - kernel
@@ -40,7 +40,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
@@ -50,7 +50,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: defconfig
     targets:
     - kernel
@@ -58,7 +58,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: i386
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: defconfig
     targets:
     - kernel
@@ -66,7 +66,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: mips
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
@@ -78,7 +78,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: mips
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
@@ -89,7 +89,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: ppc44x_defconfig
     targets:
     - kernel
@@ -98,7 +98,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: ppc64_guest_defconfig
     targets:
     - kernel
@@ -108,7 +108,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: powernv_defconfig
     targets:
     - kernel
@@ -117,7 +117,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: riscv
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: defconfig
     targets:
     - kernel
@@ -127,14 +127,14 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: s390
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: defconfig
     targets:
     - kernel
     make_variables:
       LLVM_IAS: 0
   - target_arch: x86_64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: defconfig
     targets:
     - kernel
@@ -144,7 +144,7 @@ jobs:
 - name: allconfigs
   builds:
   - target_arch: arm
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
@@ -154,7 +154,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: allnoconfig
     targets:
     - default
@@ -162,7 +162,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig:
     - allyesconfig
     - CONFIG_WERROR=n
@@ -172,7 +172,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: allmodconfig
     targets:
     - default
@@ -180,7 +180,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: allnoconfig
     targets:
     - default
@@ -188,7 +188,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: allyesconfig
     targets:
     - default
@@ -196,7 +196,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: allmodconfig
     targets:
     - default
@@ -204,7 +204,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: allnoconfig
     targets:
     - default
@@ -212,7 +212,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-13
+    toolchain: korg-clang-13
     kconfig: allyesconfig
     targets:
     - default
