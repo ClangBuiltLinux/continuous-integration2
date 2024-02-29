@@ -19,7 +19,7 @@ jobs:
   check_cache:
     name: Check Cache
     runs-on: ubuntu-latest
-    container: tuxmake/x86_64_clang-13
+    container: tuxmake/x86_64_korg-clang-13
     env:
       GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
       GIT_REF: linux-5.4.y

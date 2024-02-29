@@ -14,7 +14,7 @@ jobs:
 - name: defconfigs
   builds:
   - target_arch: arm
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: multi_v7_defconfig
     targets:
     - kernel
@@ -22,7 +22,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig:
     - multi_v7_defconfig
     - CONFIG_THUMB2_KERNEL=y
@@ -32,7 +32,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: arm64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig:
     - defconfig
     - CONFIG_COMPAT_VDSO=n
@@ -42,7 +42,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: arm64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
@@ -52,7 +52,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: mips
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
@@ -64,7 +64,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: mips
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
@@ -75,7 +75,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: ppc44x_defconfig
     targets:
     - kernel
@@ -84,7 +84,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: ppc64_guest_defconfig
     targets:
     - kernel
@@ -94,7 +94,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: powerpc
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: powernv_defconfig
     targets:
     - kernel
@@ -103,7 +103,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 0
   - target_arch: x86_64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: defconfig
     targets:
     - kernel
@@ -113,7 +113,7 @@ jobs:
 - name: allconfigs
   builds:
   - target_arch: x86_64
-    toolchain: clang-16
+    toolchain: korg-clang-16
     kconfig: allmodconfig
     targets:
     - default

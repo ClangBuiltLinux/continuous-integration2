@@ -141,14 +141,16 @@ def get_requested_llvm_version():
     ver = os.environ["LLVM_VERSION"]
     with LLVM_TOT_VERSION.open(encoding='utf-8') as file:
         llvm_tot_version = str(int(file.read())).strip()
-    return "clang-" + ("nightly" if ver == llvm_tot_version else ver)
+    if ver == llvm_tot_version:
+        return 'clang-nightly'
+    return f"korg-clang-{ver}"
 
 
 def show_builds():
     print_yellow("Available builds:")
     for build in _read_builds():
         arch_val = build['target_arch']
-        llvm_version_val = build['toolchain'].split('-', 1)[1]
+        llvm_version_val = build['toolchain'].rsplit('-', 1)[-1]
         config_val = "+".join(build["kconfig"])
         print_yellow(
             f"\tARCH={arch_val} LLVM_VERSION={llvm_version_val} CONFIG={config_val}"

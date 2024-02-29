@@ -13,7 +13,7 @@ jobs:
 - name: defconfigs
   builds:
   - target_arch: arm64
-    toolchain: clang-15
+    toolchain: korg-clang-15
     kconfig:
     - chromeos/config/chromeos/base.config
     - chromeos/config/chromeos/arm64/common.config
@@ -25,7 +25,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: clang-15
+    toolchain: korg-clang-15
     kconfig:
     - chromeos/config/chromeos/base.config
     - chromeos/config/chromeos/x86_64/common.config
