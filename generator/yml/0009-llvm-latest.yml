@@ -135,10 +135,10 @@
   - {<< : *riscv_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *riscv_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *riscv_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *s390,              << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
-  - {<< : *s390_kasan,        << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
-  - {<< : *s390_fedora,       << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
-  - {<< : *s390_suse,         << : *next,             << : *clang_ias,       boot: true,  << : *llvm_latest}
+  - {<< : *s390,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_kasan,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *s390_suse,         << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
