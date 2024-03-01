@@ -113,20 +113,14 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "uses": "actions/checkout@v4"
                 },
                 {
-                    "uses": "actions/setup-python@v5",
-                    "with": {
-                        "python-version": "3.x",
-                    },
-                },
-                {
                     "name": "pip install -r requirements.txt",
-                    "run": "python3 -m pip install -r requirements.txt",
+                    "run": "apt-get install -y python3-venv && python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt",
                 },
                 {
-                    "name": "python3 check_cache.py",
+                    "name": "python check_cache.py",
                     "id": "step1",
                     "continue-on-error": True,
-                    "run": "python3 caching/check.py -w '${{ github.workflow }}' "
+                    "run": ". venv/bin/activate && python caching/check.py -w '${{ github.workflow }}' "
                            "-g ${{ secrets.REPO_SCOPED_PAT }} "
                            "-r ${{ env.GIT_REF }} "
                            "-o ${{ env.GIT_REPO }}",
