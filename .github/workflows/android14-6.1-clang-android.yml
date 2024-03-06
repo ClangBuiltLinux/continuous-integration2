@@ -19,7 +19,7 @@ jobs:
   check_cache:
     name: Check Cache
     runs-on: ubuntu-latest
-    container: tuxmake/x86_64_korg-clang-android
+    container: tuxmake/x86_64_clang-android
     env:
       GIT_REPO: https://android.googlesource.com/kernel/common.git
       GIT_REF: android14-6.1

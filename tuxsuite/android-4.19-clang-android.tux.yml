@@ -13,7 +13,7 @@ jobs:
 - name: defconfigs
   builds:
   - target_arch: arm64
-    toolchain: korg-clang-android
+    toolchain: clang-android
     kconfig:
     - gki_defconfig
     - CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
@@ -23,7 +23,7 @@ jobs:
       LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
-    toolchain: korg-clang-android
+    toolchain: clang-android
     kconfig:
     - gki_defconfig
     - CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
