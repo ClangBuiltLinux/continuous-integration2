@@ -74,6 +74,8 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                 arch = build.get("ARCH", "x86_64")
                 if llvm_version == max_version:
                     tuxsuite_toolchain = "clang-nightly"
+                elif llvm_version == "android":
+                    tuxsuite_toolchain = "clang-android"
                 else:
                     # We want to use the kernel.org LLVM builds for speed but
                     # we don't want korg everywhere

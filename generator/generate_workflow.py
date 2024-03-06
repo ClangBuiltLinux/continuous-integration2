@@ -92,6 +92,8 @@ def check_cache_job_setup(repo, ref, toolchain):
     last_part = toolchain.split("-")[-1]
     if last_part == llvm_tot_version:
         toolchain = "clang-nightly"
+    elif last_part == "android":
+        toolchain = "clang-android"
     else:
         toolchain = f"korg-clang-{last_part}"
 
