@@ -143,6 +143,8 @@ def get_requested_llvm_version():
         llvm_tot_version = str(int(file.read())).strip()
     if ver == llvm_tot_version:
         return 'clang-nightly'
+    if ver == 'android':
+        return 'clang-android'
     return f"korg-clang-{ver}"
 
 
