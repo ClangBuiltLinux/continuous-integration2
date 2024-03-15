@@ -1,12 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH v2] kbuild: Move
- -Wenum-{compare-conditional,enum-conversion} into W=1
+From 75b5ab134bb5f657ef7979a59106dce0657e8d87 Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
-Date: Tue, 05 Mar 2024 15:12:47 -0700
-Message-Id: <20240305-disable-extra-clang-enum-warnings-v2-1-ba529ec15f95@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Date: Tue, 5 Mar 2024 15:12:47 -0700
+Subject: kbuild: Move -Wenum-{compare-conditional,enum-conversion} into W=1
 
 Clang enables -Wenum-enum-conversion and -Wenum-compare-conditional
 under -Wenum-conversion. A recent change in Clang strengthened these
@@ -47,21 +42,17 @@ Cc: stable@vger.kernel.org
 Closes: https://github.com/ClangBuiltLinux/linux/issues/2002
 Link: https://github.com/llvm/llvm-project/commit/8c2ae42b3e1c6aa7c18f873edcebff7c0b45a37e
 Acked-by: Yonghong Song <yonghong.song@linux.dev>
-Acked-by: Arnd Bergmann <arnd@arndb.de>
-Link: https://lore.kernel.org/r/20240305-disable-extra-clang-enum-warnings-v2-1-ba529ec15f95@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Acked-by: Arnd Bergmann <arnd@arndb.de>
+Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
 ---
-Changes in v2:
-- Only disable the warning for the default build, leave it on for W=1 (Arnd)
-- Add Yonghong's ack, as the warning is still disabled for the default
-  build.
-- Link to v1: https://lore.kernel.org/r/20240305-disable-extra-clang-enum-warnings-v1-1-6a93ef3d35ff@kernel.org
+Link: https://git.kernel.org/masahiroy/linux-kbuild/c/75b5ab134bb5f657ef7979a59106dce0657e8d87
 ---
  scripts/Makefile.extrawarn | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
-index a9e552a1e910..2f25a1de129d 100644
+index a9e552a1e9105b..2f25a1de129d10 100644
 --- a/scripts/Makefile.extrawarn
 +++ b/scripts/Makefile.extrawarn
 @@ -132,6 +132,8 @@ KBUILD_CFLAGS += $(call cc-disable-warning, pointer-to-enum-cast)
@@ -73,12 +64,6 @@ index a9e552a1e910..2f25a1de129d 100644
  endif
  
  endif
-
----
-base-commit: 90d35da658da8cff0d4ecbb5113f5fac9d00eb72
-change-id: 20240304-disable-extra-clang-enum-warnings-bf574c7c99fd
-
-Best regards,
 -- 
-Nathan Chancellor <nathan@kernel.org>
+cgit 1.2.3-korg
 
