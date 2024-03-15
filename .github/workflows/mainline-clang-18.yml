@@ -834,12 +834,12 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _b44d869d20f1498db69bd2c10feadaa2:
+  _af7afd080e56e2a68964f8b20c8612b4:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=18 defconfig
+    name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: s390
@@ -862,12 +862,12 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _7636ef53313fa166fbc1b97829a3868c:
+  _54c2f672a2b4383c29636e94d6280c0e:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
-    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: s390
@@ -1491,12 +1491,12 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _85c021aa7070a43cffc70e8eb749333d:
+  _b09613e175e3f625085032870643e265:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
-    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+    name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: s390
@@ -1519,12 +1519,12 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _1adfaf7b63bac61bf2e8db5bac4fb007:
+  _64b02c22430661ba14a8e1de6f0ef689:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
-    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: s390

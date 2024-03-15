@@ -282,6 +282,7 @@ jobs:
     targets:
     - kernel
     make_variables:
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: s390
     toolchain: korg-clang-18
@@ -294,6 +295,7 @@ jobs:
     targets:
     - kernel
     make_variables:
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: um
     toolchain: korg-clang-18
@@ -491,6 +493,7 @@ jobs:
     targets:
     - kernel
     make_variables:
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: s390
     toolchain: korg-clang-18
@@ -498,6 +501,7 @@ jobs:
     targets:
     - kernel
     make_variables:
+      LLVM: 1
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: korg-clang-18
