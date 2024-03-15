@@ -33,7 +33,7 @@ def update_llvm_tot_version():
     # Avoids pulling in an extra Python package dependency
     curl_cmd = [
         'curl', '-fLSs',
-        'https://raw.githubusercontent.com/llvm/llvm-project/main/llvm/CMakeLists.txt'
+        'https://raw.githubusercontent.com/llvm/llvm-project/main/cmake/Modules/LLVMVersion.cmake'
     ]
     cmakelists = subprocess.run(curl_cmd,
                                 capture_output=True,
