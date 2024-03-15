@@ -1,8 +1,8 @@
 From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] media: mxl5xx: Move xpt structures off stack
+Subject: [PATCH v2] media: mxl5xx: Move xpt structures off stack
 From: Nathan Chancellor <nathan@kernel.org>
-Date: Thu, 11 Jan 2024 17:40:36 -0700
-Message-Id: <20240111-dvb-mxl5xx-move-structs-off-stack-v1-1-ca4230e67c11@kernel.org>
+Date: Tue, 05 Mar 2024 15:49:40 -0700
+Message-Id: <20240305-dvb-mxl5xx-move-structs-off-stack-v2-1-6903844aba3c@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -22,18 +22,26 @@ above warning in combination with inlining, as config_ts() gets inlined
 into probe().
 
 This warning can be easily fixed by moving the array of structures off
-of the stackvia 'static const', which is a better location for these
+of the stack via 'static const', which is a better location for these
 variables anyways because they are static data that is only ever read
 from, never modified, so allocating the stack space is wasteful.
 
 This drops the stack usage from 2368 bytes to 256 bytes with the same
 compiler and configuration.
 
-Cc:  <stable@vger.kernel.org>
-Closes: https://github.com/ClangBuiltLinux/linux/issues/1977
+Cc: stable@vger.kernel.org
+Closes: https://github.com/ClangBuiltLinux/linux/issues/1978
 Link: https://github.com/llvm/llvm-project/commit/afe8b93ffdfef5d8879e1894b9d7dda40dee2b8d
-Link: https://lore.kernel.org/r/20240111-dvb-mxl5xx-move-structs-off-stack-v1-1-ca4230e67c11@kernel.org
+Reviewed-by: Miguel Ojeda <ojeda@kernel.org>
+Tested-by: Miguel Ojeda <ojeda@kernel.org>
+Link: https://lore.kernel.org/r/20240305-dvb-mxl5xx-move-structs-off-stack-v2-1-6903844aba3c@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+Changes in v2:
+- Rebase on latest media tree
+- Fix typo and link in the commit message (Miguel)
+- Pick up Miguel's reviewed-by and tested-by tags
+- Link to v1: https://lore.kernel.org/r/20240111-dvb-mxl5xx-move-structs-off-stack-v1-1-ca4230e67c11@kernel.org
 ---
  drivers/media/dvb-frontends/mxl5xx.c | 22 +++++++++++-----------
  1 file changed, 11 insertions(+), 11 deletions(-)
@@ -113,7 +121,7 @@ index 4ebbcf05cc09..91e9c378397c 100644
  		{0x90700044, 16, 84}, {0x90700044, 16, 85},
 
 ---
-base-commit: 02d4e62ae2452c83e4a3e279b8e4cb4dcbad4b31
+base-commit: 8c64f4cdf4e6cc5682c52523713af8c39c94e6d5
 change-id: 20240111-dvb-mxl5xx-move-structs-off-stack-e12172b1ef02
 
 Best regards,
