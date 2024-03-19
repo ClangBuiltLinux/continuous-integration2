@@ -93,17 +93,19 @@ def main():
             build_log_raw = response.read().decode()
 
         failed_pattern = (
-            r"(?<=Apply patch set FAILED\s)[0-9A-Za-z._:/\-\s]*?(?=\serror: )"
-        )
+            r"(?<=Apply patch set FAILED\s)[0-9A-Za-z._:/\-\s]*?(?=\serror: )")
         failed_matches = re.findall(failed_pattern, build_log_raw)
         if len(failed_matches) == 0:
             print(
                 f"No patches failed to apply yet the build status stated there were: {build['status_message']}"
             )
-            sys.exit(0)  # Not sure how we got here but continue the action anyways
+            sys.exit(
+                0)  # Not sure how we got here but continue the action anyways
 
         patches_that_failed_to_apply = failed_matches[0].split('\n')
-        print(f"Error: Some patches failed to apply.\n{patches_that_failed_to_apply}\n")
+        print(
+            f"Error: Some patches failed to apply.\n{patches_that_failed_to_apply}\n"
+        )
         sys.exit(1)
 
     if len(builds_that_are_missing_metadata) == len(builds):
