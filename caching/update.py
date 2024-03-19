@@ -18,6 +18,8 @@ a caching system stop us from doing so -- even if sha and version match.
 import json
 import os
 import sys
+import re
+import urllib.request
 from pathlib import Path
 
 from utils import get_patches_hash, get_workflow_name_to_var_name, update_repository_variable
@@ -78,6 +80,31 @@ def main():
             break
         except KeyError:
             builds_that_are_missing_metadata.append(entry)
+
+    # some builds may be missing metadata due to patches failing to apply
+    for build_id in builds_that_are_missing_metadata:
+        build = builds[build_id]
+
+        if "Unable to apply kernel patch" not in build["status_message"]:
+            continue
+        req = urllib.request.Request(build["download_url"] + "build.log")
+        build_log_raw = ""
+        with urllib.request.urlopen(req) as response:
+            build_log_raw = response.read().decode()
+
+        failed_pattern = (
+            r"(?<=Apply patch set FAILED\s)[0-9A-Za-z._:/\-\s]*?(?=\serror: )"
+        )
+        failed_matches = re.findall(failed_pattern, build_log_raw)
+        if len(failed_matches) == 0:
+            print(
+                f"No patches failed to apply yet the build status stated there were: {build['status_message']}"
+            )
+            sys.exit(0)  # Not sure how we got here but continue the action anyways
+
+        patches_that_failed_to_apply = failed_matches[0].split('\n')
+        print(f"Error: Some patches failed to apply.\n{patches_that_failed_to_apply}\n")
+        sys.exit(1)
 
     if len(builds_that_are_missing_metadata) == len(builds):
         raise RuntimeError(
