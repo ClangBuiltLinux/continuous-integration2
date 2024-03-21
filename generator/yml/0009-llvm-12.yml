@@ -33,7 +33,8 @@
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_12}
-  - {<< : *mips,              << : *mainline,         << : *mips_llvm_full,  boot: true,  << : *llvm_12}
+  # mips builds with GNU ld broken until 2.41: https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=6b958fe36b765f70878e8d3d002864967c4bc3a4
+  # - {<< : *mips,              << : *mainline,         << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_12}
@@ -92,7 +93,8 @@
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_12}
-  - {<< : *mips,              << : *stable,           << : *mips_llvm_full,  boot: true,  << : *llvm_12}
+  # mips builds with GNU ld broken until 2.41: https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=6b958fe36b765f70878e8d3d002864967c4bc3a4
+  # - {<< : *mips,              << : *stable,           << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_12}
@@ -151,7 +153,8 @@
   - {<< : *hexagon,           << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *stable-6_6,       << : *llvm_full,       boot: false, << : *llvm_12}
-  - {<< : *mips,              << : *stable-6_6,       << : *mips_llvm_full,  boot: true,  << : *llvm_12}
+  # mips builds with GNU ld broken until 2.41: https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=6b958fe36b765f70878e8d3d002864967c4bc3a4
+  # - {<< : *mips,              << : *stable-6_6,       << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable-6_6,       << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable-6_6,       << : *llvm,            boot: true,  << : *llvm_12}
@@ -210,7 +213,8 @@
   - {<< : *hexagon,           << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *stable-6_1,       << : *llvm_full,       boot: false, << : *llvm_12}
-  - {<< : *mips,              << : *stable-6_1,       << : *mips_llvm_full,  boot: true,  << : *llvm_12}
+  # mips builds with GNU ld broken until 2.41: https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=6b958fe36b765f70878e8d3d002864967c4bc3a4
+  # - {<< : *mips,              << : *stable-6_1,       << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable-6_1,       << : *llvm_full,       boot: true,  << : *llvm_12}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable-6_1,       << : *llvm,            boot: true,  << : *llvm_12}
@@ -269,7 +273,8 @@
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_12}
-  - {<< : *mips,              << : *stable-5_15,      << : *mips_llvm_full,  boot: true,  << : *llvm_12}
+  # mips builds with GNU ld broken until 2.41: https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=6b958fe36b765f70878e8d3d002864967c4bc3a4
+  # - {<< : *mips,              << : *stable-5_15,      << : *mips_llvm_full,  boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_12}
@@ -309,7 +314,8 @@
   - {<< : *arm64_allno,       << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *arm64_allyes,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_12}
   - {<< : *i386,              << : *stable-5_10,      << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *mips,              << : *stable-5_10,      << : *mips_llvm,       boot: true,  << : *llvm_12}
+  # mips builds with GNU ld broken until 2.41: https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=6b958fe36b765f70878e8d3d002864967c4bc3a4
+  # - {<< : *mips,              << : *stable-5_10,      << : *mips_llvm,       boot: true,  << : *llvm_12}
   - {<< : *mipsel,            << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc32,             << : *stable-5_10,      << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *ppc64,             << : *stable-5_10,      << : *ppc64_llvm,      boot: true,  << : *llvm_12}

@@ -174,19 +174,6 @@ jobs:
     kconfig:
     - malta_defconfig
     - CONFIG_BLK_DEV_INITRD=y
-    - CONFIG_CPU_BIG_ENDIAN=y
-    targets:
-    - kernel
-    kernel_image: vmlinux
-    make_variables:
-      LD: mips-linux-gnu-ld
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: mips
-    toolchain: korg-clang-12
-    kconfig:
-    - malta_defconfig
-    - CONFIG_BLK_DEV_INITRD=y
     targets:
     - kernel
     kernel_image: vmlinux
