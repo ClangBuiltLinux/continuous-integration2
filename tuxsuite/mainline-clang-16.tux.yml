@@ -248,6 +248,28 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - target_arch: riscv
+    toolchain: korg-clang-16
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - kernel
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: riscv
+    toolchain: korg-clang-16
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - kernel
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
   - target_arch: s390
     toolchain: korg-clang-16
     kconfig: defconfig
