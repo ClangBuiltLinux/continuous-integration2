@@ -45,6 +45,8 @@
   - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *ppc64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  - {<< : *riscv_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *riscv_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
