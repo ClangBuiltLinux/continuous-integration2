@@ -834,6 +834,62 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
+  _d85cf623a0baba4ce434758fabad1912:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_LTO_CLANG_FULL=y
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 18
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
+  _8013a0d19522c2cc6970b59fbfa0df31:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 defconfig+CONFIG_LTO_CLANG_THIN=y
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 18
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
   _af7afd080e56e2a68964f8b20c8612b4:
     runs-on: ubuntu-latest
     needs:
