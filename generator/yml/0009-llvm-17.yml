@@ -32,6 +32,7 @@
   - {<< : *arm64_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *arm64_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_fedora_lto,  << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_virt,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
@@ -73,6 +74,7 @@
   - {<< : *x86_64_alpine,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_arch,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_fedora,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_fedora_lto, << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_suse,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   ##########
   #  Next  #
@@ -104,6 +106,7 @@
   - {<< : *arm64_allyes,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *arm64_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_fedora,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_fedora_lto,  << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_virt,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
@@ -147,6 +150,7 @@
   - {<< : *x86_64_alpine,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_arch,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_fedora,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_fedora_lto, << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_suse,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   ###########################
   #  Latest stable release  #
@@ -178,6 +182,7 @@
   - {<< : *arm64_allyes,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *arm64_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_fedora,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_fedora_lto,  << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_virt,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_17}
@@ -217,6 +222,7 @@
   - {<< : *x86_64_alpine,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_arch,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_fedora_lto, << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_suse,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   ###########
   #  6.6.y  #
