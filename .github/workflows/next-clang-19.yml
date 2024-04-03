@@ -1407,6 +1407,34 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
+  _5fd7ba41b2d9304c0016d0427f2e88ac:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_LTO_CLANG_THIN=y
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 19
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_LTO_CLANG_THIN=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_distribution_configs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_distribution_configs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
   _ff0df706f24e25e0685590346bdd44e8:
     runs-on: ubuntu-latest
     needs:
@@ -1699,6 +1727,34 @@ jobs:
       LLVM_VERSION: 19
       BOOT: 1
       CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_distribution_configs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_distribution_configs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
+  _299e543a68730cc10e9d179f680f63e0:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_distribution_configs
+    - check_cache
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config+CONFIG_LTO_CLANG_THIN=y
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 19
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
