@@ -13,6 +13,20 @@ GENERATOR_ROOT = Path(CI_ROOT, 'generator')
 LLVM_TOT_VERSION = Path(GENERATOR_ROOT, 'LLVM_TOT_VERSION')
 
 
+# Certain subsystems have more targeted -Werror configurations. If we have
+# CONFIG_WERROR=n, it means we are explicitly opting out of -Werror for some
+# reason, so all other known subsystem specific configurations should be
+# disabled as well.
+def disable_subsys_werror_configs(configs):
+    if 'CONFIG_WERROR=n' not in configs:
+        return
+
+    known_subsys_configs = ['CONFIG_DRM_WERROR=n']
+    for item in known_subsys_configs:
+        if item not in configs:
+            configs.append(item)
+
+
 def get_config_from_generator():
     if not (all_generator_files := sorted(
             Path(GENERATOR_ROOT, 'yml').glob('*.yml'))):
