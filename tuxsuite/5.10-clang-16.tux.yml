@@ -158,6 +158,7 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:
@@ -176,6 +177,7 @@ jobs:
     kconfig:
     - allyesconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:

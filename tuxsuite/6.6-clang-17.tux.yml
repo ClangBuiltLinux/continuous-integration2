@@ -500,6 +500,7 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:
@@ -518,6 +519,7 @@ jobs:
     kconfig:
     - allyesconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:
@@ -572,6 +574,7 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:
@@ -583,6 +586,7 @@ jobs:
     - allmodconfig
     - CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:
@@ -593,6 +597,7 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     kernel_image: Image
