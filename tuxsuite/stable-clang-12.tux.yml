@@ -394,6 +394,7 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:
@@ -448,6 +449,7 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     kernel_image: Image

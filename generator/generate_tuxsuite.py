@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 import yaml
 
-from utils import CI_ROOT, LLVM_TOT_VERSION, get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
+from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
 
 
 # Aliases makes this YAML unreadable
@@ -81,6 +81,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                     # we don't want korg everywhere
                     tuxsuite_toolchain = f"korg-{toolchain}"
 
+                disable_subsys_werror_configs(build["config"])
                 current_build = {
                     "target_arch": arch,
                     "toolchain": tuxsuite_toolchain,

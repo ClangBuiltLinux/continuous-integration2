@@ -231,18 +231,18 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_allconfigs
         if-no-files-found: error
-  _4b115193ceb7dddbc6b11c715fd79f88:
+  _437a4c762fc9e539e4e10aba6b1b4e94:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 allmodconfig+CONFIG_WERROR=n
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 15
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
+      CONFIG: allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu

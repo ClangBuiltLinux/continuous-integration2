@@ -511,18 +511,18 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_allconfigs
         if-no-files-found: error
-  _1dd519d5e67fb6542ee595775814d363:
+  _9b797f72b4984bc93cce2b07b731301c:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n
+      CONFIG: allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -567,18 +567,18 @@ jobs:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _787230103202571eafef247f0ba0902e:
+  _c5eab1d86e7a916cbf0a57b4269fcd2f:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 allyesconfig+CONFIG_WERROR=n
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 allyesconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 13
       BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n
+      CONFIG: allyesconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu

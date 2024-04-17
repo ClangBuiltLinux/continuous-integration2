@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 import yaml
 
-from utils import CI_ROOT, LLVM_TOT_VERSION, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
+from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
 
 
 def parse_args(trees):
@@ -277,6 +277,7 @@ def print_builds(config, tree_name, llvm_version):
         if build["git_repo"] == repo and \
            build["git_ref"] == ref and \
            build["llvm_version"] == llvm_version:
+            disable_subsys_werror_configs(build["config"])
             cfg_str = str(build["config"])
             if "defconfig" in cfg_str or "chromeos" in cfg_str:
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
