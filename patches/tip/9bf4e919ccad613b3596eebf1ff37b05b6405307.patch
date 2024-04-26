@@ -1,4 +1,4 @@
-From 7d80e7ebf9e333dc5463a48a914f55caef15f62f Mon Sep 17 00:00:00 2001
+From 9bf4e919ccad613b3596eebf1ff37b05b6405307 Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
 Date: Mon, 1 Apr 2024 11:24:17 -0700
 Subject: Bluetooth: Fix type of len in {l2cap,sco}_sock_getsockopt_old()
@@ -62,7 +62,7 @@ Signed-off-by: Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
  2 files changed, 8 insertions(+), 6 deletions(-)
 
 diff --git a/net/bluetooth/l2cap_sock.c b/net/bluetooth/l2cap_sock.c
-index 9a9f933a748b8..7846a068bf60b 100644
+index e7d810b23082f5..5cc83f906c123f 100644
 --- a/net/bluetooth/l2cap_sock.c
 +++ b/net/bluetooth/l2cap_sock.c
 @@ -439,7 +439,8 @@ static int l2cap_sock_getsockopt_old(struct socket *sock, int optname,
@@ -94,10 +94,10 @@ index 9a9f933a748b8..7846a068bf60b 100644
  			err = -EFAULT;
  
 diff --git a/net/bluetooth/sco.c b/net/bluetooth/sco.c
-index b3c2af7c7d678..99c2b713d8268 100644
+index 368e026f4d15ca..5d03c5440b06f8 100644
 --- a/net/bluetooth/sco.c
 +++ b/net/bluetooth/sco.c
-@@ -982,7 +982,8 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname,
+@@ -964,7 +964,8 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname,
  	struct sock *sk = sock->sk;
  	struct sco_options opts;
  	struct sco_conninfo cinfo;
@@ -107,7 +107,7 @@ index b3c2af7c7d678..99c2b713d8268 100644
  
  	BT_DBG("sk %p", sk);
  
-@@ -1004,7 +1005,7 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname,
+@@ -986,7 +987,7 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname,
  
  		BT_DBG("mtu %u", opts.mtu);
  
@@ -116,7 +116,7 @@ index b3c2af7c7d678..99c2b713d8268 100644
  		if (copy_to_user(optval, (char *)&opts, len))
  			err = -EFAULT;
  
-@@ -1022,7 +1023,7 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname,
+@@ -1004,7 +1005,7 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname,
  		cinfo.hci_handle = sco_pi(sk)->conn->hcon->handle;
  		memcpy(cinfo.dev_class, sco_pi(sk)->conn->hcon->dev_class, 3);
  
