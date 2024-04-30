@@ -43,15 +43,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: riscv
-    toolchain: korg-clang-15
-    kconfig: gki_defconfig
-    targets:
-    - kernel
-    kernel_image: Image
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
 - name: allconfigs
   builds:
   - target_arch: arm
