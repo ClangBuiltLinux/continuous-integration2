@@ -75,7 +75,6 @@ configs:
   - &riscv_no_efi      {config: [defconfig, CONFIG_EFI=n],                                                      kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
   - &riscv_alpine      {config: *riscv-alpine-config-url,                                                       kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
   - &riscv_suse        {config: *riscv-suse-config-url,                                                         kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
-  - &riscv_gki         {config: gki_defconfig,                                                                  kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
   - &s390              {config: defconfig,                                                                                                  ARCH: *s390-arch,       << : *kernel}
   - &s390_kasan        {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],             ARCH: *s390-arch,       << : *kernel}
   - &s390_fedora       {config: *s390-fedora-config-url,                                                                                    ARCH: *s390-arch,       << : *kernel}

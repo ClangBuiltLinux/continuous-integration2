@@ -451,7 +451,6 @@
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *riscv_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm32_allmod,      << : *android15-6_6,    << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *arm32_v7_t,        << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_gki,         << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_15}
