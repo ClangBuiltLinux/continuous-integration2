@@ -10,6 +10,7 @@ configs:
   - &arm32_v6          {config: aspeed_g5_defconfig,                                                                                        ARCH: *arm-arch,        << : *kernel_dtbs}
   - &arm32_v7          {config: multi_v7_defconfig,                                                                                         ARCH: *arm-arch,        << : *kernel}
   - &arm32_v7_t        {config: [multi_v7_defconfig, CONFIG_THUMB2_KERNEL=y],                                                               ARCH: *arm-arch,        << : *kernel}
+  - &arm32_cfi         {config: [multi_v7_defconfig, CONFIG_CFI_CLANG=y],                                                                   ARCH: *arm-arch,        << : *kernel}
   - &arm32_imx         {config: imx_v4_v5_defconfig,                                                                                        ARCH: *arm-arch,        << : *default}
   - &arm32_omap        {config: omap2plus_defconfig,                                                                                        ARCH: *arm-arch,        << : *default}
   - &arm32_lpae_fp     {config: [multi_v7_defconfig, CONFIG_ARM_LPAE=y, CONFIG_UNWINDER_FRAME_POINTER=y],                                   ARCH: *arm-arch,        << : *kernel}
