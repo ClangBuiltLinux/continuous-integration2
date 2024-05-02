@@ -51,6 +51,16 @@ jobs:
       LLVM_IAS: 1
   - target_arch: arm
     toolchain: korg-clang-18
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_CFI_CLANG=y
+    targets:
+    - kernel
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: arm
+    toolchain: korg-clang-18
     kconfig: imx_v4_v5_defconfig
     targets:
     - default
