@@ -162,34 +162,6 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _9d63787dd80567f37c0fba29cbdcbc48:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=15 gki_defconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: riscv
-      LLVM_VERSION: 15
-      BOOT: 1
-      CONFIG: gki_defconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   kick_tuxsuite_allconfigs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
