@@ -57,7 +57,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name defconfigs --json-out builds.json --patch-series patches/next tuxsuite/next-clang-18.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name defconfigs --json-out builds.json tuxsuite/next-clang-18.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -1302,7 +1302,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name distribution_configs --json-out builds.json --patch-series patches/next tuxsuite/next-clang-18.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name distribution_configs --json-out builds.json tuxsuite/next-clang-18.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -1847,7 +1847,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name allconfigs --json-out builds.json --patch-series patches/next tuxsuite/next-clang-18.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --git-ref master --job-name allconfigs --json-out builds.json tuxsuite/next-clang-18.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
