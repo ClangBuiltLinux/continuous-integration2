@@ -57,6 +57,7 @@
   - {<< : *riscv_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *riscv_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *riscv_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
