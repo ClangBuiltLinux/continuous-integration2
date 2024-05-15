@@ -164,6 +164,8 @@ for name, builds in jobs.items():
                 distro = 'fedora'
             elif 'openSUSE' in url:
                 distro = 'opensuse'
+            else:
+                raise RuntimeError(f"URL ('{url}') was not handled?")
             cfg_str = cfg_str.replace(url, distro)
         specific_output_dir = Path(output_dir, toolchain, target_arch, cfg_str)
         specific_output_dir.mkdir(exist_ok=True, parents=True)
