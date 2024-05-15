@@ -512,6 +512,20 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - target_arch: riscv
+    toolchain: korg-clang-14
+    kconfig:
+    - allmodconfig
+    - CONFIG_WERROR=n
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_DRM_WERROR=n
+    targets:
+    - default
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: korg-clang-14
     kconfig: allmodconfig

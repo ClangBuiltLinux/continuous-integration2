@@ -2176,6 +2176,34 @@ jobs:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
+  _773c4c0d80f04005802335236f84d00f:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=18 allmodconfig+CONFIG_WERROR=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_WERROR=n
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 18
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_WERROR=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_WERROR=n
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_allconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
   _023bdb66eac2efb5decd45b88317a7bd:
     runs-on: ubuntu-latest
     needs:
