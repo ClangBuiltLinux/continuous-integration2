@@ -200,7 +200,10 @@
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *ppc64_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *riscv_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *riscv_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *riscv_allmod_lto,  << : *stable,           << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *riscv_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *s390,              << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_17}
