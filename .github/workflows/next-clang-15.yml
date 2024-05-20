@@ -12,7 +12,7 @@ name: next (clang-15)
     - tuxsuite/next-clang-15.tux.yml
     - .github/workflows/next-clang-15.yml
   schedule:
-  - cron: 1 12 * * 1,2,3,4,5
+  - cron: 0 12 * * 1,2,3,4,5
   workflow_dispatch: null
 permissions: read-all
 jobs:

@@ -12,7 +12,7 @@ name: chromeos-6.1 (clang-14)
     - tuxsuite/chromeos-6.1-clang-14.tux.yml
     - .github/workflows/chromeos-6.1-clang-14.yml
   schedule:
-  - cron: 1 18 * * 0
+  - cron: 0 18 * * 0
   workflow_dispatch: null
 permissions: read-all
 jobs:

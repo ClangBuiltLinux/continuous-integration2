@@ -12,7 +12,7 @@ name: 4.19 (clang-19)
     - tuxsuite/4.19-clang-19.tux.yml
     - .github/workflows/4.19-clang-19.yml
   schedule:
-  - cron: 1 18 * * 1,5
+  - cron: 0 18 * * 1,5
   workflow_dispatch: null
 permissions: read-all
 jobs:

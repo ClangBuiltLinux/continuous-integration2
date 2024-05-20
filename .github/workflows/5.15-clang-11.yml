@@ -12,7 +12,7 @@ name: 5.15 (clang-11)
     - tuxsuite/5.15-clang-11.tux.yml
     - .github/workflows/5.15-clang-11.yml
   schedule:
-  - cron: 1 6 * * 3
+  - cron: 0 6 * * 3
   workflow_dispatch: null
 permissions: read-all
 jobs:
