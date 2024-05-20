@@ -1,7 +1,7 @@
 name: Check clang version
 'on':
   schedule:
-  - cron: 0 0 * * *
+  - cron: 1 0 * * *
   workflow_dispatch: null
 jobs:
   check_check_version:

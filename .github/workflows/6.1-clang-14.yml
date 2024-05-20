@@ -12,7 +12,7 @@ name: 6.1 (clang-14)
     - tuxsuite/6.1-clang-14.tux.yml
     - .github/workflows/6.1-clang-14.yml
   schedule:
-  - cron: 0 0 * * 3
+  - cron: 1 0 * * 3
   workflow_dispatch: null
 permissions: read-all
 jobs:

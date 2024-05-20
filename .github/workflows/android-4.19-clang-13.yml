@@ -12,7 +12,7 @@ name: android-4.19 (clang-13)
     - tuxsuite/android-4.19-clang-13.tux.yml
     - .github/workflows/android-4.19-clang-13.yml
   schedule:
-  - cron: 0 12 * * 0
+  - cron: 1 12 * * 0
   workflow_dispatch: null
 permissions: read-all
 jobs:

@@ -12,7 +12,7 @@ name: arm64-fixes (clang-17)
     - tuxsuite/arm64-fixes-clang-17.tux.yml
     - .github/workflows/arm64-fixes-clang-17.yml
   schedule:
-  - cron: 0 18 * * 1,2,3,4,5
+  - cron: 1 18 * * 1,2,3,4,5
   workflow_dispatch: null
 permissions: read-all
 jobs:
