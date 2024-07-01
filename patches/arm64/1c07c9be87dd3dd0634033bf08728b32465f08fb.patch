@@ -1,11 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] tty: mxser: Remove __counted_by from mxser_board.ports[]
+From 1c07c9be87dd3dd0634033bf08728b32465f08fb Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
 Date: Wed, 29 May 2024 14:29:42 -0700
-Message-Id: <20240529-drop-counted-by-ports-mxser-board-v1-1-0ab217f4da6d@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: tty: mxser: Remove __counted_by from mxser_board.ports[]
 
 Work for __counted_by on generic pointers in structures (not just
 flexible array members) has started landing in Clang 19 (current tip of
@@ -42,17 +38,18 @@ Remove this use of __counted_by to fix the warning/error. However,
 rather than remove it altogether, leave it commented, as it may be
 possible to support this in future compiler releases.
 
-Cc: stable@vger.kernel.org
+Cc:  <stable@vger.kernel.org>
 Closes: https://github.com/ClangBuiltLinux/linux/issues/2026
 Fixes: f34907ecca71 ("mxser: Annotate struct mxser_board with __counted_by")
-Link: https://lore.kernel.org/r/20240529-drop-counted-by-ports-mxser-board-v1-1-0ab217f4da6d@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Link: https://lore.kernel.org/r/20240529-drop-counted-by-ports-mxser-board-v1-1-0ab217f4da6d@kernel.org
+Signed-off-by: Kees Cook <kees@kernel.org>
 ---
  drivers/tty/mxser.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/tty/mxser.c b/drivers/tty/mxser.c
-index 458bb1280ebf..5b97e420a95f 100644
+index 458bb1280ebf9d..5b97e420a95f84 100644
 --- a/drivers/tty/mxser.c
 +++ b/drivers/tty/mxser.c
 @@ -288,7 +288,7 @@ struct mxser_board {
@@ -64,12 +61,6 @@ index 458bb1280ebf..5b97e420a95f 100644
  };
  
  static DECLARE_BITMAP(mxser_boards, MXSER_BOARDS);
-
----
-base-commit: 1613e604df0cd359cf2a7fbd9be7a0bcfacfabd0
-change-id: 20240529-drop-counted-by-ports-mxser-board-ed2a66f1a6e2
-
-Best regards,
 -- 
-Nathan Chancellor <nathan@kernel.org>
+cgit 1.2.3-korg
 

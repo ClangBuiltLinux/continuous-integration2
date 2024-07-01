@@ -1,12 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] nvmet-fc: Remove __counted_by from
- nvmet_fc_tgt_queue.fod[]
+From 440e2051c577896275c0e0513ec26964e04c7810 Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
 Date: Wed, 29 May 2024 14:42:40 -0700
-Message-Id: <20240529-drop-counted-by-fod-nvmet-fc-tgt-queue-v1-1-286adbc25943@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: nvmet-fc: Remove __counted_by from nvmet_fc_tgt_queue.fod[]
 
 Work for __counted_by on generic pointers in structures (not just
 flexible array members) has started landing in Clang 19 (current tip of
@@ -46,14 +41,16 @@ possible to support this in future compiler releases.
 Cc: stable@vger.kernel.org
 Closes: https://github.com/ClangBuiltLinux/linux/issues/2027
 Fixes: ccd3129aca28 ("nvmet-fc: Annotate struct nvmet_fc_tgt_queue with __counted_by")
-Link: https://lore.kernel.org/r/20240529-drop-counted-by-fod-nvmet-fc-tgt-queue-v1-1-286adbc25943@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Signed-off-by: Keith Busch <kbusch@kernel.org>
+---
+Link: https://git.kernel.org/linus/440e2051c577896275c0e0513ec26964e04c7810
 ---
  drivers/nvme/target/fc.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/nvme/target/fc.c b/drivers/nvme/target/fc.c
-index 337ee1cb09ae..381b4394731f 100644
+index 337ee1cb09ae64..381b4394731f1d 100644
 --- a/drivers/nvme/target/fc.c
 +++ b/drivers/nvme/target/fc.c
 @@ -148,7 +148,7 @@ struct nvmet_fc_tgt_queue {
@@ -65,12 +62,6 @@ index 337ee1cb09ae..381b4394731f 100644
  } __aligned(sizeof(unsigned long long));
  
  struct nvmet_fc_hostport {
-
----
-base-commit: c758b77d4a0a0ed3a1292b3fd7a2aeccd1a169a4
-change-id: 20240529-drop-counted-by-fod-nvmet-fc-tgt-queue-50edd2f8d60e
-
-Best regards,
 -- 
-Nathan Chancellor <nathan@kernel.org>
+cgit 1.2.3-korg
 
