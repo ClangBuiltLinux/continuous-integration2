@@ -1,11 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] drm/radeon: Remove __counted_by from StateArray.states[]
+From 2bac084468847cfe5bbc7166082b2a208514bb1c Mon Sep 17 00:00:00 2001
 From: Bill Wendling <morbo@google.com>
 Date: Wed, 29 May 2024 14:54:44 -0700
-Message-Id: <20240529-drop-counted-by-radeon-states-state-array-v1-1-5cdc1fb29be7@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: [PATCH] drm/radeon: Remove __counted_by from StateArray.states[]
 
 Work for __counted_by on generic pointers in structures (not just
 flexible array members) has started landing in Clang 19 (current tip of
@@ -47,14 +43,16 @@ Closes: https://github.com/ClangBuiltLinux/linux/issues/2028
 Fixes: efade6fe50e7 ("drm/radeon: silence UBSAN warning (v3)")
 Signed-off-by: Bill Wendling <morbo@google.com>
 Co-developed-by: Nathan Chancellor <nathan@kernel.org>
-Link: https://lore.kernel.org/r/20240529-drop-counted-by-radeon-states-state-array-v1-1-5cdc1fb29be7@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+---
+Link: https://gitlab.freedesktop.org/agd5f/linux/-/commit/2bac084468847cfe5bbc7166082b2a208514bb1c
 ---
  drivers/gpu/drm/radeon/pptable.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/radeon/pptable.h b/drivers/gpu/drm/radeon/pptable.h
-index b7f22597ee95..969a8fb0ee9e 100644
+index b7f22597ee95e..969a8fb0ee9e0 100644
 --- a/drivers/gpu/drm/radeon/pptable.h
 +++ b/drivers/gpu/drm/radeon/pptable.h
 @@ -439,7 +439,7 @@ typedef struct _StateArray{
@@ -66,12 +64,6 @@ index b7f22597ee95..969a8fb0ee9e 100644
  }StateArray;
  
  
-
----
-base-commit: e64e8f7c178e5228e0b2dbb504b9dc75953a319f
-change-id: 20240529-drop-counted-by-radeon-states-state-array-01936ded4c18
-
-Best regards,
 -- 
-Nathan Chancellor <nathan@kernel.org>
+GitLab
 
