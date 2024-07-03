@@ -1323,18 +1323,18 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _c1017c26306edbf2fe4d4ef3bdd57c06:
+  _f809e329fba47a9a7ef5c5067de41439:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
-    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: powerpc
       LLVM_VERSION: 19
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1435,18 +1435,18 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _b2fe3d92de2f9c8f3356bd83602f25a7:
+  _15b03a9cd1672003f73c91600633c540:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
-    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+    name: ARCH=s390 CC=clang LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: s390
       LLVM_VERSION: 19
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu

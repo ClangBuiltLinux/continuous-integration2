@@ -431,7 +431,9 @@ jobs:
       LLVM_IAS: 1
   - target_arch: powerpc
     toolchain: korg-clang-18
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    - CONFIG_DRM_WERROR=n
     targets:
     - kernel
     kernel_image: zImage.epapr
@@ -467,7 +469,9 @@ jobs:
       LLVM_IAS: 1
   - target_arch: s390
     toolchain: korg-clang-18
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+    - CONFIG_DRM_WERROR=n
     targets:
     - kernel
     make_variables:
