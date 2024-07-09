@@ -62,7 +62,8 @@ configs:
   # Disable -Werror for ppc64_guest_defconfig for clang-13 and older: https://github.com/ClangBuiltLinux/linux/issues/1445
   - &ppc64_no_werror   {config: [ppc64_guest_defconfig, CONFIG_PPC_DISABLE_WERROR=y],                           kernel_image: vmlinux,      ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64le           {config: powernv_defconfig,                                                              kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
-  - &ppc64le_fedora    {config: *ppc64le-fedora-config-url,                                                     kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
+  # CONFIG_DRM_WERROR=n due to https://github.com/ClangBuiltLinux/linux/issues/2036
+  - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_DRM_WERROR=n],                              kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &ppc64le_fedora_bpf {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                       kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
@@ -78,7 +79,8 @@ configs:
   - &riscv_suse        {config: *riscv-suse-config-url,                                                         kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}
   - &s390              {config: defconfig,                                                                                                  ARCH: *s390-arch,       << : *kernel}
   - &s390_kasan        {config: [defconfig, CONFIG_KASAN=y, CONFIG_KASAN_KUNIT_TEST=y, CONFIG_KASAN_VMALLOC=y, CONFIG_KUNIT=y],             ARCH: *s390-arch,       << : *kernel}
-  - &s390_fedora       {config: *s390-fedora-config-url,                                                                                    ARCH: *s390-arch,       << : *kernel}
+  # CONFIG_DRM_WERROR=n due to https://github.com/ClangBuiltLinux/linux/issues/1285
+  - &s390_fedora       {config: [*s390-fedora-config-url, CONFIG_DRM_WERROR=n],                                                             ARCH: *s390-arch,       << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &s390_fedora_bpf   {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                            ARCH: *s390-arch,       << : *kernel}
   - &s390_suse         {config: *s390-suse-config-url,                                                                                      ARCH: *s390-arch,       << : *kernel}
