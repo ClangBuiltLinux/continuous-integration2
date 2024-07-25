@@ -53,8 +53,9 @@ configs:
   - &i386_suse         {config: *i386-suse-config-url,                                                                                      ARCH: *i386-arch,       << : *default}
   - &loong             {config: defconfig,                                                                                                  ARCH: *loongarch-arch,  << : *kernel}
   - &loong_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                       ARCH: *loongarch-arch,  << : *kernel}
-  - &loong_allmod      {config: allmodconfig,                                                                                               ARCH: *loongarch-arch,  << : *default}
-  - &loong_allmod_lto  {config: [allmodconfig, CONFIG_FTRACE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y],                             ARCH: *loongarch-arch,  << : *default}
+  # CONFIG_DRM_OMAP=n due to https://github.com/ClangBuiltLinux/linux/issues/2038
+  - &loong_allmod      {config: [allmodconfig, CONFIG_DRM_OMAP=n],                                                                          ARCH: *loongarch-arch,  << : *default}
+  - &loong_allmod_lto  {config: [allmodconfig, CONFIG_FTRACE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_DRM_OMAP=n],          ARCH: *loongarch-arch,  << : *default}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],            kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                     kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &ppc32             {config: ppc44x_defconfig,                                                               kernel_image: uImage,       ARCH: *powerpc-arch,    << : *kernel}
