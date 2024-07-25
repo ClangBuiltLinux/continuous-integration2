@@ -190,6 +190,34 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
+  _6caf4470519e51764e10589f05d70d73:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 multi_v7_defconfig+CONFIG_CFI_CLANG=y
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: arm
+      LLVM_VERSION: 16
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_CFI_CLANG=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
   _99f832d1047e3cd59873b7d37a5f9dd7:
     runs-on: ubuntu-latest
     needs:

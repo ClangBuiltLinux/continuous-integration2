@@ -9,6 +9,7 @@
   - {<< : *arm32_v6,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm32_v7,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_cfi,         << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm32_imx,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *arm32_omap,        << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
@@ -161,6 +162,7 @@
   - {<< : *arm32_v6,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm32_v7,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm32_v7_t,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_cfi,         << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm32_imx,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *arm32_omap,        << : *stable,           << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *arm32_lpae_fp,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
