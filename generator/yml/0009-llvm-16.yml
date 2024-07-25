@@ -9,6 +9,7 @@
   - {<< : *arm32_v6,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm32_v7,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
+  - {<< : *arm32_cfi,         << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
   - {<< : *arm32_imx,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *arm32_omap,        << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_16}
   - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_16}
