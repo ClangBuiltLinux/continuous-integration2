@@ -670,7 +670,9 @@ jobs:
       LLVM_IAS: 1
   - target_arch: loongarch
     toolchain: clang-nightly
-    kconfig: allmodconfig
+    kconfig:
+    - allmodconfig
+    - CONFIG_DRM_OMAP=n
     targets:
     - default
     make_variables:
@@ -683,6 +685,7 @@ jobs:
     - CONFIG_FTRACE=n
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_DRM_OMAP=n
     targets:
     - default
     make_variables:
