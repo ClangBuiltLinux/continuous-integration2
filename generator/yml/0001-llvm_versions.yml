@@ -1,6 +1,6 @@
 llvm_versions:
   - &llvm_tot     {llvm_version: 20}
-  - &llvm_latest  {llvm_version: 18}
+  - &llvm_18      {llvm_version: 18}
   - &llvm_17      {llvm_version: 17}
   - &llvm_16      {llvm_version: 16}
   - &llvm_15      {llvm_version: 15}
