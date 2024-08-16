@@ -57,7 +57,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://chromium.googlesource.com/chromiumos/third_party/kernel.git --git-ref chromeos-6.6 --job-name defconfigs --json-out builds.json --patch-series patches/chromeos-6.6 tuxsuite/chromeos-6.6-clang-20.tux.yml || true
+      run: tuxsuite plan --git-repo https://chromium.googlesource.com/chromiumos/third_party/kernel.git --git-ref chromeos-6.6 --job-name defconfigs --json-out builds.json tuxsuite/chromeos-6.6-clang-20.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
