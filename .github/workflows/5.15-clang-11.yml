@@ -987,34 +987,6 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _25f87da1043f926ba53aee8e9493b399:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 11
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   _56346298d74420f54e010a2d76dc70d1:
     runs-on: ubuntu-latest
     needs:

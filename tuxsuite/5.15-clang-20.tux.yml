@@ -384,14 +384,6 @@ jobs:
     kernel_image: zImage.epapr
     make_variables:
       LLVM_IAS: 0
-  - target_arch: powerpc
-    toolchain: clang-nightly
-    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-    targets:
-    - kernel
-    kernel_image: zImage.epapr
-    make_variables:
-      LLVM_IAS: 0
   - target_arch: riscv
     toolchain: clang-nightly
     kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
