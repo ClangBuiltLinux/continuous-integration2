@@ -1,0 +1,141 @@
+From afa9b48f327c9ef36bfba4c643a29385a633252b Mon Sep 17 00:00:00 2001
+From: Marc Zyngier <maz@kernel.org>
+Date: Thu, 10 Oct 2024 16:13:26 +0100
+Subject: KVM: arm64: Shave a few bytes from the EL2 idmap code
+
+Our idmap is becoming too big, to the point where it doesn't fit in
+a 4kB page anymore.
+
+There are some low-hanging fruits though, such as the el2_init_state
+horror that is expanded 3 times in the kernel. Let's at least limit
+ourselves to two copies, which makes the kernel link again.
+
+At some point, we'll have to have a better way of doing this.
+
+Reported-by: Nathan Chancellor <nathan@kernel.org>
+Signed-off-by: Marc Zyngier <maz@kernel.org>
+Link: https://lore.kernel.org/r/20241009204903.GA3353168@thelio-3990X
+---
+Link: https://git.kernel.org/linus/afa9b48f327c9ef36bfba4c643a29385a633252b
+---
+ arch/arm64/include/asm/kvm_asm.h   |  1 +
+ arch/arm64/kernel/asm-offsets.c    |  1 +
+ arch/arm64/kvm/hyp/nvhe/hyp-init.S | 52 +++++++++++++++++++++-----------------
+ 3 files changed, 31 insertions(+), 23 deletions(-)
+
+diff --git a/arch/arm64/include/asm/kvm_asm.h b/arch/arm64/include/asm/kvm_asm.h
+index b36a3b6cc01169..67afac659231ed 100644
+--- a/arch/arm64/include/asm/kvm_asm.h
++++ b/arch/arm64/include/asm/kvm_asm.h
+@@ -178,6 +178,7 @@ struct kvm_nvhe_init_params {
+ 	unsigned long hcr_el2;
+ 	unsigned long vttbr;
+ 	unsigned long vtcr;
++	unsigned long tmp;
+ };
+ 
+ /*
+diff --git a/arch/arm64/kernel/asm-offsets.c b/arch/arm64/kernel/asm-offsets.c
+index 27de1dddb0abee..b21dd24b8efc3b 100644
+--- a/arch/arm64/kernel/asm-offsets.c
++++ b/arch/arm64/kernel/asm-offsets.c
+@@ -146,6 +146,7 @@ int main(void)
+   DEFINE(NVHE_INIT_HCR_EL2,	offsetof(struct kvm_nvhe_init_params, hcr_el2));
+   DEFINE(NVHE_INIT_VTTBR,	offsetof(struct kvm_nvhe_init_params, vttbr));
+   DEFINE(NVHE_INIT_VTCR,	offsetof(struct kvm_nvhe_init_params, vtcr));
++  DEFINE(NVHE_INIT_TMP,		offsetof(struct kvm_nvhe_init_params, tmp));
+ #endif
+ #ifdef CONFIG_CPU_PM
+   DEFINE(CPU_CTX_SP,		offsetof(struct cpu_suspend_ctx, sp));
+diff --git a/arch/arm64/kvm/hyp/nvhe/hyp-init.S b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
+index 401af1835be6b7..fc186622606767 100644
+--- a/arch/arm64/kvm/hyp/nvhe/hyp-init.S
++++ b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
+@@ -24,28 +24,25 @@
+ 	.align	11
+ 
+ SYM_CODE_START(__kvm_hyp_init)
+-	ventry	__invalid		// Synchronous EL2t
+-	ventry	__invalid		// IRQ EL2t
+-	ventry	__invalid		// FIQ EL2t
+-	ventry	__invalid		// Error EL2t
++	ventry	.			// Synchronous EL2t
++	ventry	.			// IRQ EL2t
++	ventry	.			// FIQ EL2t
++	ventry	.			// Error EL2t
+ 
+-	ventry	__invalid		// Synchronous EL2h
+-	ventry	__invalid		// IRQ EL2h
+-	ventry	__invalid		// FIQ EL2h
+-	ventry	__invalid		// Error EL2h
++	ventry	.			// Synchronous EL2h
++	ventry	.			// IRQ EL2h
++	ventry	.			// FIQ EL2h
++	ventry	.			// Error EL2h
+ 
+ 	ventry	__do_hyp_init		// Synchronous 64-bit EL1
+-	ventry	__invalid		// IRQ 64-bit EL1
+-	ventry	__invalid		// FIQ 64-bit EL1
+-	ventry	__invalid		// Error 64-bit EL1
++	ventry	.			// IRQ 64-bit EL1
++	ventry	.			// FIQ 64-bit EL1
++	ventry	.			// Error 64-bit EL1
+ 
+-	ventry	__invalid		// Synchronous 32-bit EL1
+-	ventry	__invalid		// IRQ 32-bit EL1
+-	ventry	__invalid		// FIQ 32-bit EL1
+-	ventry	__invalid		// Error 32-bit EL1
+-
+-__invalid:
+-	b	.
++	ventry	.			// Synchronous 32-bit EL1
++	ventry	.			// IRQ 32-bit EL1
++	ventry	.			// FIQ 32-bit EL1
++	ventry	.			// Error 32-bit EL1
+ 
+ 	/*
+ 	 * Only uses x0..x3 so as to not clobber callee-saved SMCCC registers.
+@@ -76,6 +73,13 @@ __do_hyp_init:
+ 	eret
+ SYM_CODE_END(__kvm_hyp_init)
+ 
++SYM_CODE_START_LOCAL(__kvm_init_el2_state)
++	/* Initialize EL2 CPU state to sane values. */
++	init_el2_state				// Clobbers x0..x2
++	finalise_el2_state
++	ret
++SYM_CODE_END(__kvm_init_el2_state)
++
+ /*
+  * Initialize the hypervisor in EL2.
+  *
+@@ -102,9 +106,12 @@ SYM_CODE_START_LOCAL(___kvm_hyp_init)
+ 	// TPIDR_EL2 is used to preserve x0 across the macro maze...
+ 	isb
+ 	msr	tpidr_el2, x0
+-	init_el2_state
+-	finalise_el2_state
++	str	lr, [x0, #NVHE_INIT_TMP]
++
++	bl	__kvm_init_el2_state
++
+ 	mrs	x0, tpidr_el2
++	ldr	lr, [x0, #NVHE_INIT_TMP]
+ 
+ 1:
+ 	ldr	x1, [x0, #NVHE_INIT_TPIDR_EL2]
+@@ -199,9 +206,8 @@ SYM_CODE_START_LOCAL(__kvm_hyp_init_cpu)
+ 
+ 2:	msr	SPsel, #1			// We want to use SP_EL{1,2}
+ 
+-	/* Initialize EL2 CPU state to sane values. */
+-	init_el2_state				// Clobbers x0..x2
+-	finalise_el2_state
++	bl	__kvm_init_el2_state
++
+ 	__init_el2_nvhe_prepare_eret
+ 
+ 	/* Enable MMU, set vectors and stack. */
+-- 
+cgit 1.2.3-korg
+
