@@ -85,6 +85,7 @@ configs:
   # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &s390_fedora_bpf   {config: [*s390-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                            ARCH: *s390-arch,       << : *kernel}
   - &s390_suse         {config: *s390-suse-config-url,                                                                                      ARCH: *s390-arch,       << : *kernel}
+  - &sparc64           {config: sparc64_defconfig,                                                              kernel_image: image,        ARCH: *sparc-arch,      << : *kernel}
   - &um                {config: defconfig,                                                                                                  ARCH: *um-arch,         << : *kernel}
   - &x86_64            {config: defconfig,                                                                                                                          << : *kernel}
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                               << : *kernel}

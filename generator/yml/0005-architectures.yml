@@ -8,4 +8,5 @@ architectures:
   - &powerpc-arch   powerpc
   - &riscv-arch     riscv
   - &s390-arch      s390
+  - &sparc-arch     sparc
   - &um-arch        um

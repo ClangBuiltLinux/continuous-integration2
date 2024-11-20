@@ -60,6 +60,7 @@ def get_image_name():
         "mips": "vmlinux",
         "riscv": "Image",
         "s390": "bzImage",
+        "sparc": "image",
         "um": "linux",
         "x86_64": "bzImage",
     }[arch]
@@ -126,6 +127,7 @@ def get_cbl_name():
         "ppc44x_defconfig": "ppc32",
         "ppc64_guest_defconfig": "ppc64",
         "powernv_defconfig": "ppc64le",
+        "sparc64_defconfig": "sparc64",
     }
     if "CONFIG_CPU_BIG_ENDIAN=y" in full_config:
         if arch == "arm64":
