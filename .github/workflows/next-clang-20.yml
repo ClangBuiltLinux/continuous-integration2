@@ -974,6 +974,34 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
+  _c1f95a5d10da4358dc9fbc0075f7a8ca:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
+    name: ARCH=sparc CC=clang LLVM_IAS=0 LLVM_VERSION=20 sparc64_defconfig
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: sparc
+      LLVM_VERSION: 20
+      BOOT: 1
+      CONFIG: sparc64_defconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
   _d549f06de3b0361d62337ef98fc167b9:
     runs-on: ubuntu-latest
     needs:
