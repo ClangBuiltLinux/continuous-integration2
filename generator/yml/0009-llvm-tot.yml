@@ -147,6 +147,7 @@
   - {<< : *s390_kasan,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *sparc64,           << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
