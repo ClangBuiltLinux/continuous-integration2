@@ -329,6 +329,14 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
+  - target_arch: sparc
+    toolchain: clang-nightly
+    kconfig: sparc64_defconfig
+    targets:
+    - kernel
+    kernel_image: image
+    make_variables:
+      LLVM_IAS: 0
   - target_arch: um
     toolchain: clang-nightly
     kconfig: defconfig
