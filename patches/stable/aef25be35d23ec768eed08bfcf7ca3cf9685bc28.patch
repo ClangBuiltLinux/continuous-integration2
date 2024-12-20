@@ -1,12 +1,8 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH v2] hexagon: Disable constant extender optimization for
- LLVM prior to 19.1.0
+From aef25be35d23ec768eed08bfcf7ca3cf9685bc28 Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
 Date: Thu, 21 Nov 2024 11:22:18 -0700
-Message-Id: <20241121-hexagon-disable-constant-expander-pass-v2-1-1a92e9afb0f4@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: hexagon: Disable constant extender optimization for LLVM prior to
+ 19.1.0
 
 The Hexagon-specific constant extender optimization in LLVM may crash on
 Linux kernel code [1], such as fs/bcache/btree_io.c after
@@ -32,24 +28,16 @@ Link: https://github.com/llvm/llvm-project/issues/99714 [1]
 Link: https://github.com/llvm/llvm-project/commit/68df06a0b2998765cb0a41353fcf0919bbf57ddb [2]
 Link: https://github.com/llvm/llvm-project/commit/2ab8d93061581edad3501561722ebd5632d73892 [3]
 Reviewed-by: Brian Cain <bcain@quicinc.com>
-Link: https://lore.kernel.org/r/20241121-hexagon-disable-constant-expander-pass-v2-1-1a92e9afb0f4@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
 ---
-Andrew, can you please take this for 6.13? Our CI continues to hit this.
-
-Changes in v2:
-- Rebase on 6.12 to make sure it is still applicable
-- Name exact bcachefs commit that introduces crash now that it is
-  merged
-- Add 'Cc: stable' as this is now visible in a stable release
-- Carry forward Brian's reviewed-by
-- Link to v1: https://lore.kernel.org/r/20240819-hexagon-disable-constant-expander-pass-v1-1-36a734e9527d@kernel.org
+Link: https://git.kernel.org/linus/aef25be35d23ec768eed08bfcf7ca3cf9685bc28
 ---
  arch/hexagon/Makefile | 6 ++++++
  1 file changed, 6 insertions(+)
 
 diff --git a/arch/hexagon/Makefile b/arch/hexagon/Makefile
-index 92d005958dfb232d48a4ca843b46262a84a08eb4..ff172cbe5881a074f9d9430c37071992a4c8beac 100644
+index 92d005958dfb23..ff172cbe5881a0 100644
 --- a/arch/hexagon/Makefile
 +++ b/arch/hexagon/Makefile
 @@ -32,3 +32,9 @@ KBUILD_LDFLAGS += $(ldflags-y)
@@ -62,12 +50,6 @@ index 92d005958dfb232d48a4ca843b46262a84a08eb4..ff172cbe5881a074f9d9430c37071992
 +ifneq ($(call clang-min-version, 190100),y)
 +KBUILD_CFLAGS += -mllvm -hexagon-cext=false
 +endif
-
----
-base-commit: adc218676eef25575469234709c2d87185ca223a
-change-id: 20240802-hexagon-disable-constant-expander-pass-8b6b61db6afc
-
-Best regards,
 -- 
-Nathan Chancellor <nathan@kernel.org>
+cgit 1.2.3-korg
 
