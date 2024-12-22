@@ -1,12 +1,8 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] media: mediatek: vcodec: mark
- vdec_vp9_slice_map_counts_eob_coef noinline
+From 8b55f8818900c99dd4f55a59a103f5b29e41eb2c Mon Sep 17 00:00:00 2001
 From: Arnd Bergmann <arnd@arndb.de>
 Date: Fri, 18 Oct 2024 15:14:42 +0000
-Message-Id: <20241018151448.3694052-1-arnd@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: media: mediatek: vcodec: mark vdec_vp9_slice_map_counts_eob_coef
+ noinline
 
 With KASAN enabled, clang fails to optimize the inline version of
 vdec_vp9_slice_map_counts_eob_coef() properly, leading to kilobytes
@@ -22,20 +18,19 @@ the problem completely.
 
 Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 Reviewed-by: Nathan Chancellor <nathan@kernel.org>
-Link: https://lore.kernel.org/r/20241018151448.3694052-1-arnd@kernel.org
+Signed-off-by: Sebastian Fricke <sebastian.fricke@collabora.com>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
-I have not come to a conclusion on how exactly clang fails to do this
-right, but can provide the .config and/or preprocessed source files
-and command line if we think this should be fixed in clang.
+Link: https://git.linuxtv.org/media.git/commit/?id=8b55f8818900c99dd4f55a59a103f5b29e41eb2c
 ---
- .../mediatek/vcodec/decoder/vdec/vdec_vp9_req_lat_if.c         | 3 ++-
+ .../media/platform/mediatek/vcodec/vdec/vdec_vp9_req_lat_if.c  | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/media/platform/mediatek/vcodec/decoder/vdec/vdec_vp9_req_lat_if.c b/drivers/media/platform/mediatek/vcodec/decoder/vdec/vdec_vp9_req_lat_if.c
+diff --git a/drivers/media/platform/mediatek/vcodec/vdec/vdec_vp9_req_lat_if.c b/drivers/media/platform/mediatek/vcodec/vdec/vdec_vp9_req_lat_if.c
 index eea709d93820..47c302745c1d 100644
---- a/drivers/media/platform/mediatek/vcodec/decoder/vdec/vdec_vp9_req_lat_if.c
-+++ b/drivers/media/platform/mediatek/vcodec/decoder/vdec/vdec_vp9_req_lat_if.c
-@@ -1188,7 +1188,8 @@ static int vdec_vp9_slice_setup_lat(struct vdec_vp9_slice_instance *instance,
+--- a/drivers/media/platform/mediatek/vcodec/vdec/vdec_vp9_req_lat_if.c
++++ b/drivers/media/platform/mediatek/vcodec/vdec/vdec_vp9_req_lat_if.c
+@@ -1188,7 +1188,8 @@ err:
  	return ret;
  }
  
@@ -46,5 +41,5 @@ index eea709d93820..47c302745c1d 100644
  					struct vdec_vp9_slice_frame_counts *counts,
  					struct v4l2_vp9_frame_symbol_counts *counts_helper)
 -- 
-2.39.5
+cgit v1.2.3
 
