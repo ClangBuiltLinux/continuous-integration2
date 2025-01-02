@@ -85,6 +85,24 @@ def sanitize_job_name(name):
     return "_" + hashlib.new("md5", name.encode("utf-8")).hexdigest()
 
 
+def check_patches_job_setup(repo, ref, tree_name):
+    return {
+        'check_patches': {
+            'name': 'Check that patches are applicable',
+            'runs-on': 'ubuntu-latest',
+            'steps': [
+                {
+                    'uses': 'actions/checkout@v4',
+                },
+                {
+                    'name': 'check-patches-apply.py',
+                    'run': f"python3 scripts/check-patches-apply.py --patches-dir patches/{tree_name} --repo {repo} --ref {ref}",
+                },
+            ],
+        }
+    }  # yapf: disable
+
+
 def check_cache_job_setup(repo, ref, toolchain):
     with LLVM_TOT_VERSION.open(encoding='utf-8') as fd:
         llvm_tot_version = fd.read().strip()
@@ -102,6 +120,7 @@ def check_cache_job_setup(repo, ref, toolchain):
             "name": "Check Cache",
             "runs-on": "ubuntu-latest",
             "container": f"tuxmake/x86_64_{toolchain}",
+            "needs": "check_patches",
             "env": {
                 "GIT_REPO": repo,
                 "GIT_REF": ref
@@ -147,7 +166,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
             "runs-on": "ubuntu-latest",
             "container": "tuxsuite/tuxsuite",
-            "needs": "check_cache",
+            "needs": ["check_cache", "check_patches"],
             "env": {
                 "TUXSUITE_TOKEN": "${{ secrets.TUXSUITE_TOKEN }}",
                 "REPO_SCOPED_PAT": "${{ secrets.REPO_SCOPED_PAT }}"
@@ -213,7 +232,7 @@ def get_steps(build, build_set):
     return {
         sanitize_job_name(name): {
             "runs-on": "ubuntu-latest",
-            "needs": [f"kick_tuxsuite_{build_set}", "check_cache"],
+            "needs": [f"kick_tuxsuite_{build_set}", "check_cache", "check_patches"],
             "name": name,
             "if": "${{ needs.check_cache.outputs.status != 'pass' }}",
             "env": {
@@ -293,6 +312,7 @@ def print_builds(config, tree_name, llvm_version):
     workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
                                 github_yml)
 
+    workflow['jobs'].update(check_patches_job_setup(repo, ref, tree_name))
     workflow['jobs'].update(check_cache_job_setup(repo, ref, toolchain))
     workflow["jobs"].update(
         tuxsuite_setups("defconfigs", tuxsuite_yml, repo, ref))
