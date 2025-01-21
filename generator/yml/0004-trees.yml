@@ -2,6 +2,7 @@ trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
   - &stable           {git_repo: *stable-url,   git_ref: linux-6.13.y,        name: stable}
+  - &stable-6_12      {git_repo: *stable-url,   git_ref: linux-6.12.y,        name: "6.12"}
   - &stable-6_6       {git_repo: *stable-url,   git_ref: linux-6.6.y,         name: "6.6"}
   - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
@@ -54,6 +55,14 @@ tree_schedules:
   - &stable_llvm_13                {<< : *llvm_13,      << : *stable,           << : *wed_six}
   - &stable_llvm_12                {<< : *llvm_12,      << : *stable,           << : *wed_noon}
   - &stable_llvm_11                {<< : *llvm_11,      << : *stable,           << : *wed_noon}
+  - &stable-6_12_llvm_tot          {<< : *llvm_tot,     << : *stable-6_12,      << : *mon_fri_six}
+  - &stable-6_12_llvm_latest       {<< : *llvm_latest,  << : *stable-6_12,      << : *mon_fri_midnight}
+  - &stable-6_12_llvm_18           {<< : *llvm_18,      << : *stable-6_12,      << : *wed_noon}
+  - &stable-6_12_llvm_17           {<< : *llvm_17,      << : *stable-6_12,      << : *wed_noon}
+  - &stable-6_12_llvm_16           {<< : *llvm_16,      << : *stable-6_12,      << : *wed_eighteen}
+  - &stable-6_12_llvm_15           {<< : *llvm_15,      << : *stable-6_12,      << : *wed_eighteen}
+  - &stable-6_12_llvm_14           {<< : *llvm_14,      << : *stable-6_12,      << : *wed_midnight}
+  - &stable-6_12_llvm_13           {<< : *llvm_13,      << : *stable-6_12,      << : *wed_midnight}
   - &stable-6_6_llvm_tot           {<< : *llvm_tot,     << : *stable-6_6,       << : *mon_fri_eighteen}
   - &stable-6_6_llvm_latest        {<< : *llvm_latest,  << : *stable-6_6,       << : *mon_fri_noon}
   - &stable-6_6_llvm_18            {<< : *llvm_18,      << : *stable-6_6,       << : *wed_eighteen}
