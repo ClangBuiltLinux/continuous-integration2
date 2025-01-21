@@ -231,6 +231,82 @@
   - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_fedora_lto, << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_suse,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_17}
+  ############
+  #  6.12.y  #
+  ############
+  - {<< : *arm32_v5,          << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_v6,          << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_v7,          << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_v7_t,        << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_cfi,         << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_imx,         << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm32_omap,        << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm32_lpae_fp,     << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_allmod,      << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm32_allno,       << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm32_allyes,      << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm32_alpine,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm32_suse,        << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64,             << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64be,           << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_lto_full,    << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_lto_thin,    << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_cfi,         << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_cfi_lto,     << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_kasan,       << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_kasan_sw,    << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_ubsan,       << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_allmod,      << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm64_allmod_lto,  << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm64_allno,       << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm64_allyes,      << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *arm64_alpine,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_fedora,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_fedora_lto,  << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_suse,        << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *arm64_virt,        << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *hexagon,           << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *hexagon_allmod,    << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *i386,              << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *i386_suse,         << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *mips,              << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *mipsel,            << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
+  - {<< : *ppc32,             << : *stable-6_12,      << : *llvm,            boot: false, << : *llvm_17}
+  - {<< : *ppc64,             << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *ppc64le,           << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *ppc64le_fedora,    << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *ppc64le_suse,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *ppc64_allmod,      << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *riscv,             << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *riscv_lto_full,    << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *riscv_lto_thin,    << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *riscv_allmod,      << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *riscv_allmod_lto,  << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *riscv_alpine,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *riscv_suse,        << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *s390,              << : *stable-6_12,      << : *clang_ias,       boot: true,  << : *llvm_17}
+  - {<< : *s390_kasan,        << : *stable-6_12,      << : *clang_ias,       boot: true,  << : *llvm_17}
+  - {<< : *s390_fedora,       << : *stable-6_12,      << : *clang_ias,       boot: true,  << : *llvm_17}
+  - {<< : *s390_suse,         << : *stable-6_12,      << : *clang_ias,       boot: true,  << : *llvm_17}
+  - {<< : *um,                << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64,            << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_lto_full,   << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_lto_thin,   << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_cfi,        << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_cfi_lto,    << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_kasan,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_kcsan,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_ubsan,      << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_allmod,     << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *x86_64_allmod_lto, << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *x86_64_allno,      << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *x86_64_allyes,     << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_17}
+  - {<< : *x86_64_alpine,     << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_arch,       << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_fedora,     << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_fedora_lto, << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
+  - {<< : *x86_64_suse,       << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_17}
   ###########
   #  6.6.y  #
   ###########
