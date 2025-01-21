@@ -16,10 +16,18 @@ name: next (clang-19)
   workflow_dispatch: null
 permissions: read-all
 jobs:
+  check_patches:
+    name: Check that patches are applicable
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: check-patches-apply.py
+      run: python3 scripts/check-patches-apply.py --patches-dir patches/next --repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --ref master
   check_cache:
     name: Check Cache
     runs-on: ubuntu-latest
     container: tuxmake/x86_64_korg-clang-19
+    needs: check_patches
     env:
       GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
       GIT_REF: master
@@ -41,7 +49,9 @@ jobs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
-    needs: check_cache
+    needs:
+    - check_cache
+    - check_patches
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
@@ -83,6 +93,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 multi_v5_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -111,6 +122,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 aspeed_g5_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -139,6 +151,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 multi_v7_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -167,6 +180,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -195,6 +209,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 multi_v7_defconfig+CONFIG_CFI_CLANG=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -223,6 +238,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 imx_v4_v5_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -251,6 +267,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 omap2plus_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -279,6 +296,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -307,6 +325,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -335,6 +354,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CPU_BIG_ENDIAN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -363,6 +383,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_LTO_CLANG_FULL=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -391,6 +412,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -419,6 +441,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -447,6 +470,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -475,6 +499,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -503,6 +528,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_FTRACE=y+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -531,6 +557,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_UBSAN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -559,6 +586,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+hardening.config
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -587,6 +615,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -615,6 +644,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -643,6 +673,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -671,6 +702,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=loongarch LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -699,6 +731,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -727,6 +760,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -755,6 +789,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=19 ppc44x_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -783,6 +818,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 ppc64_guest_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -811,6 +847,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 powernv_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -839,6 +876,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -867,6 +905,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_LTO_CLANG_FULL=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -895,6 +934,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -923,6 +963,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -951,6 +992,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -979,6 +1021,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=um LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1007,6 +1050,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1035,6 +1079,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_LTO_CLANG_FULL=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1063,6 +1108,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1091,6 +1137,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1119,6 +1166,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1147,6 +1195,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1175,6 +1224,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1203,6 +1253,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_UBSAN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1231,6 +1282,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+hardening.config
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1259,6 +1311,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1286,7 +1339,9 @@ jobs:
     name: TuxSuite (distribution_configs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
-    needs: check_cache
+    needs:
+    - check_cache
+    - check_patches
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
@@ -1328,6 +1383,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1356,6 +1412,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1384,6 +1441,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1412,6 +1470,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1440,6 +1499,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1468,6 +1528,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1496,6 +1557,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1524,6 +1586,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1552,6 +1615,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=powerpc LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1580,6 +1644,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1608,6 +1673,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1636,6 +1702,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1664,6 +1731,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=s390 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1692,6 +1760,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1720,6 +1789,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1748,6 +1818,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1776,6 +1847,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1804,6 +1876,7 @@ jobs:
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1831,7 +1904,9 @@ jobs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
-    needs: check_cache
+    needs:
+    - check_cache
+    - check_patches
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
@@ -1873,6 +1948,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1901,6 +1977,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allnoconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1929,6 +2006,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allyesconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1957,6 +2035,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -1985,6 +2064,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2013,6 +2093,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allnoconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2041,6 +2122,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allyesconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2069,6 +2151,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 virtconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2097,6 +2180,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2125,6 +2209,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_DRM_OMAP=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2153,6 +2238,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2181,6 +2267,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2209,6 +2296,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2237,6 +2325,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_WERROR=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2265,6 +2354,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2293,6 +2383,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2321,6 +2412,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allnoconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -2349,6 +2441,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allyesconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:

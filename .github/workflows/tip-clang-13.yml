@@ -16,10 +16,18 @@ name: tip (clang-13)
   workflow_dispatch: null
 permissions: read-all
 jobs:
+  check_patches:
+    name: Check that patches are applicable
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: check-patches-apply.py
+      run: python3 scripts/check-patches-apply.py --patches-dir patches/tip --repo https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git --ref master
   check_cache:
     name: Check Cache
     runs-on: ubuntu-latest
     container: tuxmake/x86_64_korg-clang-13
+    needs: check_patches
     env:
       GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
       GIT_REF: master
@@ -41,7 +49,9 @@ jobs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
-    needs: check_cache
+    needs:
+    - check_cache
+    - check_patches
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
@@ -83,6 +93,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -111,6 +122,7 @@ jobs:
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -138,7 +150,9 @@ jobs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
     container: tuxsuite/tuxsuite
-    needs: check_cache
+    needs:
+    - check_cache
+    - check_patches
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
@@ -180,6 +194,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -208,6 +223,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
@@ -236,6 +252,7 @@ jobs:
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
+    - check_patches
     name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
