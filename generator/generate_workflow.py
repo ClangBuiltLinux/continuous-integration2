@@ -135,7 +135,7 @@ def check_cache_job_setup(repo, ref, toolchain):
                 },
                 {
                     "name": "pip install -r requirements.txt",
-                    "run": "apt-get install -y python3-venv && python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt",
+                    "run": "apt-get update && apt-get install -y python3-venv && python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt",
                 },
                 {
                     "name": "python check_cache.py",
