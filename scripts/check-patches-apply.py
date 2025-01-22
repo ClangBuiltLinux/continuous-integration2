@@ -52,7 +52,7 @@ with TemporaryDirectory() as workdir:
         # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git ->
         # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-master.tar.gz
         tarball_url = f"{args.repo}/snapshot/{base_repo}-{args.ref}.tar.gz"
-        strip = 1
+        strip = len(args.ref.split('/'))
     elif 'googlesource.com' in args.repo:
         tarball_url = f"{args.repo}/+archive/refs/heads/{args.ref}.tar.gz"
         strip = 0
