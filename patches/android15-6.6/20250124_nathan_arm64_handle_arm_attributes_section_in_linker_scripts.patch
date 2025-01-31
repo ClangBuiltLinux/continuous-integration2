@@ -1,0 +1,66 @@
+From git@z Thu Jan  1 00:00:00 1970
+Subject: [PATCH] arm64: Handle .ARM.attributes section in linker scripts
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Fri, 24 Jan 2025 06:31:57 -0700
+Message-Id: <20250124-arm64-handle-arm-attributes-in-linker-script-v1-1-74135b6cf349@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+A recent LLVM commit [1] started generating an .ARM.attributes section
+similar to the one that exists for 32-bit, which results in orphan
+section warnings (or errors if CONFIG_WERROR is enabled) from the linker
+because it is not handled in the arm64 linker scripts.
+
+  ld.lld: error: arch/arm64/kernel/vdso/vgettimeofday.o:(.ARM.attributes) is being placed in '.ARM.attributes'
+  ld.lld: error: arch/arm64/kernel/vdso/vgetrandom.o:(.ARM.attributes) is being placed in '.ARM.attributes'
+
+  ld.lld: error: vmlinux.a(lib/vsprintf.o):(.ARM.attributes) is being placed in '.ARM.attributes'
+  ld.lld: error: vmlinux.a(lib/win_minmax.o):(.ARM.attributes) is being placed in '.ARM.attributes'
+  ld.lld: error: vmlinux.a(lib/xarray.o):(.ARM.attributes) is being placed in '.ARM.attributes'
+
+Add this new section to the necessary linker scripts to resolve the warnings.
+
+Cc: stable@vger.kernel.org
+Fixes: b3e5d80d0c48 ("arm64/build: Warn on orphan section placement")
+Link: https://github.com/llvm/llvm-project/commit/ee99c4d4845db66c4daa2373352133f4b237c942 [1]
+Link: https://lore.kernel.org/r/20250124-arm64-handle-arm-attributes-in-linker-script-v1-1-74135b6cf349@kernel.org
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ arch/arm64/kernel/vdso/vdso.lds.S | 1 +
+ arch/arm64/kernel/vmlinux.lds.S   | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/arch/arm64/kernel/vdso/vdso.lds.S b/arch/arm64/kernel/vdso/vdso.lds.S
+index 4ec32e86a8da..f8418a3a2758 100644
+--- a/arch/arm64/kernel/vdso/vdso.lds.S
++++ b/arch/arm64/kernel/vdso/vdso.lds.S
+@@ -75,6 +75,7 @@ SECTIONS
+ 
+ 	DWARF_DEBUG
+ 	ELF_DETAILS
++	.ARM.attributes 0 : { *(.ARM.attributes) }
+ 
+ 	/DISCARD/	: {
+ 		*(.data .data.* .gnu.linkonce.d.* .sdata*)
+diff --git a/arch/arm64/kernel/vmlinux.lds.S b/arch/arm64/kernel/vmlinux.lds.S
+index f84c71f04d9e..c94942e9eb46 100644
+--- a/arch/arm64/kernel/vmlinux.lds.S
++++ b/arch/arm64/kernel/vmlinux.lds.S
+@@ -335,6 +335,7 @@ SECTIONS
+ 	STABS_DEBUG
+ 	DWARF_DEBUG
+ 	ELF_DETAILS
++	.ARM.attributes 0 : { *(.ARM.attributes) }
+ 
+ 	HEAD_SYMBOLS
+ 
+
+---
+base-commit: 1dd3393696efba1598aa7692939bba99d0cffae3
+change-id: 20250123-arm64-handle-arm-attributes-in-linker-script-82aee25313ac
+
+Best regards,
+-- 
+Nathan Chancellor <nathan@kernel.org>
+
