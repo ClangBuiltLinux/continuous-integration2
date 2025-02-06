@@ -237,8 +237,6 @@
   - {<< : *arm32_v7_t,        << : *android12-5_4,    << : *llvm,            boot: true,  << : *llvm_12}
   - {<< : *arm64_gki,         << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_12}
   - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *arm64_gki,         << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_12}
-  - {<< : *x86_64_gki,        << : *android-4_19,     << : *llvm_full,       boot: true,  << : *llvm_12}
   ##############
   #  ChromeOS  #
   ##############
