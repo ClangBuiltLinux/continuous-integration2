@@ -65,6 +65,7 @@
   - {<< : *s390_kasan,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *s390_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *s390_suse,         << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *sparc64,           << : *mainline,         << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -147,6 +148,7 @@
   - {<< : *s390_kasan,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *s390_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *s390_suse,         << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *sparc64,           << : *next,             << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -230,6 +232,7 @@
   - {<< : *s390_kasan,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *s390_fedora,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *s390_suse,         << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *sparc64,           << : *stable,           << : *clang,           boot: true,  << : *llvm_latest}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
