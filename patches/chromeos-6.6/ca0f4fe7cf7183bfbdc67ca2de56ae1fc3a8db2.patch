@@ -1,11 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH v2] arm64: Handle .ARM.attributes section in linker scripts
+From ca0f4fe7cf7183bfbdc67ca2de56ae1fc3a8db2b Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
-Date: Tue, 04 Feb 2025 10:48:55 -0700
-Message-Id: <20250204-arm64-handle-arm-attributes-in-linker-script-v2-1-d684097f5554@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Date: Thu, 6 Feb 2025 10:21:38 -0700
+Subject: arm64: Handle .ARM.attributes section in linker scripts
 
 A recent LLVM commit [1] started generating an .ARM.attributes section
 similar to the one that exists for 32-bit, which results in orphan
@@ -26,32 +22,30 @@ the .note.gnu.property section.
 Cc: stable@vger.kernel.org
 Fixes: b3e5d80d0c48 ("arm64/build: Warn on orphan section placement")
 Link: https://github.com/llvm/llvm-project/commit/ee99c4d4845db66c4daa2373352133f4b237c942 [1]
-Link: https://lore.kernel.org/r/20250204-arm64-handle-arm-attributes-in-linker-script-v2-1-d684097f5554@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Link: https://lore.kernel.org/r/20250206-arm64-handle-arm-attributes-in-linker-script-v3-1-d53d169913eb@kernel.org
+Signed-off-by: Will Deacon <will@kernel.org>
 ---
-Changes in v2:
-- Discard the section instead of adding it to the final artifacts to
-  mirror the .note.gnu.property section handling (Will).
-- Link to v1: https://lore.kernel.org/r/20250124-arm64-handle-arm-attributes-in-linker-script-v1-1-74135b6cf349@kernel.org
+Link: https://git.kernel.org/arm64/c/ca0f4fe7cf7183bfbdc67ca2de56ae1fc3a8db2b
 ---
  arch/arm64/kernel/vdso/vdso.lds.S | 1 +
  arch/arm64/kernel/vmlinux.lds.S   | 1 +
  2 files changed, 2 insertions(+)
 
 diff --git a/arch/arm64/kernel/vdso/vdso.lds.S b/arch/arm64/kernel/vdso/vdso.lds.S
-index 4ec32e86a8da..8095fef66209 100644
+index 4ec32e86a8da22..47ad6944f9f088 100644
 --- a/arch/arm64/kernel/vdso/vdso.lds.S
 +++ b/arch/arm64/kernel/vdso/vdso.lds.S
-@@ -80,6 +80,7 @@ SECTIONS
- 		*(.data .data.* .gnu.linkonce.d.* .sdata*)
- 		*(.bss .sbss .dynbss .dynsbss)
- 		*(.eh_frame .eh_frame_hdr)
+@@ -41,6 +41,7 @@ SECTIONS
+ 	 */
+ 	/DISCARD/	: {
+ 		*(.note.GNU-stack .note.gnu.property)
 +		*(.ARM.attributes)
  	}
- }
+ 	.note		: { *(.note.*) }		:text	:note
  
 diff --git a/arch/arm64/kernel/vmlinux.lds.S b/arch/arm64/kernel/vmlinux.lds.S
-index f84c71f04d9e..e73326bd3ff7 100644
+index f84c71f04d9ea9..e73326bd3ff7e9 100644
 --- a/arch/arm64/kernel/vmlinux.lds.S
 +++ b/arch/arm64/kernel/vmlinux.lds.S
 @@ -162,6 +162,7 @@ SECTIONS
@@ -62,12 +56,6 @@ index f84c71f04d9e..e73326bd3ff7 100644
  	}
  
  	. = KIMAGE_VADDR;
-
----
-base-commit: 1dd3393696efba1598aa7692939bba99d0cffae3
-change-id: 20250123-arm64-handle-arm-attributes-in-linker-script-82aee25313ac
-
-Best regards,
 -- 
-Nathan Chancellor <nathan@kernel.org>
+cgit 1.2.3-korg
 
