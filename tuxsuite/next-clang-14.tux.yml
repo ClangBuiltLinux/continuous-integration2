@@ -149,14 +149,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: i386
-    toolchain: korg-clang-14
-    kconfig: defconfig
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
   - target_arch: mips
     toolchain: korg-clang-14
     kconfig:
@@ -237,80 +229,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: defconfig
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - defconfig
-    - CONFIG_LTO_CLANG_FULL=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - defconfig
-    - CONFIG_LTO_CLANG_THIN=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - defconfig
-    - CONFIG_KASAN=y
-    - CONFIG_KASAN_KUNIT_TEST=y
-    - CONFIG_KASAN_VMALLOC=y
-    - CONFIG_KUNIT=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - defconfig
-    - CONFIG_KCSAN=y
-    - CONFIG_KCSAN_KUNIT_TEST=y
-    - CONFIG_KUNIT=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - defconfig
-    - CONFIG_UBSAN=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - defconfig
-    - CONFIG_GCOV_KERNEL=y
-    - CONFIG_GCOV_PROFILE_ALL=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
 - name: distribution_configs
   builds:
   - target_arch: arm
@@ -355,14 +273,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: i386
-    toolchain: korg-clang-14
-    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
   - target_arch: powerpc
     toolchain: korg-clang-14
     kconfig:
@@ -398,38 +308,6 @@ jobs:
     targets:
     - kernel
     kernel_image: Image
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    targets:
-    - kernel
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -535,42 +413,6 @@ jobs:
     targets:
     - default
     kernel_image: Image
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: allmodconfig
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - allmodconfig
-    - CONFIG_GCOV_KERNEL=n
-    - CONFIG_KASAN=n
-    - CONFIG_LTO_CLANG_THIN=y
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: allnoconfig
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig: allyesconfig
-    targets:
-    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
