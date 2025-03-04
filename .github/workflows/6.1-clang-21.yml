@@ -1146,19 +1146,19 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_distribution_configs
         if-no-files-found: error
-  _8eddbf01c025aafddc8ada72babfd630:
+  _3d0ae668bab32771185fc35c58d2127d:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.armv7
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+      CONFIG: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.armv7
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1204,19 +1204,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _78a867af278cff81681ac4ff8d857d2d:
+  _f9f7a215599e4cd37ac00ee26a45536a:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.aarch64
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
+      CONFIG: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.aarch64
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1378,19 +1378,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _7597808a21a8a3b53335b31fadf2fdf4:
+  _f744d4c512615c48ee32cd49d2401e1b:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.riscv64
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: riscv
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+      CONFIG: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.riscv64
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1494,19 +1494,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _139211a70d0d8c4ba8231730fa122d2a:
+  _889e5116ab86b3c499d8b092740e606e:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.x86_64
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+      CONFIG: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.x86_64
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
