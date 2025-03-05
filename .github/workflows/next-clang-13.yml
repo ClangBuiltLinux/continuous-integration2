@@ -117,35 +117,6 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _3dcc2dad9e1ef4e6a3f358ffef73f7fe:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 aspeed_g5_defconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: arm
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: aspeed_g5_defconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   _9532604fe2c353a710edd757453b4457:
     runs-on: ubuntu-latest
     needs:
@@ -711,64 +682,6 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_distribution_configs
         if-no-files-found: error
-  _1dad89b577653ddc683e87e9409fc409:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: arm
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _1435de1ebd93ba0b4f841682571dd69b:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: arm
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   _41e97db7d8ed584321ef7865ba127060:
     runs-on: ubuntu-latest
     needs:
@@ -1015,35 +928,6 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_allconfigs
         if-no-files-found: error
-  _2309c816a58459d87da53f6d2074f5d8:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: arm
-      LLVM_VERSION: 13
-      BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   _e3671bdb6f10d3349593b86cc9b324f6:
     runs-on: ubuntu-latest
     needs:
@@ -1057,35 +941,6 @@ jobs:
       LLVM_VERSION: 13
       BOOT: 0
       CONFIG: allnoconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _1d1b9fe50f6e08aeeaaaf80cf8333f67:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: arm
-      LLVM_VERSION: 13
-      BOOT: 0
-      CONFIG: allyesconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
