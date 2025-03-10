@@ -8,19 +8,19 @@ urls:
   - &tip-url      https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
   - &arm64-url    https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
   # Configuration URLs
-  - &arm32-alpine-config-url   https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+  - &arm32-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.armv7
   - &arm32-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
-  - &arm64-alpine-config-url   https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
+  - &arm64-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.aarch64
   - &arm64-fedora-config-url   https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
   - &arm64-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
   - &i386-suse-config-url      https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
   - &ppc64le-fedora-config-url https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
   - &ppc64le-suse-config-url   https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
-  - &riscv-alpine-config-url   https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+  - &riscv-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.riscv64
   - &riscv-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
   - &s390-fedora-config-url    https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
   - &s390-suse-config-url      https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
-  - &x86_64-alpine-config-url  https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+  - &x86_64-alpine-config-url  https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.x86_64
   - &x86_64-arch-config-url    https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
   - &x86_64-fedora-config-url  https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
   - &x86_64-suse-config-url    https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default

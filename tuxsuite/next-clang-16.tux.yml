@@ -405,7 +405,7 @@ jobs:
   builds:
   - target_arch: arm
     toolchain: korg-clang-16
-    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.armv7
+    kconfig: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.armv7
     targets:
     - kernel
     make_variables:
@@ -421,7 +421,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: arm64
     toolchain: korg-clang-16
-    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.aarch64
+    kconfig: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.aarch64
     targets:
     - kernel
     make_variables:
@@ -475,7 +475,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: riscv
     toolchain: korg-clang-16
-    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.riscv64
+    kconfig: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.riscv64
     targets:
     - kernel
     kernel_image: Image
@@ -509,7 +509,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: korg-clang-16
-    kconfig: https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.x86_64
+    kconfig: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.x86_64
     targets:
     - kernel
     make_variables:
