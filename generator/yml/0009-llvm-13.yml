@@ -119,17 +119,23 @@
   #  Latest stable release  #
   ###########################
   - {<< : *arm32_v5,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm32_v6,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
+  # BPF uses check_mul_overflow() with a 'long long' value, which is broken prior to clang-14:
+  # https://github.com/llvm/llvm-project/commit/5c91b98c5d45243352bf10262454bcac77cd3fed
+  # - {<< : *arm32_v6,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm32_v7,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm32_v7_t,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm32_imx,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *arm32_omap,        << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *arm32_lpae_fp,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm32_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
+  # BPF uses check_mul_overflow() with a 'long long' value, which is broken prior to clang-14:
+  # https://github.com/llvm/llvm-project/commit/5c91b98c5d45243352bf10262454bcac77cd3fed
+  # - {<< : *arm32_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *arm32_allno,       << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm32_allyes,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm32_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm32_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
+  # BPF uses check_mul_overflow() with a 'long long' value, which is broken prior to clang-14:
+  # https://github.com/llvm/llvm-project/commit/5c91b98c5d45243352bf10262454bcac77cd3fed
+  # - {<< : *arm32_allyes,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_13}
+  # - {<< : *arm32_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
+  # - {<< : *arm32_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_13}
