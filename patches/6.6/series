@@ -1,1 +1,3 @@
 8b55f8818900c99dd4f55a59a103f5b29e41eb2c.patch
+v3_20250328_nathan_include_move_typedefs_in_nls_h_to_their_own_header.patch
+v3_20250328_nathan_lib_string_c_add_wcslen.patch
