@@ -43,17 +43,4 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-- name: allconfigs
-  builds:
-  - target_arch: arm
-    toolchain: korg-clang-13
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
-    - CONFIG_DRM_WERROR=n
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
 
