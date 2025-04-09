@@ -460,7 +460,9 @@
   #############
   #  Android  #
   #############
-  - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, << : *llvm_13}
+  # BPF uses check_mul_overflow() with a 'long long' value, which is broken prior to clang-14:
+  # https://github.com/llvm/llvm-project/commit/5c91b98c5d45243352bf10262454bcac77cd3fed
+  # - {<< : *arm32_allmod,      << : *android-mainline, << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_13}
