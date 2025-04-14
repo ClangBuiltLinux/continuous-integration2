@@ -586,6 +586,10 @@
   - {<< : *arm32_v7_t,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_gki,         << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_gki,        << : *android-mainline, << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm32_allmod,      << : *android16-6_12,   << : *llvm_full,       boot: false, << : *llvm_tot}
+  - {<< : *arm32_v7_t,        << : *android16-6_12,   << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *arm64_gki,         << : *android16-6_12,   << : *llvm_full,       boot: true,  << : *llvm_tot}
+  - {<< : *x86_64_gki,        << : *android16-6_12,   << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm32_allmod,      << : *android15-6_6,    << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *arm32_v7_t,        << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_gki,         << : *android15-6_6,    << : *llvm_full,       boot: true,  << : *llvm_tot}
