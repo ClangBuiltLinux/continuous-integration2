@@ -33,16 +33,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-14
-    kconfig:
-    - gki_defconfig
-    - CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
 - name: allconfigs
   builds:
   - target_arch: arm
