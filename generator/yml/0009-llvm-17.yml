@@ -567,22 +567,6 @@
   - {<< : *arm32_v7_t,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_gki,         << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_gki,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm32_allmod,      << : *android13-5_15,   << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *arm32_v7_t,        << : *android13-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm64_gki,         << : *android13-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *x86_64_gki,        << : *android13-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm32_allmod,      << : *android13-5_10,   << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *arm32_v7_t,        << : *android13-5_10,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm64_gki,         << : *android13-5_10,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *x86_64_gki,        << : *android13-5_10,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm32_allmod,      << : *android12-5_10,   << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *arm32_v7_t,        << : *android12-5_10,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm64_gki,         << : *android12-5_10,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *x86_64_gki,        << : *android12-5_10,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm32_allmod,      << : *android12-5_4,    << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *arm32_v7_t,        << : *android12-5_4,    << : *llvm,            boot: true,  << : *llvm_17}
-  - {<< : *arm64_gki,         << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *x86_64_gki,        << : *android12-5_4,    << : *llvm_full,       boot: true,  << : *llvm_17}
   #########
   #  TIP  #
   #########
