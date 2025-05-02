@@ -48,7 +48,7 @@ class KernelVersion(_BaseVersion):
             major, minor = map(int, match.groups()[0].split('.'))
 
         # Named maintainer trees
-        maintainer_trees = ('arm64', 'tip', 'arm64-fixes')
+        maintainer_trees = ('tip', )
         if version in maintainer_trees:
             category = 'maintainers'
             major = order_to_rank(maintainer_trees, version)
