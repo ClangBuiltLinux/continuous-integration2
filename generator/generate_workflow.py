@@ -298,7 +298,7 @@ def print_builds(config, tree_name, llvm_version):
            build["llvm_version"] == llvm_version:
             disable_subsys_werror_configs(build["config"])
             cfg_str = str(build["config"])
-            if "defconfig" in cfg_str or "chromeos" in cfg_str:
+            if "defconfig" in cfg_str:
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
             elif "https://" in cfg_str:
                 check_logs_distribution_configs.update(

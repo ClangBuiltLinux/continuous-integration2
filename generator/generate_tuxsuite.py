@@ -96,7 +96,7 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                         {"make_variables": build["make_variables"]})
 
                 cfg_str = str(build["config"])
-                if "defconfig" in cfg_str or "chromeos" in cfg_str:
+                if "defconfig" in cfg_str:
                     defconfigs.append(current_build)
                 elif "https://" in cfg_str:
                     distribution_configs.append(current_build)
