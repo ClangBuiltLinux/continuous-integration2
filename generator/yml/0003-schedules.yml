@@ -8,6 +8,10 @@ schedules:
   - &mon_fri_six          {schedule: "0 6 * * 1,5"}
   - &mon_fri_noon         {schedule: "0 12 * * 1,5"}
   - &mon_fri_eighteen     {schedule: "0 18 * * 1,5"}
+  - &tue_thur_midnight    {schedule: "0 0 * * 2,4"}
+  - &tue_thur_six         {schedule: "0 6 * * 2,4"}
+  - &tue_thur_noon        {schedule: "0 12 * * 2,4"}
+  - &tue_thur_eighteen    {schedule: "0 18 * * 2,4"}
   - &sun_midnight         {schedule: "0 0 * * 0"}
   - &sun_six              {schedule: "0 6 * * 0"}
   - &sun_noon             {schedule: "0 12 * * 0"}
