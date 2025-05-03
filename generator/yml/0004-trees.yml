@@ -14,8 +14,8 @@ trees:
   - &android14-5_15   {git_repo: *android-url,  git_ref: android14-5.15,      name: android14-5.15}
   - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
 tree_schedules:
-  - &mainline_llvm_tot             {<< : *llvm_tot,     << : *mainline,         << : *weekdays_every_12}
-  - &mainline_llvm_latest          {<< : *llvm_latest,  << : *mainline,         << : *weekdays_every_12}
+  - &mainline_llvm_tot             {<< : *llvm_tot,     << : *mainline,         << : *weekdays_noon}
+  - &mainline_llvm_latest          {<< : *llvm_latest,  << : *mainline,         << : *weekdays_eighteen}
   - &mainline_llvm_19              {<< : *llvm_19,      << : *mainline,         << : *weekdays_midnight}
   - &mainline_llvm_18              {<< : *llvm_18,      << : *mainline,         << : *weekdays_six}
   - &mainline_llvm_17              {<< : *llvm_17,      << : *mainline,         << : *weekdays_noon}
