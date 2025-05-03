@@ -108,27 +108,27 @@ tree_schedules:
   - &stable-5_4_llvm_15            {<< : *llvm_15,      << : *stable-5_4,       << : *wed_eighteen}
   - &stable-5_4_llvm_14            {<< : *llvm_14,      << : *stable-5_4,       << : *wed_midnight}
   - &stable-5_4_llvm_13            {<< : *llvm_13,      << : *stable-5_4,       << : *wed_midnight}
-  - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *weekdays_six}
-  - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *weekdays_six}
+  - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *tue_thur_six}
+  - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *tue_thur_six}
   - &android-mainline_llvm_19      {<< : *llvm_19,      << : *android-mainline, << : *sun_six}
-  - &android-mainline_llvm_android {<< : *llvm_android, << : *android-mainline, << : *weekdays_six}
-  - &android15-6_6_llvm_tot        {<< : *llvm_tot,     << : *android15-6_6,    << : *weekdays_six}
-  - &android15-6_6_llvm_latest     {<< : *llvm_latest,  << : *android15-6_6,    << : *weekdays_six}
+  - &android-mainline_llvm_android {<< : *llvm_android, << : *android-mainline, << : *tue_thur_six}
+  - &android15-6_6_llvm_tot        {<< : *llvm_tot,     << : *android15-6_6,    << : *tue_thur_noon}
+  - &android15-6_6_llvm_latest     {<< : *llvm_latest,  << : *android15-6_6,    << : *tue_thur_noon}
   - &android15-6_6_llvm_19         {<< : *llvm_19,      << : *android15-6_6,    << : *sun_six}
   - &android15-6_6_llvm_18         {<< : *llvm_18,      << : *android15-6_6,    << : *sun_noon}
-  - &android15-6_6_llvm_android    {<< : *llvm_android, << : *android15-6_6,    << : *weekdays_six}
-  - &android14-6_1_llvm_tot        {<< : *llvm_tot,     << : *android14-6_1,    << : *weekdays_six}
-  - &android14-6_1_llvm_latest     {<< : *llvm_latest,  << : *android14-6_1,    << : *weekdays_six}
+  - &android15-6_6_llvm_android    {<< : *llvm_android, << : *android15-6_6,    << : *tue_thur_noon}
+  - &android14-6_1_llvm_tot        {<< : *llvm_tot,     << : *android14-6_1,    << : *tue_thur_eighteen}
+  - &android14-6_1_llvm_latest     {<< : *llvm_latest,  << : *android14-6_1,    << : *tue_thur_eighteen}
   - &android14-6_1_llvm_19         {<< : *llvm_19,      << : *android14-6_1,    << : *sun_noon}
   - &android14-6_1_llvm_18         {<< : *llvm_18,      << : *android14-6_1,    << : *sun_eighteen}
   - &android14-6_1_llvm_17         {<< : *llvm_17,      << : *android14-6_1,    << : *sun_midnight}
-  - &android14-6_1_llvm_android    {<< : *llvm_android, << : *android14-6_1,    << : *weekdays_six}
-  - &android14-5_15_llvm_tot       {<< : *llvm_tot,     << : *android14-5_15,   << : *weekdays_six}
-  - &android14-5_15_llvm_latest    {<< : *llvm_latest,  << : *android14-5_15,   << : *weekdays_six}
+  - &android14-6_1_llvm_android    {<< : *llvm_android, << : *android14-6_1,    << : *tue_thur_eighteen}
+  - &android14-5_15_llvm_tot       {<< : *llvm_tot,     << : *android14-5_15,   << : *tue_thur_midnight}
+  - &android14-5_15_llvm_latest    {<< : *llvm_latest,  << : *android14-5_15,   << : *tue_thur_midnight}
   - &android14-5_15_llvm_19        {<< : *llvm_19,      << : *android14-5_15,   << : *sun_eighteen}
   - &android14-5_15_llvm_18        {<< : *llvm_18,      << : *android14-5_15,   << : *sun_midnight}
   - &android14-5_15_llvm_17        {<< : *llvm_17,      << : *android14-5_15,   << : *sun_six}
-  - &android14-5_15_llvm_android   {<< : *llvm_android, << : *android14-5_15,   << : *weekdays_six}
+  - &android14-5_15_llvm_android   {<< : *llvm_android, << : *android14-5_15,   << : *tue_thur_midnight}
   - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *weekdays_midnight}
   - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *weekdays_midnight}
   - &tip_llvm_19                   {<< : *llvm_19,      << : *tip,              << : *tue_thur_eighteen}
