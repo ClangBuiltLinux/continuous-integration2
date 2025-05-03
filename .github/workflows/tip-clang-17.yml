@@ -12,7 +12,7 @@ name: tip (clang-17)
     - tuxsuite/tip-clang-17.tux.yml
     - .github/workflows/tip-clang-17.yml
   schedule:
-  - cron: 0 18 * * 1,2,3,4,5
+  - cron: 0 18 * * 2,4
   workflow_dispatch: null
 permissions: read-all
 jobs:
