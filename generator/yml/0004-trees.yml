@@ -136,6 +136,3 @@ tree_schedules:
   - &tip_llvm_17                   {<< : *llvm_17,      << : *tip,              << : *weekdays_eighteen}
   - &tip_llvm_16                   {<< : *llvm_16,      << : *tip,              << : *weekdays_eighteen}
   - &tip_llvm_15                   {<< : *llvm_15,      << : *tip,              << : *weekdays_eighteen}
-  - &tip_llvm_14                   {<< : *llvm_14,      << : *tip,              << : *weekdays_eighteen}
-  - &tip_llvm_13                   {<< : *llvm_13,      << : *tip,              << : *weekdays_eighteen}
-  - &tip_llvm_12                   {<< : *llvm_12,      << : *tip,              << : *weekdays_eighteen}
