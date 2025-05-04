@@ -34,7 +34,7 @@ class KernelVersion(_BaseVersion):
 
         # The general categories for builds, in the order they should appear in
         # the matrix.
-        categories = ['upstream', 'lts', 'maintainers', 'android', 'chromeos']
+        categories = ['upstream', 'lts', 'maintainers', 'android']
 
         # Named upstream trees, which do not have a version associated with them
         upstream_trees = ('next', 'mainline', 'stable')
@@ -48,7 +48,7 @@ class KernelVersion(_BaseVersion):
             major, minor = map(int, match.groups()[0].split('.'))
 
         # Named maintainer trees
-        maintainer_trees = ('arm64', 'tip', 'arm64-fixes')
+        maintainer_trees = ('tip', )
         if version in maintainer_trees:
             category = 'maintainers'
             major = order_to_rank(maintainer_trees, version)
@@ -68,11 +68,6 @@ class KernelVersion(_BaseVersion):
                 # android14-5.15 is newer than android13-5.15.
                 if version[0]:
                     patch = int(version[0])
-
-        # ChromeOS trees
-        if 'chromeos' in version:
-            category = 'chromeos'
-            major, minor = version.replace(f"{category}-", '').split('.')
 
         rank = order_to_rank(categories, category)
 

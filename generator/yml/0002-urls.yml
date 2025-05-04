@@ -4,9 +4,7 @@ urls:
   - &next-url     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
   - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
   - &android-url  https://android.googlesource.com/kernel/common.git
-  - &chromeos-url https://chromium.googlesource.com/chromiumos/third_party/kernel.git
   - &tip-url      https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
-  - &arm64-url    https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
   # Configuration URLs
   - &arm32-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.armv7
   - &arm32-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
