@@ -36,7 +36,8 @@ configs:
   - &arm64_allyes      {config: allyesconfig,                                                                                               ARCH: *arm64-arch,      << : *default}
   - &arm64_alpine      {config: *arm64-alpine-config-url,                                                                                   ARCH: *arm64-arch,      << : *kernel}
   - &arm64_fedora      {config: *arm64-fedora-config-url,                                                                                   ARCH: *arm64-arch,      << : *kernel}
-  - &arm64_fedora_lto  {config: [*arm64-fedora-config-url, CONFIG_LTO_CLANG_THIN=y],                                                        ARCH: *arm64-arch,      << : *kernel}
+  # CONFIG_FORTIFY_KUNIT_TEST disabled due to https://github.com/ClangBuiltLinux/linux/issues/2075
+  - &arm64_fedora_lto  {config: [*arm64-fedora-config-url, CONFIG_LTO_CLANG_THIN=y, CONFIG_FORTIFY_KUNIT_TEST=n],                           ARCH: *arm64-arch,      << : *kernel}
   # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
   - &arm64_fedora_bpf  {config: [*arm64-fedora-config-url, CONFIG_BPF_PRELOAD=n],                                                           ARCH: *arm64-arch,      << : *kernel}
   # CONFIG_DEBUG_INFO_BTF disabled for certain SUSE configs due to pahole issue: https://lore.kernel.org/r/20210506205622.3663956-1-kafai@fb.com/
@@ -103,5 +104,6 @@ configs:
   - &x86_64_alpine     {config: *x86_64-alpine-config-url,                                                                                                          << : *kernel}
   - &x86_64_arch       {config: *x86_64-arch-config-url,                                                                                                            << : *kernel}
   - &x86_64_fedora     {config: *x86_64-fedora-config-url,                                                                                                          << : *kernel}
-  - &x86_64_fedora_lto {config: [*x86_64-fedora-config-url, CONFIG_LTO_CLANG_THIN=y],                                                                               << : *kernel}
+  # CONFIG_FORTIFY_KUNIT_TEST disabled due to https://github.com/ClangBuiltLinux/linux/issues/2075
+  - &x86_64_fedora_lto {config: [*x86_64-fedora-config-url, CONFIG_LTO_CLANG_THIN=y, CONFIG_FORTIFY_KUNIT_TEST=n],                                                  << : *kernel}
   - &x86_64_suse       {config: *x86_64-suse-config-url,                                                                                                            << : *kernel}
