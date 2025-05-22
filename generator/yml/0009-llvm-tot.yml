@@ -509,7 +509,8 @@
   - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
-  - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
+  # Hexagon does not have readsb() in older releases, which is necessary for compile testing certain drivers
+  # - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_tot}
   - {<< : *mips,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_tot}
