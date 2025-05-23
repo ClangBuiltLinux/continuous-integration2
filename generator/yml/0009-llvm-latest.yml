@@ -45,8 +45,9 @@
   - {<< : *loong_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *loong_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *loong_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_latest}
-  - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  << : *llvm_latest}
+  - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
   - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, << : *llvm_latest}
   - {<< : *ppc64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -129,8 +130,9 @@
   - {<< : *loong_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *loong_allmod,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *loong_allmod_lto,  << : *next,             << : *llvm_full,       boot: false, << : *llvm_latest}
-  - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  << : *llvm_latest}
+  - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  << : *llvm_latest}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
   - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, << : *llvm_latest}
   - {<< : *ppc64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_latest}

@@ -40,8 +40,9 @@
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  << : *llvm_17}
+  - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_17}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
   - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, << : *llvm_17}
   - {<< : *ppc64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
@@ -117,8 +118,9 @@
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  << : *llvm_17}
+  - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  << : *llvm_17}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
   - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, << : *llvm_17}
   - {<< : *ppc64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}

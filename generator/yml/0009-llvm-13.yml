@@ -37,8 +37,9 @@
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
+  - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64_no_werror,   << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
@@ -86,8 +87,9 @@
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_13}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_13}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
+  - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
   - {<< : *ppc64_no_werror,   << : *next,             << : *llvm,            boot: true,  << : *llvm_13}
