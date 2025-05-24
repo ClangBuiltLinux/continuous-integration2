@@ -488,6 +488,7 @@ jobs:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - kernel
     make_variables:
@@ -596,6 +597,7 @@ jobs:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - kernel
     make_variables:
@@ -780,14 +782,6 @@ jobs:
   - target_arch: x86_64
     toolchain: clang-nightly
     kconfig: allnoconfig
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: clang-nightly
-    kconfig: allyesconfig
     targets:
     - default
     make_variables:

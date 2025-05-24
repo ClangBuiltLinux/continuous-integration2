@@ -210,7 +210,7 @@ jobs:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - target_arch: mips
     toolchain: korg-clang-16
     kconfig:
@@ -221,7 +221,7 @@ jobs:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - target_arch: powerpc
     toolchain: korg-clang-16
     kconfig: ppc44x_defconfig
@@ -663,14 +663,6 @@ jobs:
   - target_arch: x86_64
     toolchain: korg-clang-16
     kconfig: allnoconfig
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-16
-    kconfig: allyesconfig
     targets:
     - default
     make_variables:

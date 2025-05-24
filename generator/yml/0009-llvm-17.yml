@@ -40,8 +40,9 @@
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *mips,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *mipsel,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  << : *llvm_17}
+  - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_17}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
   - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: false, << : *llvm_17}
   - {<< : *ppc64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
@@ -72,7 +73,8 @@
   - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_allmod_lto, << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_allno,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
+  # x86_64 allyesconfig has grown too large to be linked within TuxSuite's time limit
+  # - {<< : *x86_64_allyes,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_alpine,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_arch,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_fedora,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
@@ -116,8 +118,9 @@
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *mips,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *mipsel,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  << : *llvm_17}
+  - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  << : *llvm_17}
   # ppc32: Boot disabled (https://github.com/ClangBuiltLinux/linux/issues/1814)
   - {<< : *ppc32,             << : *next,             << : *llvm,            boot: false, << : *llvm_17}
   - {<< : *ppc64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
@@ -148,7 +151,8 @@
   - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
+  # x86_64 allyesconfig has grown too large to be linked within TuxSuite's time limit
+  # - {<< : *x86_64_allyes,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_gcov,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_alpine,     << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_arch,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
@@ -476,7 +480,8 @@
   - {<< : *arm64_fedora_bpf,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_suse,        << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *hexagon,           << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_17}
+  # Hexagon does not have readsb() in older releases, which is necessary for compile testing certain drivers
+  # - {<< : *hexagon_allmod,    << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *i386,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *i386_suse,         << : *stable-5_15,      << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *mips,              << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_17}
@@ -566,4 +571,5 @@
   - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_17}
+  # x86_64 allyesconfig has grown too large to be linked within TuxSuite's time limit
+  # - {<< : *x86_64_allyes,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_17}
