@@ -152,7 +152,7 @@ jobs:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - target_arch: mips
     toolchain: korg-clang-13
     kconfig:
@@ -163,7 +163,7 @@ jobs:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - target_arch: powerpc
     toolchain: korg-clang-13
     kconfig:

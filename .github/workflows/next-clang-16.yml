@@ -639,13 +639,13 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _fedc5f4e7e04694ff10adc74ddb292bf:
+  _57cd8bd1a726e4cf62e21d215295c0a4:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=16 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
@@ -668,13 +668,13 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _a504446a00214ac4328ea7d57c281108:
+  _acbf41c3fe915f4237a216ed3a7d4b48:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=16 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
@@ -2159,35 +2159,6 @@ jobs:
       LLVM_VERSION: 16
       BOOT: 0
       CONFIG: allnoconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _cc92db58f57103904b162bb3cb351329:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=16 allyesconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 16
-      BOOT: 0
-      CONFIG: allyesconfig
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu

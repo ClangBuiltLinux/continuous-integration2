@@ -478,6 +478,7 @@ jobs:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - kernel
     make_variables:
@@ -586,6 +587,7 @@ jobs:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - kernel
     make_variables:

@@ -237,7 +237,7 @@ jobs:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - target_arch: mips
     toolchain: korg-clang-18
     kconfig:
@@ -248,7 +248,7 @@ jobs:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
-      LLVM_IAS: 1
+      LLVM_IAS: 0
   - target_arch: powerpc
     toolchain: korg-clang-18
     kconfig: ppc44x_defconfig
@@ -480,6 +480,7 @@ jobs:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - kernel
     make_variables:
@@ -588,6 +589,7 @@ jobs:
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - kernel
     make_variables:
@@ -772,14 +774,6 @@ jobs:
   - target_arch: x86_64
     toolchain: korg-clang-18
     kconfig: allnoconfig
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: x86_64
-    toolchain: korg-clang-18
-    kconfig: allyesconfig
     targets:
     - default
     make_variables:

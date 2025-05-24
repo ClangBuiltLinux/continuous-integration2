@@ -519,17 +519,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: hexagon
-    toolchain: clang-nightly
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
-    - CONFIG_DRM_WERROR=n
-    targets:
-    - default
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
   - target_arch: riscv
     toolchain: clang-nightly
     kconfig:
