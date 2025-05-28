@@ -31,7 +31,8 @@ configs:
   - &arm64_gki         {config: [gki_defconfig, CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n],                                                       ARCH: *arm64-arch,      << : *kernel}
   - &arm64_cut         {config: cuttlefish_defconfig,                                                                                       ARCH: *arm64-arch,      << : *kernel}
   - &arm64_allmod      {config: allmodconfig,                                                                                               ARCH: *arm64-arch,      << : *default}
-  - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y],                              ARCH: *arm64-arch,      << : *default}
+  # CONFIG_FORTIFY_KUNIT_TEST disabled due to https://github.com/ClangBuiltLinux/linux/issues/2075
+  - &arm64_allmod_lto  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_FORTIFY_KUNIT_TEST=n], ARCH: *arm64-arch,      << : *default}
   - &arm64_allno       {config: allnoconfig,                                                                                                ARCH: *arm64-arch,      << : *default}
   - &arm64_allyes      {config: allyesconfig,                                                                                               ARCH: *arm64-arch,      << : *default}
   - &arm64_alpine      {config: *arm64-alpine-config-url,                                                                                   ARCH: *arm64-arch,      << : *kernel}
@@ -93,7 +94,8 @@ configs:
   - &x86_64_gki        {config: [gki_defconfig, CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n],                                                                               << : *kernel}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                        << : *kernel}
   - &x86_64_allmod     {config: allmodconfig,                                                                                                                       << : *default}
-  - &x86_64_allmod_lto {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y],                                                      << : *default}
+  # CONFIG_FORTIFY_KUNIT_TEST disabled due to https://github.com/ClangBuiltLinux/linux/issues/2075
+  - &x86_64_allmod_lto {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_FORTIFY_KUNIT_TEST=n],                         << : *default}
   - &x86_64_allno      {config: allnoconfig,                                                                                                                        << : *default}
   - &x86_64_allyes     {config: allyesconfig,                                                                                                                       << : *default}
   - &x86_64_gcov       {config: [defconfig, CONFIG_GCOV_KERNEL=y, CONFIG_GCOV_PROFILE_ALL=y],                                                                       << : *kernel}
