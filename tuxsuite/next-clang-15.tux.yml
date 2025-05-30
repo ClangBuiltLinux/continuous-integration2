@@ -525,6 +525,7 @@ jobs:
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - default
     make_variables:
@@ -596,6 +597,7 @@ jobs:
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
     - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - default
     make_variables:
