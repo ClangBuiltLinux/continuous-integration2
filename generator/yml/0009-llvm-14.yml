@@ -125,10 +125,9 @@
   - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *mips,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *mipsel,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
+  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
+  - {<< : *mips,              << : *stable,           << : *llvm,            boot: true,  << : *llvm_14}
+  - {<< : *mipsel,            << : *stable,           << : *llvm,            boot: true,  << : *llvm_14}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
   # - {<< : *ppc32,             << : *stable,           << : *llvm,            boot: true,  << : *llvm_14}
   - {<< : *ppc64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
@@ -143,20 +142,6 @@
   - {<< : *riscv_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_kasan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_kcsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_ubsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_allmod,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *x86_64_allmod_lto, << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *x86_64_allno,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *x86_64_allyes,     << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *x86_64_alpine,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_arch,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_fedora,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *x86_64_suse,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   ############
   #  6.12.y  #
   ############

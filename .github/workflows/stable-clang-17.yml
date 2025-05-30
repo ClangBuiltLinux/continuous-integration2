@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: check-patches-apply.py
-      run: python3 scripts/check-patches-apply.py --patches-dir patches/stable --repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --ref linux-6.14.y
+      run: python3 scripts/check-patches-apply.py --patches-dir patches/stable --repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --ref linux-6.15.y
   check_cache:
     name: Check Cache
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
     needs: check_patches
     env:
       GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-      GIT_REF: linux-6.14.y
+      GIT_REF: linux-6.15.y
     outputs:
       output: ${{ steps.step2.outputs.output }}
       status: ${{ steps.step2.outputs.status }}
@@ -67,7 +67,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.14.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-17.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.15.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-17.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -639,13 +639,13 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _31c8bcfe68e731d6236ca25af17bb0bd:
+  _e836b9f59c8c4bc93227cc77a653a918:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=17 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
@@ -668,13 +668,13 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _a90761b1a6042999dfa1d16dfa3ae390:
+  _25ca713ca5e8003eeabda1ca61d99d15:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=17 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
@@ -1212,7 +1212,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.14.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-17.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.15.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-17.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -1777,7 +1777,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.14.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-17.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.15.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-17.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -2217,35 +2217,6 @@ jobs:
       LLVM_VERSION: 17
       BOOT: 0
       CONFIG: allnoconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _73a72aae81b42c7ef0b0bd18add14c1f:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 allyesconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 17
-      BOOT: 0
-      CONFIG: allyesconfig
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
