@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: check-patches-apply.py
-      run: python3 scripts/check-patches-apply.py --patches-dir patches/stable --repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --ref linux-6.14.y
+      run: python3 scripts/check-patches-apply.py --patches-dir patches/stable --repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --ref linux-6.15.y
   check_cache:
     name: Check Cache
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
     needs: check_patches
     env:
       GIT_REPO: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-      GIT_REF: linux-6.14.y
+      GIT_REF: linux-6.15.y
     outputs:
       output: ${{ steps.step2.outputs.output }}
       status: ${{ steps.step2.outputs.status }}
@@ -67,7 +67,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.14.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-13.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.15.y --job-name defconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-13.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -465,42 +465,13 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _7dde147b804e95998e110f5dfe487e8f:
+  _0eecb2df639bfc6c34cb18f6437e649b:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: i386
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _41bfb2f60b3f93f83d0159ac988829d1:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
@@ -523,13 +494,13 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _e584cbd03ae7b4888ad3d4444ace58d7:
+  _69a1e3f1d846068b618f26c404160b14:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: mips
@@ -668,180 +639,6 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _5725232ce5f790d6db053c3d226eead6:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _0c554830a7608800ee581090e7c68ae2:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_FULL=y
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _40472006bdaaeeebdb5591dd0d8287f8:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _a511dcc1062022a2d34af1759c1f94db:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _00dbff809f200680d6649ddf91c3ef28:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _344c3215d0ddd4bcd3ad90425d833033:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_UBSAN=y
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: defconfig+CONFIG_UBSAN=y
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_defconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   kick_tuxsuite_distribution_configs:
     name: TuxSuite (distribution_configs)
     runs-on: ubuntu-latest
@@ -864,7 +661,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.14.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-13.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.15.y --job-name distribution_configs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-13.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -956,35 +753,6 @@ jobs:
       LLVM_VERSION: 13
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _a806c79f399d017938fc07b0c8ab38ac:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: i386
-      LLVM_VERSION: 13
-      BOOT: 0
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1117,122 +885,6 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _8717046894ca2042927cc0781a4dae1c:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.x86_64
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-edge/config-edge.x86_64
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _417a2a32449d514b66acb4f23450f5a8:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _1eb07c3aa26899e71a54a11f89ca7e32:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _e62bd1fdb88a0712c30c1204bd627466:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 1
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   kick_tuxsuite_allconfigs:
     name: TuxSuite (allconfigs)
     runs-on: ubuntu-latest
@@ -1255,7 +907,7 @@ jobs:
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.14.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-13.tux.yml || true
+      run: tuxsuite plan --git-repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --git-ref linux-6.15.y --job-name allconfigs --json-out builds.json --patch-series patches/stable tuxsuite/stable-clang-13.tux.yml || true
     - name: Update Cache Build Status
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
       run: python caching/update.py
@@ -1463,122 +1115,6 @@ jobs:
       LLVM_VERSION: 13
       BOOT: 0
       CONFIG: allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _ff86d54e6acbce65590f71efbb2f826b:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 0
-      CONFIG: allmodconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _3f1fcb512394bc9c9952598ccc67e2b7:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 0
-      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _10bc1944d6f5f29611271ddc67d9e2bd:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allnoconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 0
-      CONFIG: allnoconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_allconfigs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _02922017f2cb19d45aba8492132c7804:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_allconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: x86_64
-      LLVM_VERSION: 13
-      BOOT: 0
-      CONFIG: allyesconfig
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
