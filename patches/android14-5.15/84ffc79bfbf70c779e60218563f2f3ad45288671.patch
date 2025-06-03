@@ -1,11 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] kbuild: Add '-fno-builtin-wcslen'
+From 84ffc79bfbf70c779e60218563f2f3ad45288671 Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
-Date: Mon, 07 Apr 2025 16:22:12 -0700
-Message-Id: <20250407-fno-builtin-wcslen-v1-1-6775ce759b15@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Date: Mon, 7 Apr 2025 16:22:12 -0700
+Subject: kbuild: Add '-fno-builtin-wcslen'
 
 A recent optimization change in LLVM [1] aims to transform certain loop
 idioms into calls to strlen() or wcslen(). This change transforms the
@@ -20,12 +16,26 @@ build when UniStrcat() gets inlined into alloc_path_with_tree_prefix():
 
 Disable this optimization with '-fno-builtin-wcslen', which prevents the
 compiler from assuming that wcslen() is available in the kernel's C
-library
+library.
+
+[ More to the point - it's not that we couldn't implement wcslen(), it's
+  that this isn't an optimization at all in the context of the kernel.
+
+  Replacing a simple inlined loop with a function call to the same loop
+  is just stupid and pointless if you don't have long strings and fancy
+  libraries with vectorization support etc.
+
+  For the regular 'strlen()' cases, we want the compiler to do this in
+  order to handle the trivial case of constant strings. And we do have
+  optimized versions of 'strlen()' on some architectures. But for
+  wcslen? Just no.    - Linus ]
 
 Cc: stable@vger.kernel.org
 Link: https://github.com/llvm/llvm-project/commit/9694844d7e36fd5e01011ab56b64f27b867aa72d [1]
-Link: https://lore.kernel.org/r/20250407-fno-builtin-wcslen-v1-1-6775ce759b15@kernel.org
 Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+---
+Link: https://git.kernel.org/linus/84ffc79bfbf70c779e60218563f2f3ad45288671
 ---
  Makefile | 3 +++
  1 file changed, 3 insertions(+)
@@ -44,11 +54,6 @@ index 6b3a24466e288..7bb6cfc2f0f13 100644
  # change __FILE__ to the relative path from the srctree
  KBUILD_CPPFLAGS += $(call cc-option,-fmacro-prefix-map=$(srctree)/=)
  
----
-base-commit: 0af2f6be1b4281385b618cb86ad946eded089ac8
-change-id: 20250407-fno-builtin-wcslen-90a858ae7d54
-
-Best regards,
 -- 
-Nathan Chancellor <nathan@kernel.org>
+cgit 1.2.3-korg
 
