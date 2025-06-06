@@ -5,8 +5,8 @@ allmod_lto_configs:
   # CONFIG_FORTIFY_KUNIT_TEST disabled due to https://github.com/ClangBuiltLinux/linux/issues/2075
   - &arm64-allmod-lto-configs  {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_FORTIFY_KUNIT_TEST=n]}
   # CONFIG_DRM_OMAP=n due to https://github.com/ClangBuiltLinux/linux/issues/2038
-  - &loong-allmod-lto-configs  {config: [allmodconfig, CONFIG_FTRACE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_DRM_OMAP=n]}
-  - &riscv-allmod-lto-configs  {config: [allmodconfig, CONFIG_WERROR=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y]}
+  - &loong-allmod-lto-configs  {config: [allmodconfig, CONFIG_FTRACE=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_DRM_OMAP=n, CONFIG_FORTIFY_KUNIT_TEST=n]}
+  - &riscv-allmod-lto-configs  {config: [allmodconfig, CONFIG_WERROR=n, CONFIG_GCOV_KERNEL=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_FORTIFY_KUNIT_TEST=n]}
   - &x86_64-allmod-lto-configs {config: [allmodconfig, CONFIG_GCOV_KERNEL=n, CONFIG_KASAN=n, CONFIG_LTO_CLANG_THIN=y, CONFIG_FORTIFY_KUNIT_TEST=n]}
 configs:
   #                     config:                                                                                 image target (optional)    [ARCH:] (Optional: x86)  targets to build
