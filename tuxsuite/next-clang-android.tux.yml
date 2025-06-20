@@ -29,7 +29,7 @@ jobs:
     - dtbs
     make_variables:
       LLVM: 1
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - target_arch: arm
     toolchain: clang-android
     kconfig: multi_v7_defconfig
@@ -145,10 +145,21 @@ jobs:
     - default
     make_variables:
       LLVM: 1
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - target_arch: arm
     toolchain: clang-android
     kconfig: allnoconfig
+    targets:
+    - default
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - target_arch: arm
+    toolchain: clang-android
+    kconfig:
+    - allyesconfig
+    - CONFIG_WERROR=n
+    - CONFIG_DRM_WERROR=n
     targets:
     - default
     make_variables:

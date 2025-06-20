@@ -117,13 +117,13 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _a82d5da76edb25de07265b1189803b21:
+  _3a8b38a1ee16a0b8441c7dda2a3d6573:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=android aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android aspeed_g5_defconfig
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
@@ -508,13 +508,13 @@ jobs:
         path: boot-utils.json
         name: boot_utils_json_allconfigs
         if-no-files-found: error
-  _5c6a45dfab4397855db83c0803300b23:
+  _05b4b5316e0115835ded8a6f9865a052:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=android allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
@@ -550,6 +550,35 @@ jobs:
       LLVM_VERSION: android
       BOOT: 0
       CONFIG: allnoconfig
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_allconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_allconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
+  _245638df4b978821d25a986e495eb7b3:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_allconfigs
+    - check_cache
+    - check_patches
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allyesconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      BOOT: 0
+      CONFIG: allyesconfig+CONFIG_WERROR=n+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
