@@ -1,0 +1,10 @@
+0001-994f5f7816ff963f49269cfc97f63cb2e4edb84f.patch
+0002-MIPS-Move-Wa-msoft-float-check-from-as-option-to-cc-.patch
+0003-d5c8d6e0fa61401a729e9eb6a9c7077b2d3aebb0.patch
+0004-7db038d9790eda558dd6c1dde4cdd58b64789c47.patch
+0005-08f6554ff90ef189e6b8f0303e57005bddfdd6a7.patch
+0006-cff6e7f50bd315e5b39c4e46c704ac587ceb965f.patch
+0007-feb843a469fb0ab00d2d23cfb9bcc379791011bb.patch
+0008-43fc0a99906e04792786edf8534d8d58d1e9de0c.patch
+0009-drm-amd-display-Do-not-add-mhard-float-to-dcn2-1-0-_.patch
+0010-20250618_nathan_arm_use_an_absolute_path_to_unified_h_in_kbuild_aflags.patch
