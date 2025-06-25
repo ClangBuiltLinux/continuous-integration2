@@ -80,8 +80,8 @@ def get_cbl_name():
                 "riscv64": "riscv",
                 "x86_64": "x86_64"
             }
-            # The URL is https://.../config-edge.<arch>
-            alpine_arch = base_config.split(".")[-1]
+            # The URL is https://.../stable.<arch>.config
+            alpine_arch = base_config.split(".")[1]
             return alpine_to_cbl[alpine_arch]
         if "fedora" in base_config:
             fedora_to_cbl = {
