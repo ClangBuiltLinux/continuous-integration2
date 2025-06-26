@@ -81,7 +81,7 @@ def get_cbl_name():
                 "x86_64": "x86_64"
             }
             # The URL is https://.../stable.<arch>.config
-            alpine_arch = base_config.split(".")[1]
+            alpine_arch = base_config.split(".")[-2]
             return alpine_to_cbl[alpine_arch]
         if "fedora" in base_config:
             fedora_to_cbl = {
