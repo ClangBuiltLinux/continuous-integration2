@@ -1,0 +1,65 @@
+From git@z Thu Jan  1 00:00:00 1970
+Subject: [PATCH] ARM: Use an absolute path to unified.h in KBUILD_AFLAGS
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Wed, 18 Jun 2025 12:29:09 -0700
+Message-Id: <20250618-arm-expand-include-unified-h-path-v1-1-aef6eb4c44ca@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+After commit d5c8d6e0fa61 ("kbuild: Update assembler calls to use proper
+flags and language target"), which updated as-instr to use the
+'assembler-with-cpp' language option, the Kbuild version of as-instr
+always fails internally for arch/arm with
+
+  <command-line>: fatal error: asm/unified.h: No such file or directory
+  compilation terminated.
+
+because '-include' flags are now taken into account by the compiler
+driver and as-instr does not have '$(LINUXINCLUDE)', so unified.h is not
+found.
+
+This went unnoticed at the time of the Kbuild change because the last
+use of as-instr in Kbuild that arch/arm could reach was removed in 5.7
+by commit 541ad0150ca4 ("arm: Remove 32bit KVM host support") but a
+stable backport of the Kbuild change to before that point exposed this
+potential issue if one were to be reintroduced.
+
+Follow the general pattern of '-include' paths throughout the tree and
+make unified.h absolute using '$(srctree)' to ensure KBUILD_AFLAGS can
+be used independently.
+
+Cc: stable@vger.kernel.org
+Fixes: d5c8d6e0fa61 ("kbuild: Update assembler calls to use proper flags and language target")
+Reported-by: KernelCI bot <bot@kernelci.org>
+Closes: https://lore.kernel.org/CACo-S-1qbCX4WAVFA63dWfHtrRHZBTyyr2js8Lx=Az03XHTTHg@mail.gmail.com/
+Reviewed-by: Masahiro Yamada <masahiroy@kernel.org>
+Link: https://lore.kernel.org/r/20250618-arm-expand-include-unified-h-path-v1-1-aef6eb4c44ca@kernel.org
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+Submitted to rmk's tracker: https://www.armlinux.org.uk/developer/patches/viewpatch.php?id=9448/1
+---
+ arch/arm/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/Makefile b/arch/arm/Makefile
+index 4f098edfbf20..cb33ed8de5f8 100644
+--- a/arch/arm/Makefile
++++ b/arch/arm/Makefile
+@@ -136,7 +136,7 @@ endif
+ 
+ # Need -Uarm for gcc < 3.x
+ KBUILD_CFLAGS	+=$(CFLAGS_ABI) $(CFLAGS_ISA) $(arch-y) $(tune-y) $(call cc-option,-mshort-load-bytes,$(call cc-option,-malignment-traps,)) -msoft-float -Uarm
+-KBUILD_AFLAGS	+=$(CFLAGS_ABI) $(AFLAGS_ISA) $(arch-y) $(tune-y) -include asm/unified.h -msoft-float
++KBUILD_AFLAGS	+=$(CFLAGS_ABI) $(AFLAGS_ISA) $(arch-y) $(tune-y) -include $(srctree)/arch/arm/include/asm/unified.h -msoft-float
+ 
+ CHECKFLAGS	+= -D__arm__
+ 
+---
+base-commit: e04c78d86a9699d136910cfc0bdcf01087e3267e
+change-id: 20250618-arm-expand-include-unified-h-path-60e65adcda1e
+
+Best regards,
+--  
+Nathan Chancellor <nathan@kernel.org>
+
