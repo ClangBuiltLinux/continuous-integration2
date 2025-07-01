@@ -1,7 +1,7 @@
 From ee72d68bba47e0a0f045ff33638601ef7ec14260 Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
 Date: Thu, 1 Jun 2023 11:38:24 -0700
-Subject: [PATCH 5/9] mips: Include KBUILD_CPPFLAGS in CHECKFLAGS invocation
+Subject: [PATCH 2/5] mips: Include KBUILD_CPPFLAGS in CHECKFLAGS invocation
 
 commit 08f6554ff90ef189e6b8f0303e57005bddfdd6a7 upstream.
 
