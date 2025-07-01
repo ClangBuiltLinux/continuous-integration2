@@ -1,7 +1,7 @@
 From a846e1c74e2c17443e84efefb632f0d759d5f6e1 Mon Sep 17 00:00:00 2001
 From: Masahiro Yamada <masahiroy@kernel.org>
 Date: Sun, 9 Apr 2023 23:53:57 +0900
-Subject: [PATCH 7/9] kbuild: add $(CLANG_FLAGS) to KBUILD_CPPFLAGS
+Subject: [PATCH 4/5] kbuild: add $(CLANG_FLAGS) to KBUILD_CPPFLAGS
 
 commit feb843a469fb0ab00d2d23cfb9bcc379791011bb upstream.
 

@@ -1,7 +1,7 @@
 From 53842cd1ecb80f2347244af2a4fdfd2956e010b6 Mon Sep 17 00:00:00 2001
 From: Nick Desaulniers <ndesaulniers@google.com>
 Date: Wed, 11 Jan 2023 20:05:01 -0700
-Subject: [PATCH 3/9] kbuild: Update assembler calls to use proper flags and
+Subject: [PATCH 1/5] kbuild: Update assembler calls to use proper flags and
  language target
 
 commit d5c8d6e0fa61401a729e9eb6a9c7077b2d3aebb0 upstream.

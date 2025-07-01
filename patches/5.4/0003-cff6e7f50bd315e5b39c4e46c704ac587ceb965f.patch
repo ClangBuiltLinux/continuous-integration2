@@ -1,7 +1,7 @@
 From b7e68767a827168474d68a6f5ab998eac82f8c90 Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
 Date: Thu, 1 Jun 2023 12:50:39 -0700
-Subject: [PATCH 6/9] kbuild: Add CLANG_FLAGS to as-instr
+Subject: [PATCH 3/5] kbuild: Add CLANG_FLAGS to as-instr
 
 commit cff6e7f50bd315e5b39c4e46c704ac587ceb965f upstream.
 

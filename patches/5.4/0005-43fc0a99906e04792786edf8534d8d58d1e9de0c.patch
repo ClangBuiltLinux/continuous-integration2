@@ -1,7 +1,7 @@
 From 869854f263162dc80dc632fed8db396789bdf3ab Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <nathan@kernel.org>
 Date: Tue, 6 Jun 2023 15:40:35 -0700
-Subject: [PATCH 8/9] kbuild: Add KBUILD_CPPFLAGS to as-option invocation
+Subject: [PATCH 5/5] kbuild: Add KBUILD_CPPFLAGS to as-option invocation
 
 commit 43fc0a99906e04792786edf8534d8d58d1e9de0c upstream.
 
