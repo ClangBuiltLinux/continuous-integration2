@@ -58,7 +58,12 @@ def verify_build():
     retries = 0
     max_retries = 9
     while retries < max_retries:
-        if build["tuxbuild_status"] == "complete":
+        # build never started
+        if (build_status := build['tuxbuild_status']) == 'error':
+            print_red(f"msg from tuxsuite: {build['status_message']}")
+            sys.exit(1)
+        # build is finished
+        elif build_status == "complete":
             break
 
         if retries:

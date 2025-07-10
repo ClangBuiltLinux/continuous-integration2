@@ -290,12 +290,12 @@ def update_repository_variable(
 
 
 def print_red(msg):
-    print(f"\033[91m{msg}\033[0m", file=sys.stderr)
+    print(f"\033[91m[CI ERROR] {msg}\033[0m", file=sys.stderr)
     sys.stderr.flush()
 
 
 def print_yellow(msg):
-    print(f"\033[93m{msg}\033[0m", file=sys.stdout)
+    print(f"\033[93m[CI WARNING] {msg}\033[0m", file=sys.stdout)
     sys.stdout.flush()
 
 

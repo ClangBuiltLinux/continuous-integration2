@@ -1,0 +1,16 @@
+{
+    "problemMatcher": [
+        {
+            "__comment_owner": "internal continuous integration errors",
+            "owner": "internal",
+            "pattern": [
+                {
+                    "__comment_regexp1": "[CI ERROR] Build is not finished on TuxSuite's side!",
+                    "regexp": "^\\[CI (WARNING|ERROR)\\]\\s+(.*)$",
+                    "severity": 1,
+                    "message": 2
+                }
+            ]
+        }
+    ]
+}
