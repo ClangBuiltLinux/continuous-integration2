@@ -10,12 +10,12 @@ import sys
 import time
 import urllib.request
 
-from utils import CI_ROOT, get_build, get_image_name, get_requested_llvm_version, print_red, print_yellow, get_cbl_name, show_builds
+from utils import CI_ROOT, get_build, get_image_name, get_requested_llvm_version, print_red, get_cbl_name, show_builds, die, warn, info
 
 
 def _fetch(title, url, dest):
     current_time = time.strftime("%H:%M:%S", time.localtime())
-    print_yellow(f"{current_time}: fetching {title} from: {url}")
+    info(f"{current_time}: fetching {title} from: {url}")
     retries = 0
     max_retries = 7
     retry_codes = [404, 500, 504]
@@ -27,26 +27,22 @@ def _fetch(title, url, dest):
             urllib.request.urlretrieve(url, dest)
             break
         except ConnectionResetError as err:
-            print_yellow(f"{title} download error ('{err}'), retrying...")
+            warn(f"{title} download error ('{err}'), retrying...")
         except urllib.error.HTTPError as err:
             if err.code in retry_codes:
-                print_yellow(
-                    f"{title} download error ({err.code}), retrying...")
+                warn(f"{title} download error ({err.code}), retrying...")
             else:
-                print_red(f"{err.code} error trying to download {title}")
-                sys.exit(1)
+                die(f"{err.code} error trying to download {title}")
         except urllib.error.URLError as err:
-            print_yellow(f"{title} download error ('{err}'), retrying...")
+            warn(f"{title} download error ('{err}'), retrying...")
 
     if retries == max_retries:
-        print_red(f"Unable to download {title} after {max_retries} tries")
-        sys.exit(1)
+        die(f"Unable to download {title} after {max_retries} tries")
 
     if dest.exists():
-        print_yellow(f"Filesize: {dest.stat().st_size}")
+        info(f"Filesize: {dest.stat().st_size}")
     else:
-        print_red(f"Unable to download {title}")
-        sys.exit(1)
+        die(f"Unable to download {title}")
 
 
 def verify_build():
@@ -60,8 +56,7 @@ def verify_build():
     while retries < max_retries:
         # build never started
         if (build_status := build['tuxbuild_status']) == 'error':
-            print_red(f"msg from tuxsuite: {build['status_message']}")
-            sys.exit(1)
+            die(f"msg from tuxsuite: {build['status_message']}")
         # build is finished
         elif build_status == "complete":
             break
@@ -78,16 +73,14 @@ def verify_build():
     print(json.dumps(build, indent=4))
 
     if retries == max_retries:
-        print_red("Build is not finished on TuxSuite's side!")
-        sys.exit(1)
+        die("Build is not finished on TuxSuite's side!")
 
     if "Build Timed Out" in build["status_message"]:
-        print_red(build["status_message"])
-        sys.exit(1)
+        die(build["status_message"])
 
     if build["status_message"] == "Unable to apply kernel patch":
         print_red(
-            "Patch failed to apply to current kernel tree, does it need to be removed or updated?"
+            "ERROR: Patch failed to apply to current kernel tree, does it need to be removed or updated?"
         )
         fetch_logs(build)
         sys.exit(1)
@@ -106,7 +99,7 @@ def check_log(build):
     warnings_count = build["warnings_count"]
     errors_count = build["errors_count"]
     if warnings_count + errors_count > 0:
-        print_yellow(f"{warnings_count} warnings, {errors_count} errors")
+        info(f"{warnings_count} warnings, {errors_count} errors")
         fetch_logs(build)
 
 
@@ -159,12 +152,12 @@ def check_built_config(build):
             elif line.startswith("# CONFIG_"):
                 name, state = line.split(" ", 2)[1:]
                 if state != "is not set":
-                    print_yellow(
+                    warn(
                         f"Could not parse '{name}' from .config line '{line}'!?"
                     )
                 state = 'n'
             elif not line.startswith("#"):
-                print_yellow(f"Could not parse .config line '{line}'!?")
+                warn(f"Could not parse .config line '{line}'!?")
             configs[name] = state
 
     # Compare requested configs against the loaded dictionary.
@@ -175,7 +168,7 @@ def check_built_config(build):
         name, state = config.split('=')
         # If a config is missing from the dictionary, it is considered 'n'.
         if state != configs.get(name, 'n'):
-            print_red(f"FAIL: {config} not found in .config!")
+            print_red(f"ERROR: {config} not found in .config!")
             fail = True
         else:
             print(f"ok: {name}={state}")
@@ -195,7 +188,7 @@ def print_clang_info(build):
     url = build["download_url"] + metadata_file.name
     _fetch(metadata_file, url, metadata_file)
     metadata_json = json.loads(metadata_file.read_text(encoding='utf-8'))
-    print_yellow("Printing clang-nightly checkout date and hash")
+    info("Printing clang-nightly checkout date and hash")
     parse_cmd = [
         Path(CI_ROOT, "scripts/parse-debian-clang.py"), "--print-info",
         "--version-string", metadata_json["compiler"]["version_full"]
@@ -243,8 +236,7 @@ def run_boot(build):
             boot_cmd += ["-t", "10m"]
         if "CONFIG_KASAN_KUNIT_TEST=y" in build["kconfig"] or \
            "CONFIG_KCSAN_KUNIT_TEST=y" in build["kconfig"]:
-            print_yellow(
-                "Disabling Oops problem matcher under Sanitizer KUnit build")
+            info("Disabling Oops problem matcher under Sanitizer KUnit build")
             print("::remove-matcher owner=linux-kernel-oopses::")
 
     # Before spawning a process with potentially different IO buffering,
@@ -256,19 +248,17 @@ def run_boot(build):
         subprocess.run(boot_cmd, check=True)
     except subprocess.CalledProcessError as err:
         if err.returncode == 124:
-            print_red("Image failed to boot")
+            print_red("ERROR: Image failed to boot")
         raise err
 
 
 def boot_test(build):
     if build["result"] == "unknown":
-        print_red("unknown build result, skipping boot")
-        sys.exit(1)
+        die("unknown build result, skipping boot")
     if build["result"] == "fail":
-        print_red("fatal build errors encountered during build, skipping boot")
-        sys.exit(1)
+        die("fatal build errors encountered during build, skipping boot")
     if "BOOT" in os.environ and os.environ["BOOT"] == "0":
-        print_yellow("boot test disabled via config, skipping boot")
+        info("boot test disabled via config, skipping boot")
         return
     fetch_kernel_image(build)
     fetch_dtb(build)
@@ -282,11 +272,11 @@ if __name__ == "__main__":
             missing.append(var)
     if missing:
         for var in missing:
-            print_red(f"${var} must be specified")
+            print_red(f"ERROR: ${var} must be specified")
         show_builds()
         sys.exit(1)
     verified_build = verify_build()
-    print_yellow("Register clang error/warning problem matchers")
+    info("Register clang error/warning problem matchers")
     for problem_matcher in glob.glob(".github/problem-matchers/*.json"):
         print(f"::add-matcher::{problem_matcher}")
     print_clang_info(verified_build)
