@@ -5,8 +5,8 @@
             "owner": "internal",
             "pattern": [
                 {
-                    "__comment_regexp1": "[CI ERROR] Build is not finished on TuxSuite's side!",
-                    "regexp": "^\\[CI (WARNING|ERROR)\\]\\s+(.*)$",
+                    "__comment_regexp1": "ERROR: Build is not finished on TuxSuite's side!",
+                    "regexp": "^(WARNING|ERROR):\\s+(.*)$",
                     "severity": 1,
                     "message": 2
                 }

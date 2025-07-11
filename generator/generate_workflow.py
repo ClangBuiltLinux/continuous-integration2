@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 import yaml
 
-from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, print_red
+from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, die
 
 
 def parse_args(trees):
@@ -279,8 +279,8 @@ def get_cron_schedule(schedules, tree_name, llvm_version):
         if item["name"] == tree_name and \
            item["llvm_version"] == llvm_version:
             return item["schedule"]
-    print_red(f"Could not find schedule for {tree_name} clang-{llvm_version}?")
-    sys.exit(1)
+    return die(
+        f"Could not find schedule for {tree_name} clang-{llvm_version}?")
 
 
 def print_builds(config, tree_name, llvm_version):

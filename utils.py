@@ -13,6 +13,11 @@ GENERATOR_ROOT = Path(CI_ROOT, 'generator')
 LLVM_TOT_VERSION = Path(GENERATOR_ROOT, 'LLVM_TOT_VERSION')
 
 
+def die(msg):
+    print_red(f"ERROR: {msg}")
+    sys.exit(1)
+
+
 # Certain subsystems have more targeted -Werror configurations. If we have
 # CONFIG_WERROR=n, it means we are explicitly opting out of -Werror for some
 # reason, so all other known subsystem specific configurations should be
@@ -30,7 +35,7 @@ def disable_subsys_werror_configs(configs):
 def get_config_from_generator():
     if not (all_generator_files := sorted(
             Path(GENERATOR_ROOT, 'yml').glob('*.yml'))):
-        raise FileNotFoundError('No generator files could not be found?')
+        return die('No generator files could not be found?')
 
     generator_pieces = []
     for file in all_generator_files:
@@ -131,18 +136,17 @@ def get_cbl_name():
         return unique_defconfigs[base_config]
     if "defconfig" in base_config or "virtconfig" in base_config:
         return "x86" if arch == "i386" else arch
-    raise RuntimeError("unknown CBL name")
+    return die("unknown CBL name")
 
 
 def _read_builds():
     file = "mock.builds.json" if os.environ.get("MOCK") else "builds.json"
     try:
         if (builds := Path(CI_ROOT, file)).stat().st_size == 0:
-            raise RuntimeError(f"{file} is zero sized?")
+            return die(f"{file} is zero sized?")
         builds_json = json.loads(builds.read_text(encoding='utf-8'))
-    except FileNotFoundError as err:
-        print_red(f"Unable to find {file}. Artifact not saved?")
-        raise err
+    except FileNotFoundError:
+        return die(f"Unable to find {file}. Artifact not saved?")
     return builds_json["builds"].values()
 
 
@@ -155,6 +159,10 @@ def get_requested_llvm_version():
     if ver == 'android':
         return 'clang-android'
     return f"korg-clang-{ver}"
+
+
+def info(msg):
+    print_yellow(f"INFO: {msg}")
 
 
 def show_builds():
@@ -177,7 +185,7 @@ def get_build():
            build["toolchain"] == llvm_version and \
            build["kconfig"] == configs:
             return build
-    print_red("Unable to find build")
+    print_red("ERROR: Unable to find build")
     show_builds()
     sys.exit(1)
 
@@ -186,7 +194,7 @@ def get_repo_ref(config, tree_name):
     for tree in config["trees"]:
         if tree["name"] == tree_name:
             return tree["git_repo"], tree["git_ref"]
-    raise RuntimeError(f"Could not find git repo and ref for {tree_name}?")
+    return die(f"Could not find git repo and ref for {tree_name}?")
 
 
 def get_llvm_versions(config, tree_name):
@@ -290,12 +298,12 @@ def update_repository_variable(
 
 
 def print_red(msg):
-    print(f"\033[91m[CI ERROR] {msg}\033[0m", file=sys.stderr)
+    print(f"\033[91m{msg}\033[0m", file=sys.stderr)
     sys.stderr.flush()
 
 
 def print_yellow(msg):
-    print(f"\033[93m[CI WARNING] {msg}\033[0m", file=sys.stdout)
+    print(f"\033[93m{msg}\033[0m", file=sys.stdout)
     sys.stdout.flush()
 
 
@@ -303,3 +311,7 @@ def patch_series_flag(tree):
     patches_folder = Path('patches', tree)
     patch_files = list(Path(CI_ROOT, patches_folder).glob('*.patch'))
     return f"--patch-series {patches_folder} " if patch_files else ""
+
+
+def warn(msg):
+    print_yellow(f"WARNING: {msg}")
