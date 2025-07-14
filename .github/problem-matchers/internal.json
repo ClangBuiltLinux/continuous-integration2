@@ -6,7 +6,7 @@
             "pattern": [
                 {
                     "__comment_regexp1": "ERROR: Build is not finished on TuxSuite's side!",
-                    "regexp": "^(WARNING|ERROR):\\s+(.*)$",
+                    "regexp": "^\\x1b\\[[0-9]+m(WARNING|ERROR):\\s+(.*)\\x1b\\[0m$",
                     "severity": 1,
                     "message": 2
                 }
