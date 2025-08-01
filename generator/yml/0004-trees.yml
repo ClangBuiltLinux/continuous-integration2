@@ -1,7 +1,7 @@
 trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
-  - &stable           {git_repo: *stable-url,   git_ref: linux-6.15.y,        name: stable}
+  - &stable           {git_repo: *stable-url,   git_ref: linux-6.16.y,        name: stable}
   - &stable-6_12      {git_repo: *stable-url,   git_ref: linux-6.12.y,        name: "6.12"}
   - &stable-6_6       {git_repo: *stable-url,   git_ref: linux-6.6.y,         name: "6.6"}
   - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}

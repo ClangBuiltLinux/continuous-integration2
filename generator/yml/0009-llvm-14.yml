@@ -134,7 +134,6 @@
   - {<< : *ppc64le_fedora,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *ppc64le_suse,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *riscv_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *riscv_allmod,      << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
   - {<< : *riscv_allmod_lto,  << : *stable,           << : *llvm_full,       boot: false, << : *llvm_14}
