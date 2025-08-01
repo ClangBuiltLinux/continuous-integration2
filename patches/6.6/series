@@ -1,0 +1,6 @@
+0001-HACK-rtl8712-Zero-initialize-val-in-read_rfreg_hdl.patch
+8d1b02e5d7e3a6d2acffb1f4c094678fda9e3456.patch
+81284e86bf8849f8e98e8ead3ff5811926b2107f.patch
+20250715_nathan_wifi_mt76_mt7996_initialize_hdr_before_passing_to_skb_put_data.patch
+20250722_elver_kcsan_test_initialize_dummy_variable.patch
+ccc35ff2fd2911986b716a87fe65e03fac2312c9.patch

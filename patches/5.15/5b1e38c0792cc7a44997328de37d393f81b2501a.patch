@@ -1,0 +1,43 @@
+From 5b1e38c0792cc7a44997328de37d393f81b2501a Mon Sep 17 00:00:00 2001
+From: Robert-Ionut Alexa <robert-ionut.alexa@nxp.com>
+Date: Thu, 6 Jan 2022 15:59:03 +0200
+Subject: dpaa2-mac: bail if the dpmacs fwnode is not found
+
+The parent pointer node handler must be declared with a NULL
+initializer. Before using it, a check must be performed to make
+sure that a valid address has been assigned to it.
+
+Signed-off-by: Robert-Ionut Alexa <robert-ionut.alexa@nxp.com>
+Signed-off-by: Jakub Kicinski <kuba@kernel.org>
+---
+Link: https://git.kernel.org/linus/5b1e38c0792cc7a44997328de37d393f81b2501a
+---
+ drivers/net/ethernet/freescale/dpaa2/dpaa2-mac.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/net/ethernet/freescale/dpaa2/dpaa2-mac.c b/drivers/net/ethernet/freescale/dpaa2/dpaa2-mac.c
+index 7f509f427e3d6d..e80376c6e55e38 100644
+--- a/drivers/net/ethernet/freescale/dpaa2/dpaa2-mac.c
++++ b/drivers/net/ethernet/freescale/dpaa2/dpaa2-mac.c
+@@ -41,7 +41,7 @@ static int phy_mode(enum dpmac_eth_if eth_if, phy_interface_t *if_mode)
+ static struct fwnode_handle *dpaa2_mac_get_node(struct device *dev,
+ 						u16 dpmac_id)
+ {
+-	struct fwnode_handle *fwnode, *parent, *child  = NULL;
++	struct fwnode_handle *fwnode, *parent = NULL, *child  = NULL;
+ 	struct device_node *dpmacs = NULL;
+ 	int err;
+ 	u32 id;
+@@ -56,6 +56,9 @@ static struct fwnode_handle *dpaa2_mac_get_node(struct device *dev,
+ 		parent = fwnode;
+ 	}
+ 
++	if (!parent)
++		return NULL;
++
+ 	fwnode_for_each_child_node(parent, child) {
+ 		err = -EINVAL;
+ 		if (is_acpi_device_node(child))
+-- 
+cgit 1.2.3-korg
+

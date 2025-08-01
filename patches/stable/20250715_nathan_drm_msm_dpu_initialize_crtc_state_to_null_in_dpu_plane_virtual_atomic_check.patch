@@ -1,0 +1,65 @@
+From git@z Thu Jan  1 00:00:00 1970
+Subject: [PATCH] drm/msm/dpu: Initialize crtc_state to NULL in
+ dpu_plane_virtual_atomic_check()
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Tue, 15 Jul 2025 16:27:35 -0700
+Message-Id: <20250715-drm-msm-fix-const-uninit-warning-v1-1-d6a366fd9a32@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+After a recent change in clang to expose uninitialized warnings from
+const variables and pointers [1], there is a warning around crtc_state
+in dpu_plane_virtual_atomic_check():
+
+  drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c:1145:6: error: variable 'crtc_state' is used uninitialized whenever 'if' condition is false [-Werror,-Wsometimes-uninitialized]
+   1145 |         if (plane_state->crtc)
+        |             ^~~~~~~~~~~~~~~~~
+  drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c:1149:58: note: uninitialized use occurs here
+   1149 |         ret = dpu_plane_atomic_check_nosspp(plane, plane_state, crtc_state);
+        |                                                                 ^~~~~~~~~~
+  drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c:1145:2: note: remove the 'if' if its condition is always true
+   1145 |         if (plane_state->crtc)
+        |         ^~~~~~~~~~~~~~~~~~~~~~
+   1146 |                 crtc_state = drm_atomic_get_new_crtc_state(state,
+  drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c:1139:35: note: initialize the variable 'crtc_state' to silence this warning
+   1139 |         struct drm_crtc_state *crtc_state;
+        |                                          ^
+        |                                           = NULL
+
+Initialize crtc_state to NULL like other places in the driver do, so
+that it is consistently initialized.
+
+Cc: stable@vger.kernel.org
+Closes: https://github.com/ClangBuiltLinux/linux/issues/2106
+Fixes: 774bcfb73176 ("drm/msm/dpu: add support for virtual planes")
+Link: https://github.com/llvm/llvm-project/commit/2464313eef01c5b1edf0eccf57a32cdee01472c7 [1]
+Reviewed-by: Jessica Zhang <jessica.zhang@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20250715-drm-msm-fix-const-uninit-warning-v1-1-d6a366fd9a32@kernel.org
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c
+index 421138bc3cb7..30ff21c01a36 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c
+@@ -1136,7 +1136,7 @@ static int dpu_plane_virtual_atomic_check(struct drm_plane *plane,
+ 	struct drm_plane_state *old_plane_state =
+ 		drm_atomic_get_old_plane_state(state, plane);
+ 	struct dpu_plane_state *pstate = to_dpu_plane_state(plane_state);
+-	struct drm_crtc_state *crtc_state;
++	struct drm_crtc_state *crtc_state = NULL;
+ 	int ret;
+ 
+ 	if (IS_ERR(plane_state))
+
+---
+base-commit: d3deabe4c619875714b9a844b1a3d9752dbae1dd
+change-id: 20250715-drm-msm-fix-const-uninit-warning-2b93cef9f1c6
+
+Best regards,
+--  
+Nathan Chancellor <nathan@kernel.org>
+
