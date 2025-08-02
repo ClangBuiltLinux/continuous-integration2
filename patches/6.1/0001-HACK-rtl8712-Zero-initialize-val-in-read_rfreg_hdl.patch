@@ -1,0 +1,28 @@
+From a87fdd235388e0c6644305eda55f265ff2c04f84 Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Fri, 1 Aug 2025 15:30:21 -0700
+Subject: [PATCH] HACK: rtl8712: Zero initialize val in read_rfreg_hdl()
+
+This is likely not a correct fix. This driver was removed in 6.13 in
+commit 41e883c137eb ("staging: rtl8712: Remove driver using deprecated
+API wext"), so this will need to be a stable only fix.
+---
+ drivers/staging/rtl8712/rtl8712_cmd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/staging/rtl8712/rtl8712_cmd.c b/drivers/staging/rtl8712/rtl8712_cmd.c
+index bb7db96ed821..6e2d92f7b22e 100644
+--- a/drivers/staging/rtl8712/rtl8712_cmd.c
++++ b/drivers/staging/rtl8712/rtl8712_cmd.c
+@@ -140,7 +140,7 @@ static u8 write_bbreg_hdl(struct _adapter *padapter, u8 *pbuf)
+ 
+ static u8 read_rfreg_hdl(struct _adapter *padapter, u8 *pbuf)
+ {
+-	u32 val;
++	u32 val = 0;
+ 	void (*pcmd_callback)(struct _adapter *dev, struct cmd_obj *pcmd);
+ 	struct cmd_obj *pcmd  = (struct cmd_obj *)pbuf;
+ 
+-- 
+2.50.1
+
