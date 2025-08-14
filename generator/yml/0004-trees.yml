@@ -18,10 +18,11 @@ tree_schedules:
   # These should be spaced out such that they do not run on top of each other or -next.
   - &mainline_llvm_tot             {<< : *llvm_tot,     << : *mainline,         << : *weekdays_six}
   - &mainline_llvm_latest          {<< : *llvm_latest,  << : *mainline,         << : *weekdays_eighteen}
-  - &mainline_llvm_19              {<< : *llvm_19,      << : *mainline,         << : *weekdays_midnight}
+  - &mainline_llvm_20              {<< : *llvm_20,      << : *mainline,         << : *weekdays_midnight}
   # For the older versions, we do builds less frequently, depending on how old the version is
-  - &mainline_llvm_18              {<< : *llvm_18,      << : *mainline,         << : *mon_fri_midnight}
-  - &mainline_llvm_17              {<< : *llvm_17,      << : *mainline,         << : *mon_fri_three}
+  - &mainline_llvm_19              {<< : *llvm_19,      << : *mainline,         << : *mon_fri_midnight}
+  - &mainline_llvm_18              {<< : *llvm_18,      << : *mainline,         << : *mon_fri_three}
+  - &mainline_llvm_17              {<< : *llvm_17,      << : *mainline,         << : *sat_midnight}
   - &mainline_llvm_16              {<< : *llvm_16,      << : *mainline,         << : *sat_midnight}
   - &mainline_llvm_15              {<< : *llvm_15,      << : *mainline,         << : *sat_three}
   - &mainline_llvm_14              {<< : *llvm_14,      << : *mainline,         << : *sun_midnight}
@@ -30,6 +31,7 @@ tree_schedules:
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
   - &next_llvm_tot                 {<< : *llvm_tot,     << : *next,             << : *weekdays_noon}
   - &next_llvm_latest              {<< : *llvm_latest,  << : *next,             << : *weekdays_noon}
+  - &next_llvm_20                  {<< : *llvm_20,      << : *next,             << : *weekdays_noon}
   - &next_llvm_19                  {<< : *llvm_19,      << : *next,             << : *weekdays_noon}
   - &next_llvm_18                  {<< : *llvm_18,      << : *next,             << : *weekdays_noon}
   - &next_llvm_17                  {<< : *llvm_17,      << : *next,             << : *weekdays_noon}
@@ -46,12 +48,13 @@ tree_schedules:
   # should notice first).
   - &stable_llvm_tot               {<< : *llvm_tot,     << : *stable,           << : *mon_fri_nine}
   - &stable_llvm_latest            {<< : *llvm_latest,  << : *stable,           << : *mon_fri_twentyone}
-  - &stable_llvm_19                {<< : *llvm_19,      << : *stable,           << : *mon_three}
-  - &stable_llvm_18                {<< : *llvm_18,      << : *stable,           << : *tue_three}
-  - &stable_llvm_17                {<< : *llvm_17,      << : *stable,           << : *wed_three}
-  - &stable_llvm_16                {<< : *llvm_16,      << : *stable,           << : *thur_three}
-  - &stable_llvm_15                {<< : *llvm_15,      << : *stable,           << : *fri_three}
-  - &stable_llvm_14                {<< : *llvm_14,      << : *stable,           << : *sat_three}
+  - &stable_llvm_20                {<< : *llvm_20,      << : *stable,           << : *mon_three}
+  - &stable_llvm_19                {<< : *llvm_19,      << : *stable,           << : *tue_three}
+  - &stable_llvm_18                {<< : *llvm_18,      << : *stable,           << : *wed_three}
+  - &stable_llvm_17                {<< : *llvm_17,      << : *stable,           << : *thur_three}
+  - &stable_llvm_16                {<< : *llvm_16,      << : *stable,           << : *fri_three}
+  - &stable_llvm_15                {<< : *llvm_15,      << : *stable,           << : *sat_three}
+  - &stable_llvm_14                {<< : *llvm_14,      << : *stable,           << : *sun_three}
   - &stable_llvm_13                {<< : *llvm_13,      << : *stable,           << : *sun_three}
 
   # Longterm stable (LTS) kernels see less frequent updates the older that they get
@@ -59,16 +62,18 @@ tree_schedules:
   # frequently and others not as frequently.
   - &stable-6_12_llvm_tot          {<< : *llvm_tot,     << : *stable-6_12,      << : *tue_thur_nine}
   - &stable-6_12_llvm_latest       {<< : *llvm_latest,  << : *stable-6_12,      << : *tue_thur_twentyone}
-  - &stable-6_12_llvm_19           {<< : *llvm_19,      << : *stable-6_12,      << : *mon_fifteen}
-  - &stable-6_12_llvm_18           {<< : *llvm_18,      << : *stable-6_12,      << : *tue_fifteen}
-  - &stable-6_12_llvm_17           {<< : *llvm_17,      << : *stable-6_12,      << : *wed_fifteen}
-  - &stable-6_12_llvm_16           {<< : *llvm_16,      << : *stable-6_12,      << : *thur_fifteen}
-  - &stable-6_12_llvm_15           {<< : *llvm_15,      << : *stable-6_12,      << : *fri_fifteen}
-  - &stable-6_12_llvm_14           {<< : *llvm_14,      << : *stable-6_12,      << : *sat_fifteen}
-  - &stable-6_12_llvm_13           {<< : *llvm_13,      << : *stable-6_12,      << : *sun_fifteen}
+  - &stable-6_12_llvm_20           {<< : *llvm_20,      << : *stable-6_12,      << : *mon_fifteen}
+  - &stable-6_12_llvm_19           {<< : *llvm_19,      << : *stable-6_12,      << : *tue_fifteen}
+  - &stable-6_12_llvm_18           {<< : *llvm_18,      << : *stable-6_12,      << : *wed_fifteen}
+  - &stable-6_12_llvm_17           {<< : *llvm_17,      << : *stable-6_12,      << : *thur_fifteen}
+  - &stable-6_12_llvm_16           {<< : *llvm_16,      << : *stable-6_12,      << : *fri_fifteen}
+  - &stable-6_12_llvm_15           {<< : *llvm_15,      << : *stable-6_12,      << : *sat_fifteen}
+  - &stable-6_12_llvm_14           {<< : *llvm_14,      << : *stable-6_12,      << : *sun_fifteen}
+  - &stable-6_12_llvm_13           {<< : *llvm_13,      << : *stable-6_12,      << : *mon_eighteen}
 
   - &stable-6_6_llvm_tot           {<< : *llvm_tot,     << : *stable-6_6,       << : *mon_fri_eighteen}
   - &stable-6_6_llvm_latest        {<< : *llvm_latest,  << : *stable-6_6,       << : *mon_fri_eighteen}
+  - &stable-6_6_llvm_20            {<< : *llvm_20,      << : *stable-6_6,       << : *tue_eighteen}
   - &stable-6_6_llvm_19            {<< : *llvm_19,      << : *stable-6_6,       << : *wed_twentyone}
   - &stable-6_6_llvm_18            {<< : *llvm_18,      << : *stable-6_6,       << : *wed_twentyone}
   - &stable-6_6_llvm_17            {<< : *llvm_17,      << : *stable-6_6,       << : *wed_eighteen}
@@ -81,6 +86,7 @@ tree_schedules:
 
   - &stable-6_1_llvm_tot           {<< : *llvm_tot,     << : *stable-6_1,       << : *tue_thur_eighteen}
   - &stable-6_1_llvm_latest        {<< : *llvm_latest,  << : *stable-6_1,       << : *tue_thur_eighteen}
+  - &stable-6_1_llvm_20            {<< : *llvm_20,      << : *stable-6_1,       << : *mon_eighteen}
   - &stable-6_1_llvm_19            {<< : *llvm_19,      << : *stable-6_1,       << : *sun_twentyone}
   - &stable-6_1_llvm_18            {<< : *llvm_18,      << : *stable-6_1,       << : *sun_twentyone}
   - &stable-6_1_llvm_17            {<< : *llvm_17,      << : *stable-6_1,       << : *wed_three}
@@ -93,6 +99,7 @@ tree_schedules:
 
   - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *sat_eighteen}
   - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *sat_eighteen}
+  - &stable-5_15_llvm_20           {<< : *llvm_20,      << : *stable-5_15,      << : *sun_midnight}
   - &stable-5_15_llvm_19           {<< : *llvm_19,      << : *stable-5_15,      << : *sat_twentyone}
   - &stable-5_15_llvm_18           {<< : *llvm_18,      << : *stable-5_15,      << : *sat_twentyone}
   - &stable-5_15_llvm_17           {<< : *llvm_17,      << : *stable-5_15,      << : *thur_six}
@@ -105,6 +112,7 @@ tree_schedules:
 
   - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *sat_nine}
   - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *sat_nine}
+  - &stable-5_10_llvm_20           {<< : *llvm_20,      << : *stable-5_10,      << : *sat_six}
   - &stable-5_10_llvm_19           {<< : *llvm_19,      << : *stable-5_10,      << : *sat_noon}
   - &stable-5_10_llvm_18           {<< : *llvm_18,      << : *stable-5_10,      << : *sat_noon}
   - &stable-5_10_llvm_17           {<< : *llvm_17,      << : *stable-5_10,      << : *sun_noon}
@@ -117,6 +125,7 @@ tree_schedules:
 
   - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *sat_fifteen}
   - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *sat_fifteen}
+  - &stable-5_4_llvm_20            {<< : *llvm_20,      << : *stable-5_4,       << : *sun_midnight}
   - &stable-5_4_llvm_19            {<< : *llvm_19,      << : *stable-5_4,       << : *sat_twentyone}
   - &stable-5_4_llvm_18            {<< : *llvm_18,      << : *stable-5_4,       << : *sat_twentyone}
   - &stable-5_4_llvm_17            {<< : *llvm_17,      << : *stable-5_4,       << : *sun_nine}
@@ -130,17 +139,20 @@ tree_schedules:
   # else less frequently.
   - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *tue_thur_eighteen}
   - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *mon_fri_eighteen}
+  - &android-mainline_llvm_20      {<< : *llvm_20,      << : *android-mainline, << : *thur_twentyone}
   - &android-mainline_llvm_19      {<< : *llvm_19,      << : *android-mainline, << : *wed_eighteen}
   - &android-mainline_llvm_android {<< : *llvm_android, << : *android-mainline, << : *wed_six}
 
   - &android15-6_6_llvm_tot        {<< : *llvm_tot,     << : *android15-6_6,    << : *thur_three}
   - &android15-6_6_llvm_latest     {<< : *llvm_latest,  << : *android15-6_6,    << : *thur_three}
+  - &android15-6_6_llvm_20         {<< : *llvm_20,      << : *android15-6_6,    << : *mon_six}
   - &android15-6_6_llvm_19         {<< : *llvm_19,      << : *android15-6_6,    << : *mon_three}
   - &android15-6_6_llvm_18         {<< : *llvm_18,      << : *android15-6_6,    << : *mon_three}
   - &android15-6_6_llvm_android    {<< : *llvm_android, << : *android15-6_6,    << : *sun_three}
 
   - &android14-6_1_llvm_tot        {<< : *llvm_tot,     << : *android14-6_1,    << : *tue_three}
   - &android14-6_1_llvm_latest     {<< : *llvm_latest,  << : *android14-6_1,    << : *tue_three}
+  - &android14-6_1_llvm_20         {<< : *llvm_20,      << : *android14-6_1,    << : *fri_six}
   - &android14-6_1_llvm_19         {<< : *llvm_19,      << : *android14-6_1,    << : *fri_three}
   - &android14-6_1_llvm_18         {<< : *llvm_18,      << : *android14-6_1,    << : *fri_three}
   - &android14-6_1_llvm_17         {<< : *llvm_17,      << : *android14-6_1,    << : *sun_six}
@@ -148,6 +160,7 @@ tree_schedules:
 
   - &android14-5_15_llvm_tot       {<< : *llvm_tot,     << : *android14-5_15,   << : *tue_nine}
   - &android14-5_15_llvm_latest    {<< : *llvm_latest,  << : *android14-5_15,   << : *tue_nine}
+  - &android14-5_15_llvm_20        {<< : *llvm_20,      << : *android14-5_15,   << : *thur_nine}
   - &android14-5_15_llvm_19        {<< : *llvm_19,      << : *android14-5_15,   << : *mon_nine}
   - &android14-5_15_llvm_18        {<< : *llvm_18,      << : *android14-5_15,   << : *mon_nine}
   - &android14-5_15_llvm_17        {<< : *llvm_17,      << : *android14-5_15,   << : *sun_nine}
@@ -157,6 +170,7 @@ tree_schedules:
   # it does to notice the source of problems before a formal bisect
   - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *weekdays_midnight}
   - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *weekdays_midnight}
+  - &tip_llvm_20                   {<< : *llvm_20,      << : *tip,              << : *mon_fri_nine}
   - &tip_llvm_19                   {<< : *llvm_19,      << : *tip,              << : *mon_fri_midnight}
   - &tip_llvm_18                   {<< : *llvm_18,      << : *tip,              << : *mon_fri_six}
   - &tip_llvm_17                   {<< : *llvm_17,      << : *tip,              << : *tue_thur_midnight}
