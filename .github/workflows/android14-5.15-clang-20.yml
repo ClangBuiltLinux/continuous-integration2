@@ -12,7 +12,7 @@ name: android14-5.15 (clang-20)
     - tuxsuite/android14-5.15-clang-20.tux.yml
     - .github/workflows/android14-5.15-clang-20.yml
   schedule:
-  - cron: 0 9 * * 2
+  - cron: 0 9 * * 4
   workflow_dispatch: null
 permissions: read-all
 jobs:
