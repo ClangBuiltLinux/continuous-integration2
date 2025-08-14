@@ -164,23 +164,24 @@ def main():
 
     output_file = None
     if args.output:
-        output_file = open(args.output, "w", newline="")
+        # pylint: disable-next=consider-using-with
+        output_file = open(  # noqa: SIM115
+            args.output, "w", encoding="utf-8", newline="")
 
     try:
         if args.format == "csv":
             output_csv(days, output_file)
         elif args.format == "pretty":
             output_pretty_table(days, output_file)
-        else:  # regular table
-            if (
-                    output_file
-            ):  # evil hack so I don't have to rewrite visualize_data() prints
-                original_stdout = sys.stdout
-                sys.stdout = output_file
-                visualize_data(days)
-                sys.stdout = original_stdout
-            else:
-                visualize_data(days)
+        # regular table
+        elif output_file:
+            # evil hack so I don't have to rewrite visualize_data() prints
+            original_stdout = sys.stdout
+            sys.stdout = output_file
+            visualize_data(days)
+            sys.stdout = original_stdout
+        else:
+            visualize_data(days)
     finally:
         if output_file:
             output_file.close()
