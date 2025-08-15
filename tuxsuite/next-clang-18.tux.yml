@@ -469,7 +469,9 @@ jobs:
       LLVM_IAS: 1
   - target_arch: arm64
     toolchain: korg-clang-18
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - CONFIG_EFI_SBAT_FILE=n
     targets:
     - kernel
     make_variables:
@@ -479,6 +481,7 @@ jobs:
     toolchain: korg-clang-18
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - CONFIG_EFI_SBAT_FILE=n
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
@@ -578,7 +581,9 @@ jobs:
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: korg-clang-18
-    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - CONFIG_EFI_SBAT_FILE=n
     targets:
     - kernel
     make_variables:
@@ -588,6 +593,7 @@ jobs:
     toolchain: korg-clang-18
     kconfig:
     - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - CONFIG_EFI_SBAT_FILE=n
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
