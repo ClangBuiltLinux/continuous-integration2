@@ -149,6 +149,11 @@ def check_built_config(build):
             state = None
             if '=' in line:
                 name, state = line.split('=', 1)
+                # Treat empty string values as 'n', as TuxSuite only supports y|m|n
+                # for overriding configuration options, so 'n' may be used to reset
+                # a value
+                if state == '""':
+                    state = 'n'
             elif line.startswith("# CONFIG_"):
                 name, state = line.split(" ", 2)[1:]
                 if state != "is not set":
