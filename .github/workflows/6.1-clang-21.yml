@@ -1233,19 +1233,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _f04aa2304f0c98afcbe264c9acfa42a2:
+  _a6b92c5ae5e92024a1b2d10c47f4ed23:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_EFI_SBAT_FILE=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_EFI_SBAT_FILE=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1552,19 +1552,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _8b805917d92743db6a273a32cd0394de:
+  _cc517d56d1744462f9303fd2d8ac875f:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
