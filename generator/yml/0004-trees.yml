@@ -37,8 +37,6 @@ tree_schedules:
   - &next_llvm_17                  {<< : *llvm_17,      << : *next,             << : *weekdays_noon}
   - &next_llvm_16                  {<< : *llvm_16,      << : *next,             << : *weekdays_noon}
   - &next_llvm_15                  {<< : *llvm_15,      << : *next,             << : *weekdays_noon}
-  - &next_llvm_14                  {<< : *llvm_14,      << : *next,             << : *weekdays_noon}
-  - &next_llvm_13                  {<< : *llvm_13,      << : *next,             << : *weekdays_noon}
   - &next_llvm_android             {<< : *llvm_android, << : *next,             << : *weekdays_noon}
 
   # stable is usually updated frequently but not more than once a week. Do builds
