@@ -34,8 +34,7 @@ configs:
   - &arm64_kasan       {<< : *arm64-kasan-configs,                                                                                          ARCH: *arm64-arch,      << : *kernel}
   - &arm64_kasan_sw    {<< : *arm64-kasan-sw-configs,                                                                                       ARCH: *arm64-arch,      << : *kernel}
   - &arm64_ubsan       {config: [defconfig, CONFIG_UBSAN=y],                                                                                ARCH: *arm64-arch,      << : *kernel}
-  #                                             https://github.com/ClangBuiltLinux/continuous-integration2/issues/716
-  - &arm64_gki         {config: [gki_defconfig, CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n],                                                       ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_gki         {config: gki_defconfig,                                                                                              ARCH: *arm64-arch,      << : *kernel}
   - &arm64_cut         {config: cuttlefish_defconfig,                                                                                       ARCH: *arm64-arch,      << : *kernel}
   - &arm64_allmod      {config: allmodconfig,                                                                                               ARCH: *arm64-arch,      << : *default}
   - &arm64_allmod_lto  {<< : *arm64-allmod-lto-configs,                                                                                     ARCH: *arm64-arch,      << : *default}
@@ -97,8 +96,7 @@ configs:
   - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                               << : *kernel}
   - &x86_64_cfi        {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                                                    << : *kernel}
   - &x86_64_cfi_lto    {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                                           << : *kernel}
-  #                                             https://github.com/ClangBuiltLinux/continuous-integration2/issues/716
-  - &x86_64_gki        {config: [gki_defconfig, CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n],                                                                               << : *kernel}
+  - &x86_64_gki        {config: gki_defconfig,                                                                                                                      << : *kernel}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                        << : *kernel}
   - &x86_64_allmod     {config: allmodconfig,                                                                                                                       << : *default}
   - &x86_64_allmod_lto {<< : *x86_64-allmod-lto-configs,                                                                                                            << : *default}
