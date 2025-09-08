@@ -133,7 +133,8 @@
   - {<< : *arm32_lpae_fp,     << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_allno,       << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}
-  - {<< : *arm32_allyes,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}
+  # ARM allyesconfig build disabled: https://github.com/ClangBuiltLinux/linux/issues/1615
+  # - {<< : *arm32_allyes,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *arm32_alpine,      << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm32_suse,        << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *arm64,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_11}
