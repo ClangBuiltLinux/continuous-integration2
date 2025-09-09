@@ -24,9 +24,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: arm64
     toolchain: korg-clang-19
-    kconfig:
-    - gki_defconfig
-    - CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
+    kconfig: gki_defconfig
     targets:
     - kernel
     make_variables:
@@ -34,9 +32,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: korg-clang-19
-    kconfig:
-    - gki_defconfig
-    - CONFIG_DEBUG_INFO_COMPRESSED_ZSTD=n
+    kconfig: gki_defconfig
     targets:
     - kernel
     make_variables:
