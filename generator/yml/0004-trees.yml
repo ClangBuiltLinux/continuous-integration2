@@ -80,7 +80,6 @@ tree_schedules:
   - &stable-6_6_llvm_14            {<< : *llvm_14,      << : *stable-6_6,       << : *sat_six}
   - &stable-6_6_llvm_13            {<< : *llvm_13,      << : *stable-6_6,       << : *sun_nine}
   - &stable-6_6_llvm_12            {<< : *llvm_12,      << : *stable-6_6,       << : *sun_noon}
-  - &stable-6_6_llvm_11            {<< : *llvm_11,      << : *stable-6_6,       << : *sun_fifteen}
 
   - &stable-6_1_llvm_tot           {<< : *llvm_tot,     << : *stable-6_1,       << : *tue_thur_eighteen}
   - &stable-6_1_llvm_latest        {<< : *llvm_latest,  << : *stable-6_1,       << : *tue_thur_eighteen}
@@ -94,7 +93,6 @@ tree_schedules:
   - &stable-6_1_llvm_14            {<< : *llvm_14,      << : *stable-6_1,       << : *sat_midnight}
   - &stable-6_1_llvm_13            {<< : *llvm_13,      << : *stable-6_1,       << : *sat_nine}
   - &stable-6_1_llvm_12            {<< : *llvm_12,      << : *stable-6_1,       << : *sat_noon}
-  - &stable-6_1_llvm_11            {<< : *llvm_11,      << : *stable-6_1,       << : *sun_fifteen}
 
   - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *sat_eighteen}
   - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *sat_eighteen}
@@ -108,7 +106,6 @@ tree_schedules:
   - &stable-5_15_llvm_14           {<< : *llvm_14,      << : *stable-5_15,      << : *tue_twentyone}
   - &stable-5_15_llvm_13           {<< : *llvm_13,      << : *stable-5_15,      << : *sun_eighteen}
   - &stable-5_15_llvm_12           {<< : *llvm_12,      << : *stable-5_15,      << : *sun_eighteen}
-  - &stable-5_15_llvm_11           {<< : *llvm_11,      << : *stable-5_15,      << : *sun_fifteen}
 
   - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *sat_nine}
   - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *sat_nine}
@@ -122,7 +119,6 @@ tree_schedules:
   - &stable-5_10_llvm_14           {<< : *llvm_14,      << : *stable-5_10,      << : *sun_noon}
   - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *sun_eighteen}
   - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *sun_eighteen}
-  - &stable-5_10_llvm_11           {<< : *llvm_11,      << : *stable-5_10,      << : *sun_three}
 
   # In a similar manner as above, build android-mainline more frequently
   # than the branched builds with newer toolchains and build everything
