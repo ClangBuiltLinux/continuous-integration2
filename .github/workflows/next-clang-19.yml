@@ -204,19 +204,19 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _bca6d618b51d85b3925a9169685f6e71:
+  _41ec72c28445dcf077429be9d64bfbdd:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 multi_v7_defconfig+CONFIG_CFI_CLANG=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 multi_v7_defconfig+CONFIG_CFI=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm
       LLVM_VERSION: 19
       BOOT: 1
-      CONFIG: multi_v7_defconfig+CONFIG_CFI_CLANG=y
+      CONFIG: multi_v7_defconfig+CONFIG_CFI=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -436,19 +436,19 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _0acf3aeb4791118198691053f213f459:
+  _ae6f52596b0912ca74804ab60a9ce1da:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 19
       BOOT: 1
-      CONFIG: defconfig+CONFIG_CFI_CLANG=y
+      CONFIG: defconfig+CONFIG_CFI=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -465,19 +465,19 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _a87adbbc7b7a44a3e9fcb78a92420b0d:
+  _7035e7a520454cb6c3c97c6f639bb7a7:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI=y+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 19
       BOOT: 1
-      CONFIG: defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+      CONFIG: defconfig+CONFIG_CFI=y+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1132,19 +1132,19 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _903c4a446419ebd2084f00f87c150c2d:
+  _d0fe557d9450cfe5f7edda534c9eb9ad:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 19
       BOOT: 1
-      CONFIG: defconfig+CONFIG_CFI_CLANG=y
+      CONFIG: defconfig+CONFIG_CFI=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1161,19 +1161,19 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _7ba2728d5b589699e33eca41f3691194:
+  _4115d3ffcd2342cf518769f1ec160941:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_defconfigs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 defconfig+CONFIG_CFI=y+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 19
       BOOT: 1
-      CONFIG: defconfig+CONFIG_CFI_CLANG=y+CONFIG_LTO_CLANG_THIN=y
+      CONFIG: defconfig+CONFIG_CFI=y+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu

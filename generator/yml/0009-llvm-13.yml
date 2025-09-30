@@ -296,7 +296,7 @@
   - {<< : *arm64,             << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_lto_full,    << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_lto_thin,    << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_cfi_lto,     << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
+  - {<< : *arm64_cfi_cl_lto,  << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_kasan,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_kasan_sw,    << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}
   - {<< : *arm64_ubsan,       << : *stable-5_15,      << : *llvm_full,       boot: true,  << : *llvm_13}

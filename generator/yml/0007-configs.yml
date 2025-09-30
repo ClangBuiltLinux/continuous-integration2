@@ -14,7 +14,8 @@ configs:
   - &arm32_v6          {config: aspeed_g5_defconfig,                                                                                        ARCH: *arm-arch,        << : *kernel_dtbs}
   - &arm32_v7          {config: multi_v7_defconfig,                                                                                         ARCH: *arm-arch,        << : *kernel}
   - &arm32_v7_t        {config: [multi_v7_defconfig, CONFIG_THUMB2_KERNEL=y],                                                               ARCH: *arm-arch,        << : *kernel}
-  - &arm32_cfi         {config: [multi_v7_defconfig, CONFIG_CFI_CLANG=y],                                                                   ARCH: *arm-arch,        << : *kernel}
+  - &arm32_cfi         {config: [multi_v7_defconfig, CONFIG_CFI=y],                                                                         ARCH: *arm-arch,        << : *kernel}
+  - &arm32_cfi_cl      {config: [multi_v7_defconfig, CONFIG_CFI_CLANG=y],                                                                   ARCH: *arm-arch,        << : *kernel}
   - &arm32_imx         {config: imx_v4_v5_defconfig,                                                                                        ARCH: *arm-arch,        << : *default}
   - &arm32_omap        {config: omap2plus_defconfig,                                                                                        ARCH: *arm-arch,        << : *default}
   - &arm32_lpae_fp     {config: [multi_v7_defconfig, CONFIG_ARM_LPAE=y, CONFIG_UNWINDER_FRAME_POINTER=y],                                   ARCH: *arm-arch,        << : *kernel}
@@ -29,8 +30,10 @@ configs:
   - &arm64be           {config: [defconfig, CONFIG_CPU_BIG_ENDIAN=y],                                                                       ARCH: *arm64-arch,      << : *kernel}
   - &arm64_lto_full    {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                       ARCH: *arm64-arch,      << : *kernel}
   - &arm64_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                       ARCH: *arm64-arch,      << : *kernel}
-  - &arm64_cfi         {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                            ARCH: *arm64-arch,      << : *kernel}
-  - &arm64_cfi_lto     {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                   ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cfi         {config: [defconfig, CONFIG_CFI=y],                                                                                  ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cfi_cl      {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                            ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cfi_lto     {config: [defconfig, CONFIG_CFI=y, CONFIG_LTO_CLANG_THIN=y],                                                         ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_cfi_cl_lto  {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                   ARCH: *arm64-arch,      << : *kernel}
   - &arm64_kasan       {<< : *arm64-kasan-configs,                                                                                          ARCH: *arm64-arch,      << : *kernel}
   - &arm64_kasan_sw    {<< : *arm64-kasan-sw-configs,                                                                                       ARCH: *arm64-arch,      << : *kernel}
   - &arm64_ubsan       {config: [defconfig, CONFIG_UBSAN=y],                                                                                ARCH: *arm64-arch,      << : *kernel}
@@ -94,8 +97,10 @@ configs:
   - &x86_64            {config: defconfig,                                                                                                                          << : *kernel}
   - &x86_64_lto_full   {config: [defconfig, CONFIG_LTO_CLANG_FULL=y],                                                                                               << : *kernel}
   - &x86_64_lto_thin   {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                                               << : *kernel}
-  - &x86_64_cfi        {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                                                    << : *kernel}
-  - &x86_64_cfi_lto    {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                                           << : *kernel}
+  - &x86_64_cfi        {config: [defconfig, CONFIG_CFI=y],                                                                                                          << : *kernel}
+  - &x86_64_cfi_cl     {config: [defconfig, CONFIG_CFI_CLANG=y],                                                                                                    << : *kernel}
+  - &x86_64_cfi_lto    {config: [defconfig, CONFIG_CFI=y, CONFIG_LTO_CLANG_THIN=y],                                                                                 << : *kernel}
+  - &x86_64_cfi_cl_lto {config: [defconfig, CONFIG_CFI_CLANG=y, CONFIG_LTO_CLANG_THIN=y],                                                                           << : *kernel}
   - &x86_64_gki        {config: gki_defconfig,                                                                                                                      << : *kernel}
   - &x86_64_cut        {config: x86_64_cuttlefish_defconfig,                                                                                                        << : *kernel}
   - &x86_64_allmod     {config: allmodconfig,                                                                                                                       << : *default}
