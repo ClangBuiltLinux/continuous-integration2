@@ -53,7 +53,7 @@ jobs:
     toolchain: korg-clang-16
     kconfig:
     - multi_v7_defconfig
-    - CONFIG_CFI_CLANG=y
+    - CONFIG_CFI=y
     targets:
     - kernel
     make_variables:
@@ -128,7 +128,7 @@ jobs:
     toolchain: korg-clang-16
     kconfig:
     - defconfig
-    - CONFIG_CFI_CLANG=y
+    - CONFIG_CFI=y
     targets:
     - kernel
     make_variables:
@@ -138,7 +138,7 @@ jobs:
     toolchain: korg-clang-16
     kconfig:
     - defconfig
-    - CONFIG_CFI_CLANG=y
+    - CONFIG_CFI=y
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - kernel
@@ -339,7 +339,7 @@ jobs:
     toolchain: korg-clang-16
     kconfig:
     - defconfig
-    - CONFIG_CFI_CLANG=y
+    - CONFIG_CFI=y
     targets:
     - kernel
     make_variables:
@@ -349,7 +349,7 @@ jobs:
     toolchain: korg-clang-16
     kconfig:
     - defconfig
-    - CONFIG_CFI_CLANG=y
+    - CONFIG_CFI=y
     - CONFIG_LTO_CLANG_THIN=y
     targets:
     - kernel
