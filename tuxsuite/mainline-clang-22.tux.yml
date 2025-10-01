@@ -98,16 +98,6 @@ jobs:
     toolchain: clang-nightly
     kconfig:
     - defconfig
-    - CONFIG_CPU_BIG_ENDIAN=y
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: arm64
-    toolchain: clang-nightly
-    kconfig:
-    - defconfig
     - CONFIG_LTO_CLANG_FULL=y
     targets:
     - kernel

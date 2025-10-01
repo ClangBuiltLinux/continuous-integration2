@@ -19,7 +19,6 @@
   - {<< : *arm32_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm32_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *arm64be,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_cfi,         << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -103,7 +102,6 @@
   - {<< : *arm32_alpine,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm32_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64,             << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *arm64be,           << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_full,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_lto_thin,    << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *arm64_cfi,         << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
