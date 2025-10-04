@@ -1,56 +1,10 @@
   #############
   #  LLVM 14  #
   #############
-  ##############
-  #  Mainline  #
-  ##############
-  #  configs:                 trees:                  make_variables:        BOOT=1       llvm_versions:
-  - {<< : *arm32_v5,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm32_v6,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm32_v7,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm32_imx,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm32_omap,        << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm32_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm32_allno,       << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm32_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm32_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm32_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_kasan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_kasan_sw,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_ubsan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm64_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm64_allno,       << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm64_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *arm64_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
-  - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  << : *llvm_14}
-  - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_14}
-  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
-  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_14}
-  - {<< : *ppc64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *ppc64le,           << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *ppc64le_fedora,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *ppc64le_suse,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *riscv_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *riscv_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_14}
-  - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *riscv_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
-  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_14}
   ###########################
   #  Latest stable release  #
   ###########################
+  #  configs:                 trees:                  make_variables:        BOOT=1       llvm_versions:
   - {<< : *arm32_v5,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm32_v6,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
   - {<< : *arm32_v7,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_14}
