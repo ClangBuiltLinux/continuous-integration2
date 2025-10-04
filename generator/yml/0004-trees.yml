@@ -25,8 +25,6 @@ tree_schedules:
   - &mainline_llvm_17              {<< : *llvm_17,      << : *mainline,         << : *sat_midnight}
   - &mainline_llvm_16              {<< : *llvm_16,      << : *mainline,         << : *sat_midnight}
   - &mainline_llvm_15              {<< : *llvm_15,      << : *mainline,         << : *sat_three}
-  - &mainline_llvm_14              {<< : *llvm_14,      << : *mainline,         << : *sun_midnight}
-  - &mainline_llvm_13              {<< : *llvm_13,      << : *mainline,         << : *sat_three}
 
   # -next updates M-F in the evening AEST, which is usually around 12:00PM UTC
   - &next_llvm_tot                 {<< : *llvm_tot,     << : *next,             << : *weekdays_noon}

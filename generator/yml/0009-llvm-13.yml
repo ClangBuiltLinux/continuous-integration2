@@ -1,56 +1,6 @@
   #############
   #  LLVM 13  #
   #############
-  ##############
-  #  Mainline  #
-  ##############
-  - {<< : *arm32_v5,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  # BPF uses check_mul_overflow() with a 'long long' value, which is broken prior to clang-14:
-  # https://github.com/llvm/llvm-project/commit/5c91b98c5d45243352bf10262454bcac77cd3fed
-  # - {<< : *arm32_v6,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm32_v7,          << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm32_v7_t,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm32_imx,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm32_omap,        << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm32_lpae_fp,     << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  # BPF uses check_mul_overflow() with a 'long long' value, which is broken prior to clang-14:
-  # https://github.com/llvm/llvm-project/commit/5c91b98c5d45243352bf10262454bcac77cd3fed
-  # - {<< : *arm32_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm32_allno,       << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  # BPF uses check_mul_overflow() with a 'long long' value, which is broken prior to clang-14:
-  # https://github.com/llvm/llvm-project/commit/5c91b98c5d45243352bf10262454bcac77cd3fed
-  # - {<< : *arm32_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  # - {<< : *arm32_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  # - {<< : *arm32_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_lto_full,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_lto_thin,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_kasan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_kasan_sw,    << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_ubsan,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm64_allmod_lto,  << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm64_allno,       << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm64_allyes,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *arm64_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
-  - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
-  # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
-  # - {<< : *ppc32,             << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64_no_werror,   << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64le,           << : *mainline,         << : *llvm,            boot: true,  << : *llvm_13}
-  - {<< : *ppc64le_fedora,    << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *ppc64le_suse,      << : *mainline,         << : *clang,           boot: true,  << : *llvm_13}
-  - {<< : *riscv,             << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *riscv_allmod,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_13}
-  - {<< : *riscv_alpine,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *riscv_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
-  - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_13}
   ###########################
   #  Latest stable release  #
   ###########################
