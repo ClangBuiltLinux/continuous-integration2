@@ -1,0 +1,88 @@
+From c710de671789388b3af1046c7091685594ec44d9 Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <nathan@kernel.org>
+Date: Tue, 30 Sep 2025 11:31:34 -0700
+Subject: nfsd: Avoid strlen conflict in nfsd4_encode_components_esc()
+
+There is an error building nfs4xdr.c with CONFIG_SUNRPC_DEBUG_TRACE=y
+and CONFIG_FORTIFY_SOURCE=n due to the local variable strlen conflicting
+with the function strlen():
+
+  In file included from include/linux/cpumask.h:11,
+                   from arch/x86/include/asm/paravirt.h:21,
+                   from arch/x86/include/asm/irqflags.h:102,
+                   from include/linux/irqflags.h:18,
+                   from include/linux/spinlock.h:59,
+                   from include/linux/mmzone.h:8,
+                   from include/linux/gfp.h:7,
+                   from include/linux/slab.h:16,
+                   from fs/nfsd/nfs4xdr.c:37:
+  fs/nfsd/nfs4xdr.c: In function 'nfsd4_encode_components_esc':
+  include/linux/kernel.h:321:46: error: called object 'strlen' is not a function or function pointer
+    321 |                 __trace_puts(_THIS_IP_, str, strlen(str));              \
+        |                                              ^~~~~~
+  include/linux/kernel.h:265:17: note: in expansion of macro 'trace_puts'
+    265 |                 trace_puts(fmt);                        \
+        |                 ^~~~~~~~~~
+  include/linux/sunrpc/debug.h:34:41: note: in expansion of macro 'trace_printk'
+     34 | #  define __sunrpc_printk(fmt, ...)     trace_printk(fmt, ##__VA_ARGS__)
+        |                                         ^~~~~~~~~~~~
+  include/linux/sunrpc/debug.h:42:17: note: in expansion of macro '__sunrpc_printk'
+     42 |                 __sunrpc_printk(fmt, ##__VA_ARGS__);                    \
+        |                 ^~~~~~~~~~~~~~~
+  include/linux/sunrpc/debug.h:25:9: note: in expansion of macro 'dfprintk'
+     25 |         dfprintk(FACILITY, fmt, ##__VA_ARGS__)
+        |         ^~~~~~~~
+  fs/nfsd/nfs4xdr.c:2646:9: note: in expansion of macro 'dprintk'
+   2646 |         dprintk("nfsd4_encode_components(%s)\n", components);
+        |         ^~~~~~~
+  fs/nfsd/nfs4xdr.c:2643:13: note: declared here
+   2643 |         int strlen, count=0;
+        |             ^~~~~~
+
+This dprintk() instance is not particularly useful, so just remove it
+altogether to get rid of the immediate strlen() conflict.
+
+At the same time, eliminate the local strlen variable to avoid potential
+conflicts with strlen() in the future.
+
+Fixes: ec7d8e68ef0e ("sunrpc: add a Kconfig option to redirect dfprintk() output to trace buffer")
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Reviewed-by: NeilBrown <neil@brown.name>
+Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
+---
+Link: https://git.kernel.org/cel/c/c710de671789388b3af1046c7091685594ec44d9
+---
+ fs/nfsd/nfs4xdr.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/fs/nfsd/nfs4xdr.c b/fs/nfsd/nfs4xdr.c
+index 8f5ee3014abc81..b689b792c21f2b 100644
+--- a/fs/nfsd/nfs4xdr.c
++++ b/fs/nfsd/nfs4xdr.c
+@@ -2628,10 +2628,8 @@ static __be32 nfsd4_encode_components_esc(struct xdr_stream *xdr, char sep,
+ 	__be32 *p;
+ 	__be32 pathlen;
+ 	int pathlen_offset;
+-	int strlen, count=0;
+ 	char *str, *end, *next;
+-
+-	dprintk("nfsd4_encode_components(%s)\n", components);
++	int count = 0;
+ 
+ 	pathlen_offset = xdr->buf->len;
+ 	p = xdr_reserve_space(xdr, 4);
+@@ -2658,9 +2656,8 @@ static __be32 nfsd4_encode_components_esc(struct xdr_stream *xdr, char sep,
+ 			for (; *end && (*end != sep); end++)
+ 				/* find sep or end of string */;
+ 
+-		strlen = end - str;
+-		if (strlen) {
+-			if (xdr_stream_encode_opaque(xdr, str, strlen) < 0)
++		if (end > str) {
++			if (xdr_stream_encode_opaque(xdr, str, end - str) < 0)
+ 				return nfserr_resource;
+ 			count++;
+ 		} else
+-- 
+cgit 1.2.3-korg
+
