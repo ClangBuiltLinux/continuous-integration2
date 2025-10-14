@@ -43,7 +43,7 @@ from utils import get_patches_hash, get_workflow_name_to_var_name, update_reposi
 OWNER = "ClangBuiltLinux"
 REPO = "continuous-integration2"
 MAIN_BRANCH = "main"
-HEADERS = {}  # populated after args are parsed
+headers = {}  # populated after args are parsed
 
 # states we allow our cache system to perform a cache-hit upon
 # other states like 'presuite' or 'unknown' or '' (empty) are considered
@@ -94,7 +94,7 @@ def ___purge___cache___():
     """!!!completely clears the CBL CI cache!!!"""
     list_url = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/variables"
 
-    list_response = requests.get(list_url, headers=HEADERS, timeout=TIMEOUT)
+    list_response = requests.get(list_url, headers=headers, timeout=TIMEOUT)
     print(list_response.content)
     all_variables_keys = [
         x["name"] for x in json.loads(list_response.content)["variables"]
@@ -106,7 +106,7 @@ def ___purge___cache___():
             f"https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{key}"
         )
         delete_response = requests.delete(delete_url,
-                                          headers=HEADERS,
+                                          headers=headers,
                                           timeout=TIMEOUT)
         if delete_response.status_code != 204:
             print(f"ERROR: Couldn't delete cache entry with key {key}")
@@ -136,7 +136,7 @@ def get_clang_version():
 def get_repository_variable_or_none(name: str) -> Optional[dict]:
     _url = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{name}"
 
-    response = requests.get(_url, headers=HEADERS, timeout=TIMEOUT)
+    response = requests.get(_url, headers=headers, timeout=TIMEOUT)
     if response.status_code != 200:
         return None
 
@@ -156,14 +156,14 @@ def create_repository_variable(name: str, linux_sha: str, clang_version: str,
     })
     data = {"name": name, "value": _value}
 
-    resp = requests.post(_url, headers=HEADERS, json=data, timeout=TIMEOUT)
+    resp = requests.post(_url, headers=headers, json=data, timeout=TIMEOUT)
     print(f"create_repository_variable() response:\n{resp.content}")
 
 
 if __name__ == "__main__":
     args = parse_args()
 
-    HEADERS = {
+    headers = {
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {args.github_token}",
         "X-GitHub-Api-Version": "2022-11-28",
@@ -228,7 +228,7 @@ if __name__ == "__main__":
         """)
         update_repository_variable(
             VAR_NAME,
-            http_headers=HEADERS,
+            http_headers=headers,
             sha=curr_sha,
             clang_version=curr_clang_version,
             patches_hash=curr_patches_hash,
