@@ -1,11 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH] dmaengine: mmp_pdma: fix DMA mask handling
+From 88ebb29d3244e515a92c2331434bb73fef7efdc6 Mon Sep 17 00:00:00 2001
 From: Guodong Xu <guodong@riscstar.com>
 Date: Thu, 18 Sep 2025 22:27:27 +0800
-Message-Id: <20250918-mmp-pdma-simplify-dma-addressing-v1-1-5c2be2b85696@riscstar.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: dmaengine: mmp_pdma: fix DMA mask handling
 
 The driver's existing logic for setting the DMA mask for "marvell,pdma-1.0"
 was flawed. It incorrectly relied on pdev->dev->coherent_dma_mask instead
@@ -36,47 +32,18 @@ Reported-by: Naresh Kamboju <naresh.kamboju@linaro.org>
 Closes: https://lore.kernel.org/lkml/CA+G9fYsPcMfW-e_0_TRqu4cnwqOqYF3aJOeKUYk6Z4qRStdFvg@mail.gmail.com
 Suggested-by: Arnd Bergmann <arnd@arndb.de>
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
-Tested-by: Naresh Kamboju <naresh.kamboju@linaro.org>
-Tested-by: Nathan Chancellor <nathan@kernel.org> # build
 Reviewed-by: Arnd Bergmann <arnd@arndb.de>
-Link: https://patch.msgid.link/20250918-mmp-pdma-simplify-dma-addressing-v1-1-5c2be2b85696@riscstar.com
+Tested-by: Nathan Chancellor <nathan@kernel.org> # build
+Tested-by: Naresh Kamboju <naresh.kamboju@linaro.org>
+Signed-off-by: Vinod Koul <vkoul@kernel.org>
 ---
-Hi Vinod, Arnd, and all,
-
-This patch fixes a build failure in the mmp_pdma driver when using
-clang-20, as reported by Naresh Kamboju [1]. The error,
-a -Wshift-count-overflow warning, is caused by a known issue in the clang
-compiler. When the DMA_BIT_MASK(64) macro is used in a static initializer,
-it triggers a long-standing bug in how clang evaluates compile-time
-constants [2, 3]. Thanks to Nathan Chancellor for providing these links.
-
-While investigating this, Arnd Bergmann pointed out that the driver's
-logic for setting the DMA mask was unnecessarily complex. This logic,
-which was inherited from the original Marvel PDMA driver when adding
-support for SpacemiT K1 DMA, could be simplified. A better solution is to
-set each device's DMA mask directly based on its hardware capability.
-
-This patch implements Arnd's suggestion. It refactors the driver to store
-the controller's DMA width (either 32 or 64 bits) and generates the mask
-at runtime within the probe() function.
-
-This approach also avoids the clang false error reporting.
-
-This patch is based on dmaengine.git next [4].
-
-Thanks,
-Guodong Xu
-
-[1] https://lore.kernel.org/lkml/CA+G9fYsPcMfW-e_0_TRqu4cnwqOqYF3aJOeKUYk6Z4qRStdFvg@mail.gmail.com/
-[2] https://github.com/ClangBuiltLinux/linux/issues/92
-[3] https://github.com/llvm/llvm-project/issues/38137
-[4] https://git.kernel.org/pub/scm/linux/kernel/git/vkoul/dmaengine.git/log/?h=next
+Link: https://git.kernel.org/vkoul/dmaengine/p/88ebb29d3244e515a92c2331434bb73fef7efdc6
 ---
  drivers/dma/mmp_pdma.c | 20 ++++++++------------
  1 file changed, 8 insertions(+), 12 deletions(-)
 
 diff --git a/drivers/dma/mmp_pdma.c b/drivers/dma/mmp_pdma.c
-index d07229a748868b8115892c63c54c16130d88e326..86661eb3cde1ff6d6d8f02b6f0d4142878b5a890 100644
+index d07229a748868b..86661eb3cde1ff 100644
 --- a/drivers/dma/mmp_pdma.c
 +++ b/drivers/dma/mmp_pdma.c
 @@ -152,8 +152,8 @@ struct mmp_pdma_phy {
@@ -134,12 +101,6 @@ index d07229a748868b8115892c63c54c16130d88e326..86661eb3cde1ff6d6d8f02b6f0d41428
  
  	ret = dma_async_device_register(&pdev->device);
  	if (ret) {
-
----
-base-commit: cc0bacac6de7763a038550cf43cb94634d8be9cd
-change-id: 20250904-mmp-pdma-simplify-dma-addressing-f6aef03e07c3
-
-Best regards,
 -- 
-Guodong Xu <guodong@riscstar.com>
+cgit 1.2.3-korg
 
