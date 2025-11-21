@@ -9,16 +9,16 @@ urls:
   - &arm32-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-stable/stable.armv7.config
   - &arm32-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
   - &arm64-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-stable/stable.aarch64.config
-  - &arm64-fedora-config-url   https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+  - &arm64-fedora-config-url   https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config
   - &arm64-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
   - &i386-suse-config-url      https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-  - &ppc64le-fedora-config-url https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+  - &ppc64le-fedora-config-url https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config
   - &ppc64le-suse-config-url   https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
   - &riscv-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-stable/stable.riscv64.config
   - &riscv-suse-config-url     https://github.com/openSUSE/kernel-source/raw/master/config/riscv64/default
-  - &s390-fedora-config-url    https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+  - &s390-fedora-config-url    https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-s390x-fedora.config
   - &s390-suse-config-url      https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
   - &x86_64-alpine-config-url  https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-stable/stable.x86_64.config
   - &x86_64-arch-config-url    https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
-  - &x86_64-fedora-config-url  https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+  - &x86_64-fedora-config-url  https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config
   - &x86_64-suse-config-url    https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
