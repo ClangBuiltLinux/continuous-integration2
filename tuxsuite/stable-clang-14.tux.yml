@@ -247,7 +247,7 @@ jobs:
   - target_arch: arm64
     toolchain: korg-clang-14
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config
     - CONFIG_EFI_SBAT_FILE=n
     targets:
     - kernel
@@ -267,7 +267,7 @@ jobs:
   - target_arch: powerpc
     toolchain: korg-clang-14
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config
     - CONFIG_DRM_WERROR=n
     targets:
     - kernel

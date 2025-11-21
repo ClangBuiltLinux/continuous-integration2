@@ -1117,19 +1117,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _bf89cd7515f84e0de9f09c693557d477:
+  _544315cc929ec18b872b416f5240621a:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1204,19 +1204,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _9863b8098cf78c90bd1aeb1c5b4d4784:
+  _d534e16e3e1ef988c8502ce2471dd5eb:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=21 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: powerpc
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1291,19 +1291,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _e3e42ec1316275906ce1a54f0a0ce6d0:
+  _900278ee14e69ff6e9674f63a09c1b73:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=21 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: s390
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1407,19 +1407,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _cc517d56d1744462f9303fd2d8ac875f:
+  _c0b7b345685e3b43ae2b941bb06017dc:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=21 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 21
       BOOT: 1
-      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n
+      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
