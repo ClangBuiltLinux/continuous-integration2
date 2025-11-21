@@ -459,7 +459,7 @@ jobs:
   - target_arch: arm64
     toolchain: korg-clang-18
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config
     - CONFIG_EFI_SBAT_FILE=n
     targets:
     - kernel
@@ -469,7 +469,7 @@ jobs:
   - target_arch: arm64
     toolchain: korg-clang-18
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config
     - CONFIG_EFI_SBAT_FILE=n
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_FORTIFY_KUNIT_TEST=n
@@ -499,7 +499,7 @@ jobs:
   - target_arch: powerpc
     toolchain: korg-clang-18
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config
     - CONFIG_DRM_WERROR=n
     targets:
     - kernel
@@ -537,7 +537,7 @@ jobs:
   - target_arch: s390
     toolchain: korg-clang-18
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-s390x-fedora.config
     - CONFIG_DRM_WERROR=n
     targets:
     - kernel
@@ -571,7 +571,7 @@ jobs:
   - target_arch: x86_64
     toolchain: korg-clang-18
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config
     - CONFIG_EFI_SBAT_FILE=n
     targets:
     - kernel
@@ -581,7 +581,7 @@ jobs:
   - target_arch: x86_64
     toolchain: korg-clang-18
     kconfig:
-    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config
     - CONFIG_EFI_SBAT_FILE=n
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_FORTIFY_KUNIT_TEST=n
