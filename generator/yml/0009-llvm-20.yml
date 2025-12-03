@@ -570,20 +570,6 @@
   - {<< : *x86_64_allmod,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *x86_64_allno,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *x86_64_allyes,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_20}
-  ###########
-  #  5.4.y  #
-  ###########
-  - {<< : *arm32_v7,          << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_20}
-  - {<< : *arm32_v7_t,        << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_20}
-  - {<< : *arm64_no_vdso32,   << : *stable-5_4,       << : *llvm_full,       boot: true,  << : *llvm_20}
-  - {<< : *arm64be,           << : *stable-5_4,       << : *llvm_full,       boot: true,  << : *llvm_20}
-  - {<< : *mips,              << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_20}
-  - {<< : *mipsel,            << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_20}
-  - {<< : *ppc32,             << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_20}
-  - {<< : *ppc64,             << : *stable-5_4,       << : *ppc64_llvm,      boot: true,  << : *llvm_20}
-  - {<< : *ppc64le,           << : *stable-5_4,       << : *llvm,            boot: true,  << : *llvm_20}
-  - {<< : *x86_64_allmod,     << : *stable-5_4,       << : *llvm_full,       boot: false, << : *llvm_20}
-  - {<< : *x86_64,            << : *stable-5_4,       << : *llvm_full,       boot: true,  << : *llvm_20}
   #############
   #  Android  #
   #############
