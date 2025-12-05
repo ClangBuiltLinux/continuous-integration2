@@ -155,7 +155,6 @@
   - {<< : *arm32_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm32_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *arm64be,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_kasan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}

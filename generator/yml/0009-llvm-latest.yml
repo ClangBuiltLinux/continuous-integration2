@@ -176,7 +176,7 @@
   - {<< : *arm32_v6,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm32_v7,          << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm32_v7_t,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm32_cfi_cl,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm32_cfi,         << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm32_imx,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *arm32_omap,        << : *stable,           << : *llvm_full,       boot: false, << : *llvm_latest}
   - {<< : *arm32_lpae_fp,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -186,11 +186,10 @@
   - {<< : *arm32_alpine,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm32_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64be,           << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_lto_full,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_lto_thin,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64_cfi_cl,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *arm64_cfi_cl_lto,  << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_cfi,         << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *arm64_cfi_lto,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_kasan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_kasan_sw,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *arm64_ubsan,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
@@ -237,8 +236,8 @@
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_lto_thin,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *x86_64_cfi_cl,     << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
-  - {<< : *x86_64_cfi_cl_lto, << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *x86_64_cfi,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
+  - {<< : *x86_64_cfi_lto,    << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_kasan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_kcsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
   - {<< : *x86_64_ubsan,      << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_latest}
