@@ -7,7 +7,6 @@ trees:
   - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
-  - &stable-5_4       {git_repo: *stable-url,   git_ref: linux-5.4.y,         name: "5.4"}
   - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
   - &android15-6_6    {git_repo: *android-url,  git_ref: android15-6.6,       name: android15-6.6}
   - &android14-6_1    {git_repo: *android-url,  git_ref: android14-6.1,       name: android14-6.1}
@@ -116,17 +115,6 @@ tree_schedules:
   - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *sun_eighteen}
   - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *sun_eighteen}
   - &stable-5_10_llvm_11           {<< : *llvm_11,      << : *stable-5_10,      << : *sun_three}
-
-  - &stable-5_4_llvm_tot           {<< : *llvm_tot,     << : *stable-5_4,       << : *sat_fifteen}
-  - &stable-5_4_llvm_latest        {<< : *llvm_latest,  << : *stable-5_4,       << : *sat_fifteen}
-  - &stable-5_4_llvm_20            {<< : *llvm_20,      << : *stable-5_4,       << : *sun_midnight}
-  - &stable-5_4_llvm_19            {<< : *llvm_19,      << : *stable-5_4,       << : *sat_twentyone}
-  - &stable-5_4_llvm_18            {<< : *llvm_18,      << : *stable-5_4,       << : *sat_twentyone}
-  - &stable-5_4_llvm_17            {<< : *llvm_17,      << : *stable-5_4,       << : *sun_nine}
-  - &stable-5_4_llvm_16            {<< : *llvm_16,      << : *stable-5_4,       << : *sun_nine}
-  - &stable-5_4_llvm_15            {<< : *llvm_15,      << : *stable-5_4,       << : *sun_midnight}
-  - &stable-5_4_llvm_14            {<< : *llvm_14,      << : *stable-5_4,       << : *sun_midnight}
-  - &stable-5_4_llvm_13            {<< : *llvm_13,      << : *stable-5_4,       << : *sun_three}
 
   # In a similar manner as above, build android-mainline more frequently
   # than the branched builds with newer toolchains and build everything
