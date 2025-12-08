@@ -1,4 +1,3 @@
-0001-HACK-rtl8712-Zero-initialize-val-in-read_rfreg_hdl.patch
 5b1e38c0792cc7a44997328de37d393f81b2501a.patch
 20250728_justinstitt_kvm_arm64_sys_regs_disable_wuninitialized_const_pointer_warning.patch
 ccc35ff2fd2911986b716a87fe65e03fac2312c9.patch
