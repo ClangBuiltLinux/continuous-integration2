@@ -19,6 +19,6 @@ urls:
   - &s390-fedora-config-url    https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-s390x-fedora.config
   - &s390-suse-config-url      https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
   - &x86_64-alpine-config-url  https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-stable/stable.x86_64.config
-  - &x86_64-arch-config-url    https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config
+  - &x86_64-arch-config-url    https://github.com/ClangBuiltLinux/linux_pkgbuild/raw/main/config
   - &x86_64-fedora-config-url  https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config
   - &x86_64-suse-config-url    https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
