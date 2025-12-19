@@ -114,7 +114,7 @@ def get_cbl_name():
             suse_arch = base_config.split("/")[-2]
             return suse_to_cbl[suse_arch]
         # Arch Linux is x86_64 only
-        if "archlinux" in base_config:
+        if "archlinux" in base_config or "linux_pkgbuild" in base_config:
             return "x86_64"
 
     unique_defconfigs = {
