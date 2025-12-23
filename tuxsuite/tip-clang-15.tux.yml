@@ -12,14 +12,6 @@ description: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git at mast
 jobs:
 - name: defconfigs
   builds:
-  - target_arch: i386
-    toolchain: korg-clang-15
-    kconfig: defconfig
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: korg-clang-15
     kconfig: defconfig
