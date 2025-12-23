@@ -149,14 +149,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: i386
-    toolchain: korg-clang-15
-    kconfig: defconfig
-    targets:
-    - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
   - target_arch: mips
     toolchain: korg-clang-15
     kconfig:
@@ -362,14 +354,6 @@ jobs:
     - CONFIG_DEBUG_INFO_BTF=n
     targets:
     - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: i386
-    toolchain: korg-clang-15
-    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    targets:
-    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
