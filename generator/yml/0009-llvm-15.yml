@@ -32,8 +32,10 @@
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
-  - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  # i386 fails to build after e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on clang < 17")
+  # https://github.com/ClangBuiltLinux/linux/issues/2121
+  # - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
+  # - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
   # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
   - {<< : *mips,              << : *mainline,         << : *llvm,            boot: true,  << : *llvm_15}
   - {<< : *mipsel,            << : *mainline,         << : *llvm,            boot: true,  << : *llvm_15}
@@ -100,8 +102,10 @@
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
-  - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  # i386 fails to build after e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on clang < 17")
+  # https://github.com/ClangBuiltLinux/linux/issues/2121
+  # - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
+  # - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
   # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
   - {<< : *mips,              << : *next,             << : *llvm,            boot: true,  << : *llvm_15}
   - {<< : *mipsel,            << : *next,             << : *llvm,            boot: true,  << : *llvm_15}
@@ -169,8 +173,10 @@
   - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
-  - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
+  # i386 fails to build after e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on clang < 17")
+  # https://github.com/ClangBuiltLinux/linux/issues/2121
+  # - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_15}
+  # - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_15}
   # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
   - {<< : *mips,              << : *stable,           << : *llvm,            boot: true,  << : *llvm_15}
   - {<< : *mipsel,            << : *stable,           << : *llvm,            boot: true,  << : *llvm_15}
@@ -496,7 +502,9 @@
   #########
   #  TIP  #
   #########
-  - {<< : *i386,              << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_15}
+  # i386 fails to build after e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on clang < 17")
+  # https://github.com/ClangBuiltLinux/linux/issues/2121
+  # - {<< : *i386,              << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64,            << : *tip,              << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *x86_64_allmod,     << : *tip,              << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *x86_64_allno,      << : *tip,              << : *llvm_full,       boot: false, << : *llvm_15}
