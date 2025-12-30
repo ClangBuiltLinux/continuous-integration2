@@ -72,8 +72,6 @@ configs:
   - &ppc64le           {config: powernv_defconfig,                                                              kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   # CONFIG_DRM_WERROR=n due to https://github.com/ClangBuiltLinux/linux/issues/2036
   - &ppc64le_fedora    {config: [*ppc64le-fedora-config-url, CONFIG_DRM_WERROR=n],                              kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
-  # CONFIG_BPF_PRELOAD disabled for pre-5.18 cross compiled Fedora configs: https://github.com/ClangBuiltLinux/linux/issues/1433
-  - &ppc64le_fedora_bpf {config: [*ppc64le-fedora-config-url, CONFIG_BPF_PRELOAD=n],                            kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64le_suse      {config: *ppc64le-suse-config-url,                                                       kernel_image: zImage.epapr, ARCH: *powerpc-arch,    << : *kernel}
   - &ppc64_allmod      {config: [allmodconfig, CONFIG_PPC64_BIG_ENDIAN_ELF_ABI_V2=y, CONFIG_WERROR=n],                                      ARCH: *powerpc-arch,    << : *default}
   - &riscv             {config: defconfig,                                                                      kernel_image: Image,        ARCH: *riscv-arch,      << : *kernel}

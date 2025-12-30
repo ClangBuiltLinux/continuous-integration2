@@ -375,16 +375,6 @@ jobs:
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
-  - target_arch: powerpc
-    toolchain: korg-clang-15
-    kconfig:
-    - https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config
-    - CONFIG_BPF_PRELOAD=n
-    targets:
-    - kernel
-    kernel_image: zImage.epapr
-    make_variables:
-      LLVM_IAS: 0
   - target_arch: riscv
     toolchain: korg-clang-15
     kconfig: https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-stable/stable.riscv64.config

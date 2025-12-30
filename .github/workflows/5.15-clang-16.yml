@@ -1204,35 +1204,6 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _11596a8d58c1849f9c8359e5dc121496:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=16 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: powerpc
-      LLVM_VERSION: 16
-      BOOT: 1
-      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v4
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
-      with:
-        name: boot_utils_json_distribution_configs
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   _1a7e1f70d0f607bea91d4d48c76f5664:
     runs-on: ubuntu-latest
     needs:
