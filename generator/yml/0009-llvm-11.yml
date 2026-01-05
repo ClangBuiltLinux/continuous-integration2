@@ -160,7 +160,6 @@
   # - {<< : *ppc32,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   # - {<< : *ppc64,             << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_11}
   - {<< : *ppc64le,           << : *stable-5_15,      << : *ppc64_llvm,      boot: true,  << : *llvm_11}
-  - {<< : *ppc64le_fedora_bpf, << : *stable-5_15,     << : *clang,           boot: true,  << : *llvm_11}
   - {<< : *riscv,             << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
   - {<< : *riscv_allmod,      << : *stable-5_15,      << : *llvm,            boot: false, << : *llvm_11}
   - {<< : *riscv_alpine,      << : *stable-5_15,      << : *llvm,            boot: true,  << : *llvm_11}
