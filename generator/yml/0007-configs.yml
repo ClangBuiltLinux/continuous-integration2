@@ -54,6 +54,7 @@ configs:
   - &arm64_suse        {config: [*arm64-suse-config-url, CONFIG_DEBUG_INFO_BTF=n],                                                          ARCH: *arm64-arch,      << : *kernel}
   - &arm64_virt        {config: virtconfig,                                                                                                 ARCH: *arm64-arch,      << : *kernel}
   - &arm64_hardening   {config: [defconfig, hardening.config],                                                                              ARCH: *arm64-arch,      << : *kernel}
+  - &arm64_harden_lto  {config: [defconfig, hardening.config, CONFIG_LTO_CLANG_FULL=y],                                                     ARCH: *arm64-arch,      << : *kernel}
   - &hexagon           {config: defconfig,                                                                                                  ARCH: *hexagon-arch,    << : *default}
   - &hexagon_allmod    {config: [allmodconfig, CONFIG_WERROR=n],                                                                            ARCH: *hexagon-arch,    << : *default}
   - &i386              {config: defconfig,                                                                                                  ARCH: *i386-arch,       << : *kernel}
@@ -110,6 +111,7 @@ configs:
   - &x86_64_kcsan      {config: [defconfig, CONFIG_KCSAN=y, CONFIG_KCSAN_KUNIT_TEST=y, CONFIG_KUNIT=y],                                                             << : *kernel}
   - &x86_64_ubsan      {config: [defconfig, CONFIG_UBSAN=y],                                                                                                        << : *kernel}
   - &x86_64_hardening  {config: [defconfig, hardening.config],                                                                                                      << : *kernel}
+  - &x86_64_harden_lto {config: [defconfig, hardening.config, CONFIG_LTO_CLANG_FULL=y],                                                                             << : *kernel}
   - &x86_64_alpine     {config: *x86_64-alpine-config-url,                                                                                                          << : *kernel}
   - &x86_64_arch       {config: *x86_64-arch-config-url,                                                                                                            << : *kernel}
   # CONFIG_EFI_SBAT_FILE=n to unset Fedora's file, which will not exist in our trees
