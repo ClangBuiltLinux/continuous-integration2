@@ -12,7 +12,7 @@ name: mainline (clang-18)
     - tuxsuite/mainline-clang-18.tux.yml
     - .github/workflows/mainline-clang-18.yml
   schedule:
-  - cron: 0 3 * * 1,5
+  - cron: 0 0 * * 6
   workflow_dispatch: null
 permissions: read-all
 jobs:
