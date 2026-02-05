@@ -581,6 +581,35 @@ jobs:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
+  _62b31cbd228c79c78471af50411b0f51:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
+    - check_patches
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=23 defconfig+hardening.config+CONFIG_LTO_CLANG_FULL=y
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 23
+      BOOT: 1
+      CONFIG: defconfig+hardening.config+CONFIG_LTO_CLANG_FULL=y
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
   _b33f45999dde0d55df4cf3ec1e8ed032:
     runs-on: ubuntu-latest
     needs:
@@ -1290,6 +1319,35 @@ jobs:
       LLVM_VERSION: 23
       BOOT: 1
       CONFIG: defconfig+hardening.config
+      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
+    container:
+      image: ghcr.io/clangbuiltlinux/qemu
+      options: --ipc=host
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v4
+      with:
+        name: output_artifact_defconfigs
+    - uses: actions/download-artifact@v4
+      with:
+        name: boot_utils_json_defconfigs
+    - name: Check Build and Boot Logs
+      run: scripts/check-logs.py
+  _d87aa011a45011e76ad925cf2f82fd67:
+    runs-on: ubuntu-latest
+    needs:
+    - kick_tuxsuite_defconfigs
+    - check_cache
+    - check_patches
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=23 defconfig+hardening.config+CONFIG_LTO_CLANG_FULL=y
+    if: ${{ needs.check_cache.outputs.status != 'pass' }}
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 23
+      BOOT: 1
+      CONFIG: defconfig+hardening.config+CONFIG_LTO_CLANG_FULL=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu

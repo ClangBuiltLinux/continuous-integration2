@@ -36,6 +36,7 @@
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *arm64_virt,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *arm64_hardening,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
+  - {<< : *arm64_harden_lto,  << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
@@ -76,6 +77,7 @@
   - {<< : *x86_64_kcsan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_ubsan,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_hardening,  << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
+  - {<< : *x86_64_harden_lto, << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_allmod,     << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *x86_64_allmod_lto, << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *x86_64_allno,      << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_20}
@@ -120,6 +122,7 @@
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *arm64_virt,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *arm64_hardening,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
+  - {<< : *arm64_harden_lto,  << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
@@ -160,6 +163,7 @@
   - {<< : *x86_64_kcsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_ubsan,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_hardening,  << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
+  - {<< : *x86_64_harden_lto, << : *next,             << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_allmod,     << : *next,             << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *x86_64_allmod_lto, << : *next,             << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *x86_64_allno,      << : *next,             << : *llvm_full,       boot: false, << : *llvm_20}
@@ -205,6 +209,7 @@
   - {<< : *arm64_suse,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *arm64_virt,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *arm64_hardening,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
+  - {<< : *arm64_harden_lto,  << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_20}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
@@ -255,6 +260,7 @@
   - {<< : *x86_64_fedora_lto, << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_suse,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
   - {<< : *x86_64_hardening,  << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
+  - {<< : *x86_64_harden_lto, << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_20}
   ############
   #  6.12.y  #
   ############
