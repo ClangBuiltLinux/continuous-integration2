@@ -11,5 +11,4 @@ llvm_versions:
   - &llvm_14      {llvm_version: 14}
   - &llvm_13      {llvm_version: 13}
   - &llvm_12      {llvm_version: 12}
-  - &llvm_11      {llvm_version: 11}
   - &llvm_android {llvm_version: android}
