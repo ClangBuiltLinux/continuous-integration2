@@ -594,7 +594,7 @@ jobs:
       LLVM_IAS: 1
   - target_arch: x86_64
     toolchain: korg-clang-22
-    kconfig: https://github.com/ClangBuiltLinux/linux_pkgbuild/raw/main/config
+    kconfig: https://github.com/ClangBuiltLinux/linux_pkgbuild/raw/main/config.x86_64
     targets:
     - kernel
     make_variables:

@@ -1610,19 +1610,19 @@ jobs:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _059ec97fa898ac1d5b48df6efdb49901:
+  _60a6afc41fc6e1f4c481b26b43095e2d:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 https://github.com/ClangBuiltLinux/linux_pkgbuild/raw/main/config
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=17 https://github.com/ClangBuiltLinux/linux_pkgbuild/raw/main/config.x86_64
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 17
       BOOT: 1
-      CONFIG: https://github.com/ClangBuiltLinux/linux_pkgbuild/raw/main/config
+      CONFIG: https://github.com/ClangBuiltLinux/linux_pkgbuild/raw/main/config.x86_64
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
