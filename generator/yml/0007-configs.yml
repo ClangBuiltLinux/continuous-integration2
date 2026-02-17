@@ -62,7 +62,8 @@ configs:
   - &loong             {config: defconfig,                                                                                                  ARCH: *loongarch-arch,  << : *kernel}
   - &loong_lto_thin    {config: [defconfig, CONFIG_LTO_CLANG_THIN=y],                                                                       ARCH: *loongarch-arch,  << : *kernel}
   # CONFIG_DRM_OMAP=n due to https://github.com/ClangBuiltLinux/linux/issues/2038
-  - &loong_allmod      {config: [allmodconfig, CONFIG_DRM_OMAP=n],                                                                          ARCH: *loongarch-arch,  << : *default}
+  # CONFIG_VIDEO_ROCKCHIP_VDEC=n due to https://github.com/ClangBuiltLinux/linux/issues/2151
+  - &loong_allmod      {config: [allmodconfig, CONFIG_DRM_OMAP=n, CONFIG_VIDEO_ROCKCHIP_VDEC=n],                                            ARCH: *loongarch-arch,  << : *default}
   - &loong_allmod_lto  {<< : *loong-allmod-lto-configs,                                                                                     ARCH: *loongarch-arch,  << : *default}
   - &mips              {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y, CONFIG_CPU_BIG_ENDIAN=y],            kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
   - &mipsel            {config: [malta_defconfig, CONFIG_BLK_DEV_INITRD=y],                                     kernel_image: vmlinux,      ARCH: *mips-arch,       << : *kernel}
