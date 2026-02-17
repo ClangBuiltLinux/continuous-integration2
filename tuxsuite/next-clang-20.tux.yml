@@ -723,6 +723,7 @@ jobs:
     kconfig:
     - allmodconfig
     - CONFIG_DRM_OMAP=n
+    - CONFIG_VIDEO_ROCKCHIP_VDEC=n
     targets:
     - default
     make_variables:

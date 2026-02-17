@@ -1972,19 +1972,19 @@ jobs:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _c23bb406e423ff4c45e22377b4b4c254:
+  _f6f595de7e0d00195c71579c8bbb3e31:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=23 allmodconfig+CONFIG_DRM_OMAP=n
+    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=23 allmodconfig+CONFIG_DRM_OMAP=n+CONFIG_VIDEO_ROCKCHIP_VDEC=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: loongarch
       LLVM_VERSION: 23
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_DRM_OMAP=n
+      CONFIG: allmodconfig+CONFIG_DRM_OMAP=n+CONFIG_VIDEO_ROCKCHIP_VDEC=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
