@@ -12,7 +12,7 @@ name: android-mainline (clang-19)
     - tuxsuite/android-mainline-clang-19.tux.yml
     - .github/workflows/android-mainline-clang-19.yml
   schedule:
-  - cron: 0 18 * * 3
+  - cron: 0 12 * * 3
   workflow_dispatch: null
 permissions: read-all
 jobs:
