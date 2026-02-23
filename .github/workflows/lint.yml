@@ -19,8 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
+    - uses: astral-sh/setup-uv@v7
     - name: generate.py
-      run: python3 generator/generate.py --check
+      run: generator/generate.py --check
   check_patch_series:
     name: Check patches series
     runs-on: ubuntu-latest
