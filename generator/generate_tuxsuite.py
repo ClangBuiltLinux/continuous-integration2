@@ -8,6 +8,9 @@
 import argparse
 from pathlib import Path
 import sys
+
+# uv will ensure this is available
+# pylint: disable-next=import-error
 import yaml
 
 from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag

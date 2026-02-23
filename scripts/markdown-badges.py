@@ -11,6 +11,8 @@ import glob
 import os
 import re
 
+# uv will ensure this is available
+# pylint: disable-next=import-error
 from packaging.version import _BaseVersion
 
 

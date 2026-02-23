@@ -44,6 +44,8 @@ import subprocess
 import sys
 from typing import Optional
 
+# uv will ensure this is available
+# pylint: disable-next=import-error
 import requests
 
 from utils import get_patches_hash, get_workflow_name_to_var_name, update_repository_variable

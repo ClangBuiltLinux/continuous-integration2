@@ -17,8 +17,11 @@ import signal
 import shutil
 import sys
 
+# uv will ensure these  available
+# pylint: disable=import-error
 import tuxmake.build
 import yaml
+# pylint: enable=import-error
 
 NORMAL = '\033[0m'
 RED = '\033[01;31m'

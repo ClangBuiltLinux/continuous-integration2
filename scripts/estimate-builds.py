@@ -12,6 +12,8 @@
 from collections import defaultdict
 import datetime
 
+# uv will ensure this is available
+# pylint: disable-next=import-error
 import croniter
 
 from utils import get_config_from_generator
