@@ -272,6 +272,9 @@ def get_steps(build, build_set):
                     },
                 },
                 {
+                    "uses": "astral-sh/setup-uv@v7",
+                },
+                {
                     "name": "Check Build and Boot Logs",
                     "run": "scripts/check-logs.py",
                 },
