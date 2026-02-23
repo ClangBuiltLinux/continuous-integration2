@@ -20,7 +20,7 @@ jobs:
     name: Check that patches are applicable
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: check-patches-apply.py
       run: python3 scripts/check-patches-apply.py --patches-dir patches/next --repo https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git --ref master
   check_cache:
@@ -35,7 +35,7 @@ jobs:
       output: ${{ steps.step2.outputs.output }}
       status: ${{ steps.step2.outputs.status }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: pip install -r requirements.txt
       run: apt-get update && apt-get install -y python3-venv && python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt
     - name: python check_cache.py
@@ -63,7 +63,7 @@ jobs:
     - name: Checking Cache Fail
       if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
@@ -73,7 +73,7 @@ jobs:
       run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: builds.json
         name: output_artifact_defconfigs
@@ -83,7 +83,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: boot-utils.json
         name: boot_utils_json_defconfigs
@@ -106,13 +106,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -135,13 +135,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -164,13 +164,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -193,13 +193,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -222,13 +222,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -251,13 +251,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -280,13 +280,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -309,13 +309,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -338,13 +338,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -367,13 +367,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -396,13 +396,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -425,13 +425,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -454,13 +454,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -483,13 +483,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -512,13 +512,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -541,13 +541,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -570,13 +570,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -599,13 +599,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -628,13 +628,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -657,13 +657,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -686,13 +686,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -715,13 +715,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -744,13 +744,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -773,13 +773,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -802,13 +802,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -831,13 +831,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -860,13 +860,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -889,13 +889,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -918,13 +918,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -947,13 +947,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -976,13 +976,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1005,13 +1005,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1034,13 +1034,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1063,13 +1063,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1092,13 +1092,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1121,13 +1121,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1150,13 +1150,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1179,13 +1179,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_defconfigs
     - name: Check Build and Boot Logs
@@ -1208,7 +1208,7 @@ jobs:
     - name: Checking Cache Fail
       if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
@@ -1218,7 +1218,7 @@ jobs:
       run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: builds.json
         name: output_artifact_distribution_configs
@@ -1228,7 +1228,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: boot-utils.json
         name: boot_utils_json_distribution_configs
@@ -1251,13 +1251,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1280,13 +1280,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1309,13 +1309,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1338,13 +1338,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1367,13 +1367,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1396,13 +1396,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1425,13 +1425,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1454,13 +1454,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1483,13 +1483,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1512,13 +1512,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1541,13 +1541,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1570,13 +1570,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1599,13 +1599,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1628,13 +1628,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1657,13 +1657,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1686,13 +1686,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1715,13 +1715,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1744,13 +1744,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_distribution_configs
     - name: Check Build and Boot Logs
@@ -1773,7 +1773,7 @@ jobs:
     - name: Checking Cache Fail
       if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
@@ -1783,7 +1783,7 @@ jobs:
       run: python caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: builds.json
         name: output_artifact_allconfigs
@@ -1793,7 +1793,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: boot-utils.json
         name: boot_utils_json_allconfigs
@@ -1816,13 +1816,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1845,13 +1845,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1874,13 +1874,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1903,13 +1903,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1932,13 +1932,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1961,13 +1961,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -1990,13 +1990,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2019,13 +2019,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2048,13 +2048,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2077,13 +2077,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2106,13 +2106,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2135,13 +2135,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2164,13 +2164,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2193,13 +2193,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
@@ -2222,13 +2222,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: boot_utils_json_allconfigs
     - name: Check Build and Boot Logs
