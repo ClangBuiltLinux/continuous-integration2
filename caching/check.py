@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "pyyaml>=6.0.3",
+#     "requests>=2.32.5",
+# ]
+# ///
 """
 Don't run this script directly, let the CI invoke it and determine whether a
 workflow should run or not.

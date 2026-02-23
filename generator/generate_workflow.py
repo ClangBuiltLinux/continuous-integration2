@@ -140,14 +140,13 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "uses": "actions/checkout@v6"
                 },
                 {
-                    "name": "pip install -r requirements.txt",
-                    "run": "apt-get update && apt-get install -y python3-venv && python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt",
+                    "uses": "astral-sh/setup-uv@v7",
                 },
                 {
                     "name": "python check_cache.py",
                     "id": "step1",
                     "continue-on-error": True,
-                    "run": ". venv/bin/activate && python caching/check.py -w '${{ github.workflow }}' "
+                    "run": "caching/check.py -w '${{ github.workflow }}' "
                            "-g ${{ secrets.REPO_SCOPED_PAT }} "
                            "-r ${{ env.GIT_REF }} "
                            "-o ${{ env.GIT_REPO }}",
@@ -194,6 +193,10 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                     **cond,
                 },
                 {
+                    "uses": "astral-sh/setup-uv@v7",
+                    **cond,
+                },
+                {
                     "name": "tuxsuite",
                     **cond,
                     "run": f"tuxsuite plan --git-repo {repo} --git-ref {ref} --job-name {job_name} --json-out builds.json {patch_series}{tuxsuite_yml} || true",
@@ -201,7 +204,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     "name": "Update Cache Build Status",
                     **cond,
-                    "run": "python caching/update.py"
+                    "run": "caching/update.py"
                 },
                 {
                     "name": "save builds.json",
