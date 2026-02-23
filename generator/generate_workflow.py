@@ -254,13 +254,13 @@ def get_steps(build, build_set):
                     },
                 },
                 {
-                    "uses": "actions/download-artifact@v4",
+                    "uses": "actions/download-artifact@v7",
                     "with": {
                         "name": f"output_artifact_{build_set}"
                     },
                 },
                 {
-                    "uses": "actions/download-artifact@v4",
+                    "uses": "actions/download-artifact@v7",
                     "with": {
                         "name": f"boot_utils_json_{build_set}"
                     },
