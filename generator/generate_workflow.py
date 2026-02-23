@@ -92,7 +92,7 @@ def check_patches_job_setup(repo, ref, tree_name):
             'runs-on': 'ubuntu-latest',
             'steps': [
                 {
-                    'uses': 'actions/checkout@v4',
+                    'uses': 'actions/checkout@v6',
                 },
                 {
                     'name': 'check-patches-apply.py',
@@ -131,7 +131,7 @@ def check_cache_job_setup(repo, ref, toolchain):
             },
             "steps": [
                 {
-                    "uses": "actions/checkout@v4"
+                    "uses": "actions/checkout@v6"
                 },
                 {
                     "name": "pip install -r requirements.txt",
@@ -184,7 +184,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                     "run": "echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1"
                 },
                 {
-                    "uses": "actions/checkout@v4",
+                    "uses": "actions/checkout@v6",
                     **cond,
                 },
                 {
@@ -248,7 +248,7 @@ def get_steps(build, build_set):
             },
             "steps": [
                 {
-                    "uses": "actions/checkout@v4",
+                    "uses": "actions/checkout@v6",
                     "with": {
                         "submodules": True
                     },
