@@ -1,4 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "packaging>=26.0",
+# ]
+# ///
+
 # pylint: disable=invalid-name
 import glob
 import os
