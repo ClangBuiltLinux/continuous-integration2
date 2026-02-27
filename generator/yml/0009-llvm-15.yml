@@ -31,7 +31,8 @@
   - {<< : *arm64_fedora,      << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
-  - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
+  # hexagon allmodconfig is too big when the constant extender optimization is disabled (LLVM < 19.1.0)
+  # - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_15}
   # i386 fails to build after e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on clang < 17")
   # https://github.com/ClangBuiltLinux/linux/issues/2121
   # - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_15}
@@ -101,7 +102,8 @@
   - {<< : *arm64_fedora,      << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
-  - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
+  # hexagon allmodconfig is too big when the constant extender optimization is disabled (LLVM < 19.1.0)
+  # - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_15}
   # i386 fails to build after e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on clang < 17")
   # https://github.com/ClangBuiltLinux/linux/issues/2121
   # - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_15}
