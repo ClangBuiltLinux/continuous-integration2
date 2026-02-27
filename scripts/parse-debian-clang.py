@@ -41,9 +41,6 @@ clang_utc = datetime.datetime.strptime(clang_date + '+0000', '%Y%m%d%H%M%S%z')
 now_utc = datetime.datetime.now(datetime.timezone.utc)
 delta = now_utc - clang_utc
 
-if args.check and delta.days >= 5:
-    raise RuntimeError(f"Clang has not been updated for {delta}!")
-
 if args.print_info:
     print(
         f"clang checkout date: {clang_utc.strftime('%Y-%m-%d %H:%M %Z')} ({delta} ago)"
@@ -52,3 +49,6 @@ if args.print_info:
     print(
         f"clang revision link: https://github.com/llvm/llvm-project/commit/{clang_hash}"
     )
+
+if args.check and delta.days >= 5:
+    raise RuntimeError(f"Clang has not been updated for {delta}!")
