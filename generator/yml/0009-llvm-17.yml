@@ -36,7 +36,8 @@
   - {<< : *arm64_suse,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_virt,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *hexagon,           << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
+  # hexagon allmodconfig is too big when the constant extender optimization is disabled (LLVM < 19.1.0)
+  # - {<< : *hexagon_allmod,    << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *i386,              << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *i386_suse,         << : *mainline,         << : *llvm_full,       boot: false, << : *llvm_17}
   # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")
@@ -113,7 +114,8 @@
   - {<< : *arm64_suse,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *arm64_virt,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *hexagon,           << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
+  # hexagon allmodconfig is too big when the constant extender optimization is disabled (LLVM < 19.1.0)
+  # - {<< : *hexagon_allmod,    << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *i386,              << : *next,             << : *llvm_full,       boot: true,  << : *llvm_17}
   - {<< : *i386_suse,         << : *next,             << : *llvm_full,       boot: false, << : *llvm_17}
   # mips with the integrated assembler does not work after 56651128e2fb ("MIPS: Fix idle VS timer enqueue")

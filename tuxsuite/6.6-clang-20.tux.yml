@@ -565,7 +565,6 @@ jobs:
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
     - CONFIG_LTO_CLANG_THIN=y
-    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - default
     make_variables:
@@ -625,7 +624,7 @@ jobs:
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_LTO_CLANG_THIN=y
     - CONFIG_DRM_OMAP=n
-    - CONFIG_FORTIFY_KUNIT_TEST=n
+    - CONFIG_VIDEO_ROCKCHIP_VDEC=n
     targets:
     - default
     make_variables:
@@ -670,7 +669,6 @@ jobs:
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
     - CONFIG_LTO_CLANG_THIN=y
-    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - default
     make_variables:
