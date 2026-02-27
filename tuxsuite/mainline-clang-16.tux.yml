@@ -554,7 +554,6 @@ jobs:
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
     - CONFIG_LTO_CLANG_THIN=y
-    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - default
     make_variables:
@@ -581,17 +580,6 @@ jobs:
     kconfig: virtconfig
     targets:
     - kernel
-    make_variables:
-      LLVM: 1
-      LLVM_IAS: 1
-  - target_arch: hexagon
-    toolchain: korg-clang-16
-    kconfig:
-    - allmodconfig
-    - CONFIG_WERROR=n
-    - CONFIG_DRM_WERROR=n
-    targets:
-    - default
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -634,7 +622,6 @@ jobs:
     - CONFIG_GCOV_KERNEL=n
     - CONFIG_KASAN=n
     - CONFIG_LTO_CLANG_THIN=y
-    - CONFIG_FORTIFY_KUNIT_TEST=n
     targets:
     - default
     make_variables:

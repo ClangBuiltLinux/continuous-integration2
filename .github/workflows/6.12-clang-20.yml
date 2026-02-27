@@ -1514,19 +1514,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _d9b8ef9094a38e704ca02eb2af8c6057:
+  _f7f42efda01d99a58641bec7499c51b2:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 20
       BOOT: 1
-      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-aarch64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -1874,19 +1874,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _7e450057c21977e8a170c46eafdf88d4:
+  _690962fb327ef1338d8d9fac9c515730:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_distribution_configs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 20
       BOOT: 1
-      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: https://github.com/ClangBuiltLinux/rpms_kernel/raw/rawhide/kernel-x86_64-fedora.config+CONFIG_EFI_SBAT_FILE=n+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -2099,19 +2099,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _294d9d93fd7431f9321c7ad7011d6293:
+  _11eee609ca345277c10352b1b80cb60f:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 20
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -2279,19 +2279,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _28ca3dc7b1aad120f0da7248ae672603:
+  _78ddb008a51123104784eef4136f810a:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_VIDEO_ROCKCHIP_VDEC=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: loongarch
       LLVM_VERSION: 20
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_VIDEO_ROCKCHIP_VDEC=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -2369,19 +2369,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _381bca61f2725f8c62b540985297c986:
+  _9dd88db58ce5b9448d22614ab710eb97:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_WERROR=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n+CONFIG_DRM_WERROR=n
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_WERROR=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_WERROR=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: riscv
       LLVM_VERSION: 20
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_WERROR=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n+CONFIG_DRM_WERROR=n
+      CONFIG: allmodconfig+CONFIG_WERROR=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_WERROR=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -2429,19 +2429,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _1147adba0ac71dc6ac577bc133ab34d2:
+  _d7485d2f4e9eb9e8ddda19a03514ac67:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=20 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 20
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu

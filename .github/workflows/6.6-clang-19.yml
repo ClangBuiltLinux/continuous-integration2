@@ -1889,19 +1889,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _ec47e6d142373c49a742492b590bb9fb:
+  _8f8c4e885db9958071888f421213ac7f:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: arm64
       LLVM_VERSION: 19
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -2069,19 +2069,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _94b33ed1045180daf0c170942ea0677f:
+  _84ee501276ead66d4e5594d88d453fda:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=loongarch BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_VIDEO_ROCKCHIP_VDEC=n
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: loongarch
       LLVM_VERSION: 19
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: allmodconfig+CONFIG_FTRACE=n+CONFIG_GCOV_KERNEL=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_DRM_OMAP=n+CONFIG_VIDEO_ROCKCHIP_VDEC=n
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
@@ -2189,19 +2189,19 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _406d39cfc02892fccceeac377adaf548:
+  _c8e42d26b73f69e7bee8ecad6607b2d0:
     runs-on: ubuntu-latest
     needs:
     - kick_tuxsuite_allconfigs
     - check_cache
     - check_patches
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=19 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
     if: ${{ needs.check_cache.outputs.status != 'pass' }}
     env:
       ARCH: x86_64
       LLVM_VERSION: 19
       BOOT: 0
-      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y+CONFIG_FORTIFY_KUNIT_TEST=n
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
