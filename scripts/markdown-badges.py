@@ -1,9 +1,18 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "packaging>=26.0",
+# ]
+# ///
+
 # pylint: disable=invalid-name
 import glob
 import os
 import re
 
+# uv will ensure this is available
+# pylint: disable-next=import-error
 from packaging.version import _BaseVersion
 
 

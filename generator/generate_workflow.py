@@ -1,9 +1,18 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "pyyaml>=6.0.3",
+# ]
+# ///
 
 import argparse
 import hashlib
 from pathlib import Path
 import sys
+
+# uv will ensure this is available
+# pylint: disable-next=import-error
 import yaml
 
 from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, die
@@ -134,14 +143,13 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "uses": "actions/checkout@v6"
                 },
                 {
-                    "name": "pip install -r requirements.txt",
-                    "run": "apt-get update && apt-get install -y python3-venv && python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt",
+                    "uses": "astral-sh/setup-uv@v7",
                 },
                 {
                     "name": "python check_cache.py",
                     "id": "step1",
                     "continue-on-error": True,
-                    "run": ". venv/bin/activate && python caching/check.py -w '${{ github.workflow }}' "
+                    "run": "caching/check.py -w '${{ github.workflow }}' "
                            "-g ${{ secrets.REPO_SCOPED_PAT }} "
                            "-r ${{ env.GIT_REF }} "
                            "-o ${{ env.GIT_REPO }}",
@@ -188,6 +196,10 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                     **cond,
                 },
                 {
+                    "uses": "astral-sh/setup-uv@v7",
+                    **cond,
+                },
+                {
                     "name": "tuxsuite",
                     **cond,
                     "run": f"tuxsuite plan --git-repo {repo} --git-ref {ref} --job-name {job_name} --json-out builds.json {patch_series}{tuxsuite_yml} || true",
@@ -195,7 +207,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     "name": "Update Cache Build Status",
                     **cond,
-                    "run": "python caching/update.py"
+                    "run": "caching/update.py"
                 },
                 {
                     "name": "save builds.json",
@@ -264,6 +276,9 @@ def get_steps(build, build_set):
                     "with": {
                         "name": f"boot_utils_json_{build_set}"
                     },
+                },
+                {
+                    "uses": "astral-sh/setup-uv@v7",
                 },
                 {
                     "name": "Check Build and Boot Logs",

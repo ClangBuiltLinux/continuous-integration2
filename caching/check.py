@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "pyyaml>=6.0.3",
+#     "requests>=2.32.5",
+# ]
+# ///
 """
 Don't run this script directly, let the CI invoke it and determine whether a
 workflow should run or not.
@@ -36,6 +44,8 @@ import subprocess
 import sys
 from typing import Optional
 
+# uv will ensure this is available
+# pylint: disable-next=import-error
 import requests
 
 from utils import get_patches_hash, get_workflow_name_to_var_name, update_repository_variable

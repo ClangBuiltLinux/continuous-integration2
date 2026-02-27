@@ -1,4 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "pyyaml>=6.0.3",
+#     "tuxmake>=1.36.0",
+# ]
+# ///
+
 # pylint: disable=invalid-name
 
 from argparse import ArgumentParser
@@ -9,7 +17,11 @@ import signal
 import shutil
 import sys
 
+# uv will ensure these  available
+# pylint: disable=import-error
+import tuxmake.build
 import yaml
+# pylint: enable=import-error
 
 NORMAL = '\033[0m'
 RED = '\033[01;31m'
@@ -25,17 +37,6 @@ def interrupt_handler(_signum, _frame):
 
 
 signal.signal(signal.SIGINT, interrupt_handler)
-
-try:
-    import tuxmake.build
-except ModuleNotFoundError:
-    print(
-        'The tuxmake package is required to use this script but it could not be found!'
-    )
-    print(
-        'Follow the "Installing TuxMake" section of https://tuxmake.org to install it.'
-    )
-    sys.exit(1)
 
 tuxmake_dir = Path(__file__).resolve().parents[1].joinpath('tuxmake')
 default_build_dir = Path(tuxmake_dir, 'build')

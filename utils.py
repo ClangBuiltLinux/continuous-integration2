@@ -6,6 +6,9 @@ import sys
 from typing import Dict, Optional
 import urllib.request
 
+# anything that imports this will use uv, which ensures this will be available
+# in the environment
+# pylint: disable-next=import-error
 import yaml
 
 CI_ROOT = Path(__file__).resolve().parent

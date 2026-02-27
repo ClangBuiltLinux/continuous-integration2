@@ -1,9 +1,19 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "croniter>=6.0.0",
+#     "pyyaml>=6.0.3",
+# ]
+# ///
+
 # pylint: disable=invalid-name
 
 from collections import defaultdict
 import datetime
 
+# uv will ensure this is available
+# pylint: disable-next=import-error
 import croniter
 
 from utils import get_config_from_generator
