@@ -1,12 +1,7 @@
-From git@z Thu Jan  1 00:00:00 1970
-Subject: [PATCH 1/2] hwmon: (macsmc) Fix regressions in Apple Silicon SMC
- hwmon driver
+From 5dd69b864911ae3847365e8bafe7854e79fbeecb Mon Sep 17 00:00:00 2001
 From: Guenter Roeck <linux@roeck-us.net>
 Date: Thu, 29 Jan 2026 09:51:10 -0800
-Message-Id: <20260129175112.3751907-2-linux@roeck-us.net>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Subject: hwmon: (macsmc) Fix regressions in Apple Silicon SMC hwmon driver
 
 The recently added macsmc-hwmon driver contained several critical
 bugs in its sensor population logic and float conversion routines.
@@ -37,13 +32,17 @@ Cc: Neal Gompa <neal@gompa.dev>
 Cc: Janne Grunau <j@jannau.net>
 Signed-off-by: Guenter Roeck <linux@roeck-us.net>
 Tested-by: Nathan Chancellor <nathan@kernel.org> # build only
-Link: https://patch.msgid.link/20260129175112.3751907-2-linux@roeck-us.net
+Link: https://lore.kernel.org/r/20260129175112.3751907-2-linux@roeck-us.net
+Reviewed-by: James Calligeros <jcalligeros99@gmail.com>
+Signed-off-by: Guenter Roeck <linux@roeck-us.net>
 ---
- drivers/hwmon/macsmc-hwmon.c | 23 ++++++++++-------------
- 1 file changed, 10 insertions(+), 13 deletions(-)
+Link: https://git.kernel.org/groeck/linux-staging/c/5dd69b864911ae3847365e8bafe7854e79fbeecb
+---
+ drivers/hwmon/macsmc-hwmon.c | 25 +++++++++++--------------
+ 1 file changed, 11 insertions(+), 14 deletions(-)
 
 diff --git a/drivers/hwmon/macsmc-hwmon.c b/drivers/hwmon/macsmc-hwmon.c
-index 1c0bbec7e8eb..40d25c81b443 100644
+index 1c0bbec7e8ebc4..40d25c81b44356 100644
 --- a/drivers/hwmon/macsmc-hwmon.c
 +++ b/drivers/hwmon/macsmc-hwmon.c
 @@ -228,25 +228,22 @@ static int macsmc_hwmon_write_f32(struct apple_smc *smc, smc_key key, int value)
@@ -59,8 +58,7 @@ index 1c0bbec7e8eb..40d25c81b443 100644
  
  	if (val) {
 -		int msb = __fls(val) - exp;
-+		exp = __fls(val);
- 
+-
 -		if (msb > 23) {
 -			val >>= msb - FLT_MANT_BIAS;
 -			exp -= msb - FLT_MANT_BIAS;
@@ -68,6 +66,8 @@ index 1c0bbec7e8eb..40d25c81b443 100644
 -			val <<= FLT_MANT_BIAS - msb;
 -			exp += msb;
 -		}
++		exp = __fls(val);
++
 +		if (exp > 23)
 +			val >>= exp - 23;
 +		else
@@ -92,5 +92,5 @@ index 1c0bbec7e8eb..40d25c81b443 100644
  				sensor->attrs = HWMON_I_INPUT;
  
 -- 
-2.45.2
+cgit 1.2.3-korg
 
