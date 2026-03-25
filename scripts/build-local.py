@@ -42,42 +42,35 @@ tuxmake_dir = Path(__file__).resolve().parents[1].joinpath('tuxmake')
 default_build_dir = Path(tuxmake_dir, 'build')
 default_output_dir = Path(tuxmake_dir, 'output')
 
-parser = ArgumentParser(
-    description='Build TuxSuite YAML files locally using TuxMake')
-parser.add_argument('-b',
-                    '--build-dir',
-                    default=default_build_dir,
-                    help=f"Build folder (default: {default_build_dir})")
-parser.add_argument('-c',
-                    '--ccache',
-                    action='store_true',
-                    help='Use ccache if it is available')
-parser.add_argument('-C',
-                    '--directory',
-                    help='Path to kernel source',
-                    required=True)
-parser.add_argument('-d',
-                    '--debug',
-                    action='store_true',
-                    help='Show debugging messages')
-parser.add_argument('-f',
-                    '--files',
-                    help='TuxSuite YAML files to build',
-                    nargs='+',
-                    required=True)
-parser.add_argument('-j',
-                    '--jobs',
-                    help='Jobs to build (default: build all jobs)',
-                    nargs='+')
+parser = ArgumentParser(description='Build TuxSuite YAML files locally using TuxMake')
+parser.add_argument(
+    '-b',
+    '--build-dir',
+    default=default_build_dir,
+    help=f"Build folder (default: {default_build_dir})",
+)
+parser.add_argument(
+    '-c', '--ccache', action='store_true', help='Use ccache if it is available'
+)
+parser.add_argument('-C', '--directory', help='Path to kernel source', required=True)
+parser.add_argument(
+    '-d', '--debug', action='store_true', help='Show debugging messages'
+)
+parser.add_argument(
+    '-f', '--files', help='TuxSuite YAML files to build', nargs='+', required=True
+)
+parser.add_argument(
+    '-j', '--jobs', help='Jobs to build (default: build all jobs)', nargs='+'
+)
 parser.add_argument(
     '-o',
     '--output-dir',
     default=default_output_dir,
-    help=f"Output folder for TuxMake files (default: {default_output_dir})")
-parser.add_argument('-v',
-                    '--verbose',
-                    action='store_true',
-                    help="Show tuxmake's output")
+    help=f"Output folder for TuxMake files (default: {default_output_dir})",
+)
+parser.add_argument(
+    '-v', '--verbose', action='store_true', help="Show tuxmake's output"
+)
 args = parser.parse_args()
 
 if not (tree := Path(args.directory).resolve()).exists():
@@ -145,9 +138,11 @@ for name, builds in jobs.items():
             )
 
         cfg_str = '+'.join(kconfig) if isinstance(kconfig, list) else kconfig
-        print(f"I: Building {target_arch} {cfg_str} ({toolchain})... ",
-              end='\n' if args.verbose else '',
-              flush=True)
+        print(
+            f"I: Building {target_arch} {cfg_str} ({toolchain})... ",
+            end='\n' if args.verbose else '',
+            flush=True,
+        )
 
         if build_dir.exists():
             shutil.rmtree(build_dir)
@@ -155,7 +150,7 @@ for name, builds in jobs.items():
 
         # Replace the URL in the configuration string with a simple name, so
         # that it can be used in a path.
-        if (match := re.search(r'(https://[^\+]+)', cfg_str)):
+        if match := re.search(r'(https://[^\+]+)', cfg_str):
             url = match.groups()[0]
             if 'alpine' in url:
                 distro = 'alpine'
@@ -179,13 +174,15 @@ for name, builds in jobs.items():
             build['kconfig'] = build['kconfig'][0]
 
         # Perform the build and report the result
-        result = tuxmake.build.build(build_dir=build_dir,
-                                     output_dir=specific_output_dir,
-                                     quiet=(not args.verbose),
-                                     runtime=runtime,
-                                     tree=tree,
-                                     wrapper=wrapper,
-                                     **build)
+        result = tuxmake.build.build(
+            build_dir=build_dir,
+            output_dir=specific_output_dir,
+            quiet=(not args.verbose),
+            runtime=runtime,
+            tree=tree,
+            wrapper=wrapper,
+            **build,
+        )
 
         if all(info.passed for info in result.status.values()):
             print(f"{GREEN}PASS{NORMAL}")

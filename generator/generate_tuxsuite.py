@@ -13,22 +13,31 @@ import sys
 # pylint: disable-next=import-error
 import yaml
 
-from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_repo_ref, get_llvm_versions, patch_series_flag
+from utils import (
+    CI_ROOT,
+    LLVM_TOT_VERSION,
+    disable_subsys_werror_configs,
+    get_config_from_generator,
+    get_repo_ref,
+    get_llvm_versions,
+    patch_series_flag,
+)
 
 
 # Aliases makes this YAML unreadable
 # https://ttl255.com/yaml-anchors-and-aliases-and-how-to-disable-them/
 class NoAliasDumper(yaml.SafeDumper):
-
     def ignore_aliases(self, _data):
         return True
 
 
 def parse_args(trees):
     parser = argparse.ArgumentParser(description="Generate TuxSuite YML.")
-    parser.add_argument("tree",
-                        help="The git repo and ref to filter in.",
-                        choices=[tree["name"] for tree in trees])
+    parser.add_argument(
+        "tree",
+        help="The git repo and ref to filter in.",
+        choices=[tree["name"] for tree in trees],
+    )
     return parser.parse_args()
 
 
@@ -55,11 +64,8 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
             # Input: '--patch-series ... '
             # Output: '...'
             patches_folder = patches_flag.split(' ')[1]
-            print(
-                f"# $ git -C linux quiltimport --patches ../{patches_folder}")
-        print(
-            f"# $ scripts/build-local.py -C linux -f {tuxsuite_yml} -j defconfigs"
-        )
+            print(f"# $ git -C linux quiltimport --patches ../{patches_folder}")
+        print(f"# $ scripts/build-local.py -C linux -f {tuxsuite_yml} -j defconfigs")
 
         tuxsuite_plan = {
             'version': 1,
@@ -71,15 +77,17 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                     'builds': [],
                 }
             ]
-        }  # yapf: disable
+        }  # fmt: off
         max_version = int(LLVM_TOT_VERSION.read_text(encoding='utf-8'))
         defconfigs = []
         distribution_configs = []
         allconfigs = []
         for build in config["builds"]:
-            if build["git_repo"] == repo and \
-               build["git_ref"] == ref and \
-               build["llvm_version"] == llvm_version:
+            if (
+                build["git_repo"] == repo
+                and build["git_ref"] == ref
+                and build["llvm_version"] == llvm_version
+            ):
                 arch = build.get("ARCH", "x86_64")
                 if llvm_version == max_version:
                     tuxsuite_toolchain = "clang-nightly"
@@ -95,14 +103,12 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
                     "target_arch": arch,
                     "toolchain": tuxsuite_toolchain,
                     "kconfig": build["config"],
-                    "targets": build["targets"]
+                    "targets": build["targets"],
                 }
                 if "kernel_image" in build:
-                    current_build.update(
-                        {"kernel_image": build["kernel_image"]})
+                    current_build.update({"kernel_image": build["kernel_image"]})
                 if "make_variables" in build:
-                    current_build.update(
-                        {"make_variables": build["make_variables"]})
+                    current_build.update({"make_variables": build["make_variables"]})
 
                 cfg_str = str(build["config"])
                 if "defconfig" in cfg_str:
@@ -114,20 +120,14 @@ def emit_tuxsuite_yml(config, tree, llvm_version):
 
         tuxsuite_plan["jobs"][0]["builds"] = defconfigs
         if distribution_configs:
-            tuxsuite_plan["jobs"] += [{
-                "name": "distribution_configs",
-                "builds": distribution_configs
-            }]
+            tuxsuite_plan["jobs"] += [
+                {"name": "distribution_configs", "builds": distribution_configs}
+            ]
         if allconfigs:
-            tuxsuite_plan["jobs"] += [{
-                "name": "allconfigs",
-                "builds": allconfigs
-            }]
+            tuxsuite_plan["jobs"] += [{"name": "allconfigs", "builds": allconfigs}]
         print(
-            yaml.dump(tuxsuite_plan,
-                      Dumper=NoAliasDumper,
-                      width=1000,
-                      sort_keys=False))
+            yaml.dump(tuxsuite_plan, Dumper=NoAliasDumper, width=1000, sort_keys=False)
+        )
         sys.stdout = orig_stdout
 
 

@@ -36,8 +36,7 @@ def disable_subsys_werror_configs(configs):
 
 
 def get_config_from_generator():
-    if not (all_generator_files := sorted(
-            Path(GENERATOR_ROOT, 'yml').glob('*.yml'))):
+    if not (all_generator_files := sorted(Path(GENERATOR_ROOT, 'yml').glob('*.yml'))):
         return die('No generator files could not be found?')
 
     generator_pieces = []
@@ -55,11 +54,9 @@ def get_image_name():
     arch = os.environ["ARCH"]
     if arch == "powerpc":
         subarch = get_cbl_name()
-        return {
-            "ppc32": "uImage",
-            "ppc64": "vmlinux",
-            "ppc64le": "zImage.epapr"
-        }[subarch]
+        return {"ppc32": "uImage", "ppc64": "vmlinux", "ppc64le": "zImage.epapr"}[
+            subarch
+        ]
     return {
         "arm": "zImage",
         "arm64": "Image.gz",
@@ -86,7 +83,7 @@ def get_cbl_name():
                 "aarch64": "arm64",
                 "armv7": "arm32_v7",
                 "riscv64": "riscv",
-                "x86_64": "x86_64"
+                "x86_64": "x86_64",
             }
             # The URL is https://.../stable.<arch>.config
             alpine_arch = base_config.split(".")[-2]
@@ -98,7 +95,7 @@ def get_cbl_name():
                 "i686": "x86",
                 "ppc64le": "ppc64le",
                 "s390x": "s390",
-                "x86_64": "x86_64"
+                "x86_64": "x86_64",
             }
             # The URL is https://.../kernel-<arch>-fedora.config
             fedora_arch = base_config.split("/")[-1].split("-")[1]
@@ -111,7 +108,7 @@ def get_cbl_name():
                 "ppc64le": "ppc64le",
                 "riscv64": "riscv",
                 "s390x": "s390",
-                "x86_64": "x86_64"
+                "x86_64": "x86_64",
             }
             # The URL is https://.../<arch>/default
             suse_arch = base_config.split("/")[-2]
@@ -184,9 +181,11 @@ def get_build():
     configs = os.environ["CONFIG"].split("+")
     llvm_version = get_requested_llvm_version()
     for build in _read_builds():
-        if build["target_arch"] == arch and \
-           build["toolchain"] == llvm_version and \
-           build["kconfig"] == configs:
+        if (
+            build["target_arch"] == arch
+            and build["toolchain"] == llvm_version
+            and build["kconfig"] == configs
+        ):
             return build
     print_red("ERROR: Unable to find build")
     show_builds()
@@ -211,8 +210,7 @@ def get_llvm_versions(config, tree_name):
 
 def get_patches_hash(tree_name):
     patches_folder = Path(CI_ROOT, 'patches', tree_name)
-    patches = sorted(
-        patches_folder.iterdir()) if patches_folder.exists() else []
+    patches = sorted(patches_folder.iterdir()) if patches_folder.exists() else []
 
     text = ''.join(item.read_text(encoding='utf-8') for item in patches)
 
@@ -242,7 +240,7 @@ def update_repository_variable(
     patches_hash: Optional[str] = None,
     build_status: Optional[str] = None,
     other: Optional[Dict[str, str]] = None,
-    allow_fail_to_pass=False  # should a cache entry be allowed to go from 'fail' to 'pass'
+    allow_fail_to_pass=False,  # should a cache entry be allowed to go from 'fail' to 'pass'
 ):
     """
     Update cache entries.
@@ -270,8 +268,11 @@ def update_repository_variable(
         if patches_hash:
             cached_value["patches_hash"] = patches_hash
         if build_status:
-            if not allow_fail_to_pass and cached_value[
-                    'build_status'] == 'fail' and build_status == 'pass':
+            if (
+                not allow_fail_to_pass
+                and cached_value['build_status'] == 'fail'
+                and build_status == 'pass'
+            ):
                 ...
             else:
                 cached_value["build_status"] = build_status
@@ -281,14 +282,10 @@ def update_repository_variable(
 
         cached_value = json.dumps(cached_value)
 
-    new_value = json.dumps({
-        "name": key,
-        "value": cached_value
-    }).encode("utf-8")
-    update_request = urllib.request.Request(url,
-                                            data=new_value,
-                                            method="PATCH",
-                                            headers=http_headers)
+    new_value = json.dumps({"name": key, "value": cached_value}).encode("utf-8")
+    update_request = urllib.request.Request(
+        url, data=new_value, method="PATCH", headers=http_headers
+    )
     urllib.request.urlopen(update_request)  # pylint: disable=consider-using-with
 
     print(f"""\
