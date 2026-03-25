@@ -29,7 +29,11 @@ import re
 import urllib.request
 from pathlib import Path
 
-from utils import get_patches_hash, get_workflow_name_to_var_name, update_repository_variable
+from utils import (
+    get_patches_hash,
+    get_workflow_name_to_var_name,
+    update_repository_variable,
+)
 
 if "GITHUB_WORKFLOW" not in os.environ:
     print("Couldn't find GITHUB_WORKFLOW in env. Not in a GitHub Workflow?")
@@ -38,15 +42,12 @@ if "GITHUB_WORKFLOW" not in os.environ:
 MOCK = "MOCK" in os.environ
 
 
-def update_cache(status: str, git_sha: str, clang_version: str,
-                 patches_hash: str):
+def update_cache(status: str, git_sha: str, clang_version: str, patches_hash: str):
     print(f"Trying to update cache with status: {status}")
-    cache_entry_key = get_workflow_name_to_var_name(
-        os.environ["GITHUB_WORKFLOW"])
+    cache_entry_key = get_workflow_name_to_var_name(os.environ["GITHUB_WORKFLOW"])
 
     if "REPO_SCOPED_PAT" not in os.environ:
-        print(
-            "Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
+        print("Couldn't find REPO_SCOPED_PAT in env. Not in a GitHub Workflow?")
         sys.exit(1)
 
     headers = {"Authorization": f"Bearer {os.environ['REPO_SCOPED_PAT']}"}
@@ -82,8 +83,7 @@ def main():
     for entry, build in builds.items():
         try:
             git_sha = build["git_sha"]
-            clang_version = build["tuxmake_metadata"]["compiler"][
-                "version_full"]
+            clang_version = build["tuxmake_metadata"]["compiler"]["version_full"]
             break
         except KeyError:
             builds_that_are_missing_metadata.append(entry)
@@ -100,32 +100,32 @@ def main():
             build_log_raw = response.read().decode()
 
         failed_pattern = (
-            r"(?<=Apply patch set FAILED\s)[0-9A-Za-z._:/\-\s]*?(?=\serror: )")
+            r"(?<=Apply patch set FAILED\s)[0-9A-Za-z._:/\-\s]*?(?=\serror: )"
+        )
         failed_matches = re.findall(failed_pattern, build_log_raw)
         if len(failed_matches) == 0:
             print(
                 f"No patches failed to apply yet the build status stated there were: {build['status_message']}"
             )
-            sys.exit(
-                0)  # Not sure how we got here but continue the action anyways
+            sys.exit(0)  # Not sure how we got here but continue the action anyways
 
         patches_that_failed_to_apply = failed_matches[0].split('\n')
-        print(
-            f"Error: Some patches failed to apply.\n{patches_that_failed_to_apply}\n"
-        )
+        print(f"Error: Some patches failed to apply.\n{patches_that_failed_to_apply}\n")
         sys.exit(1)
 
     if len(builds_that_are_missing_metadata) == len(builds):
         raise RuntimeError(
             f"Could not find a suitable git sha or compiler version in any build\n"
-            f"Here's the build.json:\n{raw}")
+            f"Here's the build.json:\n{raw}"
+        )
 
     if len(builds_that_are_missing_metadata) > 0:
         print(
             "Warning: Some of the builds in builds.json are malformed and missing "
             "some metadata.\n"
             f"Here's a list: {builds_that_are_missing_metadata}\n"
-            f"Here's the build.json in question:\n{raw}")
+            f"Here's the build.json in question:\n{raw}"
+        )
 
     assert git_sha and clang_version
 

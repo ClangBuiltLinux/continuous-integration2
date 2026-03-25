@@ -23,7 +23,6 @@ def order_to_rank(iterable, item):
 
 
 class ClangVersion(_BaseVersion):
-
     def __init__(self, version):
         if 'clang-' not in version:
             raise ValueError(f"Invalid clang version ('{version}') provided?")
@@ -35,7 +34,6 @@ class ClangVersion(_BaseVersion):
 
 
 class KernelVersion(_BaseVersion):
-
     def __init__(self, version):
         major = 0
         minor = 0
@@ -52,12 +50,12 @@ class KernelVersion(_BaseVersion):
             major = order_to_rank(upstream_trees, version)
 
         # LTS releases
-        if (match := re.search(r'^([\d|\.]+)$', version)):
+        if match := re.search(r'^([\d|\.]+)$', version):
             category = 'lts'
             major, minor = map(int, match.groups()[0].split('.'))
 
         # Named maintainer trees
-        maintainer_trees = ('tip', )
+        maintainer_trees = ('tip',)
         if version in maintainer_trees:
             category = 'maintainers'
             major = order_to_rank(maintainer_trees, version)
@@ -146,10 +144,16 @@ max_width = len(max(columns, key=len))
 # - Make every column the same width
 # - Force whitespace to non-breaking (to keep the cell from eliding spaces)
 # - Replace "-" with non-breaking-dash (to keep the name from wrapping)
-print("|     | " + " | ".join([
-    "&nbsp;" * (max_width - len(col)) + col.replace('-', '&#8209;')
-    for col in columns
-]) + " |")
+print(
+    "|     | "
+    + " | ".join(
+        [
+            "&nbsp;" * (max_width - len(col)) + col.replace('-', '&#8209;')
+            for col in columns
+        ]
+    )
+    + " |"
+)
 # Align tree name to the right for readability, and center the badges.
 print("| ---: |" + " :---: |" * len(columns))
 
@@ -165,13 +169,14 @@ rows.insert(0, 'next')
 for tree in rows:
     # Keep names from wrapping.
     row = tree.replace('-', '&#8209;')
-    print(f"| {row} | " + " | ".join(
-        [svg(trees[tree].get(compiler, None)) for compiler in columns]) + " |")
+    print(
+        f"| {row} | "
+        + " | ".join([svg(trees[tree].get(compiler, None)) for compiler in columns])
+        + " |"
+    )
 
 # Output a button for the "Check clang version" workflow, which ensures that
 # tip of tree LLVM is being updating. This does not need to be a part of the
 # table above.
 cv_workflow_url = 'https://github.com/clangbuiltlinux/continuous-integration2/actions/workflows/clang-version.yml'
-print(
-    f"\n[![Check clang version]({cv_workflow_url}/badge.svg)]({cv_workflow_url})"
-)
+print(f"\n[![Check clang version]({cv_workflow_url}/badge.svg)]({cv_workflow_url})")

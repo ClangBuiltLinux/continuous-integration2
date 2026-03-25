@@ -17,20 +17,22 @@ import utils
 
 
 def parse_args(trees):
-    parser = ArgumentParser(
-        description='Generate yml files and perform extra checks')
+    parser = ArgumentParser(description='Generate yml files and perform extra checks')
 
-    parser.add_argument('-c',
-                        '--check',
-                        action='store_true',
-                        help='Fail if generating yml files results in a diff')
+    parser.add_argument(
+        '-c',
+        '--check',
+        action='store_true',
+        help='Fail if generating yml files results in a diff',
+    )
     parser.add_argument(
         'trees',
         choices=[*trees, 'all'],
         default='all',
         help='The trees to generate yml files for (default: all)',
         metavar='TREES',
-        nargs='*')
+        nargs='*',
+    )
 
     return parser.parse_args()
 
@@ -38,13 +40,13 @@ def parse_args(trees):
 def update_llvm_tot_version():
     # Avoids pulling in an extra Python package dependency
     curl_cmd = [
-        'curl', '-fLSs',
-        'https://raw.githubusercontent.com/llvm/llvm-project/main/cmake/Modules/LLVMVersion.cmake'
+        'curl',
+        '-fLSs',
+        'https://raw.githubusercontent.com/llvm/llvm-project/main/cmake/Modules/LLVMVersion.cmake',
     ]
-    cmakelists = subprocess.run(curl_cmd,
-                                capture_output=True,
-                                check=True,
-                                text=True).stdout
+    cmakelists = subprocess.run(
+        curl_cmd, capture_output=True, check=True, text=True
+    ).stdout
 
     if not (match := re.search(r'set\(LLVM_VERSION_MAJOR (\d+)', cmakelists)):
         raise RuntimeError('Could not find LLVM_VERSION_MAJOR?')
@@ -64,9 +66,9 @@ def generate(config, tree):
 
 def check(trees_arg):
     try:
-        subprocess.run(['git', 'rev-parse', '--git-dir'],
-                       check=True,
-                       capture_output=True)
+        subprocess.run(
+            ['git', 'rev-parse', '--git-dir'], check=True, capture_output=True
+        )
     except subprocess.CalledProcessError:
         # Print a nicer error message versus spewing the exception
         print('Script is not being run inside a git repository!')
@@ -74,11 +76,13 @@ def check(trees_arg):
 
     if subprocess.run(
         ['git', '--no-optional-locks', 'status', '-uno', '--porcelain'],
-            capture_output=True,
-            check=True).stdout:
+        capture_output=True,
+        check=True,
+    ).stdout:
         print(
             f"\nRunning 'generate.py {trees_arg}' generated the following diff:\n",
-            flush=True)
+            flush=True,
+        )
         subprocess.run(['git', '--no-pager', 'diff', 'HEAD'], check=True)
         print(
             "\nPlease run 'generate.py all' locally then commit and push the changes it creates!"

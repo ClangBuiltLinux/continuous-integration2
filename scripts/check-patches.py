@@ -30,7 +30,9 @@ for folder in patch_folders:
         sys.exit(1)
 
     # A single line shell command to update a particular series file
-    update_series_command = f"\t$ ls -1 {folder}/*.patch | sed 's;{folder}/;;' > {folder}/series"
+    update_series_command = (
+        f"\t$ ls -1 {folder}/*.patch | sed 's;{folder}/;;' > {folder}/series"
+    )
 
     # Next, make sure series file is not missing
     if not (series := Path(folder, 'series')).exists():
@@ -55,8 +57,7 @@ for folder in patch_folders:
     # the series file (removed from series file, did not remove patch file)
     for patch in folder.glob('*.patch'):
         if patch.name not in series_text:
-            print(
-                f"{patch.name} not found in {series} but it is in {folder}?\n")
+            print(f"{patch.name} not found in {series} but it is in {folder}?\n")
             print('Update the series file:\n')
             print(update_series_command)
             sys.exit(1)
@@ -77,9 +78,7 @@ for workflow in workflows.glob('*-clang-*.yml'):
         sys.exit(1)
 
     if patch_folder.exists() and not wf_has_ps_opt:
-        print(
-            f"{patch_folder} exists but '--patch-series' not found in {workflow}?\n"
-        )
+        print(f"{patch_folder} exists but '--patch-series' not found in {workflow}?\n")
         print('Regenerate the TuxSuite and workflow files:\n')
         print(f"\t$ ./generate.py {tree}\n")
         print('or remove the patches if they are no longer being used.')

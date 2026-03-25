@@ -7,25 +7,29 @@ import re
 import subprocess
 
 parser = ArgumentParser(description="Parse Debian's clang version")
-parser.add_argument('-c',
-                    '--check',
-                    action='store_true',
-                    help='Fail if clang has not been updated in 5 days')
-parser.add_argument('-p',
-                    '--print-info',
-                    action='store_true',
-                    help='Print information about clang version')
+parser.add_argument(
+    '-c',
+    '--check',
+    action='store_true',
+    help='Fail if clang has not been updated in 5 days',
+)
+parser.add_argument(
+    '-p',
+    '--print-info',
+    action='store_true',
+    help='Print information about clang version',
+)
 parser.add_argument(
     '-v',
     '--version-string',
-    help="Use value as clang version instead of calling 'clang --version'")
+    help="Use value as clang version instead of calling 'clang --version'",
+)
 args = parser.parse_args()
 
 if not (version_string := args.version_string):
-    clang_version = subprocess.run(['clang', '--version'],
-                                   capture_output=True,
-                                   check=True,
-                                   text=True).stdout
+    clang_version = subprocess.run(
+        ['clang', '--version'], capture_output=True, check=True, text=True
+    ).stdout
     version_string = clang_version.splitlines()[0]
 
 # $ clang-14 --version | head -1

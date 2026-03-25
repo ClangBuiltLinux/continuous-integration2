@@ -30,12 +30,13 @@ for tree in config['tree_schedules']:
 
     # Calculate the number of times that a workflow runs in a week based on its
     # schedule
-    num_runs = len(
-        list(croniter.croniter_range(now, week_from_now, tree['schedule'])))
+    num_runs = len(list(croniter.croniter_range(now, week_from_now, tree['schedule'])))
     for build in config['builds']:
-        if tree['git_repo'] == build['git_repo'] and \
-           tree['git_ref'] == build['git_ref'] and \
-           tree_llvm_ver == build['llvm_version']:
+        if (
+            tree['git_repo'] == build['git_repo']
+            and tree['git_ref'] == build['git_ref']
+            and tree_llvm_ver == build['llvm_version']
+        ):
             builds_per_tree[tree_name]['total'] += num_runs
             builds_per_tree[tree_name][tree_llvm_ver] += num_runs
 
@@ -43,9 +44,9 @@ total_builds = sum(item['total'] for item in builds_per_tree.values())
 print(f"Total builds per week: {total_builds}")
 
 # Sort the list of builds by total number of builds descending
-for tree, builds in sorted(builds_per_tree.items(),
-                           key=lambda x: x[1]['total'],
-                           reverse=True):
+for tree, builds in sorted(
+    builds_per_tree.items(), key=lambda x: x[1]['total'], reverse=True
+):
     print(f"\n  - tree: {tree}")
     print(f"    total: {builds['total']}")
     print('    breakdown:')

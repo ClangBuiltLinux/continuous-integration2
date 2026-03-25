@@ -36,6 +36,7 @@ a new build_status is assigned to the cache entry by check_logs.py. Importantly,
 we want to only cache on a "pass" or "fail" status as these mean that Tuxsuite
 actually completed its work and didnt timeout.
 """
+
 import argparse
 import json
 import os
@@ -48,7 +49,11 @@ from typing import Optional
 # pylint: disable-next=import-error
 import requests
 
-from utils import get_patches_hash, get_workflow_name_to_var_name, update_repository_variable
+from utils import (
+    get_patches_hash,
+    get_workflow_name_to_var_name,
+    update_repository_variable,
+)
 
 OWNER = "ClangBuiltLinux"
 REPO = "continuous-integration2"
@@ -63,8 +68,7 @@ CACHE_HITABLE_STATES = ("pass", "fail")
 TIMEOUT = 64
 
 
-class MalformedCacheError(Exception):
-    ...
+class MalformedCacheError(Exception): ...
 
 
 def parse_args():
@@ -107,7 +111,8 @@ def ___purge___cache___():
     list_response = requests.get(list_url, headers=headers, timeout=TIMEOUT)
     print(list_response.content)
     all_variables_keys = [
-        x["name"] for x in json.loads(list_response.content)["variables"]
+        x["name"]
+        for x in json.loads(list_response.content)["variables"]
         if x["name"].startswith("_")
     ]
 
@@ -115,9 +120,7 @@ def ___purge___cache___():
         delete_url = (
             f"https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{key}"
         )
-        delete_response = requests.delete(delete_url,
-                                          headers=headers,
-                                          timeout=TIMEOUT)
+        delete_response = requests.delete(delete_url, headers=headers, timeout=TIMEOUT)
         if delete_response.status_code != 204:
             print(f"ERROR: Couldn't delete cache entry with key {key}")
             sys.exit(1)
@@ -154,16 +157,19 @@ def get_repository_variable_or_none(name: str) -> Optional[dict]:
     return json.loads(as_dict["value"])
 
 
-def create_repository_variable(name: str, linux_sha: str, clang_version: str,
-                               patches_hash: str) -> None:
+def create_repository_variable(
+    name: str, linux_sha: str, clang_version: str, patches_hash: str
+) -> None:
     _url = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/variables"
 
-    _value = json.dumps({
-        "linux_sha": linux_sha,
-        "clang_version": clang_version,
-        "patches_hash": patches_hash,
-        "build_status": "presuite",
-    })
+    _value = json.dumps(
+        {
+            "linux_sha": linux_sha,
+            "clang_version": clang_version,
+            "patches_hash": patches_hash,
+            "build_status": "presuite",
+        }
+    )
     data = {"name": name, "value": _value}
 
     resp = requests.post(_url, headers=headers, json=data, timeout=TIMEOUT)
@@ -199,8 +205,10 @@ if __name__ == "__main__":
     # pull down repo variable
     result = get_repository_variable_or_none(VAR_NAME)
     if result is None:
-        print(f"CACHE MISS: Did not find repo variable {VAR_NAME} "
-              f"from workflow_name: {args.workflow_name}. Creating it now.")
+        print(
+            f"CACHE MISS: Did not find repo variable {VAR_NAME} "
+            f"from workflow_name: {args.workflow_name}. Creating it now."
+        )
         create_repository_variable(
             VAR_NAME,
             linux_sha=curr_sha,
@@ -219,14 +227,19 @@ if __name__ == "__main__":
         raise MalformedCacheError(
             f"The cache with key {VAR_NAME} based on workflow '{args.workflow_name}' "
             f"is one or more fields. It's missing: {missing_fields}\n"
-            f"The current cache looks as follows:\n{result}.")
+            f"The current cache looks as follows:\n{result}."
+        )
 
     cached_sha = result["linux_sha"]
     cached_clang_version = result["clang_version"]
     cached_build_status = result["build_status"]
     cached_patches_hash = result.get("patches_hash", curr_patches_hash)
 
-    if cached_sha != curr_sha or cached_clang_version != curr_clang_version or cached_patches_hash != curr_patches_hash:
+    if (
+        cached_sha != curr_sha
+        or cached_clang_version != curr_clang_version
+        or cached_patches_hash != curr_patches_hash
+    ):
         print(f"""\
             CACHE MISS: current linux_sha is {curr_sha}, clang_version is {curr_clang_version},
             and current patches_hash is {curr_patches_hash} while {args.workflow_name} has
@@ -271,5 +284,4 @@ if __name__ == "__main__":
         with open(env_file, "a", encoding="utf-8") as fd:
             fd.write(f"CACHE_PASS={cached_build_status.strip()}")
 
-    sys.exit(
-        0)  # signifies to the workflow that no jobs should run ('success')
+    sys.exit(0)  # signifies to the workflow that no jobs should run ('success')

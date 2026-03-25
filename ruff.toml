@@ -2,6 +2,9 @@ target-version = 'py38'
 # Separate repo used as a submodule, ignore it
 extend-exclude = ['boot-utils']
 
+[format]
+quote-style = 'preserve'
+
 # https://docs.astral.sh/ruff/rules/
 [lint]
 select = [

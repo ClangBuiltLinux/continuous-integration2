@@ -17,7 +17,18 @@ import sys
 import time
 import urllib.request
 
-from utils import CI_ROOT, get_build, get_image_name, get_requested_llvm_version, print_red, get_cbl_name, show_builds, die, warn, info
+from utils import (
+    CI_ROOT,
+    get_build,
+    get_image_name,
+    get_requested_llvm_version,
+    print_red,
+    get_cbl_name,
+    show_builds,
+    die,
+    warn,
+    info,
+)
 
 
 def _fetch(title, url, dest):
@@ -164,9 +175,7 @@ def check_built_config(build):
             elif line.startswith("# CONFIG_"):
                 name, state = line.split(" ", 2)[1:]
                 if state != "is not set":
-                    warn(
-                        f"Could not parse '{name}' from .config line '{line}'!?"
-                    )
+                    warn(f"Could not parse '{name}' from .config line '{line}'!?")
                 state = 'n'
             elif not line.startswith("#"):
                 warn(f"Could not parse .config line '{line}'!?")
@@ -202,8 +211,10 @@ def print_clang_info(build):
     metadata_json = json.loads(metadata_file.read_text(encoding='utf-8'))
     info("Printing clang-nightly checkout date and hash")
     parse_cmd = [
-        Path(CI_ROOT, "scripts/parse-debian-clang.py"), "--print-info",
-        "--version-string", metadata_json["compiler"]["version_full"]
+        Path(CI_ROOT, "scripts/parse-debian-clang.py"),
+        "--print-info",
+        "--version-string",
+        metadata_json["compiler"]["version_full"],
     ]
     subprocess.run(parse_cmd, check=True)
 
@@ -238,16 +249,20 @@ def run_boot(build):
     ]
     # If we are running a sanitizer build, we should increase the number of
     # cores and timeout because booting is much slower
-    if "CONFIG_KASAN=y" in build["kconfig"] or \
-       "CONFIG_KCSAN=y" in build["kconfig"] or \
-       "CONFIG_UBSAN=y" in build["kconfig"]:
+    if (
+        "CONFIG_KASAN=y" in build["kconfig"]
+        or "CONFIG_KCSAN=y" in build["kconfig"]
+        or "CONFIG_UBSAN=y" in build["kconfig"]
+    ):
         boot_cmd += ["-s", "4"]
         if "CONFIG_KASAN=y" in build["kconfig"]:
             boot_cmd += ["-t", "20m"]
         else:
             boot_cmd += ["-t", "10m"]
-        if "CONFIG_KASAN_KUNIT_TEST=y" in build["kconfig"] or \
-           "CONFIG_KCSAN_KUNIT_TEST=y" in build["kconfig"]:
+        if (
+            "CONFIG_KASAN_KUNIT_TEST=y" in build["kconfig"]
+            or "CONFIG_KCSAN_KUNIT_TEST=y" in build["kconfig"]
+        ):
             info("Disabling Oops problem matcher under Sanitizer KUnit build")
             print("::remove-matcher owner=linux-kernel-oopses::")
 

@@ -119,27 +119,29 @@ def output_pretty_table(days, output_file=None):
     for day, hours in days.items():
         col_widths[0] = max(col_widths[0], len(CRON_TO_DAY[day]))
         for hour in range(HOURS):
-            col_widths[hour + 1] = max(col_widths[hour + 1],
-                                       len(str(len(hours[hour]))))
+            col_widths[hour + 1] = max(col_widths[hour + 1], len(str(len(hours[hour]))))
 
     top_border = "┌" + "┬".join("─" * width for width in col_widths) + "┐"
     print(top_border, file=output)
 
-    header_row = ("│" +
-                  "│".join(f"{cell:^{width}}"
-                           for cell, width in zip(header_cells, col_widths)) +
-                  "│")
+    header_row = (
+        "│"
+        + "│".join(f"{cell:^{width}}" for cell, width in zip(header_cells, col_widths))
+        + "│"
+    )
     print(header_row, file=output)
     header_sep = "├" + "┼".join("─" * width for width in col_widths) + "┤"
     print(header_sep, file=output)
 
     for day, hours in days.items():
-        row_cells = [CRON_TO_DAY[day]
-                     ] + [str(len(hours[hour])) for hour in range(HOURS)]
-        data_row = ("│" +
-                    "│".join(f"{cell:^{width}}"
-                             for cell, width in zip(row_cells, col_widths)) +
-                    "│")
+        row_cells = [CRON_TO_DAY[day]] + [
+            str(len(hours[hour])) for hour in range(HOURS)
+        ]
+        data_row = (
+            "│"
+            + "│".join(f"{cell:^{width}}" for cell, width in zip(row_cells, col_widths))
+            + "│"
+        )
         print(data_row, file=output)
 
     # Bottom border
@@ -149,17 +151,17 @@ def output_pretty_table(days, output_file=None):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Visualize build distribution across days and hours")
+        description="Visualize build distribution across days and hours"
+    )
     parser.add_argument(
         "--format",
         choices=["table", "csv", "pretty"],
         default="pretty",
         help="Output format (default: pretty)",
     )
-    parser.add_argument("--output",
-                        "-o",
-                        type=str,
-                        help="Output file (default: stdout)")
+    parser.add_argument(
+        "--output", "-o", type=str, help="Output file (default: stdout)"
+    )
     return parser.parse_args()
 
 
@@ -173,7 +175,8 @@ def main():
     if args.output:
         # pylint: disable-next=consider-using-with
         output_file = open(  # noqa: SIM115
-            args.output, "w", encoding="utf-8", newline="")
+            args.output, "w", encoding="utf-8", newline=""
+        )
 
     try:
         if args.format == "csv":

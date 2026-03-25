@@ -9,21 +9,19 @@ import sys
 from tempfile import TemporaryDirectory
 
 parser = ArgumentParser(
-    description='Check that patches apply to their tree before running CI')
+    description='Check that patches apply to their tree before running CI'
+)
 parser.add_argument(
     '-p',
     '--patches-dir',
     help='Path to patches directory (can be relative or absolute)',
     required=True,
-    type=Path)
-parser.add_argument('-r',
-                    '--repo',
-                    help='URL to git repository',
-                    required=True)
-parser.add_argument('-R',
-                    '--ref',
-                    help='Git reference to apply patches upon',
-                    required=True)
+    type=Path,
+)
+parser.add_argument('-r', '--repo', help='URL to git repository', required=True)
+parser.add_argument(
+    '-R', '--ref', help='Git reference to apply patches upon', required=True
+)
 args = parser.parse_args()
 
 # If patches directory does not exist, there is nothing to check
@@ -43,11 +41,10 @@ if not list(patches_dir.glob('*.patch')):
 with TemporaryDirectory() as workdir:
     # Fetch the tarball from the repository. This is different for each type of
     # tree that we support.
-    if args.repo.startswith(
-            'https://git.kernel.org/pub/scm/linux/kernel/git/'):
+    if args.repo.startswith('https://git.kernel.org/pub/scm/linux/kernel/git/'):
         # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git -> 'linux'
         if (base_repo := args.repo.rsplit('/', 1)[1]).endswith('.git'):
-            base_repo = base_repo[:-len('.git')]
+            base_repo = base_repo[: -len('.git')]
 
         # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git ->
         # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-master.tar.gz
@@ -61,15 +58,16 @@ with TemporaryDirectory() as workdir:
 
     try:
         print(f"Downloading {tarball_url}...")
-        tarball = subprocess.run(['curl', '-LSs', tarball_url],
-                                 capture_output=True,
-                                 check=True).stdout
+        tarball = subprocess.run(
+            ['curl', '-LSs', tarball_url], capture_output=True, check=True
+        ).stdout
 
         print(f"Extracting {tarball_url}...")
         subprocess.run(
             ['tar', '-C', workdir, f"--strip-components={strip}", '-xzf-'],
             check=True,
-            input=tarball)
+            input=tarball,
+        )
     except subprocess.CalledProcessError:
         print(
             'Downloading or extracting tarball failed! As this may be flakiness on the server end, exiting 0 to have TuxSuite fail later...'
@@ -87,7 +85,7 @@ with TemporaryDirectory() as workdir:
         'GIT_AUTHOR_EMAIL': git_email,
         'GIT_COMMITTER_NAME': git_name,
         'GIT_COMMITTER_EMAIL': git_email,
-    }  # yapf: disable
+    }  # fmt: off
 
     print(f"Creating initial git repository in {workdir}...")
     subprocess.run(['git', 'init', '-q'], check=True, cwd=workdir)
@@ -95,15 +93,18 @@ with TemporaryDirectory() as workdir:
     print(f"Adding files in {workdir}...")
     subprocess.run(['git', 'add', '.'], check=True, cwd=workdir)
 
-    print(
-        f"Creating initial commit '{args.repo} @ {args.ref}' in {workdir}...")
-    subprocess.run(['git', 'commit', '-m', f"{args.repo} @ {args.ref}", '-q'],
-                   check=True,
-                   cwd=workdir,
-                   env=git_commit_env_vars)
+    print(f"Creating initial commit '{args.repo} @ {args.ref}' in {workdir}...")
+    subprocess.run(
+        ['git', 'commit', '-m', f"{args.repo} @ {args.ref}", '-q'],
+        check=True,
+        cwd=workdir,
+        env=git_commit_env_vars,
+    )
 
     print(f"Applying patches in {workdir}...")
-    subprocess.run(['git', 'quiltimport', '--patches', patches_dir],
-                   check=True,
-                   cwd=workdir,
-                   env=git_commit_env_vars)
+    subprocess.run(
+        ['git', 'quiltimport', '--patches', patches_dir],
+        check=True,
+        cwd=workdir,
+        env=git_commit_env_vars,
+    )

@@ -15,15 +15,27 @@ import sys
 # pylint: disable-next=import-error
 import yaml
 
-from utils import CI_ROOT, LLVM_TOT_VERSION, disable_subsys_werror_configs, get_config_from_generator, get_llvm_versions, get_repo_ref, patch_series_flag, die
+from utils import (
+    CI_ROOT,
+    LLVM_TOT_VERSION,
+    disable_subsys_werror_configs,
+    get_config_from_generator,
+    get_llvm_versions,
+    get_repo_ref,
+    patch_series_flag,
+    die,
+)
 
 
 def parse_args(trees):
     parser = argparse.ArgumentParser(
-        description="Generate GitHub Action Workflow YAML.")
-    parser.add_argument("tree",
-                        help="The git repo and ref to filter in.",
-                        choices=[tree["name"] for tree in trees])
+        description="Generate GitHub Action Workflow YAML."
+    )
+    parser.add_argument(
+        "tree",
+        help="The git repo and ref to filter in.",
+        choices=[tree["name"] for tree in trees],
+    )
     return parser.parse_args()
 
 
@@ -53,7 +65,7 @@ def initial_workflow(name, cron, tuxsuite_yml, workflow_yml):
         },
         "permissions": "read-all",
         "jobs": {}
-    }  # yapf: disable
+    }  # fmt: off
 
 
 def print_config(build):
@@ -109,7 +121,7 @@ def check_patches_job_setup(repo, ref, tree_name):
                 },
             ],
         }
-    }  # yapf: disable
+    }  # fmt: off
 
 
 def check_cache_job_setup(repo, ref, toolchain):
@@ -161,13 +173,12 @@ def check_cache_job_setup(repo, ref, toolchain):
                 },
             ],
         }
-    }  # yapf: disable
+    }  # fmt: off
 
 
 def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
-    patch_series = patch_series_flag(
-        tuxsuite_yml.split("/")[1].split("-clang-")[0])
-    cond = {"if": "${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}"}  # yapf: disable
+    patch_series = patch_series_flag(tuxsuite_yml.split("/")[1].split("-clang-")[0])
+    cond = {"if": "${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}"}  # fmt: off
     return {
         f"kick_tuxsuite_{job_name}": {
             "name": f"TuxSuite ({job_name})",
@@ -236,7 +247,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 },
             ]
         }
-    }  # yapf: disable
+    }  # fmt: off
 
 
 def get_steps(build, build_set):
@@ -286,16 +297,14 @@ def get_steps(build, build_set):
                 },
             ],
         }
-    }  # yapf: disable
+    }  # fmt: off
 
 
 def get_cron_schedule(schedules, tree_name, llvm_version):
     for item in schedules:
-        if item["name"] == tree_name and \
-           item["llvm_version"] == llvm_version:
+        if item["name"] == tree_name and item["llvm_version"] == llvm_version:
             return item["schedule"]
-    return die(
-        f"Could not find schedule for {tree_name} clang-{llvm_version}?")
+    return die(f"Could not find schedule for {tree_name} clang-{llvm_version}?")
 
 
 def print_builds(config, tree_name, llvm_version):
@@ -308,39 +317,39 @@ def print_builds(config, tree_name, llvm_version):
     check_logs_distribution_configs = {}
     check_logs_allconfigs = {}
     for build in config["builds"]:
-        if build["git_repo"] == repo and \
-           build["git_ref"] == ref and \
-           build["llvm_version"] == llvm_version:
+        if (
+            build["git_repo"] == repo
+            and build["git_ref"] == ref
+            and build["llvm_version"] == llvm_version
+        ):
             disable_subsys_werror_configs(build["config"])
             cfg_str = str(build["config"])
             if "defconfig" in cfg_str:
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
             elif "https://" in cfg_str:
                 check_logs_distribution_configs.update(
-                    get_steps(build, "distribution_configs"))
+                    get_steps(build, "distribution_configs")
+                )
             else:
                 check_logs_allconfigs.update(get_steps(build, "allconfigs"))
 
     workflow_name = f"{tree_name} ({toolchain})"
-    cron_schedule = get_cron_schedule(config["tree_schedules"], tree_name,
-                                      llvm_version)
-    workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml,
-                                github_yml)
+    cron_schedule = get_cron_schedule(config["tree_schedules"], tree_name, llvm_version)
+    workflow = initial_workflow(workflow_name, cron_schedule, tuxsuite_yml, github_yml)
 
     workflow['jobs'].update(check_patches_job_setup(repo, ref, tree_name))
     workflow['jobs'].update(check_cache_job_setup(repo, ref, toolchain))
-    workflow["jobs"].update(
-        tuxsuite_setups("defconfigs", tuxsuite_yml, repo, ref))
+    workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml, repo, ref))
     workflow["jobs"].update(check_logs_defconfigs)
 
     if check_logs_distribution_configs:
         workflow["jobs"].update(
-            tuxsuite_setups("distribution_configs", tuxsuite_yml, repo, ref))
+            tuxsuite_setups("distribution_configs", tuxsuite_yml, repo, ref)
+        )
         workflow["jobs"].update(check_logs_distribution_configs)
 
     if check_logs_allconfigs:
-        workflow["jobs"].update(
-            tuxsuite_setups("allconfigs", tuxsuite_yml, repo, ref))
+        workflow["jobs"].update(tuxsuite_setups("allconfigs", tuxsuite_yml, repo, ref))
         workflow["jobs"].update(check_logs_allconfigs)
 
     with Path(CI_ROOT, github_yml).open("w", encoding='utf-8') as file:
@@ -349,11 +358,7 @@ def print_builds(config, tree_name, llvm_version):
         print("# DO NOT MODIFY MANUALLY!")
         print("# This file has been autogenerated by invoking:")
         print(f"# $ ./generate_workflow.py {tree_name}")
-        print(
-            yaml.dump(workflow,
-                      Dumper=yaml.Dumper,
-                      width=1000,
-                      sort_keys=False))
+        print(yaml.dump(workflow, Dumper=yaml.Dumper, width=1000, sort_keys=False))
         sys.stdout = orig_stdout
 
 
