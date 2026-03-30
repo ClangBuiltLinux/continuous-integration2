@@ -246,8 +246,10 @@
   - {<< : *arm64_suse,        << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *hexagon,           << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *hexagon_allmod,    << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_15}
-  - {<< : *i386,              << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_15}
-  - {<< : *i386_suse,         << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_15}
+  # i386 fails to build after e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on clang < 17")
+  # https://github.com/ClangBuiltLinux/linux/issues/2121
+  # - {<< : *i386,              << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_15}
+  # - {<< : *i386_suse,         << : *stable-6_12,      << : *llvm_full,       boot: false, << : *llvm_15}
   - {<< : *mips,              << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_15}
   - {<< : *mipsel,            << : *stable-6_12,      << : *llvm_full,       boot: true,  << : *llvm_15}
   # ppc32: Build disabled (https://github.com/ClangBuiltLinux/linux/issues/1679)
