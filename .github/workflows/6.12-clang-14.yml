@@ -509,36 +509,6 @@ jobs:
     - uses: astral-sh/setup-uv@v7
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
-  _6b9b48c5ca690a81c94f317d6baf1765:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_defconfigs
-    - check_cache
-    - check_patches
-    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: i386
-      LLVM_VERSION: 14
-      BOOT: 1
-      CONFIG: defconfig
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v6
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v7
-      with:
-        name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
-      with:
-        name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
   _9192a16443a58cecb588e3133703784b:
     runs-on: ubuntu-latest
     needs:
@@ -1137,36 +1107,6 @@ jobs:
       LLVM_VERSION: 14
       BOOT: 1
       CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
-      REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
-    container:
-      image: ghcr.io/clangbuiltlinux/qemu
-      options: --ipc=host
-    steps:
-    - uses: actions/checkout@v6
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v7
-      with:
-        name: output_artifact_distribution_configs
-    - uses: actions/download-artifact@v7
-      with:
-        name: boot_utils_json_distribution_configs
-    - uses: astral-sh/setup-uv@v7
-    - name: Check Build and Boot Logs
-      run: scripts/check-logs.py
-  _acd418378c0559207a0517e13bee439a:
-    runs-on: ubuntu-latest
-    needs:
-    - kick_tuxsuite_distribution_configs
-    - check_cache
-    - check_patches
-    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
-    if: ${{ needs.check_cache.outputs.status != 'pass' }}
-    env:
-      ARCH: i386
-      LLVM_VERSION: 14
-      BOOT: 0
-      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
       REPO_SCOPED_PAT: ${{ secrets.REPO_SCOPED_PAT }}
     container:
       image: ghcr.io/clangbuiltlinux/qemu
