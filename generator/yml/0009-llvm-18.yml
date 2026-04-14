@@ -206,7 +206,8 @@
   - {<< : *arm64_virt,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_18}
   - {<< : *arm64_hardening,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_18}
   - {<< : *hexagon,           << : *stable,           << : *llvm_full,       boot: false, << : *llvm_18}
-  - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_18}
+  # hexagon allmodconfig is too big when the constant extender optimization is disabled (LLVM < 19.1.0)
+  # - {<< : *hexagon_allmod,    << : *stable,           << : *llvm_full,       boot: false, << : *llvm_18}
   - {<< : *i386,              << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_18}
   - {<< : *i386_suse,         << : *stable,           << : *llvm_full,       boot: false, << : *llvm_18}
   - {<< : *loong,             << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_18}
