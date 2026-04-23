@@ -2,6 +2,7 @@ trees:
   - &mainline         {git_repo: *mainline-url, git_ref: master,              name: mainline}
   - &next             {git_repo: *next-url,     git_ref: master,              name: next}
   - &stable           {git_repo: *stable-url,   git_ref: linux-7.0.y,         name: stable}
+  - &stable-6_18      {git_repo: *stable-url,   git_ref: linux-6.18.y,        name: "6.18"}
   - &stable-6_12      {git_repo: *stable-url,   git_ref: linux-6.12.y,        name: "6.12"}
   - &stable-6_6       {git_repo: *stable-url,   git_ref: linux-6.6.y,         name: "6.6"}
   - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}
@@ -58,6 +59,16 @@ tree_schedules:
   # Longterm stable (LTS) kernels see less frequent updates the older that they get
   # Follow a similar scheme above and build new tree/toolchain combinations more
   # frequently and others not as frequently.
+  - &stable-6_18_llvm_tot          {<< : *llvm_tot,     << : *stable-6_18,      << : *wed_nine}
+  - &stable-6_18_llvm_latest       {<< : *llvm_latest,  << : *stable-6_18,      << : *thur_twentyone}
+  - &stable-6_18_llvm_21           {<< : *llvm_21,      << : *stable-6_18,      << : *sun_twentyone}
+  - &stable-6_18_llvm_20           {<< : *llvm_20,      << : *stable-6_18,      << : *mon_twentyone}
+  - &stable-6_18_llvm_19           {<< : *llvm_19,      << : *stable-6_18,      << : *tue_twentyone}
+  - &stable-6_18_llvm_18           {<< : *llvm_18,      << : *stable-6_18,      << : *wed_twentyone}
+  - &stable-6_18_llvm_17           {<< : *llvm_17,      << : *stable-6_18,      << : *thur_twentyone}
+  - &stable-6_18_llvm_16           {<< : *llvm_16,      << : *stable-6_18,      << : *fri_twentyone}
+  - &stable-6_18_llvm_15           {<< : *llvm_15,      << : *stable-6_18,      << : *sat_twentyone}
+
   - &stable-6_12_llvm_tot          {<< : *llvm_tot,     << : *stable-6_12,      << : *thur_nine}
   - &stable-6_12_llvm_latest       {<< : *llvm_latest,  << : *stable-6_12,      << : *thur_fifteen}
   - &stable-6_12_llvm_21           {<< : *llvm_21,      << : *stable-6_12,      << : *sun_fifteen}
