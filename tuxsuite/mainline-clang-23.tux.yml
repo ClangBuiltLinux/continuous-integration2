@@ -336,7 +336,7 @@ jobs:
     - kernel
     kernel_image: image
     make_variables:
-      LLVM_IAS: 0
+      LLVM_IAS: 1
   - target_arch: um
     toolchain: clang-nightly
     kconfig: defconfig
