@@ -65,7 +65,7 @@
   - {<< : *s390_kasan,        << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *sparc64,           << : *mainline,         << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *sparc64,           << : *mainline,         << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *um,                << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *mainline,         << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -150,7 +150,7 @@
   - {<< : *s390_kasan,        << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *sparc64,           << : *next,             << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *sparc64,           << : *next,             << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *um,                << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *next,             << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -236,7 +236,7 @@
   - {<< : *s390_kasan,        << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *sparc64,           << : *stable,           << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *sparc64,           << : *stable,           << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *um,                << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *stable,           << : *llvm_full,       boot: true,  << : *llvm_tot}
@@ -321,7 +321,7 @@
   - {<< : *s390_kasan,        << : *stable-6_18,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_fedora,       << : *stable-6_18,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *s390_suse,         << : *stable-6_18,      << : *llvm_full,       boot: true,  << : *llvm_tot}
-  - {<< : *sparc64,           << : *stable-6_18,      << : *clang,           boot: true,  << : *llvm_tot}
+  - {<< : *sparc64,           << : *stable-6_18,      << : *clang_ias,       boot: true,  << : *llvm_tot}
   - {<< : *um,                << : *stable-6_18,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64,            << : *stable-6_18,      << : *llvm_full,       boot: true,  << : *llvm_tot}
   - {<< : *x86_64_lto_full,   << : *stable-6_18,      << : *llvm_full,       boot: true,  << : *llvm_tot}
