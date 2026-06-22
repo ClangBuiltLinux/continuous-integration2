@@ -20,7 +20,7 @@ jobs:
     name: Check that patches are applicable
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: check-patches-apply.py
       run: python3 scripts/check-patches-apply.py --patches-dir patches/5.10 --repo https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git --ref linux-5.10.y
   check_cache:
@@ -35,7 +35,7 @@ jobs:
       output: ${{ steps.step2.outputs.output }}
       status: ${{ steps.step2.outputs.status }}
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: astral-sh/setup-uv@v7
     - name: python check_cache.py
       id: step1
@@ -62,7 +62,7 @@ jobs:
     - name: Checking Cache Fail
       if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - uses: astral-sh/setup-uv@v7
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
@@ -74,7 +74,7 @@ jobs:
       run: caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: builds.json
         name: output_artifact_defconfigs
@@ -84,7 +84,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: boot-utils.json
         name: boot_utils_json_defconfigs
@@ -107,13 +107,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -137,13 +137,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -167,13 +167,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -197,13 +197,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -227,13 +227,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -257,13 +257,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -287,13 +287,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -317,13 +317,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -347,13 +347,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -377,13 +377,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -407,13 +407,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -437,13 +437,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -467,13 +467,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -497,13 +497,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -527,13 +527,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_defconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
     - uses: astral-sh/setup-uv@v7
@@ -557,7 +557,7 @@ jobs:
     - name: Checking Cache Fail
       if: ${{ needs.check_cache.outputs.output == 'success' && github.event_name != 'workflow_dispatch' && needs.check_cache.outputs.status == 'fail' }}
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - uses: astral-sh/setup-uv@v7
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
@@ -569,7 +569,7 @@ jobs:
       run: caching/update.py
     - name: save builds.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: builds.json
         name: output_artifact_allconfigs
@@ -579,7 +579,7 @@ jobs:
       run: python3 scripts/generate-boot-utils-json.py ${{ secrets.GITHUB_TOKEN }}
     - name: save boot-utils.json
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: boot-utils.json
         name: boot_utils_json_allconfigs
@@ -602,13 +602,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -632,13 +632,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -662,13 +662,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -692,13 +692,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -722,13 +722,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -752,13 +752,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -782,13 +782,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -812,13 +812,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
@@ -842,13 +842,13 @@ jobs:
       image: ghcr.io/clangbuiltlinux/qemu
       options: --ipc=host
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: output_artifact_allconfigs
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
     - uses: astral-sh/setup-uv@v7
