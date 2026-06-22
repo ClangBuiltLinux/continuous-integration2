@@ -113,7 +113,7 @@ def check_patches_job_setup(repo, ref, tree_name):
             'runs-on': 'ubuntu-latest',
             'steps': [
                 {
-                    'uses': 'actions/checkout@v6',
+                    'uses': 'actions/checkout@v7',
                 },
                 {
                     'name': 'check-patches-apply.py',
@@ -152,7 +152,7 @@ def check_cache_job_setup(repo, ref, toolchain):
             },
             "steps": [
                 {
-                    "uses": "actions/checkout@v6"
+                    "uses": "actions/checkout@v7"
                 },
                 {
                     "uses": "astral-sh/setup-uv@v7",
@@ -203,7 +203,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                     "run": "echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1"
                 },
                 {
-                    "uses": "actions/checkout@v6",
+                    "uses": "actions/checkout@v7",
                     **cond,
                 },
                 {
@@ -223,7 +223,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     "name": "save builds.json",
                     **cond,
-                    "uses": "actions/upload-artifact@v6",
+                    "uses": "actions/upload-artifact@v7",
                     "with": {
                         "path": "builds.json",
                         "name": f"output_artifact_{job_name}",
@@ -238,7 +238,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                 {
                     'name': 'save boot-utils.json',
                     **cond,
-                    'uses': 'actions/upload-artifact@v6',
+                    'uses': 'actions/upload-artifact@v7',
                     'with': {
                         'path': 'boot-utils.json',
                         'name': f"boot_utils_json_{job_name}",
@@ -271,19 +271,19 @@ def get_steps(build, build_set):
             },
             "steps": [
                 {
-                    "uses": "actions/checkout@v6",
+                    "uses": "actions/checkout@v7",
                     "with": {
                         "submodules": True
                     },
                 },
                 {
-                    "uses": "actions/download-artifact@v7",
+                    "uses": "actions/download-artifact@v8",
                     "with": {
                         "name": f"output_artifact_{build_set}"
                     },
                 },
                 {
-                    "uses": "actions/download-artifact@v7",
+                    "uses": "actions/download-artifact@v8",
                     "with": {
                         "name": f"boot_utils_json_{build_set}"
                     },
