@@ -35,7 +35,6 @@ tree_schedules:
   - &next_llvm_17                  {<< : *llvm_17,      << : *next,             << : *wed_eighteen}
   - &next_llvm_16                  {<< : *llvm_16,      << : *next,             << : *wed_eighteen}
   - &next_llvm_15                  {<< : *llvm_15,      << : *next,             << : *thur_eighteen}
-  - &next_llvm_android             {<< : *llvm_android, << : *next,             << : *fri_eighteen}
 
   # stable is usually updated frequently but not more than once a week. Do builds
   # with the two latest versions of LLVM on Monday and Friday to catch updates
