@@ -3,7 +3,6 @@ urls:
   - &mainline-url https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
   - &next-url     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
   - &stable-url   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-  - &android-url  https://android.googlesource.com/kernel/common.git
   - &tip-url      https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
   # Configuration URLs
   - &arm32-alpine-config-url   https://github.com/alpinelinux/aports/raw/refs/heads/master/community/linux-stable/stable.armv7.config

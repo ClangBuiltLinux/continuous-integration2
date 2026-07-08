@@ -617,17 +617,6 @@
   - {<< : *x86_64_allmod,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_allno,      << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_17}
   - {<< : *x86_64_allyes,     << : *stable-5_10,      << : *llvm_full,       boot: false, << : *llvm_17}
-  #############
-  #  Android  #
-  #############
-  - {<< : *arm32_allmod,      << : *android14-6_1,    << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *arm32_v7_t,        << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm64_gki,         << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *x86_64_gki,        << : *android14-6_1,    << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm32_allmod,      << : *android14-5_15,   << : *llvm_full,       boot: false, << : *llvm_17}
-  - {<< : *arm32_v7_t,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *arm64_gki,         << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
-  - {<< : *x86_64_gki,        << : *android14-5_15,   << : *llvm_full,       boot: true,  << : *llvm_17}
   #########
   #  TIP  #
   #########

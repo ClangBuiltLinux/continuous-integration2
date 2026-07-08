@@ -8,10 +8,6 @@ trees:
   - &stable-6_1       {git_repo: *stable-url,   git_ref: linux-6.1.y,         name: "6.1"}
   - &stable-5_15      {git_repo: *stable-url,   git_ref: linux-5.15.y,        name: "5.15"}
   - &stable-5_10      {git_repo: *stable-url,   git_ref: linux-5.10.y,        name: "5.10"}
-  - &android-mainline {git_repo: *android-url,  git_ref: android-mainline,    name: android-mainline}
-  - &android15-6_6    {git_repo: *android-url,  git_ref: android15-6.6,       name: android15-6.6}
-  - &android14-6_1    {git_repo: *android-url,  git_ref: android14-6.1,       name: android14-6.1}
-  - &android14-5_15   {git_repo: *android-url,  git_ref: android14-5.15,      name: android14-5.15}
   - &tip              {git_repo: *tip-url,      git_ref: master,              name: tip}
 tree_schedules:
   # For mainline, we want the three latest versions of LLVM to build every day during the merge
@@ -132,42 +128,6 @@ tree_schedules:
   - &stable-5_10_llvm_14           {<< : *llvm_14,      << : *stable-5_10,      << : *sun_noon}
   - &stable-5_10_llvm_13           {<< : *llvm_13,      << : *stable-5_10,      << : *sun_eighteen}
   - &stable-5_10_llvm_12           {<< : *llvm_12,      << : *stable-5_10,      << : *sun_eighteen}
-
-  # In a similar manner as above, build android-mainline more frequently
-  # than the branched builds with newer toolchains and build everything
-  # else less frequently.
-  - &android-mainline_llvm_tot     {<< : *llvm_tot,     << : *android-mainline, << : *tue_noon}
-  - &android-mainline_llvm_latest  {<< : *llvm_latest,  << : *android-mainline, << : *mon_noon}
-  - &android-mainline_llvm_21      {<< : *llvm_21,      << : *android-mainline, << : *sun_six}
-  - &android-mainline_llvm_20      {<< : *llvm_20,      << : *android-mainline, << : *thur_fifteen}
-  - &android-mainline_llvm_19      {<< : *llvm_19,      << : *android-mainline, << : *wed_noon}
-  - &android-mainline_llvm_android {<< : *llvm_android, << : *android-mainline, << : *wed_six}
-
-  - &android15-6_6_llvm_tot        {<< : *llvm_tot,     << : *android15-6_6,    << : *thur_three}
-  - &android15-6_6_llvm_latest     {<< : *llvm_latest,  << : *android15-6_6,    << : *thur_three}
-  - &android15-6_6_llvm_21         {<< : *llvm_21,      << : *android15-6_6,    << : *sat_fifteen}
-  - &android15-6_6_llvm_20         {<< : *llvm_20,      << : *android15-6_6,    << : *mon_six}
-  - &android15-6_6_llvm_19         {<< : *llvm_19,      << : *android15-6_6,    << : *mon_three}
-  - &android15-6_6_llvm_18         {<< : *llvm_18,      << : *android15-6_6,    << : *mon_three}
-  - &android15-6_6_llvm_android    {<< : *llvm_android, << : *android15-6_6,    << : *sun_three}
-
-  - &android14-6_1_llvm_tot        {<< : *llvm_tot,     << : *android14-6_1,    << : *tue_three}
-  - &android14-6_1_llvm_latest     {<< : *llvm_latest,  << : *android14-6_1,    << : *tue_three}
-  - &android14-6_1_llvm_21         {<< : *llvm_21,      << : *android14-6_1,    << : *sat_fifteen}
-  - &android14-6_1_llvm_20         {<< : *llvm_20,      << : *android14-6_1,    << : *fri_six}
-  - &android14-6_1_llvm_19         {<< : *llvm_19,      << : *android14-6_1,    << : *fri_three}
-  - &android14-6_1_llvm_18         {<< : *llvm_18,      << : *android14-6_1,    << : *fri_three}
-  - &android14-6_1_llvm_17         {<< : *llvm_17,      << : *android14-6_1,    << : *sun_six}
-  - &android14-6_1_llvm_android    {<< : *llvm_android, << : *android14-6_1,    << : *sun_six}
-
-  - &android14-5_15_llvm_tot       {<< : *llvm_tot,     << : *android14-5_15,   << : *tue_nine}
-  - &android14-5_15_llvm_latest    {<< : *llvm_latest,  << : *android14-5_15,   << : *tue_nine}
-  - &android14-5_15_llvm_21        {<< : *llvm_21,      << : *android14-5_15,   << : *wed_nine}
-  - &android14-5_15_llvm_20        {<< : *llvm_20,      << : *android14-5_15,   << : *thur_nine}
-  - &android14-5_15_llvm_19        {<< : *llvm_19,      << : *android14-5_15,   << : *mon_nine}
-  - &android14-5_15_llvm_18        {<< : *llvm_18,      << : *android14-5_15,   << : *mon_nine}
-  - &android14-5_15_llvm_17        {<< : *llvm_17,      << : *android14-5_15,   << : *sun_nine}
-  - &android14-5_15_llvm_android   {<< : *llvm_android, << : *android14-5_15,   << : *sun_nine}
 
   # -tip flows into -next so we do not need super frequent builds but
   # it does to notice the source of problems before a formal bisect
