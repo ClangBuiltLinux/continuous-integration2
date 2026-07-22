@@ -155,7 +155,7 @@ def check_cache_job_setup(repo, ref, toolchain):
                     "uses": "actions/checkout@v7"
                 },
                 {
-                    "uses": "astral-sh/setup-uv@v7",
+                    "uses": "astral-sh/setup-uv@v9.0.0",
                 },
                 {
                     "name": "python check_cache.py",
@@ -207,7 +207,7 @@ def tuxsuite_setups(job_name, tuxsuite_yml, repo, ref):
                     **cond,
                 },
                 {
-                    "uses": "astral-sh/setup-uv@v7",
+                    "uses": "astral-sh/setup-uv@v9.0.0",
                     **cond,
                 },
                 {
@@ -289,7 +289,7 @@ def get_steps(build, build_set):
                     },
                 },
                 {
-                    "uses": "astral-sh/setup-uv@v7",
+                    "uses": "astral-sh/setup-uv@v9.0.0",
                 },
                 {
                     "name": "Check Build and Boot Logs",
