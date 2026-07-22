@@ -36,7 +36,7 @@ jobs:
       status: ${{ steps.step2.outputs.status }}
     steps:
     - uses: actions/checkout@v7
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: python check_cache.py
       id: step1
       continue-on-error: true
@@ -64,7 +64,7 @@ jobs:
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v7
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
@@ -116,7 +116,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _322bb929498de2a7e79e1b55e4033472:
@@ -146,7 +146,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _6496821d52cabaeb6de82b21d84d7907:
@@ -176,7 +176,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _3c5c91aeea6c32d13ba57a6c6caa9d8e:
@@ -206,7 +206,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _0a8a158b8bc4ca7cce0b1e9eba89d88f:
@@ -236,7 +236,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _b8f47465994802a1b9fb29ff9edf8bd1:
@@ -266,7 +266,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _947ad34af59ed806016515ea5011cb62:
@@ -296,7 +296,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _fe245d8396417fcdc0a3d5397194f18f:
@@ -326,7 +326,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _9aef80ac0d243a630d3528fa70d11a88:
@@ -356,7 +356,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _761e3a9c5b1082d71c0790ecd9f43bb6:
@@ -386,7 +386,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _2e0a3889493f20a2d1578aec9f6583fd:
@@ -416,7 +416,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _d45c93363bd72f73c7b5499794876b31:
@@ -446,7 +446,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _a3f08fbe8181ae6474113b302e49b611:
@@ -476,7 +476,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _d31f5c0db56d4acc9e21368ea7423b14:
@@ -506,7 +506,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _4d0766b9b83334c8d1b2fe65a57948d2:
@@ -536,7 +536,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_defconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   kick_tuxsuite_allconfigs:
@@ -559,7 +559,7 @@ jobs:
       run: echo 'Cache HIT on previously FAILED build. Failing this build to avoid redundant work.' && exit 1
     - uses: actions/checkout@v7
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
     - name: tuxsuite
       if: ${{ needs.check_cache.outputs.output == 'failure' || github.event_name == 'workflow_dispatch' }}
@@ -611,7 +611,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _d02adb0f8a0e7aff39b7d63067c37e83:
@@ -641,7 +641,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _88acc9f4c920e9cc37af1860d418ab5b:
@@ -671,7 +671,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _9bbf01c447b0fc9d9587123cfe87f34b:
@@ -701,7 +701,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _dbdc0f611d865bfe77cc92b3ecee270f:
@@ -731,7 +731,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _2f37a163a3a6d7e500b1f5fa00c028fb:
@@ -761,7 +761,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _ce3a71cf1bb8f60468e7ab731008aa0a:
@@ -791,7 +791,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _38fc0cb557f535a48f3d6c0e3958c9d5:
@@ -821,7 +821,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
   _ce25fdce7ffa559e7f04309347df34c8:
@@ -851,7 +851,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         name: boot_utils_json_allconfigs
-    - uses: astral-sh/setup-uv@v7
+    - uses: astral-sh/setup-uv@v9.0.0
     - name: Check Build and Boot Logs
       run: scripts/check-logs.py
 
