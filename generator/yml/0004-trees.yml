@@ -15,8 +15,9 @@ tree_schedules:
   # These should be spaced out such that they do not run on top of each other or -next.
   - &mainline_llvm_tot             {<< : *llvm_tot,     << : *mainline,         << : *weekdays_six}
   - &mainline_llvm_latest          {<< : *llvm_latest,  << : *mainline,         << : *mon_noon}
-  - &mainline_llvm_21              {<< : *llvm_21,      << : *mainline,         << : *wed_midnight}
+  - &mainline_llvm_22              {<< : *llvm_22,      << : *mainline,         << : *wed_midnight}
   # For the older versions, we do builds less frequently, depending on how old the version is
+  - &mainline_llvm_21              {<< : *llvm_21,      << : *mainline,         << : *tue_three}
   - &mainline_llvm_20              {<< : *llvm_20,      << : *mainline,         << : *tue_midnight}
   - &mainline_llvm_19              {<< : *llvm_19,      << : *mainline,         << : *thur_three}
   - &mainline_llvm_18              {<< : *llvm_18,      << : *mainline,         << : *sat_midnight}
@@ -26,6 +27,7 @@ tree_schedules:
   # Build the two latest versions of LLVM every day, older versions less frequently
   - &next_llvm_tot                 {<< : *llvm_tot,     << : *next,             << : *weekdays_eighteen}
   - &next_llvm_latest              {<< : *llvm_latest,  << : *next,             << : *weekdays_eighteen}
+  - &next_llvm_22                  {<< : *llvm_22,      << : *next,             << : *thur_eighteen}
   - &next_llvm_21                  {<< : *llvm_21,      << : *next,             << : *mon_eighteen}
   - &next_llvm_20                  {<< : *llvm_20,      << : *next,             << : *mon_eighteen}
   - &next_llvm_19                  {<< : *llvm_19,      << : *next,             << : *tue_eighteen}
@@ -39,6 +41,7 @@ tree_schedules:
   # should notice first).
   - &stable_llvm_tot               {<< : *llvm_tot,     << : *stable,           << : *mon_nine}
   - &stable_llvm_latest            {<< : *llvm_latest,  << : *stable,           << : *mon_fifteen}
+  - &stable_llvm_22                {<< : *llvm_22,      << : *stable,           << : *fri_three}
   - &stable_llvm_21                {<< : *llvm_21,      << : *stable,           << : *sun_three}
   - &stable_llvm_20                {<< : *llvm_20,      << : *stable,           << : *mon_three}
   - &stable_llvm_19                {<< : *llvm_19,      << : *stable,           << : *tue_three}
@@ -50,6 +53,7 @@ tree_schedules:
   # frequently and others not as frequently.
   - &stable-6_18_llvm_tot          {<< : *llvm_tot,     << : *stable-6_18,      << : *wed_nine}
   - &stable-6_18_llvm_latest       {<< : *llvm_latest,  << : *stable-6_18,      << : *thur_twentyone}
+  - &stable-6_18_llvm_22           {<< : *llvm_22,      << : *stable-6_18,      << : *fri_twentyone}
   - &stable-6_18_llvm_21           {<< : *llvm_21,      << : *stable-6_18,      << : *sun_twentyone}
   - &stable-6_18_llvm_20           {<< : *llvm_20,      << : *stable-6_18,      << : *mon_twentyone}
   - &stable-6_18_llvm_19           {<< : *llvm_19,      << : *stable-6_18,      << : *tue_twentyone}
@@ -58,6 +62,7 @@ tree_schedules:
 
   - &stable-6_12_llvm_tot          {<< : *llvm_tot,     << : *stable-6_12,      << : *thur_nine}
   - &stable-6_12_llvm_latest       {<< : *llvm_latest,  << : *stable-6_12,      << : *thur_fifteen}
+  - &stable-6_12_llvm_22           {<< : *llvm_22,      << : *stable-6_12,      << : *sun_eighteen}
   - &stable-6_12_llvm_21           {<< : *llvm_21,      << : *stable-6_12,      << : *sun_fifteen}
   - &stable-6_12_llvm_20           {<< : *llvm_20,      << : *stable-6_12,      << : *mon_fifteen}
   - &stable-6_12_llvm_19           {<< : *llvm_19,      << : *stable-6_12,      << : *tue_fifteen}
@@ -66,6 +71,7 @@ tree_schedules:
 
   - &stable-6_6_llvm_tot           {<< : *llvm_tot,     << : *stable-6_6,       << : *fri_noon}
   - &stable-6_6_llvm_latest        {<< : *llvm_latest,  << : *stable-6_6,       << : *fri_noon}
+  - &stable-6_6_llvm_22            {<< : *llvm_22,      << : *stable-6_6,       << : *mon_nine}
   - &stable-6_6_llvm_21            {<< : *llvm_21,      << : *stable-6_6,       << : *sun_nine}
   - &stable-6_6_llvm_20            {<< : *llvm_20,      << : *stable-6_6,       << : *tue_noon}
   - &stable-6_6_llvm_19            {<< : *llvm_19,      << : *stable-6_6,       << : *wed_fifteen}
@@ -74,6 +80,7 @@ tree_schedules:
 
   - &stable-6_1_llvm_tot           {<< : *llvm_tot,     << : *stable-6_1,       << : *tue_noon}
   - &stable-6_1_llvm_latest        {<< : *llvm_latest,  << : *stable-6_1,       << : *tue_noon}
+  - &stable-6_1_llvm_22            {<< : *llvm_22,      << : *stable-6_1,       << : *sun_six}
   - &stable-6_1_llvm_21            {<< : *llvm_21,      << : *stable-6_1,       << : *sun_six}
   - &stable-6_1_llvm_20            {<< : *llvm_20,      << : *stable-6_1,       << : *mon_noon}
   - &stable-6_1_llvm_19            {<< : *llvm_19,      << : *stable-6_1,       << : *sun_twentyone}
@@ -82,6 +89,7 @@ tree_schedules:
 
   - &stable-5_15_llvm_tot          {<< : *llvm_tot,     << : *stable-5_15,      << : *sat_eighteen}
   - &stable-5_15_llvm_latest       {<< : *llvm_latest,  << : *stable-5_15,      << : *sat_eighteen}
+  - &stable-5_15_llvm_22           {<< : *llvm_22,      << : *stable-5_15,      << : *sun_nine}
   - &stable-5_15_llvm_21           {<< : *llvm_21,      << : *stable-5_15,      << : *sun_nine}
   - &stable-5_15_llvm_20           {<< : *llvm_20,      << : *stable-5_15,      << : *sun_midnight}
   - &stable-5_15_llvm_19           {<< : *llvm_19,      << : *stable-5_15,      << : *sat_twentyone}
@@ -90,6 +98,7 @@ tree_schedules:
 
   - &stable-5_10_llvm_tot          {<< : *llvm_tot,     << : *stable-5_10,      << : *sat_nine}
   - &stable-5_10_llvm_latest       {<< : *llvm_latest,  << : *stable-5_10,      << : *sat_nine}
+  - &stable-5_10_llvm_22           {<< : *llvm_22,      << : *stable-5_10,      << : *sat_eighteen}
   - &stable-5_10_llvm_21           {<< : *llvm_21,      << : *stable-5_10,      << : *sat_six}
   - &stable-5_10_llvm_20           {<< : *llvm_20,      << : *stable-5_10,      << : *sat_six}
   - &stable-5_10_llvm_19           {<< : *llvm_19,      << : *stable-5_10,      << : *sat_noon}
@@ -100,6 +109,7 @@ tree_schedules:
   # it does to notice the source of problems before a formal bisect
   - &tip_llvm_tot                  {<< : *llvm_tot,     << : *tip,              << : *weekdays_midnight}
   - &tip_llvm_latest               {<< : *llvm_latest,  << : *tip,              << : *weekdays_midnight}
+  - &tip_llvm_22                   {<< : *llvm_22,      << : *tip,              << : *mon_fri_eighteen}
   - &tip_llvm_21                   {<< : *llvm_21,      << : *tip,              << : *mon_fri_fifteen}
   - &tip_llvm_20                   {<< : *llvm_20,      << : *tip,              << : *mon_fri_nine}
   - &tip_llvm_19                   {<< : *llvm_19,      << : *tip,              << : *mon_fri_midnight}
